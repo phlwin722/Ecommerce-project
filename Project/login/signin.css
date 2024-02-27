@@ -8,11 +8,35 @@
 
 @media only screen and (min-width:1024px) and (max-width: 1439px){
       /*this is for laptop layout*/
-       .signin{
+       .container2{
         border: 1px solid black;
+        height: 500px;
+        margin-top: 30px;
+       }
+       
+       .form_signin{
+        padding: 55px;
+       }
+
+       .login{
+        font-size: 40px;
        }
 }
 
 @media only screen and (min-width:1440px){
     /* This is for desktop layout*/
+    .container2{
+        border: 1px solid black;
+        height: 600px;
+        margin-top: 80px;
+       }
+
+       .form_signin{
+        padding: 90px;
+       }
+
+       .login{
+        font-size: 40px;
+       }
+       
 }

@@ -13,37 +13,40 @@
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="C:\Users\System32\Documents\GitHub\Shopping-cart-Oche\Project\guest_user\Image\logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             Bootstrap
           </a>
         </div>
       </nav>
-
-      <div class="container text">
+      <!--this for layout -->
+      <div class="container text container2">
         <div class="row justify-content-md">
-  
         <div class="row">
-          <div class="col">
+          <div class="col ">
             1 of 3
           </div>
           <!-- this is form layout-->
-          <div class="col-md-auto signin">
+          <div class="col-md-4 form_signin">
+            
+        <div class="container-fluid login">Log In</div>
             <form class="">
               <div class="mb-3 justify-content-md-center">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1">
               </div>
                 <a>Forget Password</a>
-              <br>
-              <button type="submit" class="btn btn-primary">Sign in</button>
+                <br>
+                <br>
+              <button type="submit" class="btn btn-primary form-control" name="sign_button">Sign in</button>
+              <a  href="/Project/login/signup.html" class="btn btn-outline-dark form-control" style="margin-top: 10px;">Sign up</a>
+          
             </form>
           </div>
-      
         </div>
       </div>
         
