@@ -9,10 +9,31 @@
 @media only screen and (min-width: 1024px) and (max-width:1439px){
      /*this is for laptop layout*/
      .signup_container{
-        width: 550px;
+        width: 500px;
+        border: 1px solid  rgb(190, 190, 190);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px hsl(0, 0%, 43%);
+        margin-top: 20px;
+     }
+     
+     .sign_up_logo{
+          font-size: 30px;
      }
 }
 
-@media only screen and (min-witdh: 1440px){
+@media only screen and (min-width: 1440px){
      /*this is for desktop layout*/
+     .signup_container{
+          width: 500px;
+          border: 1px solid  rgb(190, 190, 190);
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 10px 10px 10px hsl(0, 0%, 43%);
+          margin-top: 100px;
+       }
+       
+       .sign_up_logo{
+            font-size: 30px;
+       }
 }
