@@ -8,6 +8,10 @@
 
 @media only screen and (min-width:1024px) and (max-width:1439px) {
     /* this is for laptop layouyt*/
+    body{
+        background-color: rgba(231, 231, 231, 0.884);
+    }
+   
     .search_input{
         width: 500px;
         margin-left: 180px;
@@ -21,10 +25,10 @@
     }
 
     .con2{
-        background-color: rgb(250, 154, 43);
+        background-color: rgb(0, 0, 0);
     }
     .fontt{
-        color: rgb(146, 72, 3);
+        color: rgb(255, 255, 255);
     }
 
     .couars{
@@ -38,14 +42,18 @@
         color: rgb(80, 80, 243);
     }
     .choose{
-        padding:26px;
+       text-align: center;
+        padding-top:30px ;
         height: 300px;
+        background-color: white;
         border: 1px solid rgb(231, 231, 231);
     }
     .list_product_chosee{
         margin-top: 40px;
         border: 1px solid black;
+        background-color: white;
     }
+    
 
 }
 
