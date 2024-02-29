@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="index.css"?>
 <student>
     <body>
         <title>Student Record</title>
-        <info>
-            <lname>Last name: Jamero</lname>
-            <fname>First name: Dexter</fname>
-            <mname>Middle name: Patan</mname>
+        <info> 
+            <name>Full name: Jamero, Dexter Patan</name>
             <age>Age: 21</age>
             <gender>Gender: Male</gender>
             <birth>Birthday: February 19 2003</birth>
             <contact>Contact: 09266666666</contact>
-                <address>
+                <address>Address:
                     <block>Block: 22</block>
                     <lot>Lot: 19</lot>
-                    <barangay>Barangay: FVR</barangay>
-                    <city>City: Norzagaray</city>
-                    <province>Province: Bulacan</province>
+                    <barangay>FVR</barangay>
+                    <city> Norzagaray</city>
+                    <province>Bulacan</province>
                 </address>
             <email>Email: jamerodexter@hotmail.com</email>
-            <status>Civil status: Taken</status>
+            <status>Civil Status: Taken</status>
         </info>
     </body>
 </student>

@@ -1,0 +1,22 @@
+student{
+    border: 1px solid rgb(209, 208, 208);
+    padding: 40px;
+    width: 350px;
+    border-radius: 10px;
+    justify-content: center;
+    box-shadow: 5px 5px 5px rgb(231, 231, 231);
+    margin: 150px 450px;
+}
+title{
+    display: block;
+    text-align: center;
+    font-size: 25px;
+}
+age,gender, birth, address, name, email, status{
+    margin-top: 5px;
+    display: block
+   
+}
+name{
+    margin-top: 10px;
+}
