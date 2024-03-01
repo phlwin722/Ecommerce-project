@@ -1,16 +1,43 @@
 student{
     border: 1px solid rgb(209, 208, 208);
-    padding: 40px;
+    padding: 30px;
     width: 90%;
+    height: 400px;
     border-radius: 10px;
     justify-content: center;
+    margin: 50px;
     box-shadow: 5px 5px 5px rgb(231, 231, 231);
+}
+info{
+    text-align: center;
 }
 title{
     display: block;
     text-align: center;
     font-size: 25px;
 }
-header{
-    display: inline;
+info{
+    text-align: center;
+}
+th{
+    display: table-cell;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd; 
+    background-color: #e0e0e0; 
+    width: 25%;
+}
+td{
+    display: table-cell;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd; 
+    width: 25%;
+}
+data{
+    display: table-row;  
+}
+data:nth-child(even){
+    background-color: #D6EEEE;
 }

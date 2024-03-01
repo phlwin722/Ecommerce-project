@@ -3,68 +3,65 @@
 
 <student>
     <title>Student Record</title>
-    <table>
-        <header>
-            <lname>Last name</lname>
-            <fname>Firt name </fname>
-            <mi>Middle initial</mi>
-            <age>Age</age>
-            <birth>Month-day-year</birth>
-            <contact>Contact</contact>
-            <address>Address</address>
-            <mail>Email</mail>
-            <status>Status</status>
-         </header>
-        </table>
+    <info>
+        <data>
+            <th>Last name</th>
+            <th>Firt name </th>
+            <th>Middle initial</th>
+            <th>Age</th>
+            <th>Month-day-year</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Status</th>
+         </data>
+           <data>
+            <td>Jamero</td>
+            <td>Dexter </td>
+            <td>P</td>
+            <td>22</td>
+            <td>February 19 2000</td>
+            <td>092666266625</td>
+            <td>Csjdm Bulacan</td>
+            <td>Jamero@hotmail.com</td>
+            <td>Single</td>
+         </data>
+           <data>
+            <td>Glee</td>
+            <td>BJ</td>
+            <td>T</td>
+            <td>32</td>
+            <td>February 12 1980</td>
+            <td>0921891829</td>
+            <td>Csjdm Bulacan</td>
+            <td>bjpogi@hotmail.com</td>
+            <td>Taken</td>
+         </data>
+           <data>
+            <td>Angles</td>
+            <td>Mark</td>
+            <td>Lyodd</td>
+            <td>22</td>
+            <td>June 23 2002</td>
+            <td>09127812818</td>
+            <td>Csjdm Bulacan</td>
+            <td>pogiangeles@hotmail.com</td>
+            <td>Single</td>
+         </data>
+           <data>
+            <td>Baltazar</td>
+            <td>Atheo</td>
+            <td>M</td>
+            <td>20</td>
+            <td>September 2 2001</td>
+            <td>0912412331</td>
+            <td>Csjdm Bulacan</td>
+            <td>Baltazar@hotmail.com</td>
+            <td>Single</td>
+         </data>
+        </info>
     <!--
-        <title>Student Record</title>
-        <info> 
-            <name>Full name: Jamero, Dexter P</name>
-            <age>Age: 21</age>
-            <gender>Gender: Male</gender>
-            <birth>Birthday: February 19 1928</birth>
-            <contact>Contact: 09266666666</contact>
-                <address>Address:
-                    <block>Block: 22</block>
-                    <lot>Lot: 19</lot>
-                    <barangay>FVR</barangay>
-                    <city> Norzagaray</city>
-                    <province>Bulacan</province>
-                </address>
-            <email>Email: jamerodexter@hotmail.com</email>
-            <status>Civil Status: Taken</status>
-        </info>
-    </body>
-      <body>
-        <title>Student Record</title>
-        <info> 
-            <name>Full name: Glee, BJ O</name>
-            <age>Age: 21</age>
-            <gender>Gender: Male</gender>
-            <birth>Birthday: February 12 2003</birth>
-            <contact>Contact: 09266666666</contact>
-                <address>Address:
-                  Purok 4 sitio San isidro Brgy Tungkong mangga Csjdm
-                </address>
-            <email>Email: gleepogi@hotmail.com</email>
-            <status>Civil Status: Single</status>
-        </info>
-    </body>
-    <body>
-        <title>Student Record</title>
-        <info> 
-            <name>Full name: Angeles, Mark Lyodd P</name>
-            <age>Age: 21</age>
-            <gender>Gender: Male</gender>
-            <birth>Birthday: April 12 2003</birth>
-            <contact>Contact: 09266666666</contact>
-                <address>Address:
-                  Purok 4 sitio San isidro Brgy Tungkong mangga Csjdm
-                </address>
-            <email>Email: Angelespogi@hotmail.com</email>
-            <status>Civil Status: Single</status>
-        </info>
-    </body>
+
     <body>
         <title>Student Record</title>
         <info> 
