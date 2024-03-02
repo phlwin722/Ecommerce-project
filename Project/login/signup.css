@@ -1,3 +1,9 @@
+*{
+     padding: 0px;
+     margin: 0px;
+     box-sizing: border-box;
+     font-family: "Poppins", sans-serif;
+ }
 @media only screen and(max-width: 767px){
     /*this is for mobile layout*/
 }
@@ -19,6 +25,98 @@
      
      .sign_up_logo{
           font-size: 30px;
+     }
+          /*capcha css*/
+          .wrapper{
+               width: 100%;
+          }
+     .wrapper .captcha-area{
+          display: flex;
+          height: 65px;
+          margin: 30px 0 20px;
+          align-items: center;
+          justify-content: space-between;
+     }
+     .captcha-area .captcha-img{
+          height: 100%;
+          width: 100%;
+          user-select: none;
+          position: relative;
+          background: #000;
+          border-radius: 5px;
+     }
+     .captcha-img img{
+          width: 100%;
+          height: 100%;
+          opacity: .95;
+          object-fit: cover;
+          border-radius: 5px;
+     }
+     .captcha-img .captacha{
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     width: 100%;
+     color: white;
+     font-size: 25px;
+     text-align: center;
+     letter-spacing: 10px;
+     transform: translate(-50%, -50%);
+     text-shadow:  0 0 2px #a9a9a9;
+     font-family:  'Noto Serif', serif; 
+     }
+     .wrapper button{
+          border: none;
+          outline: none;
+          color: white;
+          cursor: pointer;
+          background: #4db2ec;
+          border-radius: 5px;
+     }
+     .captcha-area .reload-btn{
+          width: 75px;
+          height: 100%;
+          font-size: 25px;
+     }
+     .captcha-area i{
+          transition: transform 0.3s ease;
+     }
+     .captcha-area .reload-btn:hover i {
+          transition:  rotate (15deg);
+     }
+     .wrapper .input_area{
+          height: 60px;
+          width: 100%;
+     }
+     .input_area input{
+          height: 100%;
+          width:100%;
+          outline: none;
+          font-size: 20px;
+          padding-left:20px ;
+          border-radius: 5px;
+          border: 1px solid #bfbfbf;
+     }
+     .input_area input:is(:focus, :valid){
+          padding-left: 19px;
+          border: 2px solid #4db2ec;
+     }
+     .input_area .check-btn{
+          position: absolute;
+          right: 7px;
+          top: 50%;
+          font-size: 17px;
+          height: 45px;
+          padding: 0px 20px;
+          transform: translateY(-50%);
+          opacity: 0;
+          pointer-events: none;
+     }
+     .wrapper .status-txt{
+          font-size: 15px;
+          color: #ff0000;
+          text-align: center;
+          margin: 20px 0 -5px 0;
      }
 }
 

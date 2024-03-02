@@ -1,15 +1,47 @@
 @media only screen and (max-width:767px){
     /*this is for mobile layout*/
+    .list_product_chosee{
+        margin-top: 30px;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+    }
 }
 
 @media only screen and (min-width:768px) and (max-width:1023px) {
     /* this is for tablet layout*/
+    .list_product_chosee{
+        margin-top: 30px;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+    }
 }
 
 @media only screen and (min-width:1024px) and (max-width:1439px) {
     /* this is for laptop layouyt*/
+    *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
     body{
         background-color: rgba(231, 231, 231, 0.884);
+        padding: 0px;
+        margin: 0px;
     }
    
     .search_input{
@@ -31,10 +63,6 @@
         color: rgb(255, 255, 255);
     }
 
-    .couars{
-        margin-top: 20px;
-       height: 300px;
-    }
     .fon{
         font-size: 14px;
         text-decoration: none;
@@ -49,12 +77,55 @@
         border: 1px solid rgb(231, 231, 231);
     }
     .list_product_chosee{
-        margin-top: 40px;
-        border: 1px solid black;
-        background-color: white;
+        margin-top: 30px;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
     }
     
+    .footer{
+        margin-top: 50px;
+        width: 100%;
+        background-color:rgb(83, 83, 83) ;
+        position: relative;
+        height: 80px;
+    }
+    .feedback_Container{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    .copy-right{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: rgb(233, 227, 227);
+    }
+    .modal{
+    margin-top: 240px;
+    margin-left: 430px;
 
+    }
+    .contact_us{
+        position: absolute;
+        top: 20px;
+        right: 120px;
+        color: rgb(233, 227, 227);
+    }
+    .btn-color{
+        color: rgb(233, 227, 227);
+    }
+    .btn-color:hover{
+        background-color: #afafaf;
+        color: white;
+    }
+   
 }
 
 @media only screen and (min-width:1440px){

@@ -6,7 +6,7 @@
     <info>
         <data>
             <th>Last name</th>
-            <th>Firt name </th>
+            <th>First name </th>
             <th>Middle initial</th>
             <th>Age</th>
             <th>Month-day-year</th>
@@ -28,7 +28,7 @@
          </data>
            <data>
             <td>Glee</td>
-            <td>BJ</td>
+            <td>Bhee Jay</td>
             <td>T</td>
             <td>32</td>
             <td>February 12 1980</td>
@@ -40,7 +40,7 @@
            <data>
             <td>Angles</td>
             <td>Mark</td>
-            <td>Lyodd</td>
+            <td>L</td>
             <td>22</td>
             <td>June 23 2002</td>
             <td>09127812818</td>
@@ -59,22 +59,17 @@
             <td>Baltazar@hotmail.com</td>
             <td>Single</td>
          </data>
+         <data>
+          <td>Garcia</td>
+          <td>Charlie</td>
+          <td>K</td>
+          <td>20</td>
+          <td>September 2 2001</td>
+          <td>0912411332</td>
+          <td>Csjdm Bulacan</td>
+          <td>Charlie@hotmail.com</td>
+          <td>Single</td>
+       </data>
         </info>
-    <!--
-
-    <body>
-        <title>Student Record</title>
-        <info> 
-            <name>Full name: Baltazar, Atheo K</name>
-            <age>Age: 21</age>
-            <gender>Gender: Male</gender>
-            <birth>Birthday: June 12 2003</birth>
-            <contact>Contact: 09266666666</contact>
-                <address>Address:
-                  Purok 4 sitio San isidro Brgy Tungkong mangga Csjdm
-                </address>
-            <email>Email: pogi@hotmail.com</email>
-            <status>Civil Status: Single</status>
-        </info>
-    </body>*/-->
+   
 </student>
