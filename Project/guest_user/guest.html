@@ -42,30 +42,56 @@
       <br>
       <br>
       <!--about us--> 
-        <div class="container-fluid con2">
+         <!--about us--> 
+         <div class="container-fluid con2">
           <ul class="nav">
             <a class="btn btn-dark" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               <i class="fa-solid fa-bars"></i>
             </a>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas offcanvas-start"  tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <h4 class="offcanvas-title" id="offcanvasExampleLabel">
+                    <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
+                      </a>
+                  <a class="navbar-brand" href="#">Ecommerce</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  </div>
+                </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div class="offcanvas-body">
                 <div>
-                  Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                </div>
-                <div class="dropdown mt-3">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    Dropdown button
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </div>
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                        <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/Project/guest_user/guest.html"> Home</a>
+                    </h5>
+                  </div>
+                  <hr>
+                  <div>
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                        <a class="navbar-brand" href="">Products Available</a>
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/gamingaccessories.html">Gaming Accessories</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Musical Instrument</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Kitchen Tools</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#"> Women's Fassion & Accessories</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Sports tools</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Automotive & Motorcycle Parts</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Health & Beauty</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="#">Men's Fassion & Accessoriess</a></li>
+                           </ul>       
+                 </div>
+                 <hr>
+                 <div>
+                   <h6> <a class="navbar-brand" href="/Project/login/signin.html">Sign in to buy product</a> </h6>
+                   <a  class="sign-in" href="/Project/login/signin.html">Sign in</a>
+                  </div>
+                 <hr>
+              
               </div>
             </div>
             <li class="nav-item">
@@ -102,63 +128,117 @@
         <div class="container text-center ">
           <nav class="nav flex-column">
           <div class="row list_product_chosee">
-            <div class="col">Gaming Accessories</div>
-            <div class="col">Musical Instrument</div>
-            <div class="col">Kithchen Tools</div>
-            <div class="col">Personal Care</div>
-          </div>
-          <div class="row list_product_chosee">
-            <div class="col">Electronic Accessories</div>
-            <div class="col">Health & Beauty</div>
-            <div class="col">Men's Fassion & Accessories</div>
-            <div class="col">Automotive & Motorcycle Parts</div>
+            <div class="col">
+              <a href="gamingaccessories.html" class="product_list">
+                Gaming Accessories
+                <br>
+                <img src="/Project//Image/gameaccessories.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+            <div class="col">
+              <a href="" class="product_list">
+                Musical Instrument
+                <img src="/Project//Image/musical_instrument.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+            <div class="col">
+              <a href="" class="product_list">
+                Kithchen Tools
+                <img src="/Project//Image/kitchen_tool.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
           </div>
 
+          <div class="row list_product_chosee">
+    
+            <div class="col">
+              <a href="" class="product_list">
+                Women's Fassion & Accessories
+                <br>
+                <img src="/Project//Image/women_fassion.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+            <div class="col">
+              <a href="" class="product_list">
+                Sports tools
+                <br>
+                <img src="/Project//Image/sport_tools.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+            <div class="col">
+              <a href="" class="product_list">
+                Automotive & Motorcycle Parts
+                <br>
+                <img src="/Project//Image/parts_accerores.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+          </div>
+
+          <div class="row list_product_chosee">
+            <div class="col">
+              <a href="" class="product_list">
+                Electronic Accessories 
+              <img src="/Project//Image/elecronic_accessories.jpg" width="300px" height="200px" alt="">
+            </a></div>
+            <div class="col">
+              <a href="" class="product_list">
+                Health & Beauty
+                  <img src="/Project//Image/personal_care.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+            <div class="col">
+              <a href="" class="product_list">
+                Men's Fassion & Accessories
+                <img src="/Project//Image/mens_fassion.jpg" width="300px" height="200px" alt="">
+              </a>
+            </div>
+          </div>
+            <br> <br>  <br>  <br>  <br>  
         </nav>
           </div>
             <!--Footer-->
-          <div class="container-fluid footer" id="footer">
-            <div class="copy-right"> 
-              <i class="fa-regular fa-copyright"></i> 2024, Ecommerce.com
-            </div>
-            <div class="contact_us"> 
-              <i class="fa-regular fa-envelope"></i> ecomerce@gmail.com
-              <br>
-              <i class="fa-solid fa-phone"></i> 09496565245
-            </div> 
-           
-    
-            <!--Feed back-->
-           <div class="feedback_Container">
-            <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Feedback</button>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
-                        </div>
-                        <div class="mb-3">
-                          <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Send message</button>
+            <div class="container-fluid footer" id="footer">
+              <div class="copy-right"> 
+                <i class="fa-regular fa-copyright"></i> 2024, Ecommerce.com
+              </div>
+              <div class="contact_us"> 
+                <i class="fa-regular fa-envelope"></i> ecomerce@gmail.com
+                <br>
+                <i class="fa-solid fa-phone"></i> 09496565245
+              </div> 
+             
+      
+              <!--Feed back-->
+             <div class="feedback_Container">
+              <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Feedback</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-           </div>
-          </div>
+             </div>
+            </div>
           <script src="guest.js" defer></script>
         <!--This is for fontawesome icon-->
           <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

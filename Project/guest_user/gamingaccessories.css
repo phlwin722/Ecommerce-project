@@ -1,37 +1,20 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+body{
+ 
+}
 @media only screen and (max-width:767px){
-    /*this is for mobile layout*/
-    .list_product_chosee{
-        margin-top: 30px;
-        
-    }
-    .col{
-        border-radius: 27px;
-        background: #ffffff;
-        box-shadow:  10px 10px 77px #b1b1b1,
-                     -34px -34px 77px #ffffff;
-             margin: 15px;
-             height: 250px;
-    }
+    /*mobile layout*/
 }
+@media only screen and (min-width:768px) and (max-width:1023px){
 
-@media only screen and (min-width:768px) and (max-width:1023px) {
-    /* this is for tablet layout*/
-    .list_product_chosee{
-        margin-top: 30px;
-        
-    }
-    .col{
-        border-radius: 27px;
-        background: #ffffff;
-        box-shadow:  10px 10px 77px #b1b1b1,
-                     -34px -34px 77px #ffffff;
-             margin: 15px;
-             height: 250px;
-    }
 }
-
-@media only screen and (min-width:1024px) and (max-width:1439px) {
-    /* this is for laptop layouyt*/
+@media only screen and (min-width:1024px) and (max-width:1439px){
+    /*navigation*/
     *{
         padding: 0px;
         margin: 0px;
@@ -40,9 +23,6 @@
     }
     body{
         background-color: rgba(231, 231, 231, 0.884);
-        padding: 0px;
-        margin: 0px;
-        position: relative;
     }
    
     .search_input{
@@ -76,20 +56,6 @@
         height: 300px;
         background-color: white;
         border: 1px solid rgb(231, 231, 231);
-    }
-    .list_product_chosee{
-        margin-top: 30px;
-        margin-bottom: 30pz;
-        
-    }
-    .col{
-        border-radius: 27px;
-        background: #ffffff;
-        box-shadow:  10px 10px 77px #b1b1b1,
-                     -34px -34px 77px #ffffff;
-             margin: 15px;
-             height: 250px;
-             padding: 0px;
     }
     /*footer*/
       /*footer*/
@@ -129,15 +95,8 @@
         background-color: #afafaf;
         color: white;
     }
-    /*List of product avail*/
-   .product_list{
-    text-decoration: none;
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-   }
-     /*canvas*/
-     .offcanvas{
+    /*canvas*/
+    .offcanvas{
         text-align: center;
     }
     .list-product{
@@ -158,12 +117,10 @@
         color: black;
     }
  
- 
 }
-
 @media only screen and (min-width:1440px){
-     /* this is for desktop layouyt*/
-     *{
+      /*navigation*/
+      *{
         padding: 0px;
         margin: 0px;
         box-sizing: border-box;
@@ -207,19 +164,7 @@
         background-color: white;
         border: 1px solid rgb(231, 231, 231);
     }
-    .list_product_chosee{
-        margin-top: 30px;
-        
-    }
-    .col{
-        border-radius: 27px;
-        background: #ffffff;
-        box-shadow:  10px 10px 77px #b1b1b1,
-                     -34px -34px 77px #ffffff;
-             margin: 15px;
-             height: 250px;
-             padding: 0px;
-    }
+    /*footer*/
       /*footer*/
       #footer{
         bottom: 0px;
@@ -257,5 +202,4 @@
         background-color: #afafaf;
         color: white;
     }
-   
 }
