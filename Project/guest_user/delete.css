@@ -1,20 +1,39 @@
-*{
-    padding: 0px;
-    margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-body{
- 
-}
-@media only screen and (max-width:767px){
-    /*mobile layout*/
-}
-@media only screen and (min-width:768px) and (max-width:1023px){
 
+@media only screen and (max-width:767px){
+    /*this is for mobile layout*/
+    .list_product_chosee{
+        margin-top: 30px;
+        padding: 0px;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+    }
 }
-@media only screen and (min-width:1024px) and (max-width:1439px){
-    /*navigation*/
+
+@media only screen and (min-width:768px) and (max-width:1023px) {
+    /* this is for tablet layout*/
+    .list_product_chosee{
+        margin-top: 30px;
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+             padding: 10px;
+    }
+}
+
+@media only screen and (min-width:1024px) and (max-width:1439px) {
+    /* this is for laptop layouyt*/
     *{
         padding: 0px;
         margin: 0px;
@@ -60,9 +79,23 @@ body{
         background-color: white;
         border: 1px solid rgb(231, 231, 231);
     }
+    .list_product_chosee{
+        margin-top: 30px;
+        margin-bottom: 30pz;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+             padding: 10px 10px 20px 10px;
+    }
     /*footer*/
-       /*footer*/
-       #footer{
+      /*footer*/
+      #footer{
         bottom: 0px;
         width: 100%;
         background-color:rgb(83, 83, 83) ;
@@ -105,18 +138,8 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     color: black;
    }
-   .col{
-    border-radius: 27px;
-    background: #ffffff;
-    box-shadow:  10px 10px 77px #b1b1b1,
-                 -34px -34px 77px #ffffff;
-         margin: 15px;
-         height: 250px;
-         padding: 10px 10px 20px 10px;
-}
-   
-    /*canvas*/
-    .offcanvas{
+     /*canvas*/
+     .offcanvas{
         text-align: center;
     }
     .list-product{
@@ -137,10 +160,12 @@ body{
         color: black;
     }
  
+ 
 }
+
 @media only screen and (min-width:1440px){
-      /*navigation*/
-      *{
+     /* this is for desktop layouyt*/
+     *{
         padding: 0px;
         margin: 0px;
         box-sizing: border-box;
@@ -184,7 +209,19 @@ body{
         background-color: white;
         border: 1px solid rgb(231, 231, 231);
     }
-    /*footer*/
+    .list_product_chosee{
+        margin-top: 30px;
+        
+    }
+    .col{
+        border-radius: 27px;
+        background: #ffffff;
+        box-shadow:  10px 10px 77px #b1b1b1,
+                     -34px -34px 77px #ffffff;
+             margin: 15px;
+             height: 250px;
+             padding: 0px;
+    }
       /*footer*/
       #footer{
         bottom: 0px;
@@ -222,4 +259,5 @@ body{
         background-color: #afafaf;
         color: white;
     }
+   
 }

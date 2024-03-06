@@ -13,7 +13,7 @@
             <div class="container-fluid sign_up_logo" >
               Sign up
             </div>
-          <form class="row g-3">
+          <form class="row g-3" method="post">
                 <div class="col-md-4">
                   <label for="validationDefault01" class="form-label">First name</label>
                   <input type="text" class="form-control" id="validationDefault01" name="fname" required>
@@ -34,68 +34,68 @@
                 </div>
                 <div class="col-md-4">
                   <label for="validationDefault04" class="form-label">Province</label>
-                  <select class="form-select" id="validationDefault04" required>
+                  <select class="form-select" id="validationDefault04" name="province" required aria-label="Default ma select example">
                     <option selected disabled value="">Choose...</option>
                     <option value="Abra">Abra</option> 
-                     <option value="Abra"> Agusan del Norte</option> 
-                     <option value="Abra">Agusan del Sur</option> 
-                     <option value="Abra">Aklan</option> 
-                     <option value="Abra">Antique</option> 
-                     <option value="Abra">Apayao</option> 
-                     <option value="Abra">Aurora</option> 
+                     <option value="Agusan del Norte">Agusan del Norte</option> 
+                     <option value="Agusan del Sur">Agusan del Sur</option> 
+                     <option value="Aklan">Aklan</option> 
+                     <option value="Antique">Antique</option> 
+                     <option value="Apayao">Apayao</option> 
+                     <option value="Aurora">Aurora</option> 
               
-                     <option value="Abra">Basilan</option> 
-                     <option value="Abra">Bataan</option> 
-                     <option value="Abra">Batanes</option> 
-                     <option value="Abra">Batangas</option> 
-                     <option value="Abra">Benguet</option> 
-                     <option value="Abra">Biliran</option> 
-                     <option value="Abra">Bohol</option> 
-                     <option value="Abra">Bukidnon</option> 
-                     <option value="Abra" > Bulacan</option> 
+                     <option value="Basilan">Basilan</option> 
+                     <option value="Bataan">Bataan</option> 
+                     <option value="Batanes">Batanes</option> 
+                     <option value="Batangas">Batangas</option> 
+                     <option value="Benguet">Benguet</option> 
+                     <option value="Biliran">Biliran</option> 
+                     <option value="Bohol">Bohol</option> 
+                     <option value="Bukidnon">Bukidnon</option> 
+                     <option value="Bulacan" > Bulacan</option> 
 
-                     <option value="Abra">Cagayan</option> 
-                     <option value="Abra">Camarines Norte</option> 
-                     <option value="Abra"> Camarines Sur</option> 
-                     <option value="Abra">Camiguin</option> 
-                     <option value="Abra">Capiz</option> 
-                     <option value="Abra">Catanduanes</option> 
-                     <option value="Abra">Cavite</option> 
-                     <option value="Abra">Cebu</option> 
-                     <option value="Abra">Cotabato</option> 
+                     <option value="Cagayan">Cagayan</option> 
+                     <option value="Camarines Norte">Camarines Norte</option> 
+                     <option value="Camarines Sur"> Camarines Sur</option> 
+                     <option value="Camiguin">Camiguin</option> 
+                     <option value="Capiz">Capiz</option> 
+                     <option value="Catanduanes">Catanduanes</option> 
+                     <option value="Cavite">Cavite</option> 
+                     <option value="Cebu">Cebu</option> 
+                     <option value="Cotabato">Cotabato</option> 
 
-                     <option value="Abra">Davao de Oro</option> 
-                     <option value="Abra">Davao del Norte</option> 
-                     <option value="Abra">Davao del Sur</option> 
-                     <option value="Abra">Davao Occidental</option> 
-                     <option value="Abra">Davao Oriental</option> 
-                     <option value="Abra">Dinagat Islands</option> 
+                     <option value=">Davao de Oro">Davao de Oro</option> 
+                     <option value="Davao del Norte">Davao del Norte</option> 
+                     <option value="Davao del Sur">Davao del Sur</option> 
+                     <option value="Davao Occidental">Davao Occidental</option> 
+                     <option value="Davao Oriental">Davao Oriental</option> 
+                     <option value="inagat Islands">Dinagat Islands</option> 
 
-                     <option value="Abra">Eastern Samar</option> 
+                     <option value="astern Samar">Eastern Samar</option> 
 
-                     <option value="Abra">Guimaras</option> 
+                     <option value="Guimaras">Guimaras</option> 
 
-                     <option value="Abra">Ifugao</option> 
-                     <option value="Abra">Ilocos Norte</option> 
-                     <option value="Abra">Ilocos Sur</option> 
-                     <option value="Abra">Iloilo</option> 
-                     <option value="Abra">Isabela </option> 
+                     <option value="Ifugao">Ifugao</option> 
+                     <option value="Ilocos Norte">Ilocos Norte</option> 
+                     <option value="Ilocos Sur">Ilocos Sur</option> 
+                     <option value="Iloilo">Iloilo</option> 
+                     <option value="Isabela">Isabela </option> 
 
-                     <option value="Abra">Kalinga</option> 
+                     <option value="Kalinga">Kalinga</option> 
 
-                     <option value="Abra"> La Union</option> 
-                     <option value="Abra">Laguna</option> 
-                     <option value="Abra">Lanao del Norte</option> 
-                     <option value="Abra">Lanao del Sur</option> 
-                     <option value="Abra">Leyte</option> 
+                     <option value="La Union"> La Union</option> 
+                     <option value="Laguna">Laguna</option> 
+                     <option value="Lanao del Norte">Lanao del Norte</option> 
+                     <option value="Lanao del Sur">Lanao del Sur</option> 
+                     <option value="Leyte">Leyte</option> 
 
-                     <option value="Abra">Maguindana</option> 
-                     <option value="Abra">Maguindanao del Norte</option> 
-                     <option value="Abra">Maguindanao del Sur</option> 
-                     <option value="Abra">Marinduque</option> 
-                     <option value="Abra">Masbate</option> 
-                     <option value="Abra">Misamis Occidental</option> 
-                     <option value="Abra">Mountain Province</option> 
+                     <option value="Maguindana">Maguindana</option> 
+                     <option value="Maguindanao del Norte">Maguindanao del Norte</option> 
+                     <option value="Maguindanao del Sur">Maguindanao del Sur</option> 
+                     <option value="Marinduque">Marinduque</option> 
+                     <option value="Masbate">Masbate</option> 
+                     <option value="Misamis Occidenta">Misamis Occidental</option> 
+                     <option value="Mountain Province">Mountain Province</option> 
 
                      <option value="Abra">Negros Occidental</option> 
                      <option value="Abra">Negros Oriental</option> 
@@ -103,41 +103,41 @@
                      <option value="Abra">Nueva Ecija</option> 
                      <option value="Abra">Nueva Vizcaya</option> 
 
-                     <option value="Abra">Occidental Mindoro</option> 
-                     <option value="Abra">Oriental Mindoro</option> 
+                     <option value="Occidental Mindoro">Occidental Mindoro</option> 
+                     <option value="Oriental Mindoro<">Oriental Mindoro</option> 
 
-                     <option value="Abra"> Palawan</option> 
-                     <option value="Abra">Pampanga</option> 
-                     <option value="Abra">Pangasinan</option> 
+                     <option value="Palawan"> Palawan</option> 
+                     <option value="Pampanga">Pampanga</option> 
+                     <option value="Pangasinan">Pangasinan</option> 
 
-                     <option value="Abra">Quezon</option> 
-                     <option value="Abra">Quirino</option> 
+                     <option value="Quezon">Quezon</option> 
+                     <option value="Quirino">Quirino</option> 
 
-                     <option v>Rizal</option> 
-                     <option value="Abra">Romblon</option> 
+                     <option value="Rizal">Rizal</option> 
+                     <option value="Romblon">Romblon</option> 
 
-                     <option value="Abra">Samar</option> 
-                     <option value="Abra">Sarangani</option> 
-                     <option value="Abra"> Siquijor</option> 
-                     <option value="Abra">Sorsogon</option> 
-                     <option value="Abra"> South Cotabato</option> 
-                     <option value="Abra">Southern Leyte</option> 
-                     <option value="Abra">Sultan Kudarat</option> 
-                     <option value="Abra">Sulo</option> 
-                     <option value="Abra">Surigao del Norte</option> 
-                     <option value="Abra">Surigao del Sur</option> 
+                     <option value="Samar">Samar</option> 
+                     <option value="Sarangani">Sarangani</option> 
+                     <option value="Siquijor"> Siquijor</option> 
+                     <option value="Sorsogon">Sorsogon</option> 
+                     <option value="South Cotabato"> South Cotabato</option> 
+                     <option value="Southern Leyte">Southern Leyte</option> 
+                     <option value="Sultan Kudarat">Sultan Kudarat</option> 
+                     <option value="Sulo">Sulo</option> 
+                     <option value="Surigao del Norte">Surigao del Norte</option> 
+                     <option value="Surigao del Sur">Surigao del Sur</option> 
 
-                     <option value="Abra">Tarlac</option> 
-                     <option value="Abra">Tawi-Tawi</option> 
+                     <option value="Tarlac">Tarlac</option> 
+                     <option value="Tawi-Tawi">Tawi-Tawi</option> 
 
-                     <option value="Abra"> Zambales</option> 
-                     <option value="Abra">Zamboanga del Nort</option> 
-                     <option value="Abra">Zamboanga del Sur</option> 
-                     <option value="Abra">Zamboanga Sibugay</option> 
+                     <option value="Zambales"> Zambales</option> 
+                     <option value="Zamboanga del Nort">Zamboanga del Nort</option> 
+                     <option value="Zamboanga del Sur">Zamboanga del Sur</option> 
+                     <option value="Zamboanga city">Zamboanga Sibugay</option> 
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label for="validationDefault04" class="form-label">City</label>
+                  <label for="validationDefault04" name="city" class="form-label">City</label>
                   <select class="form-select" id="validationDefault04"   name="city" required>
                     <option selected disabled value="">Choose...</option>
                                         <option value="Manila">Manila</option>
@@ -246,14 +246,15 @@
                 </div>
                 <div class="col-md-4">
                   <label for="validationDefault05" class="form-label">Barangay</label>
-                  <select class="form-select" id="validationDefault04" required>
+                  <select class="form-select" name="barangay"  id="validationDefault04" required>
                     <option selected disabled value="">Choose...</option>
-                     
+                    <option value="Bongao">FVR</option>
                   </select>
                 </div>
                 <div class="col-md-12">
                     <label for="validationDefault03" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="validationDefault03" required>
+                    <input type="email" class="form-control" id="validationDefault03" name="email" placeholder="name@example.com" required>
+                    
                   </div>
                   <div class="col-md-12">
                     <label for="validationDefault03" class="form-label">Passowrd</label>
