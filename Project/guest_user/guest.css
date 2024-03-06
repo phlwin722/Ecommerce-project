@@ -1,7 +1,14 @@
+img {
+    object-fit: cover;
+}
+.con2{
+    position: sticky;
+}
 @media only screen and (max-width:767px){
     /*this is for mobile layout*/
     .list_product_chosee{
         margin-top: 30px;
+        padding: 0px;
         
     }
     .col{
@@ -27,6 +34,7 @@
                      -34px -34px 77px #ffffff;
              margin: 15px;
              height: 250px;
+             padding: 10px;
     }
 }
 
@@ -59,6 +67,7 @@
 
     .con2{
         background-color: rgb(0, 0, 0);
+        position:sticky;
     }
     .fontt{
         color: rgb(255, 255, 255);
@@ -89,7 +98,7 @@
                      -34px -34px 77px #ffffff;
              margin: 15px;
              height: 250px;
-             padding: 0px;
+             padding: 10px 10px 20px 10px;
     }
     /*footer*/
       /*footer*/
