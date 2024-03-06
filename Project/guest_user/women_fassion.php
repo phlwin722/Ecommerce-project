@@ -4,17 +4,16 @@
         <title>gaming accessories</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Automotive & Motorcycle Parts</title>
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="automotive_parts.css">
+        <link rel="stylesheet" href="women_fassion.css">
     </head>
     <body>
-        <div class="container-fluid">
+    <div class="container-fluid">
             <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" data-bs-theme="dark">
               <div class="container-fluid">
                   <a class="navbar-brand" href="#">
-                      <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
                     </a>
                 <a class="navbar-brand" href="#">Ecommerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,10 +28,10 @@
                   </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link c" style="color: white;" href="/Project/login/signin.html">Sign in</a>
+                      <a class="nav-link c" style="color: white;" href="/shopping-cart-oche/Project/login/signin.php">Sign in</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/Project/login/signup.html">Sign up</a>
+                      <a class="nav-link" href="/shopping-cart-oche/Project/login/signup.php">Sign up</a>
                     </li>
                   </ul>
                 </div>
@@ -65,7 +64,7 @@
                   <div class="offcanvas-body">
                     <div>
                         <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                            <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/Project/guest_user/guest.html"> Home</a>
+                            <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/Project/guest_user/guest.php"> Home</a>
                         </h5>
                       </div>
                       <hr>
@@ -74,23 +73,23 @@
                             <a class="navbar-brand" href="">Products Available</a>
                             </h5>
                             <ul class="list-group list-group-flush">
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/gamingaccessories.html">Gaming Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/musical_instrument.html">Musical Instrument</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/kitchen_tools.html">Kitchen Tools</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/women_fassion.html"> Women's Fassion & Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/sport_tools.html">Sports tools</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/automotive_parts.html">Automotive & Motorcycle Parts</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/electronic_accessorise.html">Electronic Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/health_beuty.html">Health & Beauty</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/men_fassion.html">Men's Fassion & Accessoriess</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/gamingaccessories.php">Gaming Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/musical_instrument.php">Musical Instrument</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/kitchen_tools.php">Kitchen Tools</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/women_fassion.php"> Women's Fassion & Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/sport_tools.php">Sports tools</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/electronic_accessorise.php">Electronic Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/health_beuty.php">Health & Beauty</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/men_fassion.php">Men's Fassion & Accessoriess</a></li>
                         </ul>
                           
                      </div>
                      <hr>
                      <div>
-                       <h6> <a class="navbar-brand" href="/Project/login/signin.html">Sign in to buy product</a> </h6>
+                       <h6> <a class="navbar-brand" href="/shopping-cart-oche/Project/login/signin.php">Sign in to buy product</a> </h6>
 
-                     <a  class="sign-in" href="/Project/login/signin.html">Sign in</a>
+                     <a  class="sign-in" href="/shopping-cart-oche/Project/login/signin.php">Sign in</a>
                      </div>
                      <hr>
                   

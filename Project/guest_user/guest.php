@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" data-bs-theme="dark">
           <div class="container-fluid">
               <a class="navbar-brand" href="#">
-                  <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
+                <img src="/shopping-cart-oche/Project/Image/logo.png" width="30" height="30">
                 </a>
             <a class="navbar-brand" href="#">Ecommerce</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,11 @@
               </form>
               <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link c" style="color: white;" href="/Project/login/signin.html">Sign in</a>
+                  <a class="nav-link c" style="color: white;" href="/shopping-cart-oche/Project/login/signin.php">Sign in
+                </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/Project/login/signup.html">Sign up</a>
+                  <a class="nav-link" href="/shopping-cart-oche/Project/login/signup.php">Sign up</a>
                 </li>
               </ul>
             </div>
@@ -67,7 +68,7 @@
               <div class="offcanvas-body">
                 <div>
                     <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                        <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/Project/guest_user/guest.html"> Home</a>
+                        <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest.php"> Home</a>
                     </h5>
                   </div>
                   <hr>
@@ -76,21 +77,21 @@
                         <a class="navbar-brand" href="">Products Available</a>
                         </h5>
                         <ul class="list-group list-group-flush">
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/gamingaccessories.html">Gaming Accessories</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/musical_instrument.html">Musical Instrument</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/kitchen_tools.html">Kitchen Tools</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/women_fassion.html"> Women's Fassion & Accessories</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/sport_tools.html">Sports tools</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/automotive_parts.html">Automotive & Motorcycle Parts</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/electronic_accessorise.html">Electronic Accessories</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/health_beuty.html">Health & Beauty</a></li>
-                            <li  class="list-product"><a class="nav-link c" href="/Project/guest_user/men_fassion.html">Men's Fassion & Accessoriess</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/gamingaccessories.php">Gaming Accessories</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/musical_instrument.php">Musical Instrument</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/kitchen_tools.php">Kitchen Tools</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/women_fassion.php"> Women's Fassion & Accessories</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/sport_tools.php">Sports tools</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/electronic_accessorise.php">Electronic Accessories</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/health_beuty.php">Health & Beauty</a></li>
+                            <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/men_fassion.php">Men's Fassion & Accessoriess</a></li>
                            </ul>       
                  </div>
                  <hr>
                  <div>
-                   <h6> <a class="navbar-brand" href="/Project/login/signin.html">Sign in to buy product</a> </h6>
-                   <a  class="sign-in" href="/Project/login/signin.html">Sign in</a>
+                   <h6> <a class="navbar-brand" href="/shopping-cart-oche/Project/login/signin.php">Sign in to buy product</a> </h6>
+                   <a  class="sign-in" href="/shopping-cart-oche/Project/login/signin.php">Sign in</a>
                   </div>
                  <hr>
               
@@ -108,13 +109,13 @@
         <div id="carouselExampleAutoplaying" class="carousel slide couars" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="/Project/Image/two.jpeg" class="d-block w-100 " height="350px" alt="...">
+              <img src="/shopping-cart-oche/Project/Image/two.jpeg" class="d-block w-100 " height="350px" style="object-fit: cover;" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="/Project/Image/one.jpg" class="d-block w-100" height="350px" alt="...">
+              <img src="/shopping-cart-oche/Project/Image/one.jpg" class="d-block w-100" height="350px" style="object-fit: cover;" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="/Project/Image/three.jpg" class="d-block w-100 " height="350px" alt="...">
+              <img src="/shopping-cart-oche/Project/Image/three.jpg" class="d-block w-100 " height="350px" style="object-fit: cover;" alt="...">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -131,22 +132,22 @@
           <nav class="nav flex-column">
           <div class="row list_product_chosee">
             <div class="col lay">
-              <a href="gamingaccessories.html" class="product_list">
+              <a href="gamingaccessories.php" class="product_list">
                 Gaming Accessories
                 <br>
-                <img src="/Project//Image/gameaccessories.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/gameaccessories.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col lay">
-              <a href="/Project/guest_user/musical_instrument.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/musical_instrument.php" class="product_list">
                 Musical Instrument
-                <img src="/Project//Image/musical_instrument.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/musical_instrument.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col lay">
-              <a href="/Project/guest_user/kitchen_tools.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/kitchen_tools.php" class="product_list">
                 Kithchen Tools
-                <img src="/Project//Image/kitchen_tool.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/kitchen_tool.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>
@@ -154,44 +155,44 @@
           <div class="row list_product_chosee">
     
             <div class="col">
-              <a href="/Project/guest_user/women_fassion.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/women_fassion.php" class="product_list">
                 Women's Fassion & Accessories
                 <br>
-                <img src="/Project//Image/women_fassion.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/women_fassion.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/Project/guest_user/sport_tools.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/sport_tools.php" class="product_list">
                 Sports tools
                 <br>
-                <img src="/Project//Image/sport_tools.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/sport_tools.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/Project/guest_user/automotive_parts.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/automotive_parts.php" class="product_list">
                 Automotive & Motorcycle Parts
                 <br>
-                <img src="/Project//Image/parts_accerores.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/parts_accerores.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>
 
           <div class="row list_product_chosee">
             <div class="col">
-              <a href="/Project/guest_user/electronic_accessorise.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/electronic_accessorise.php" class="product_list">
                 Electronic Accessories 
-              <img src="/Project//Image/elecronic_accessories.jpg" width="300px" height="200px" alt="">
+              <img src="/shopping-cart-oche/Project//Image/elecronic_accessories.jpg" width="300px" height="200px" alt="">
             </a></div>
             <div class="col">
-              <a href="/Project/guest_user/health_beuty.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/health_beuty.php" class="product_list">
                 Health & Beauty
-                  <img src="/Project//Image/personal_care.jpg" width="300px" height="200px" alt="">
+                  <img src="/shopping-cart-oche/Project//Image/personal_care.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/Project/guest_user/men_fassion.html" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/men_fassion.php" class="product_list">
                 Men's Fassion & Accessories
-                <img src="/Project//Image/mens_fassion.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project//Image/mens_fassion.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>
@@ -234,7 +235,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="button" class="btn btn-primary">Send</button>
                       </div>
                     </div>
                   </div>

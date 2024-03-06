@@ -265,7 +265,7 @@
                     <header>Captcha</header>
                     <div class="captcha-area">
                       <div class="captcha-img">
-                        <img src="/Project/Image/back-img-capha.jpg" alt="">
+                        <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" alt="">
                         <span class="captacha"><i class="captachaa"></i></span> 
                       </div>
                       <button class="reload-btn"><i class="fa-sharp fa-solid fa-rotate-right"></i></button>
