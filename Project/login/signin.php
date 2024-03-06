@@ -67,6 +67,17 @@
                         $_SESSION ['llname'] = $row ['Lastname'];
                         header ("Location: /shopping-cart-oche/Project/user_login/guest.php");
                       }
+                      else {
+                        echo '
+                     
+                      <div style="margin-top:-30px" class="alert alert-warning alert-dismissible fade show" d-flex align-items-center" role="alert">
+                       <div>
+                       <i class="fa-solid fa-triangle-exclamation"></i>Please Check Email or Password
+                        </div>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                        ';
+                      }
                    }
 
                 }
