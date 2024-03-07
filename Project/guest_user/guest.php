@@ -7,7 +7,10 @@
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="guest.css">
-        <title>Musical Instrument</title>
+          <!--Favicon-->
+          <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
+  
+        <title>Guest - Ecommerce</title>
     </head>
     <body>
     <div class="container-fluid">
@@ -108,13 +111,13 @@
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="/shopping-cart-oche/Project/Image/two.jpeg" class="d-block w-100 " height="350px" style="object-fit: cover;" alt="...">
+                <img src="/shopping-cart-oche/Project/Image/two.png" class="d-block w-100 " height="400px" style="object-fit: cover;" alt="...">
            </div>
                 <div class="carousel-item">
-                <img src="/shopping-cart-oche/Project/Image/one.jpg" class="d-block w-100" height="350px" style="object-fit: cover;" alt="...">
+                <img src="/shopping-cart-oche/Project/Image/one.png" class="d-block w-100" height="400px" style="object-fit: cover;" alt="...">
            </div>
                 <div class="carousel-item">
-                <img src="/shopping-cart-oche/Project/Image/three.jpg" class="d-block w-100 " height="350px" style="object-fit: cover;" alt="...">
+                <img src="/shopping-cart-oche/Project/Image/three.png" class="d-block w-100 " height="400px" style="object-fit: cover;" alt="...">
           </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
