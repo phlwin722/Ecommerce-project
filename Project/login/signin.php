@@ -30,7 +30,7 @@
         <div class="row justify-content-md">
         <div class="row">
           <div class="col ">
-          <img src="/shopping-cart-oche/Project/Image/two.jpeg" width="710px" height="501px" alt="">
+          <img src="/shopping-cart-oche/Project/Image/two.png" width="710px" height="501px" alt="">
           </div>
           <!-- this is form sign in-->
           <div class="col-md-4 form_signin">
