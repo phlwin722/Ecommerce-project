@@ -63,17 +63,27 @@ body{
 }
 
 @media only screen and (min-width:768px) and (max-width:1023px) {
-    
+  .navicon{
+    background-color: rgb(43, 43, 43);
+    padding: 5px;
+}
+.navbar{
+  width: 100%;
+}
 }
 @media only screen and  (min-width:1024px) and (max-width:1439px){
     .navicon{
         background-color: rgb(43, 43, 43);
-        padding: 5px;
         width: 21%;
     }
     .display{
-        background-color: rgb(48, 47, 47);
+        background-color: rgb(37, 37, 37);
         width: 79%;
+      padding: 13px;
+    }
+    .display_container{
+      background-color: #fafafa;
+      border: 10px;
     }
     .nave{
         margin-top: -290px;
@@ -155,10 +165,6 @@ body{
     padding: 5px;
     width: 15%;
 }
-.display{
-    background-color: rgb(48, 47, 47);
-    width: 85%;
-}
 .nave{
     margin-top: -290px;
     position: fixed;
@@ -230,4 +236,10 @@ height: 959px;
     background-color: #6d6d6d;
     color: rgb(0, 0, 0);
   }
+  
+  .display{
+    background-color: rgb(160, 151, 151);
+    width: 85%;
+    padding:10px;
+}
 }
