@@ -192,18 +192,21 @@
     
 }
 
-@media only screen and (min-width:1440px) {
+@media only screen and (min-width:1440px){
     .color{
         color:white;
         text-decoration: none;
         margin-top: 10px;
         }
-    
+    .navbar{
+        width: 200px;
+    }
         .navicon{
-            background-color: rgb(43, 43, 43);
+            background-color: rgb(177, 5, 5);
+            max-width: 24800px;
         }
         .row{
-            height: 647px;
+            height: 959px;
         }
         /*Accordion css*/
         .accordion{
@@ -237,7 +240,7 @@
             content: "\2212";
         }
         .panel{
-            width: 100%;
+            max-width: 100%;
             padding: 0px 18px;
             background-color: rgb(68, 67, 67);
             max-height:0;
@@ -247,11 +250,27 @@
         }
         hr{
            background-color: white;
-          }
+             }
           .nav-link:hover{
             background-color: #6d6d6d;
-            border-radius: 10px;
+            border-radius: 5px;
             color: rgb(0, 0, 0);
           }
+    
+          /*second layout*/
+          .display{
+            background-color: rgb(37, 37, 37);
+          padding: 13px;
+        }
+        .display_container{
+          background-color: #fafafa;
+          height: 959px;
+        }
+        .navbar-expand-lg {
+            flex-wrap: nowrap;
+            justify-content: center;
+            width: 230px;
+            border: 1px solid black;
+        }
         
 }
