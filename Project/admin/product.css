@@ -1,4 +1,6 @@
-
+body{
+    overflow-x: hidden;
+}
 @media only screen and (max-width:767px){
     /*mobile layout*/
     .color{
@@ -200,6 +202,9 @@
       }
       .nav-link{
         text-align: left;
+      }
+      #grid_size{
+        width: 1116px; 
       }
 }
 
