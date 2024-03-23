@@ -126,7 +126,7 @@
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="#">List product</a></li>
+                                <li><a class="dropdown-item" href="/Project/admin/product.html">List product</a></li>
                                 <li><a class="dropdown-item" href="#">Archive product</a></li>
                               </ul>
                               </div>
@@ -148,10 +148,16 @@
                     </div>        
                     <!--this is second grid of data display-->
                         <div class="col-md-auto" id="grid_size" style=" background-color: rgba(224, 223, 221, 0.966);">
+                          <!--message error of modal or successfull-->
+                         
+                        <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Product</label>
+                          
+                         <br>
+                        
                           <!--this is button of new product-->
-                          <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New</button>
+                          <button type="button" href="newproduct.html" class="btn btn-primary new_button"><i class="fa-solid fa-plus"></i> New</button>
                           <!--this is the list of table product-->
-                          <table class="table table-hover">
+                          <table class="table table-hover" style="margin-top:10px ;">
                             <thead>
                               <tr>
                                 <th scope="col">Code</th>

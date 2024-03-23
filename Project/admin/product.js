@@ -13,3 +13,10 @@ for (i = 0; i < acc.length; i++) {
       } 
     });
   }
+
+  // this is to link the new product html
+
+  let new_button = document.querySelector(".new_button");
+  new_button.addEventListener("click",function(){
+      window.location.href="/Project/admin/newproduct.html";
+  });
