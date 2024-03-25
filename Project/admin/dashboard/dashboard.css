@@ -135,6 +135,7 @@
  #wid{
     width: 260px;
     background-color:  rgb(43, 43, 43);
+    padding: 0px 10px 0px 20px;
  }
  .color{
     color:white;
