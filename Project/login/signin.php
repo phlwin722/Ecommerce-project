@@ -1,5 +1,6 @@
 <?php 
   session_start();
+  
 ?>
 
 <!DOCTYPE html>
@@ -49,14 +50,14 @@
                   
                    $sql = "SELECT * FROM admin WHERE Username='$user' AND Password='$pass'";
                    $result = $con->query($sql);
-                   $total = $result->fetch_assoc();
-                   $row = $result->num_rows;
+                   $row = $result->fetch_assoc();
+                   $total  = $result-> num_rows;
 
-                   if ($row > 0){
+                   if ($total > 0){
                       // redirect admin 
                       $_SESSION ['ffname']  = $row ['First_name'];
-                      $_SESSION ['llname'] = $row ['Lastname'];
-                      header ("Location: /shopping-cart-oche/Project/admin/dashboard.php");
+                      $_SESSION ['llname'] = $row ['Last_name'];
+                      header ("Location: /shopping-cart-oche/Project/admin/dashboard/dashboard.php");
                    }else{
                       $sql = "SELECT * FROM user_information WHERE  Email='$user' AND Password='$pass'";
                       $result = $con -> query($sql);
@@ -64,13 +65,12 @@
                       $row = $result->num_rows;
 
                       if ($row > 0){
-                        $_SESSION ['ffname']  = $row ['First_name'];
-                        $_SESSION ['llname'] = $row ['Lastname'];
+                        $_SESSION ['ffname']  = $total ['First_name'];
+                        $_SESSION ['llname'] = $total ['Last_name'];
                         header ("Location: /shopping-cart-oche/Project/user_login/guest.php");
                       }
                       else {
                         echo '
-                     
                       <div style="margin-top:-30px" class="alert alert-warning alert-dismissible fade show" d-flex align-items-center" role="alert">
                        <div>
                        <i class="fa-solid fa-triangle-exclamation"></i><label style="margin-left: 10px;">Please Check Email or Password </label>
@@ -82,6 +82,7 @@
                    }
 
                 }
+            
             ?>
         <div class="container-fluid login">Log In</div>
             <form class="" action="" method="post">

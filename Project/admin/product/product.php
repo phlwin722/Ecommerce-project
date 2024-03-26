@@ -1,3 +1,11 @@
+<?php 
+  session_start();
+
+    if (!isset($_SESSION['ffname'])){
+      header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <html>
@@ -91,7 +99,7 @@
                               </div>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
                         </ul>
                         </div>

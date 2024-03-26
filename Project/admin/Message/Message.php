@@ -1,3 +1,10 @@
+<?php 
+  session_start();
+
+    if (!isset($_SESSION['ffname'])){
+      header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,10 +32,10 @@
                 <form class="d-flex" role="search" style="margin-right: 15px;">
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/Project/Image/logo.png" height="25" style="border-radius: 50%;">dexter Jamero</button>
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">dexter Jamero</button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><a class="dropdown-item" href="/Project/admin/my_account/myacct.html">My Account</a></li>
+                      <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/my_account/myacct.php">My Account</a></li>
                       <li><hr class="dropdown-divider"></li>
                     </ul>
                   </div>
@@ -48,18 +55,18 @@
                         <hr style="color: white;">
                         
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="#"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/Project/admin/Message/Message.html">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
                               Message
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html"> <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php"> <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -74,8 +81,8 @@
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="/Project/admin/product/archive.html">Archive product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
                               </ul>
                               </div>
                           </li>
@@ -90,7 +97,7 @@
                               </div>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
                         </ul>
                         </div>
@@ -110,18 +117,18 @@
                         <hr style="color: white;">
                         
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="#"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/Project/admin/Message/Message.html">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
                                 Message
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -136,8 +143,8 @@
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="/Project/admin/product/archive.html">Archive product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
                               </ul>
                               </div>
                           </li>
@@ -152,7 +159,7 @@
                               </div>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
                         </ul> 
                     </div>        

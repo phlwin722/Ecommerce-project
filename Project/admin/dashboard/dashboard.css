@@ -133,9 +133,9 @@
 @media only screen and (min-width:1024px) and (max-width:1439px) { 
     /* laptop layout*/
  #wid{
-    width: 260px;
+    width: 270px;
     background-color:  rgb(43, 43, 43);
-    padding: 0px 10px 0px 20px;
+    padding: 0px 10px 0px 10px;
  }
  .color{
     color:white;

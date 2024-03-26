@@ -87,6 +87,7 @@ body{
       }
       .table_action{
         width: 90px;
+        text-align: center;
       }
       .table_email{
         width: 290px;
