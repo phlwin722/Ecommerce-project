@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Archive Product</title>
         <meta name="autor"  content="Dexter Jamero">
@@ -54,11 +54,16 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html"> <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
+                            <a class="nav-link" style="color: white;" href="/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
                               Sales Report
                               
                           </a>
@@ -112,6 +117,11 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -148,57 +158,60 @@
                     </div> 
                            
                         <!--table of content-->
-                        <div class="col text-start table_content">
+                        <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966);">
                           <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted Product</label>
-                            <!--this is the list of table product-->
-                          <table class="table table-hover" style="margin-top:10px ;">
-                            <thead>
-                              <tr>
-                                <th scope="col">Code</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-rotate"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-rotate"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-rotate"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                               </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!--end this is the list of table product-->
+                         <!--this is the list of table product-->
+                         <table class="table table-hover" style="margin-top:10px ;">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="table_code">Code</th>
+                              <th scope="col" class="table_product">Product</th>
+                              <th scope="col" class="table_quantity">Quantity</th>
+                              <th scope="col" class="table_img">Image</th>
+                              <th scope="col" class="table_price">Price</th>
+                              <th scope="col" class="table_description">Description</th>
+                              <th scope="col" class="table_action">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                              <td> 
+                                <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                             </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>@fat</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                              <td> 
+                                <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                             </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td colspan="2">Larry the Bird</td>
+                              <td>@twitter</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                              <td> 
+                                <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                             </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--end this is the list of table product-->
                         </div>
                 </div>
             </div>

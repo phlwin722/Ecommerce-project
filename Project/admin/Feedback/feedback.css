@@ -80,27 +80,15 @@ body{
       .nav-link{
         text-align: left;
       }
+        /*table css*/
       .table_content{
         padding: 0px 25px 0px 15px;
-      }
-
-       /*table css*/
-       .table_code{
-        width: 130px;
-      }
-      .table_product{
-        width: 150px;
-      }
-      .table_quantity{
-        width: 0px;
-      }
-      .table_img{
-        width: 200px;
-      }
-      .table_price{
-        width: 90px;
+        overflow-y: auto;
       }
       .table_action{
-        width:90px;
+        width: 90px;
+      }
+      .table_email{
+        width: 290px;
       }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
@@ -28,7 +29,7 @@
                       <img src="/Project/Image/logo.png" height="25" style="border-radius: 50%;">dexter Jamero</button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><a class="dropdown-item" href="myacct.html">My Account</a></li>
+                      <li><a class="dropdown-item" href="/Project/admin/my_account/myacct.html">My Account</a></li>
                       <li><hr class="dropdown-divider"></li>
                     </ul>
                   </div>
@@ -55,6 +56,11 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html"> <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -112,6 +118,11 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -147,7 +158,7 @@
                         </ul> 
                     </div>        
                     <!--this is second grid of data display-->
-                        <div class="col-md" id="grid_size" style=" background-color: rgba(255, 255, 255, 0.966);">
+                        <div class="col-md" id="grid_size" style=" background-color: rgba(236, 236, 236, 0.966);">
                           <!--message error of modal or successfull-->
                          
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Product</label>
@@ -160,13 +171,13 @@
                           <table class="table table-hover" style="margin-top:10px ;">
                             <thead>
                               <tr>
-                                <th scope="col">Code</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="table_code">Code</th>
+                                <th scope="col" class="table_product">Product</th>
+                                <th scope="col" class="table_quantity">Quantity</th>
+                                <th scope="col" class="table_img">Image</th>
+                                <th scope="col" class="table_price">Price</th>
+                                <th scope="col" class="table_description">Description</th>
+                                <th scope="col" class="table_action">Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -177,8 +188,9 @@
                                 <td>@mdo</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                                <td> 
+                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                </td>
                               </tr>
                               <tr>
@@ -188,8 +200,9 @@
                                 <td>@fat</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                                <td> 
+                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                </td>
                               </tr>
                               <tr>
@@ -198,8 +211,9 @@
                                 <td>@twitter</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td> <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                                  <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                                <td> 
+                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                </td>
                               </tr>
                             </tbody>
@@ -216,3 +230,4 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     
     </body>
+    </html>

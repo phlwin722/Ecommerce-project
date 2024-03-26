@@ -56,6 +56,11 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/Project/admin/Feedback/feedback.html">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -113,6 +118,11 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                              Message
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
