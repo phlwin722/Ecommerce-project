@@ -177,7 +177,7 @@
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Manage user</label>
                           
                      
-                          <table class="table table-hover" style="margin-top:10px ;">
+                          <table class="table table-hover" id="employeeTable" style="margin-top:10px ;">
                             <thead>
                               <tr>
                                 <th scope="col"class="table_name">Full name</th>
@@ -187,33 +187,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
+                            
                             </tbody>
                           </table>
                           <!--end this is the list of table product-->
@@ -221,7 +195,38 @@
                 </div>
             </div>
             <script>
-              
+                // Function to fetch data using AJAX
+                  function fetchData() {
+                      var xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                              var data = JSON.parse(this.responseText);
+                              populateTable(data);
+                          }
+                      };
+                      xhr.open("GET", "manage_fetchdate.php", true);
+                      xhr.send();
+                  }
+
+                  // Function to populate table with fetched data
+                  function populateTable(data) {
+                      const tableBody = document.querySelector('#employeeTable tbody');
+                      data.forEach(manage_user => {
+                          const row = `<tr>
+                                <td>${manage_user.fullname}</td>
+                                <td>@${manage_user.address}</td>
+                                <td>@${manage_user.email}</td>
+                                <td> 
+                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                               </td>
+                              </tr>`;
+                          tableBody.innerHTML += row;
+                      });
+                  }
+
+                  // Call the fetchData function when the page loads
+                  window.onload = fetchData;
             </script>
         <script src="manage.js"></script>
         <!--This is for fontawesome icon-->
