@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <style>
+        table,th,td {
+          border : 1px solid black;
+          border-collapse: collapse;
+        }
+        th,td {
+          padding: 5px;
+        }
+        </style>
+<body>
+
+ 
+<p>Click on a CD to display album information.</p>
+<p id='showCD'></p>
+<table id="demo"></table>
+
+<script>
+const xhttp = new XMLHttpRequest();
+let cd;
+xhttp.onload = function() {
+ const xmlDoc = xhttp.responseXML; 
+ cd = xmlDoc.getElementsByTagName("CD");
+ loadCD();
+}
+xhttp.open("GET", "cd_catalog.xml");
+xhttp.send();
+
+function loadCD() {
+  let table="<tr><th>Artist</th><th>Title</th></tr>";
+  for (let i = 0; i < cd.length; i++) { 
+    table += "<tr onclick='displayCD(" + i + ")'><td>";
+    table += cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+    table += "</td><td>";
+    table += cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+    table += "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+function displayCD(i) {
+  document.getElementById("showCD").innerHTML =
+  "Artist: " +
+  cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+  "<br>Title: " +
+  cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+  "<br>Year: " + 
+  cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+}
+</script>
+
+<!--
+    <h2>The XMLHttpRequest Object</h2>
+<p id="demo"></p>
+
+<script>
+   
+
+
+   const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+    const xmlDoc = this.responseXML;
+    const x = xmlDoc.getElementsByTagName("ARTIST");
+    let txt = "";
+    for (let i = 0; i < x.length; i++) {
+        txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+    }
+    document.getElementById("demo").innerHTML = txt;
+    }
+xhttp.open("GET", "cd_catalog.xml");
+xhttp.send();
+</script> -->
+
+</body>
+</html>

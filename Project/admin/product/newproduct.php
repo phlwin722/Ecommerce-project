@@ -4,6 +4,8 @@
     if (!isset($_SESSION['ffname'])){
       header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
     }
+    $firtname = $_SESSION['ffname'];
+    $lastname = $_SESSION['llname'];
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,8 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand" href="#"><img src="/Project/Image/logo.png" height="30" width="60"> </a>
+              <a class="navbar-brand" href="#">
+                <img src="/shopping-cart-oche/Project/Image/logo.png" height="30" width="60"> </a>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
@@ -34,10 +37,13 @@
                 <form class="d-flex" role="search" style="margin-right: 15px;">
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/Project/Image/logo.png" height="25" style="border-radius: 50%;">dexter Jamero</button>
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                    <!--Name of the user-->
+                    <?php echo $firtname ." ". $lastname;?>
+                    </button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><a class="dropdown-item" href="/Project/admin/my_account/myacct.html">My Account</a></li>
+                      <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/my_account/myacct.php">My Account</a></li>
                       <li><hr class="dropdown-divider"></li>
                     </ul>
                   </div>
@@ -57,18 +63,18 @@
                         <hr style="color: white;">
                         
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="#"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Projet/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manange_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
                               Message
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;"  href="/Project/admin/Feedback/feedback.html">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -83,8 +89,8 @@
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="/Project/admin/product/archive.html">Archive product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
                               </ul>
                               </div>
                           </li>
@@ -145,8 +151,8 @@
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="/Project/admin/product/archive.html">Archive product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
                               </ul>
                               </div>
                           </li>

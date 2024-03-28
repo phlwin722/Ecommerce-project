@@ -1,3 +1,4 @@
+
 const captchaa = document.querySelector(".captachaa");
 reloadBtn = document.querySelector('.reload-btn');
 inputField = document.querySelector('.captcha_input');
@@ -39,3 +40,4 @@ checkBtn.addEventListener("click", e =>{
         statustxt.textContent = "Captcha not matched. Please try again!";
     }
 });
+

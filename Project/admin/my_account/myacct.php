@@ -66,10 +66,10 @@
                             <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
                               Message
                           </a>
                           </li>
@@ -128,15 +128,15 @@
                             <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/Message/Message_user.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message_user.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
                               Message
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>

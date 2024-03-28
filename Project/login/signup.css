@@ -4,6 +4,9 @@
      box-sizing: border-box;
      font-family: "Poppins", sans-serif;
  }
+
+
+
 @media only screen and(max-width: 767px){
     /*this is for mobile layout*/
 }
@@ -21,6 +24,7 @@
         border-radius: 10px;
         box-shadow: 10px 10px 10px hsl(0, 0%, 43%);
         margin-top: 20px;
+        margin-bottom: 20px;
      }
      
      .sign_up_logo{
