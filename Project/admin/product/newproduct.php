@@ -196,7 +196,7 @@
                             </div>
                             <div class="col-md-12" style="margin-top: -9vh;">
                               <img src="/Project/Image/logo.png" class="img-thumbnail" alt="..." height="200" width="200">
-                              <input type="file" class="form-control" aria-label="file example" required>
+                              <input type="file" class="form-control" aria-label="file example" required accept="image/*">
                               <div class="invalid-feedback">Example invalid form file feedback</div>
                             </div>
                             <div class="col-md-12" style="margin-top: -9vh">

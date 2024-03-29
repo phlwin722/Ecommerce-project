@@ -180,10 +180,11 @@
                           <table class="table table-hover" id="employeeTable" style="margin-top:10px ;">
                             <thead>
                               <tr>
+                              <th scope="col"class="">#</th>
                                 <th scope="col"class="table_name">Full name</th>
                                 <th scope="col" class="table_address">Address</th>
                                 <th scope="col" class="table_email ">Email</th>
-                                <th scope="col" class="table_action">Action</th>
+                                <th scope="col" class="table_action text-center">Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -195,38 +196,39 @@
                 </div>
             </div>
             <script>
-                // Function to fetch data using AJAX
-                  function fetchData() {
-                      var xhr = new XMLHttpRequest();
-                      xhr.onreadystatechange = function() {
-                          if (this.readyState === 4 && this.status === 200) {
-                              var data = JSON.parse(this.responseText);
-                              populateTable(data);
-                          }
-                      };
-                      xhr.open("GET", "manage_fetchdate.php", true);
-                      xhr.send();
-                  }
+                  // Function to fetch data using AJAX
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var data = JSON.parse(this.responseText);
+                    populateTable(data);
+                }
+            };
+            xhr.open("GET", "manage_fetchdate.php", true);
+            xhr.send();
+        }
 
-                  // Function to populate table with fetched data
-                  function populateTable(data) {
-                      const tableBody = document.querySelector('#employeeTable tbody');
-                      data.forEach(manage_user => {
-                          const row = `<tr>
-                                <td>${manage_user.fullname}</td>
-                                <td>@${manage_user.address}</td>
-                                <td>@${manage_user.email}</td>
+        // Function to populate table with fetched data
+        function populateTable(data) {
+            const tableBody = document.querySelector('#employeeTable tbody');
+            data.forEach(user => {
+                const row = `<tr>
+                                <td>${user.ID}</td>
+                                <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
+                                <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
+                                <td>${user.Email}</td>
                                 <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>`;
-                          tableBody.innerHTML += row;
-                      });
-                  }
+                                    <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                    <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                </td>
+                            </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
 
-                  // Call the fetchData function when the page loads
-                  window.onload = fetchData;
+        // Call the fetchData function when the page loads
+        window.onload = fetchData;
             </script>
         <script src="manage.js"></script>
         <!--This is for fontawesome icon-->

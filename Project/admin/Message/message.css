@@ -216,13 +216,11 @@ body{
       }
       /*table css*/
       .table_code{
-        width: 150px;
+        width: 90px;
       }
+     
       .table_product{
         width: 220px;
       }
     
-      .table_action{
-        width:80px;
-      }
 }

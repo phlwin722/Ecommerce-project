@@ -1,3 +1,39 @@
+$(document).ready(function () {
+    fetchData();
+});
+
+function fetchData() {
+    $.ajax({
+        url: 'Message_fetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            populateTable(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+function populateTable(data) {
+    const tableBody = $('#messageTable tbody');
+    tableBody.empty();
+    data.forEach(message => {
+        const row = `<tr>
+                        <td>${message.Code}</td>
+                        <td>${message.Full_name}</td>
+                        <td>${message.Product}</td>
+                        <td>${message.Message}</td>
+                        <td class="text-center"> 
+                            <button class="btn btn-sm edit-data"><i class="fa-solid fa-pen-to-square" style="color: green;"></i></button>
+                            <button class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></button>
+                        </td>
+                    </tr>`;
+        tableBody.append(row);
+    });
+}
+
 //dropdown menu
 let acc = document.getElementsByClassName("accordion");
 let i ;

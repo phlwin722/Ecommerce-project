@@ -177,36 +177,16 @@
                     <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding: 0px 25px 0px 15px;">
                       <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Feed Back</label>
                         <!--this is the list of table product-->
-                      <table class="table table-hover" style="margin-top:10px ;">
+                      <table class="table table-hover" id="feedbackTable" style="margin-top:10px ;">
                         <thead>
                           <tr>
                             <th scope="col" class="table_email">Email</th>
                             <th >Description</th>
-                            <th scope="col" class="table_action">Action</th>
+                            <th scope="col" class="table_action text-center">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td >Larry the Bird</td>
-                            <td> 
-                              <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></a>
-                           </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td >Larry the Bird</td>
-                            <td> 
-                              <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></a>
-                           </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td >Larry the Bird</td>
-                            <td>
-                              <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #fc0000;"></i></a>
-                           </td>
-                          </tr>
+                          
                         </tbody>
                       </table>
                       <!--end this is the list of table product-->
@@ -214,12 +194,51 @@
             </div>
         </div>
     <!--end-->
-    <script src="feedback.js"></script>
-     <!--This is for fontawesome icon-->
-     <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-     <!--This is bootstrap-->
-   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+      <!-- Custom JavaScript -->
+      <script>
+              //function to fetch data using ajax
+              function fetchData(){
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange =function (){
+                  if (this.readyState === 4 && this.status === 200) {
+                    let data =JSON.parse(this.responseText);
+                    populateTable(data);
+                  }
+                };
+                xhr.open("GET","feedback_fetch.php",true);
+                xhr.send();
+              }
+
+              //function to populate table with fetched data
+              function populateTable (data){
+                const tableBody =document.querySelector('#feedbackTable tbody');
+                data.forEach(feedback => {
+                    const row = `<tr>
+                                    <td>${feedback.Email}</td>
+                                    <td>${feedback.Description}</td>
+                                    <td class="text-center"> 
+                                       <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                    </td>
+                                 </tr> `;
+                                 tableBody.innerHTML += row;
+                });
+              }
+              // call the fetch data  function when the page loads
+              window.onload =fetchData;
+          </script>
+          
+     <!-- JavaScript dependencies -->
+          <!-- jQuery -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <!-- Popper.js for Bootstrap -->
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+          <!-- Bootstrap JS -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+          <!--Javascript file-->
+        <script src="feedback.js"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

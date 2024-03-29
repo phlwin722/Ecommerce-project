@@ -176,55 +176,77 @@
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Message user</label>
                           
                      
-                          <table class="table table-hover" style="margin-top:10px ;">
+                          <table class="table table-hover" id="messageTable"style="margin-top:10px ;">
                             <thead>
                               <tr>
-                                <th scope="col"class="table_code">Code</th>
+                              <th scope="col"class="table_code" style="">Full name</th>
+                              <th scope="col"class="table_code" style="width:200px;">Email</th>
+                              <th scope="col"class="table_code">Code</th>
                                 <th scope="col" class="table_product">Product</th>
                                 <th scope="col" class="table_message">Message</th>
-                                <th scope="col" class="table_action">Action</th>
+                                <th scope="col" class="table_action text-center" style="width:100px;">Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                              
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                               
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Mark</td>
-                                <td>@mdo</td>
-                                <td> 
-                               
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
+                        
                             </tbody>
                           </table>
                           <!--end this is the list of table product-->
                         </div>
                 </div>
             </div>
+
+                    
+          <!-- JavaScript dependencies -->
+          <!-- jQuery -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <!-- Popper.js for Bootstrap -->
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+          <!-- Bootstrap JS -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+          <!-- Custom JavaScript -->
+          <script>
+              $(document).ready(function () {
+                  fetchData();
+              });
+
+              function fetchData() {
+                  $.ajax({
+                      url: 'Message_fetch.php',
+                      type: 'GET',
+                      dataType: 'json',
+                      success: function (data) {
+                          populateTable(data);
+                      },
+                      error: function (xhr, status, error) {
+                          console.error('Error fetching data:', error);
+                      }
+                  });
+              }
+
+              function populateTable(data) {
+                  const tableBody = $('#messageTable tbody');
+                  tableBody.empty();
+                  data.forEach(message => {
+                      const row = `<tr>
+                                      <td>${message.Full_name}</td>
+                                      <td>${message.Email}</td>
+                                      <td>${message.Code}</td>
+                                      <td>${message.Product}</td>
+                                      <td>${message.Message}</td>
+                                      <td class="text-center"> 
+                                          <button class="btn btn-sm edit-data"><i class="fa-solid fa-pen-to-square" style="color: green;"></i></button>
+                                          <button class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></button>
+                                      </td>
+                                  </tr>`;
+                      tableBody.append(row);
+                  });
+              }
+          </script>
         <script src="message.js"></script>
-         <!--This is for fontawesome icon-->
-         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-         <!--This is bootstrap-->
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-   
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
+
     </body>
 </html>
