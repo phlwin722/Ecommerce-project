@@ -179,11 +179,11 @@
                           <table class="table table-hover" id="messageTable"style="margin-top:10px ;">
                             <thead>
                               <tr>
-                              <th scope="col"class="table_code" style="">Full name</th>
-                              <th scope="col"class="table_code" style="width:200px;">Email</th>
-                              <th scope="col"class="table_code">Code</th>
-                                <th scope="col" class="table_product">Product</th>
-                                <th scope="col" class="table_message">Message</th>
+                              <th scope="col"class="table_code " style="">Full name</th>
+                              <th scope="col"class="table_email"style="width:220px;">Email</th>
+                              <th scope="col"class="table_code "style="width:90px;">Code</th>
+                                <th scope="col" class="table_product " style="width:110px;">Product</th>
+                                <th scope="col" class="table_message ">Message</th>
                                 <th scope="col" class="table_action text-center" style="width:100px;">Action</th>
                               </tr>
                             </thead>

@@ -17,7 +17,7 @@
         <meta name="viewport" content="width:device-width, initial-scale=1">
                  <!--This is bootstrap-->
                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-         <link rel="stylesheet" href="archive.css">
+         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/archive.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -178,8 +178,8 @@
                          <table class="table table-hover" id="archieveTable" style="margin-top:10px ;">
                           <thead>
                             <tr>
-                              <th scope="col" class="table_code">Code</th>
-                              <th scope="col" class="table_product">Product</th>
+                              <th scope="col" class="table_code" style="width: 90px;">Code</th>
+                              <th scope="col" class="table_product" style="width: 120px;">Product</th>
                               <th scope="col" class="table_img">Image</th>
                               <th scope="col" class="table_quantity">Quantity</th>
                               <th scope="col" class="table_price">Price</th>

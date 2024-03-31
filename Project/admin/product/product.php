@@ -172,7 +172,7 @@
                         </ul> 
                     </div>        
                     <!--this is second grid of data display-->
-                        <div class="col-md" id="grid_size" style=" background-color: rgba(236, 236, 236, 0.966);">
+                        <div class="col-md" id="grid_size" style=" background-color: rgba(236, 236, 236, 0.966); ">
                           <!--message error of modal or successfull-->
                          
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Product</label>
@@ -182,66 +182,74 @@
                           <!--this is button of new product-->
                           <button type="button" class="btn btn-primary new_button"><i class="fa-solid fa-plus"></i> New</button>
                           <!--this is the list of table product-->
-                          <table class="table table-hover" style="margin-top:10px ;">
+                          <table class="table table-hover" id="productTable" style="margin-top:10px ;">
                             <thead>
                               <tr>
                                 <th scope="col" class="table_code">Code</th>
-                                <th scope="col" class="table_product">Product</th>
-                                <th scope="col" class="table_quantity">Quantity</th>
-                                <th scope="col" class="table_img">Image</th>
+                                <th scope="col" class="table_product">Product name</th>
+                                <th scope="col" class="table_quantity">Image</th>
+                                <th scope="col" class="table_img">Quantity</th>
                                 <th scope="col" class="table_price">Price</th>
-                                <th scope="col" class="table_description">Description</th>
-                                <th scope="col" class="table_action">Action</th>
+                                <th scope="col" class="table_action text-center">Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td> 
-                                  <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                  <a href="#" class="btn  btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                               </td>
-                              </tr>
+                             
                             </tbody>
                           </table>
                           <!--end this is the list of table product-->
                         </div>
+                        
                 </div>
             </div>
-             <script src="product.js" defer></script>
-          <!--This is for fontawesome icon-->
-          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-          <!--This is bootstrap-->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    
+            <!--JavaScript custom-->
+            <script>
+              // function to fetch data using ajax
+              function fetchData() {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(this.responseText);
+                        populateTable(data);
+                    }
+                };
+                xhr.open("GET", "product_fetch.php", true);
+                xhr.send();
+            }
+
+            // Function to populate table with fetched data
+            function populateTable(data) {
+                const tableBody = document.querySelector('#productTable tbody');
+                data.forEach(product => {
+                    const row = `<tr>
+                                    <td>${product.Product_code}</td>
+                                    <td>${product.Product_name}</td>
+                                    <td><img src="data:image/jpeg;base64,${product.Image}" width="100" height="100" alt="error"/></td>
+                                    <td>${product.Quantity}</td>
+                                    <td>${product.Price}</td>
+                                    <td class="text-center"> 
+                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                        <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                    </td>
+                                </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // call the fetchData function when the page loads
+            window.onload = fetchData;
+            </script>
+             <!-- JavaScript dependencies -->
+          <!-- jQuery -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <!-- Popper.js for Bootstrap -->
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+          <!-- Bootstrap JS -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+          <!--Javascript file-->
+        <script src="product.js" defer></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
+
     </body>
     </html>

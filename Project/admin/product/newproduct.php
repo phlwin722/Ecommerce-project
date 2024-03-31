@@ -179,37 +179,31 @@
                           
                          <br>
                          <div class="row" id="roww" style="">
-                          <form class="row " style="">
-                            <div class="col-md-4">
-                              <label for="validationDefault01" class="form-label">Product name</label>
-                              <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
-                            </div>
-                            <div class="col-md-4">
-                              <label for="validationDefault02" class="form-label">Price</label>
-                              <input type="number" class="form-control" id="validationDefault02" value="1" required min="1">
-                            </div>
-                            <div class="col-md-4">
-                              <label for="validationDefaultUsername" class="form-label">Quantity</label>
-                              <div class="input-group">
-                                <input type="number" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" value="1" required min="1">
+                         <form class="row" action="newproduct_database.php" method="POST" enctype="multipart/form-data">
+                              <div class="col-md-4">
+                                  <label for="validationDefault01" class="form-label">Product name</label>
+                                  <input type="text" class="form-control" id="validationDefault01" name="product_name" required>
                               </div>
-                            </div>
-                            <div class="col-md-12" style="margin-top: -9vh;">
-                              <img src="/Project/Image/logo.png" class="img-thumbnail" alt="..." height="200" width="200">
-                              <input type="file" class="form-control" aria-label="file example" required accept="image/*">
-                              <div class="invalid-feedback">Example invalid form file feedback</div>
-                            </div>
-                            <div class="col-md-12" style="margin-top: -9vh">
-                              <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                              <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Description</label>
-                            </div>
-                          
-                            <div class="col-12" style="margin-top: 2vh;">
-                              <button class="btn btn-primary" type="submit">Save</button>
-                            </div>
+                              <div class="col-md-4">
+                                  <label for="validationDefault02" class="form-label">Price</label>
+                                  <input type="number" class="form-control" id="validationDefault02" name="price" value="1" required min="1">
+                              </div>
+                              <div class="col-md-4">
+                                  <label for="validationDefaultUsername" class="form-label">Quantity</label>
+                                  <div class="input-group">
+                                      <input type="number" class="form-control" id="validationDefaultUsername" name="quantity" aria-describedby="inputGroupPrepend2" value="1" required min="1">
+                                  </div>
+                              </div>
+                              <div class="col-md-12" style="margin-top: -20vh;">
+                                  <img src="/shopping-cart-oche/Project/Image/default-image.jpg" class="img-thumbnail" alt="Default Image" height="200px" width="200px">
+                                  <input type="file" class="form-control" aria-label="file example" id="image" name="image" required accept="image/*">
+                                  <div class="invalid-feedback">Please select an image.</div>
+                              </div>
+                              <div class="col-12" style="margin-top: -15vh;">
+                                  <button class="btn btn-primary" type="submit" name="submit">Upload</button>
+                              </div>
                           </form>
+
                         </div>
                                <!-- last of-->
                         </div>

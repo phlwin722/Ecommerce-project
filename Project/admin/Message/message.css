@@ -216,7 +216,10 @@ body{
       }
       /*table css*/
       .table_code{
-        width: 90px;
+        width: 20px;
+      }
+      .table_email{
+        width: 120px;
       }
      
       .table_product{
