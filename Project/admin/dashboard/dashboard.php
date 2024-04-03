@@ -77,11 +77,10 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
-                              Sales Report
-                              
-                          </a>
-                          </li> 
+                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
+                          Sales Report
+                      </a>
+                      </li> 
                           <li class="nav-item">                  
                             <!--This is product accordotion-->
                             <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>

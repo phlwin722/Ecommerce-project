@@ -1,3 +1,4 @@
+
 // dropdown accordion
 let acc = document.getElementsByClassName("accordion");
 let i;
@@ -13,3 +14,4 @@ let i;
             }
         });
     }
+ 

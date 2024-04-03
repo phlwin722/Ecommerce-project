@@ -79,9 +79,8 @@
                       </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
+                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
                           Sales Report
-                          
                       </a>
                       </li> 
                       <li class="nav-item">                  

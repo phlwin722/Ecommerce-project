@@ -141,7 +141,7 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
                               Sales Report
                               
                           </a>
@@ -174,7 +174,46 @@
                     <!--this is second grid of data display-->
                         <div class="col-md text-start" id="grid_size" style=" background-color: rgba(241, 240, 236, 0.966);">
                           <!--message error of modal or successfull-->
-                         
+                          <?php 
+                              $servername = "localhost";
+                              $username = "root";
+                              $password = "";
+                              $dbname = "ecommerce";
+
+                              $con = new mysqli($servername, $username, $password, $dbname);
+
+                              if ($con->connect_error){
+                                  die ("Connection Error:" . $con->connect_error);
+                              }
+                              
+                              if (isset($_POST['submit'])){
+                                  $name = $_POST['name'];
+                                  if ($_FILES["image"]["error"] === 4){
+                                      echo '<script>alert("Image does not exist");</script>';
+                                  } else {
+                                      $filename = $_FILES["image"]["name"];
+                                      $filesize = $_FILES["image"]["size"];
+                                      $tmpname = $_FILES["image"]["tmp_name"];
+
+                                      $validExtension = ['jpg', 'jpeg', 'png'];
+                                      $imageExtension = explode('.', $filename);
+                                      $imageExtension = strtolower(end($imageExtension));
+                                      if (!in_array($imageExtension, $validExtension)){
+                                          echo '<script>alert("Invalid image extension");</script>';
+                                      } else if ($filesize > 1000000){
+                                          echo '<script>alert("Image size exceeds 1MB");</script>';
+                                      } else {
+                                          $newImagename = uniqid();
+                                          $newImagename .= '.'.$imageExtension;
+
+                                          move_uploaded_file($tmpname, 'img/' . $newImagename);
+                                          $query = "INSERT INTO tb_upload (name, image) VALUES ('$name', '$newImagename')";
+                                          mysqli_query($con, $query);
+                                          echo '<script>alert("Image uploaded successfully"); document.location.href = "dsu.php";</script>';
+                                      }
+                                  }
+                              }
+                          ?>
                         <label class=" " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Product</label>
                           
                          <br>
@@ -194,22 +233,41 @@
                                       <input type="number" class="form-control" id="validationDefaultUsername" name="quantity" aria-describedby="inputGroupPrepend2" value="1" required min="1">
                                   </div>
                               </div>
-                              <div class="col-md-12" style="margin-top: -20vh;">
-                                  <img src="/shopping-cart-oche/Project/Image/default-image.jpg" class="img-thumbnail" alt="Default Image" height="200px" width="200px">
-                                  <input type="file" class="form-control" aria-label="file example" id="image" name="image" required accept="image/*">
+                              <div class="col-md-12" style="margin-top: -80px;">
+                                  <img src="/shopping-cart-oche/Project/Image/default-image.jpg" id="imagePreview" class="" alt="Default Image" height="250px" width="250px">
+                                  <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" required accept="image/*">
                                   <div class="invalid-feedback">Please select an image.</div>
                               </div>
                               <div class="col-12" style="margin-top: -15vh;">
                                   <button class="btn btn-primary" type="submit" name="submit">Upload</button>
                               </div>
                           </form>
-
-                        </div>
-                               <!-- last of-->
-                        </div>
+                        </div>              
+                      </div>
                 </div>
             </div>
-        <script src="newproduct.js" defer></script>
+               <!--JQuerry library-->
+               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+               
+               <script>
+                // this when click choose file the picture will show on web
+                $(document).ready(function(){
+                // listen for changes in the file input
+                    $('#imageInput').on('change', function (){
+                        var input = this;
+                        if (input.files && input.files[0]){
+                            var reader = new FileReader();
+                            reader.onload = function (e){
+                                // set the source of the image element to the upload image
+                                $('#imagePreview').attr('src', e.target.result);
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    });
+                });
+
+               </script>
+        <script src="newproduct.js" ></script>
         <!--This is for fontawesome icon-->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
         <!--This is bootstrap-->
