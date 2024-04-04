@@ -178,13 +178,14 @@
                          <table class="table table-hover" id="archieveTable" style="margin-top:10px ;">
                           <thead>
                             <tr>
-                              <th scope="col" class="table_code" style="width: 90px;">Code</th>
-                              <th scope="col" class="table_product" style="width: 120px;">Product</th>
-                              <th scope="col" class="table_img">Image</th>
-                              <th scope="col" class="table_quantity">Quantity</th>
-                              <th scope="col" class="table_price">Price</th>
+                                <th scope="col" class="">Code</th>
+                                <th scope="col" class="">Product name</th>
+                                <th scope="col" class="">Price</th>
+                                <th scope="col" class="">Quantity</th>
+                                <th scope="col" class="">Image</th>
+                                <th scope="col" class="">Category</th>
+                                <th scope="col" class=" text-center">Action</th>
                            <!--   <th scope="col" class="table_description">Description</th> -->
-                              <th scope="col" class="table_action text-center">Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -215,9 +216,10 @@
                       const row =`<tr>
                                       <td>${archieves.Product_code}</td>
                                       <td>${archieves.Product_name}</td>
-                                      <td>${archieves.Image}</td>
-                                      <td>${archieves.Quantity}</td>
                                       <td>${archieves.Price}</td>
+                                      <td>${archieves.Quantity}</td>
+                                      <td><img src="product_image_list/${archieves.Image}" width:"200" height="100" title="${archieves.Product_name}"></td>
+                                      <td>${archieves.Catergory}</td>
                                       <td class="text-center"> 
                                           <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
                                           <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>

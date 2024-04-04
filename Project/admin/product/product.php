@@ -185,17 +185,20 @@
                           <table class="table table-hover" id="productTable" style="margin-top:10px ;">
                             <thead>
                               <tr>
-                                <th scope="col" class="table_code">Code</th>
-                                <th scope="col" class="table_product">Product name</th>
-                                <th scope="col" class="table_quantity">Image</th>
-                                <th scope="col" class="table_img">Quantity</th>
-                                <th scope="col" class="table_price">Price</th>
-                                <th scope="col" class="table_action text-center">Action</th>
+                                <th scope="col" class="">Code</th>
+                                <th scope="col" class="">Product name</th>
+                                <th scope="col" class="">Price</th>
+                                <th scope="col" class="">Quantity</th>
+                                <th scope="col" class="">Image</th>
+                                <th scope="col" class="">Category</th>
+                                <th scope="col" class=" text-center">Action</th>
                               </tr>
                             </thead>
-                            <tbody>
-                             
-                            </tbody>
+                            <div style="overflow-y: auto;">
+                             <tbody>
+                              
+                             </tbody>
+                            </div>
                           </table>
                           <!--end this is the list of table product-->
                         </div>
@@ -224,9 +227,10 @@
                     const row = `<tr>
                                     <td>${product.Product_code}</td>
                                     <td>${product.Product_name}</td>
-                                    <td><img src="data:image/jpeg;base64,${product.Image}" width="100" height="100" alt="error"/></td>
-                                    <td>${product.Quantity}</td>
                                     <td>${product.Price}</td>
+                                    <td>${product.Quantity}</td>
+                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                    <td>${product.Category}</td>
                                     <td class="text-center"> 
                                         <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
                                         <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
@@ -246,6 +250,8 @@
               });
 
             </script>
+              <!--Javascript file-->
+        <script src="product.js" defer></script>
              <!-- JavaScript dependencies -->
           <!-- jQuery -->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -253,8 +259,6 @@
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
           <!-- Bootstrap JS -->
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-          <!--Javascript file-->
-        <script src="product.js" defer></script>
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
 

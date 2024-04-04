@@ -13,7 +13,7 @@
     }
 
     // Fetch data from database
-    $sql = "SELECT Product_name, Quantity, Price, Image FROM product_list";
+    $sql = "SELECT Product_code,Product_name, Quantity, Price, Category, Image FROM product_list";
     $result = $con->query($sql);
 
     // Fetch and store data in an array
@@ -22,8 +22,6 @@
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
-            // Decode image data from base64
-            $row['Image'] = base64_encode($row['Image']);
             $product_list[] = $row;
         }
     }

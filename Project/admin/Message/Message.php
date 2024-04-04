@@ -179,12 +179,12 @@
                           <table class="table table-hover" id="messageTable"style="margin-top:10px ;">
                             <thead>
                               <tr>
-                              <th scope="col"class="table_code " style="">Full name</th>
-                              <th scope="col"class="table_email"style="width:220px;">Email</th>
-                              <th scope="col"class="table_code "style="width:90px;">Code</th>
-                                <th scope="col" class="table_product " style="width:110px;">Product</th>
-                                <th scope="col" class="table_message ">Message</th>
-                                <th scope="col" class="table_action text-center" style="width:100px;">Action</th>
+                              <th scope="col"class=" " style="width:220px;">Full name</th>
+                              <th scope="col"class=""style="width:220px;">Email</th>
+                              <th scope="col"class=" "style="width:90px;">Code</th>
+                                <th scope="col" class=" " style="width:110px;">Product</th>
+                                <th scope="col" class=" ">Message</th>
+                                <th scope="col" class=" text-center" style="width:100px;">Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -207,7 +207,7 @@
 
           <!-- Custom JavaScript -->
           <script>
-              $(document).ready(function () {
+            /*  $(document).ready(function () {
                   fetchData();
               });
 
@@ -230,6 +230,37 @@
                   tableBody.empty();
                   data.forEach(message => {
                       const row = `<tr>
+                                      <td>${message.full_name}</td>
+                                      <td>${message.email}</td>
+                                      <td>${message.code}</td>
+                                      <td>${message.product}</td>
+                                      <td>${message.message}</td>
+                                      <td class="text-center"> 
+                                          <button class="btn btn-sm edit-data"><i class="fa-solid fa-pen-to-square" style="color: green;"></i></button>
+                                          <button class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></button>
+                                      </td>
+                                  </tr>`;
+                      tableBody.append(row);
+                  });
+              }*/
+
+              // funtion to fetch data using ajax
+              function fetchData(){
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange =function (){
+                  if (this.readyState === 4 && this.status === 200){
+                    let data = JSON.parse(this.responseText);
+                    populateTable(data);
+                  }
+                };
+                xhr.open("GET","Message_fetch.php",false);
+              }
+              // funtion to populate table with fetched data
+              function populateTable(data){
+                   const tableBody = $('#messageTable tbody');
+                   tableBody.empty();
+                   data.forEach(message => {
+                      const row = `<tr>
                                       <td>${message.Full_name}</td>
                                       <td>${message.Email}</td>
                                       <td>${message.Code}</td>
@@ -239,10 +270,14 @@
                                           <button class="btn btn-sm edit-data"><i class="fa-solid fa-pen-to-square" style="color: green;"></i></button>
                                           <button class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></button>
                                       </td>
-                                  </tr>`;
-                      tableBody.append(row);
-                  });
+                                  </tr> `;
+                                  tableBody.textContent += row;
+                   });
               }
+              // call the fetchData function when the page loads
+              window.onload =fetchData;
+
+
           </script>
         <script src="message.js"></script>
         <!-- Font Awesome -->

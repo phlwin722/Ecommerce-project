@@ -1,5 +1,5 @@
-body{
-    overflow-x: hidden;
+*{
+   overflow: hidden;
 }
 @media only screen and (max-width:767px){
     /*mobile layout*/
@@ -240,6 +240,11 @@ body{
         text-align: center;
 
       }
+
+      #productTable tbody {
+        max-height: 200px; /* Set a maximum height for the tbody */
+        overflow-x: auto; /* Enable vertical scroll */
+    }
     
 }
 

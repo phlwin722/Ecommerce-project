@@ -15,6 +15,7 @@
         <meta content="autor" autor="Dexter Jamero">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="newproduct.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/login/logo.css">
         <title>New Product</title>
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -34,7 +35,7 @@
                     <a class="nav-link" aria-current="page" href="#" style="margin-left: -30px ; position: relative; font-weight: bold; font-size: 18px;">Ecommerce</a>
                   </li>
                 </ul>
-                <form class="d-flex" role="search" style="margin-right: 15px;">
+                <form class="d-flex" role="search" style="margin-right: 15px;" >
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
@@ -143,7 +144,6 @@
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
                               Sales Report
-                              
                           </a>
                           </li> 
                           <li class="nav-item">                  
@@ -173,7 +173,34 @@
                     </div>        
                     <!--this is second grid of data display-->
                         <div class="col-md text-start" id="grid_size" style=" background-color: rgba(241, 240, 236, 0.966);">
-                          <!--message error of modal or successfull-->
+                        
+                         <!--Modal section successfull submit-->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="text-align: center; justify-content:center; align-items:center;">
+                          <div class="modal-dialog" >
+                              <div class="modal-content">
+                              <div class="modal-body">
+                              <button type="button" class="btn-close" style="margin-left: 430px;" data-bs-dismiss="modal" aria-label="Close"></button>
+                              <div class="check-container" style="margin-left:180px;">
+                                  <div class="check-background">
+                                      <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                                      </svg>
+
+                                  </div>
+                                      </div>
+                                  <div class="check-shadow"></div> 
+                              </div>
+                              <h3>Successfull Upload!</h3>
+                              <div >
+                                  <br>
+                              <button type="button" class="btn btn-secondary" id="ok" style="margin-bottom: 20px;" data-bs-dismiss="modal">OK</button>
+                              </div>
+                              </div>
+                          </div>
+                          </div>
+                          <!--end Modal section successfull submit-->
+
+
                           <?php 
                               $servername = "localhost";
                               $username = "root";
@@ -185,12 +212,17 @@
                               if ($con->connect_error){
                                   die ("Connection Error:" . $con->connect_error);
                               }
-                              
+                              // once we click submit button will be submit on the database
                               if (isset($_POST['submit'])){
-                                  $name = $_POST['name'];
                                   if ($_FILES["image"]["error"] === 4){
                                       echo '<script>alert("Image does not exist");</script>';
                                   } else {
+                                     // Prevent SQL injection attacks
+                                      $product_name = mysqli_real_escape_string($con, $_POST['product_name']);
+                                      $price = mysqli_real_escape_string($con, $_POST['price']);
+                                      $quantity = mysqli_real_escape_string($con, $_POST['quantity']);
+                                      $category = mysqli_real_escape_string($con, $_POST['category']);
+
                                       $filename = $_FILES["image"]["name"];
                                       $filesize = $_FILES["image"]["size"];
                                       $tmpname = $_FILES["image"]["tmp_name"];
@@ -200,42 +232,70 @@
                                       $imageExtension = strtolower(end($imageExtension));
                                       if (!in_array($imageExtension, $validExtension)){
                                           echo '<script>alert("Invalid image extension");</script>';
-                                      } else if ($filesize > 1000000){
-                                          echo '<script>alert("Image size exceeds 1MB");</script>';
+                                      } else if ($filesize > 9000000){
+                                          echo '<script>alert("Image size exceeds 9MB");</script>';
                                       } else {
                                           $newImagename = uniqid();
                                           $newImagename .= '.'.$imageExtension;
 
-                                          move_uploaded_file($tmpname, 'img/' . $newImagename);
-                                          $query = "INSERT INTO tb_upload (name, image) VALUES ('$name', '$newImagename')";
-                                          mysqli_query($con, $query);
-                                          echo '<script>alert("Image uploaded successfully"); document.location.href = "dsu.php";</script>';
-                                      }
+                                          move_uploaded_file($tmpname, 'product_image_list/' . $newImagename);
+                                        // Prepare and bind statement
+                                          $stmt = $con->prepare("INSERT INTO product_list (Product_name, Quantity, Price, Category, Image) VALUES (?, ?, ?, ?, ? )");
+                                          // Use 's' for string data type
+                                          $stmt->bind_param('sssss', $product_name, $quantity, $price, $category, $newImagename);
+                                          if ($stmt->execute()) {
+                                            echo '<script>
+                                                      document.addEventListener("DOMContentLoaded", function (){
+                                                          var mymoda1 = new bootstrap.Modal(document.getElementById("exampleModal"));
+                                                          mymoda1.show();
+                                                      });
+                                                  </script>';
+                                        } 
                                   }
                               }
+                            // Close statement
+                            $stmt->close();
+                            }
+                            // Close connection
+                            $con->close();
                           ?>
                         <label class=" " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Product</label>
                           
                          <br>
                          <div class="row" id="roww" style="">
-                         <form class="row" action="newproduct_database.php" method="POST" enctype="multipart/form-data">
-                              <div class="col-md-4">
+                         <form class="row" action="#" method="POST" enctype="multipart/form-data">
+                              <div class="col-md-3">
                                   <label for="validationDefault01" class="form-label">Product name</label>
                                   <input type="text" class="form-control" id="validationDefault01" name="product_name" required>
                               </div>
-                              <div class="col-md-4">
+                              <div class="col-md-3">
                                   <label for="validationDefault02" class="form-label">Price</label>
                                   <input type="number" class="form-control" id="validationDefault02" name="price" value="1" required min="1">
                               </div>
-                              <div class="col-md-4">
+                              <div class="col-md-3">
                                   <label for="validationDefaultUsername" class="form-label">Quantity</label>
                                   <div class="input-group">
                                       <input type="number" class="form-control" id="validationDefaultUsername" name="quantity" aria-describedby="inputGroupPrepend2" value="1" required min="1">
                                   </div>
                               </div>
+                              <div class="col-md-3">
+                                  <label for="validationDefault02" class="form-label">Category</label>
+                                  <select class="form-select" aria-label="Default select example" name="category" required>
+                                      <option hidden>Choose...</option>
+                                      <option value="Gaming Accessories">Gaming Accessories</option>
+                                      <option value="Musical Instrument">Musical Instrument</option>
+                                      <option value="Kitchen Tools">Kitchen Tools</option>
+                                      <option value="Women's Fassion & Accessories">Women's Fassion & Accessories</option>
+                                      <option value="Sport tools">Sport tools</option>
+                                      <option value="Automotive & Motorcyle Parts">Automotive & Motorcyle Parts</option>
+                                      <option value="Electronic Accessories">Electronic Accessories</option>
+                                      <option value="Health &  Beauty">Health &  Beauty</option>
+                                      <option value="Men's Fassion & Accessories">Men's Fassion & Accessories</option>
+                                </select>
+                              </div>
                               <div class="col-md-12" style="margin-top: -80px;">
                                   <img src="/shopping-cart-oche/Project/Image/default-image.jpg" id="imagePreview" class="" alt="Default Image" height="250px" width="250px">
-                                  <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" required accept="image/*">
+                                  <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" required  accept="image/png, image/jpeg, image/jpg">
                                   <div class="invalid-feedback">Please select an image.</div>
                               </div>
                               <div class="col-12" style="margin-top: -15vh;">

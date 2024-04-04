@@ -12,14 +12,14 @@ if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
-$sql = "SELECT * FROM message";
+$sql = "SELECT Code, Full_name, Email, Product, Message FROM message";
 $result = $con->query($sql);
 
-$message = array();
+$message_fetch = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $message[] = $row;
+        $message_fetch[] = $row;
     }
 }
 
@@ -28,5 +28,5 @@ $con->close();
 
 // Return data as JSON
 header('Content-Type: application/json');
-echo json_encode($message);
+echo json_encode($message_fetch);
 ?>
