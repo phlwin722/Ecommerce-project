@@ -253,8 +253,7 @@
                                         } 
                                   }
                               }
-                            // Close statement
-                            $stmt->close();
+                    
                             }
                             // Close connection
                             $con->close();

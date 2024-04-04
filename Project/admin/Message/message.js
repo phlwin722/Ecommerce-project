@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     fetchData();
 });
 
@@ -21,8 +21,9 @@ function populateTable(data) {
     tableBody.empty();
     data.forEach(message => {
         const row = `<tr>
-                        <td>${message.Code}</td>
                         <td>${message.Full_name}</td>
+                        <td>${message.Email}</td>
+                        <td>${message.Code}</td>
                         <td>${message.Product}</td>
                         <td>${message.Message}</td>
                         <td class="text-center"> 
@@ -32,7 +33,7 @@ function populateTable(data) {
                     </tr>`;
         tableBody.append(row);
     });
-}
+}*/
 
 //dropdown menu
 let acc = document.getElementsByClassName("accordion");

@@ -42,7 +42,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/guestdesign.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/guest/guestdesign.css">
           <!--Favicon-->
           <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
           <link rel="stylesheet" href="/shopping-cart-oche/Project/login/logo.css">
@@ -53,10 +53,10 @@
     <div class="container-fluid">
             <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary" data-bs-theme="dark">
               <div class="container-fluid">
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
                     </a>
-                <a class="navbar-brand" href="#">Ecommerce</a>
+                <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">Ecommerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -94,7 +94,7 @@
                         <a class="navbar-brand" href="#">
                             <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
                           </a>
-                      <a class="navbar-brand" href="#">Ecommerce</a>
+                      <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">Ecommerce</a>
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                       </button>
@@ -105,7 +105,7 @@
                   <div class="offcanvas-body">
                     <div>
                         <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                            <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest.php"> Home</a>
+                            <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php"> Home</a>
                         </h5>
                       </div>
                       <hr>
@@ -114,15 +114,15 @@
                             <a class="navbar-brand" href="">Products Available</a>
                             </h5>
                             <ul class="list-group list-group-flush">
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/gamingaccessories.php">Gaming Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/musical_instrument.php">Musical Instrument</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/kitchen_tools.php">Kitchen Tools</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/women_fassion.php"> Women's Fassion & Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/sport_tools.php">Sports tools</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/electronic_accessorise.php">Electronic Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/health_beuty.php">Health & Beauty</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/men_fassion.php">Men's Fassion & Accessoriess</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/gaming_accessories/gamingaccessories.php">Gaming Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/musical_instrument/musical_instrument.php">Musical Instrument</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/kithchen_tools/kitchen_tools.php">Kitchen Tools</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/woment_fassion/women_fassion.php"> Women's Fassion & Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/sport_tool/sport_tools.php">Sports tools</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/automotive_parts/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/electronic_parts/electronic_accessorise.php">Electronic Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/health_beaty/health_beuty.php">Health & Beauty</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/men_fassion/men_fassion.php">Men's Fassion & Accessoriess</a></li>
                         </ul>
                           
                      </div>
@@ -172,22 +172,22 @@
           <nav class="nav flex-column">
           <div class="row list_product_chosee">
             <div class="col lay">
-              <a href="gamingaccessories.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/gaming_accessories/gamingaccessories.php" class="product_list">
                 Gaming Accessories
                 <br>
-                <img src="/shopping-cart-oche/Project//Image/gameaccessories.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/gameaccessories.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col lay">
-              <a href="/shopping-cart-oche/Project/guest_user/musical_instrument.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/musical_instrument/musical_instrument.php" class="product_list">
                 Musical Instrument
-                <img src="/shopping-cart-oche/Project//Image/musical_instrument.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/musical_instrument.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col lay">
-              <a href="/shopping-cart-oche/Project/guest_user/kitchen_tools.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/kitchen_tools/kitchen_tools.php" class="product_list">
                 Kithchen Tools
-                <img src="/shopping-cart-oche/Project//Image/kitchen_tool.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/kitchen_tool.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>
@@ -195,44 +195,44 @@
           <div class="row list_product_chosee">
     
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/women_fassion.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/woment_fassion/women_fassion.php" class="product_list">
                 Women's Fassion & Accessories
                 <br>
-                <img src="/shopping-cart-oche/Project//Image/women_fassion.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/women_fassion.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/sport_tools.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/sport_tool/sport_tools.php" class="product_list">
                 Sports tools
                 <br>
-                <img src="/shopping-cart-oche/Project//Image/sport_tools.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/sport_tools.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/automotive_parts.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/automotive_parts/automotive_parts.php" class="product_list">
                 Automotive & Motorcycle Parts
                 <br>
-                <img src="/shopping-cart-oche/Project//Image/parts_accerores.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/parts_accerores.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>
 
           <div class="row list_product_chosee">
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/electronic_accessorise.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/electronic_parts/electronic_accessorise.php" class="product_list">
                 Electronic Accessories 
-              <img src="/shopping-cart-oche/Project//Image/elecronic_accessories.jpg" width="300px" height="200px" alt="">
+              <img src="/shopping-cart-oche/Project/Image/elecronic_accessories.jpg" width="300px" height="200px" alt="">
             </a></div>
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/health_beuty.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/health_beauty/health_beuty.php" class="product_list">
                 Health & Beauty
-                  <img src="/shopping-cart-oche/Project//Image/personal_care.jpg" width="300px" height="200px" alt="">
+                  <img src="/shopping-cart-oche/Project/Image/personal_care.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
             <div class="col">
-              <a href="/shopping-cart-oche/Project/guest_user/men_fassion.php" class="product_list">
+              <a href="/shopping-cart-oche/Project/guest_user/men_fassion/men_fassion.php" class="product_list">
                 Men's Fassion & Accessories
-                <img src="/shopping-cart-oche/Project//Image/mens_fassion.jpg" width="300px" height="200px" alt="">
+                <img src="/shopping-cart-oche/Project/Image/mens_fassion.jpg" width="300px" height="200px" alt="">
               </a>
             </div>
           </div>

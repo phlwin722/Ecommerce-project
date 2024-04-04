@@ -207,7 +207,7 @@
 
           <!-- Custom JavaScript -->
           <script>
-            /*  $(document).ready(function () {
+            /* $(document).ready(function () {
                   fetchData();
               });
 
@@ -227,14 +227,14 @@
 
               function populateTable(data) {
                   const tableBody = $('#messageTable tbody');
-                  tableBody.empty();
                   data.forEach(message => {
                       const row = `<tr>
-                                      <td>${message.full_name}</td>
-                                      <td>${message.email}</td>
-                                      <td>${message.code}</td>
-                                      <td>${message.product}</td>
-                                      <td>${message.message}</td>
+                                      <td>${message.Full_name}</td>
+                                      <td>${message.Email}</td>
+                                      <td>${message.Code}</td>
+                                      <td>${message.Code}</td>
+                                      <td>${message.Product}</td>
+                                      <td>${message.Message}</td>
                                       <td class="text-center"> 
                                           <button class="btn btn-sm edit-data"><i class="fa-solid fa-pen-to-square" style="color: green;"></i></button>
                                           <button class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></button>
@@ -242,8 +242,8 @@
                                   </tr>`;
                       tableBody.append(row);
                   });
-              }*/
-
+              } */
+                /*
               // funtion to fetch data using ajax
               function fetchData(){
                 let xhr = new XMLHttpRequest();
@@ -275,7 +275,7 @@
                    });
               }
               // call the fetchData function when the page loads
-              window.onload =fetchData;
+              window.onload =fetchData;*/
 
 
           </script>
