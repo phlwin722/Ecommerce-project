@@ -188,7 +188,7 @@
         padding: 0px 18px;
         background-color: rgb(68, 67, 67);
         max-height:0;
-        overflow: hidden;
+        overflow: auto;
         transition: max-height 0.2s ease-out;
         color: white;
     }
@@ -242,8 +242,8 @@
       }
 
       #productTable tbody {
-        max-height: 200px; /* Set a maximum height for the tbody */
-        overflow-x: auto; /* Enable vertical scroll */
+  
+       
     }
     
 }

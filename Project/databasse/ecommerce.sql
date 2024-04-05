@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 08:50 AM
+-- Generation Time: Apr 05, 2024 at 06:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -126,13 +126,53 @@ CREATE TABLE `product_list` (
 --
 
 INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Category`, `Image`) VALUES
-(20235020, '21', '1', '1', '', '660d0e43e10ba.jpg'),
-(20235021, 'Test Paper', '13', '1', '', '660d15b1cf650.jpg'),
-(20235022, 'Test Paper', '13', '1', '', '660d162d42208.jpg'),
-(20235023, 'gad', '1', '1', 'Gaming Accessories', '660d163ad0879.jpg'),
-(20235024, 'gad', '1', '1', 'Gaming Accessories', '660d16bf2bc08.jpg'),
-(20235025, 'awda', '1', '1', 'Musical Instrument', '660d16cebbdd9.jpg'),
-(20235026, 'Dexter', '1', '1', 'Sport tools', '660d1b406a9cf.jpg');
+(20235031, 'NEW Wireless Bluetooth Headphones Colored LED Lights Gaming OverEar Headset Stereo Headphone&Mic', '50', '231', 'Gaming Accessories', '66100cbdab839.png'),
+(20235032, '1 Pair (2pcs) Gamers Sweatproof Gloves Mobile Finger Sleeve Touchscreen Game Controller Phone Gaming', '50', '20', 'Gaming Accessories', '66100d88173a8.png'),
+(20235033, 'Smilee K-21 Pubg Portable Game Grip Pad Mobile Controller L1R1 Gamepad Joystick', '50', '150', 'Gaming Accessories', '66100daf31501.png'),
+(20235034, 'Mobile Phone Gaming Radiator Cooling Fan Hurricane turbofan Cooler Portable80cm x 30cm Extended Gami', '50', '158', 'Gaming Accessories', '66100dd98f520.png'),
+(20235035, 'Mobile Controller for pc Gaming Keyboard and Mouse bluetooth controller for android phone', '50', '238', 'Gaming Accessories', '66100e6f815c7.png'),
+(20235036, '830 Breadboard Set Tie-points Breadboard Set Electronic Component Basic Starter Kit Resistor', '50', '380', 'Electronic Accessories', '661011bd9bd2e.png'),
+(20235037, ' Original AD 220V 60W Electric Welding Soldering Iron Temperature Adjustable PH Plug Rosin LEA', '50', '150', 'Electronic Accessories', '661011e26fe52.png'),
+(20235038, 'Soldering Iron Set Electronic Iron Kit 200-450°C Adjustable Temperature 60W 220V', '50', '265', 'Electronic Accessories', '661011fb3940f.png'),
+(20235039, 'Mitsushi 31In1 Screwdriver Set Mini Electronic Screwdriver Bits Multi-Size Mobile Phone Repair Tool', '50', '58', 'Electronic Accessories', '6610121dda8c7.png'),
+(20235040, '858D Hot Air Rework Station Digtal LCD Display Hot Air Soldering Station SMD SMT Hot Air Station', '50', '1180', 'Electronic Accessories', '6610123f6667c.png'),
+(20235041, '220V 60W Soldering Iron Original Set 15in1 Electric Welding Temperature Adjustable heavy duty', '50', '350', 'Electronic Accessories', '6610125ab79db.png'),
+(20235042, ' Electric Insulation Heat Shrink Tubing Tube 2:1 Electrical Wire Cable Wrap Kit Box Pack', '50', '45', 'Electronic Accessories', '66101299e94c0.png'),
+(20235043, 'MEGA.C Vitamin C 60 gummies Immunity Boost for Adults & Kids Ascorbic Acid Vegan & Gluten-Free', '50', '250', 'Health &  Beauty', '661019421d0b4.png'),
+(20235044, '30ml Ginger Massage Essential Oil Tightening Body Oil Aromatherapy Massage SPA Body Health Foot XM', '50', '65', 'Health &  Beauty', '6610195a9d839.png'),
+(20235045, 'Warts Remover Foot Corn Pads treatment first aid removal pain patch Calluses health foot care', '50', '85', 'Health &  Beauty', '6610198d9332b.png'),
+(20235046, 'Collagen Gummies Skin Beauty Hair Skin & Nail Support Whitening Vitamin Biotin + Vitamin C', '50', '400', 'Health &  Beauty', '661019a9d4f39.png'),
+(20235047, 'Beauty White Slimming & Whitening Glutathione & Collagen With Vitamin C You Glow Babe 30 Capsules', '50', '300', 'Health &  Beauty', '661019e9ac0fd.png'),
+(20235048, 'MeiYanQiong Breast Enhancement Cream + Essence Breast Lift Firming Massage Bust Care 50g+10ml', '50', '380', 'Health &  Beauty', '66101ab116ffc.png'),
+(20235049, 'YANJIAYI Glutathione Collagen Glow Gummies Anti-Aging Whitening Face Beauty Skin Supplement 60pc', '50', '500', 'Health &  Beauty', '66101acd6dd4c.png'),
+(20235050, ' Bosch Spark Plug \\\" Nickel-Copper\\\" K6tc0r (Fr8dcx+) For Motorcycle', '50', '120', 'Automotive & Motorcyle Parts', '66101cd942f86.png'),
+(20235051, 'HOTSPEED 2Pcs Mini Driving light Motorcycle LED Headlight Waterproof Super Bright With 3 Way Switch', '50', '230', 'Automotive & Motorcyle Parts', '66101cfd1ee67.png'),
+(20235052, 'AUXITO 1PCS T19 P15D LED Motorcycle Headlight Dual Color 3200K 6500 White 9-30 V', '50', '180', 'Automotive & Motorcyle Parts', '66101d150ba81.png'),
+(20235053, 'GOLD SPROCKET CHAIN SET HIGH CARBON STEEL RAIDER150/FI SNIPER 150/FZ XRM12/WAVE/DREAM/C100', '50', '400', 'Automotive & Motorcyle Parts', '66101d3d34f54.png'),
+(20235054, 'Motorcycle Signal Light Switch Big', '50', '25', 'Automotive & Motorcyle Parts', '66101d592cf08.png'),
+(20235055, 'MOTORCYCLE REAR SHOCK SUPPORT 280MM/310MM 1 PIECE ONLY!!!', '50', '220', 'Automotive & Motorcyle Parts', '66101d7751e4b.png'),
+(20235056, 'HOTSPEED Action Camera Holder Gorp Bracket for Motorcycle 360° Rotation Bike CellPhone Holder', '50', '200', 'Automotive & Motorcyle Parts', '66101d9295a2a.png'),
+(20235057, ' Popcorn 618 Wired Gaming Keyboard and Mouse Set 16 Backlighting Effects Multi Shortcuts Sequence', '50', '255', 'Computer Accessories', '6610206ab59ac.png'),
+(20235058, 'AIODIY Webcam 1080P Full HD Video Call For PC Laptop With Microphone Home USB Video Webcam', '50', '300', 'Computer Accessories', '66102080ea6be.png'),
+(20235059, 'ORICO USB HUB Long Cable 4 Port USB 3.0 Splitter With Micro USB Power Port Multiple High Speed OTG A', '50', '155', 'Computer Accessories', '661020a32a947.png'),
+(20235060, 'Inplay M10 Rainbow Rgb 120mm Led Cooling Fan For Pc/Computer/Desktop Accessories/Peripherals', '50', '120', 'Computer Accessories', '661020c600325.png'),
+(20235061, 'Laptop Stand Aluminum with Cooler Fan Adjustable for 17 inch', '50', '230', 'Computer Accessories', '661020e00269d.png'),
+(20235062, 'RAPOO V1/ V1L Mouse Pad Large Anti-Skid Bottom Dirt, Wear & Scratch Resistant', '50', '100', 'Computer Accessories', '661020f5bab27.png'),
+(20235063, 'UGREEN Cat 7 Ethernet Cable Slim Network Cable For PS PC Computer Modem Router 4 Twisted Pair Patch ', '50', '60', 'Computer Accessories', '6610210c47b06.png'),
+(20235064, 'Secure Computer AVR 500W 220V Overload Protection Power Supply For Desktop', '50', '220', 'Computer Accessories', '66102124cf6f8.png'),
+(20235065, '8 in 1 Eco Friendly-Bamboo Kitchen Utensil Set Tool Kitchenware (Bamboo Utensil Holder Included)', '50', '140', 'Kitchen Tools', '661022e9db404.png'),
+(20235066, 'Stainless Steel Kitchen Scissors Multipurpose Kitchen Tool Shears Barbecue Nutcracker Opening Bot', '50', '85', 'Kitchen Tools', '661023089a7c2.png'),
+(20235067, 'Arrow Professional 3-Stage Knife Sharpener Manual Kitchen Knife Sharpening Tool For all Knive', '50', '50', 'Kitchen Tools', '6610232b93409.png'),
+(20235068, 'Meat Tenderizer Steak Mallet Hammer Kitchen Tool', '50', '75', 'Kitchen Tools', '6610233fceab6.png'),
+(20235069, '1.3L Oil Filter Pot Stainless Steel / Oil Pot / Food Strainers / Kitchen Tools / LUCKY STAR', '50', '300', 'Kitchen Tools', '661023682f7ec.png'),
+(20235070, 'Professional Mandolin Slicer Julienne Cutter Chopper Fruit Vegetable Peelers', '50', '195', 'Kitchen Tools', '6610238333879.png'),
+(20235071, 'Stainless Steel Food Tongs Cooking BBQ Meat Clip Heat Bread Salad Kitchen Tool 9/12/14inch', '50', '100', 'Kitchen Tools', '6610239daef47.png'),
+(20235072, 'Portable Digital Music 61 Keys Electronic Piano Keyboard Kids Learning Music Microphone', '50', '700', 'Musical Instrument', '6610291303463.png'),
+(20235073, 'RIXTON Ukulele Soprano 4 Strings Spruce Basswood Guitar Set Complete Package 21 Inches', '50', '500', 'Musical Instrument', '66102940b5e5c.png'),
+(20235074, 'KAYA LYRE XYLOPHONE - with Free Bag, Lyre Beater , Strap (Percussion Instrument)', '50', '600', 'Musical Instrument', '66102960f3e54.png'),
+(20235075, 'RIXTON Professional Music Global Flute Recorder (Ivory) Music Instrument for Kids and Adults', '50', '320', 'Musical Instrument', '661029865062c.png'),
+(20235076, 'HotCompact Double Half Moon Music Tambourine Percussion Tamborine Drum Durable', '50', '120', 'Musical Instrument', '661029a66e38c.png'),
+(20235077, 'Mamy poko Children Kids Jazz Drum Set Musical Instrument ', '50', '900', 'Musical Instrument', '661029cd804e8.png');
 
 -- --------------------------------------------------------
 
@@ -259,7 +299,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `product_list`
 --
 ALTER TABLE `product_list`
-  MODIFY `Product_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235027;
+  MODIFY `Product_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235078;
 
 --
 -- AUTO_INCREMENT for table `user_information`
