@@ -282,4 +282,18 @@ justify-content: center;
         background-color: #afafaf;
         color: white;
     }
+    .sign-in{
+        padding: 10px 30px;
+        background-color: #c2c2c2;
+        text-decoration: none;
+        opacity: .9;
+        color: rgb(31, 31, 31);
+        border-radius: 10px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .sign-in:hover{
+        background-color: #ebe9e9;
+        color: black;
+    }
 }

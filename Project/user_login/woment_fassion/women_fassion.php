@@ -5,21 +5,67 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/men_fassion/men_fassionn.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/user_login/woment_fassion/women_fassionn.css">
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
-        <title>AMen's Fassion & Accessories</title>
+        <title>Women's Fassion & Accessories</title>
     </head>
+    <?php 
+                 // session checking if user has login
+                  session_start();
+                  if (!isset($_SESSION['ffname'])){
+                      header ('Location: /shopping-cart-oche/Project/user_login/logout/logout.php');
+                  }
+                  
+                  $firstname = $_SESSION['ffname'];
+                  $lastname = $_SESSION['llname'];
+                  $email = $_SESSION ['email'];
+
+                //            <!--start sent feedback php-->
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "ecommerce";
+
+                $con = new mysqli($servername, $username, $password, $dbname);
+
+                if ($con->connect_error){
+                    die("Connection error" . $con->connect_error);
+                }
+
+                // feedback 
+                if (isset($_POST["sent_message"])){
+                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $message = mysqli_real_escape_string($con, $_POST['message']);
+
+                    // Prepare and bind statement 
+                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
+                    // Use 's' for string data type
+                    $stmt->bind_param("ss", $recipient, $message);
+                    
+                    if ($stmt->execute()){
+                      echo '<script>
+                                document.addEventListener("DOMContentLoaded", function (){
+                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
+                                    modal.show();
+                                });
+                            </script>';
+                    }             
+              // Close connection
+              $con->close();
+              }
+          ?>
+
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
     
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" style="display:block;">
       <div class="container-fluid">
-          <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">
+          <a class="navbar-brand" href="/shopping-cart-oche/Project/user_login/user_login_home/guest.php">
               <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
             </a>
-        <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">Ecommerce</a>
+        <a class="navbar-brand" href="/shopping-cart-oche/Project/user_login/user_login_home/guest.php">Ecommerce</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,12 +77,20 @@
             <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
           </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link c" style="color: white;" href="/shopping-cart-oche/Project/login/signin.php">Sign in</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/shopping-cart-oche/Project/login/signup.php">Sign up</a>
-            </li>
+            <!--my account-->
+            <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                            <!--Name of user-->
+                            <?php echo $firstname ." ". $lastname;?>
+                          </button>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/logout/logout.php">Logout</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                          </ul>
+                        </div>
+               <!--end my account-->
           </ul>
         </div>
       </div>
@@ -55,7 +109,7 @@
                           <a class="navbar-brand" href="#">
                               <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
                             </a>
-                        <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">Ecommerce</a>
+                        <a class="navbar-brand" href="/shopping-cart-oche/Project/user_login/user_login_home/guest.php">Ecommerce</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
                         </button>
@@ -66,7 +120,7 @@
                     <div class="offcanvas-body">
                       <div>
                           <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                              <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php"> Home</a>
+                              <i class="fa-solid fa-house"></i><a class="navbar-brand" href="/shopping-cart-oche/Project/user_login/user_login_home/guest.php"> Home</a>
                           </h5>
                         </div>
                         <hr>
@@ -75,23 +129,21 @@
                               <a class="navbar-brand" href="">Products Available</a>
                               </h5>
                               <ul class="list-group list-group-flush">
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/gaming_accessories/gamingaccessories.php">Gaming Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/musical_instrument/musical_instrument.php">Musical Instrument</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/kitchen_tools/kitchen_tools.php">Kitchen Tools</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/woment_fassion/women_fassion.php"> Women's Fassion & Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/Computer_Accessories/Computer_Accessories.php">Computer Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/automotive_parts/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/electronic_parts/electronic_accessorise.php">Electronic Accessories</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/health_beuty/health_beuty.php">Health & Beauty</a></li>
-                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/guest_user/men_fassion/men_fassion.php">Men's Fassion & Accessoriess</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/gaming_accessories/gamingaccessories.php">Gaming Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/musical_instrument/musical_instrument.php">Musical Instrument</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/kitchen_tools/kitchen_tools.php">Kitchen Tools</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/woment_fassion/women_fassion.php"> Women's Fassion & Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/Computer_Accessories/Computer_Accessories.php">Computer Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/automotive_parts/automotive_parts.php">Automotive & Motorcycle Parts</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/electronic_parts/electronic_accessorise.php">Electronic Accessories</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/health_beuty/health_beuty.php">Health & Beauty</a></li>
+                              <li  class="list-product"><a class="nav-link c" href="/shopping-cart-oche/Project/user_login/men_fassion/men_fassion.php">Men's Fassion & Accessoriess</a></li>
                           </ul>
                             
                       </div>
                       <hr>
                       <div>
-                        <h6> <a class="navbar-brand" href="/shopping-cart-oche/Project/login/signin.php">Sign in to buy product</a> </h6>
-
-                      <a  class="sign-in" href="/shopping-cart-oche/Project/login/signin.php">Sign in</a>
+                            <a  class="sign-in" href="/shopping-cart-oche/Project/user_login/logout/logout.php"> <i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                       </div>
                       <hr>
                     
@@ -172,7 +224,7 @@
                           populateTable(data);
                       }
                   };
-                  xhr.open("GET", "men_fassion_fetch.php", true);
+                  xhr.open("GET", "women_fassion_fetch.php", true);
                   xhr.send();
               }
 

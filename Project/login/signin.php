@@ -67,7 +67,8 @@
                       if ($row > 0){
                         $_SESSION ['ffname']  = $total ['First_name'];
                         $_SESSION ['llname'] = $total ['Last_name'];
-                        header ("Location: /shopping-cart-oche/Project/user_login/guest.php");
+                        $_SESSION ['email'] = $total ['Email'];
+                        header ("Location: /shopping-cart-oche/Project/user_login/user_login_home/guest.php");
                       }
                       else {
                         echo '

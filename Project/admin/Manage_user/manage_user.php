@@ -34,7 +34,8 @@
                   </li>
                 </ul>
                 <form class="d-flex" role="search" style="margin-right: 15px;">
-                  <div class="dropdown">
+                <!--my account-->
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
                       <!--Name of user-->
@@ -46,7 +47,7 @@
                       <li><hr class="dropdown-divider"></li>
                     </ul>
                   </div>
-              
+               <!--end my account-->
                 </form>
               </div>
             </div>
