@@ -63,9 +63,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                  
-                  <form class="d-flex" role="search" style="margin-right: 100px;">
-                    <input class="form-control me-2 search_input" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                  <form class="d-flex" role="search" style="margin-right: 100px;" id="searchForm" method="post" enctype="multipart/form-data">
+                    <input class="form-control me-2 search_input" type="search" placeholder="Search" id="searchQuery" name="search_data" aria-label="Search">
+                    <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass" name="search_data_product"></i></button>
                     <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
                   </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
@@ -251,6 +251,63 @@
                     <!--end Modal section successfull submit-->
 
                     <script>
+                      // this is search product
+                      document.querySelector('#searchForm').addEventListener('submit', function(event) {
+                            event.preventDefault(); // Prevent form submission
+
+                            const searchQuery = document.querySelector('#searchQuery').value;
+                          // this is search product
+                            if (searchQuery.trim() !== '') {
+                                fetch('search.php', {
+                                    method: 'POST',
+                                    body: new FormData(this)
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    const searchResults = document.querySelector('.cem');
+
+                                    if (data.length === 0) {
+                                        searchResults.innerHTML = ' <div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 80px; 0px 30px 0px">No results found!</p>  </div>';
+                                    } else {
+                                        searchResults.innerHTML = ''; // Clear previous results
+
+                                        data.forEach(product => {
+                                            const productDiv = document.createElement('div');
+                                            productDiv.classList.add('col-md-3', 'id="cem"');
+                                            productDiv.innerHTML = `
+                                                <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                    <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
+                                                    <div class="card-body" style="position:relative;">
+                                                        <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                        <p class="card-text">${product.Category}</p>
+                                                        <p class="card-text">₱ ${product.Price}</p>
+                                                        <button class="CartBtn">
+                                                            <span class="IconContainer"> 
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                    <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                                </svg>
+                                                            </span>
+                                                            <p class="text">Add to Cart</p>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            `;
+                                            searchResults.appendChild(productDiv);
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                            } else {
+                            // else the display of no result was disapeard
+                            document.querySelector('#no_result').style.display="none";
+                              
+                              // this is when the search button is click and the search input null will be display all product
+                              fetchData();
+                            }  
+                        });
+
                   // Function to fetch data using AJAX
                   function fetchData() {
                       let xhr = new XMLHttpRequest();

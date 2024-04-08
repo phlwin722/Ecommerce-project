@@ -71,11 +71,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         
-          <form class="d-flex" role="search" style="margin-right: 100px;">
-            <input class="form-control me-2 search_input" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
-          </form>
+        <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
+                    <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                    <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
+                </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!--my account-->
             <div class="dropdown">
@@ -214,6 +214,40 @@
           </div>
 
           <script>
+                                  // Search product
+                                  document.getElementById('searchForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                const searchQuery = document.getElementById('searchQuery').value;
+
+                // If search query is not empty, perform search
+                if (searchQuery.trim() !== '') {
+                    fetch('search.php', {
+                        method: 'POST',
+                        body: new FormData(this)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const searchResults = document.querySelector('.cem');
+
+                        if (data.length === 0) {
+                            searchResults.innerHTML = ' <div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
+                        } else {
+                            searchResults.innerHTML = ''; // Clear previous results
+                            populateTable(data, searchResults);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                } else {
+                  // else the display of no result was disapeard
+                  document.querySelector('#no_result').style.display="none";
+                    // If search query is empty, display all products
+                    fetchData();
+                }  
+            });
+
                 // function to fetch data using ajax
                   // Function to fetch data using AJAX
               function fetchData() {

@@ -76,11 +76,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             
-              <form class="d-flex" role="search" style="margin-right: 100px;">
-                <input class="form-control me-2 search_input" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
-              </form>
+            <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
+                    <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                    <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
+                </form>
               <ul class="navbar-nav mb-2 mb-lg-0">
                  <!--my account-->
               <div class="dropdown">
@@ -186,7 +186,7 @@
            
     
             <!--Feed back-->
-           <div class="feedback_Container">
+           <div class="feedback_Container" id="feedback_Container">
             <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Feedback</button>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -217,49 +217,84 @@
            </div>
           </div>
           <script>
-              // Function to fetch data using AJAX
-              function fetchData() {
-                  let xhr = new XMLHttpRequest();
-                  xhr.onreadystatechange = function() {
-                      if (this.readyState === 4 && this.status === 200) {
-                          let data = JSON.parse(this.responseText);
-                          populateTable(data);
-                      }
-                  };
-                  xhr.open("GET", "gaming_accessories_fetchdata.php", true);
-                  xhr.send();
-              }
+                      // Search product
+            document.getElementById('searchForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
 
-              // Function to populate table with fetched data
-              function populateTable(data) {
-                  const tableBody = document.querySelector('.cem');
-                  data.forEach(product => {
-                      const row = `<div class="col-md-3 id="cem"">
-                                          <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                              <div class="card-body" style="postion:relative;">
-                                                  <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                  <p class="card-text">${product.Category}</p>
-                                                  <p class="card-text">₱ ${product.Price}</p>
-                                                  <button class="CartBtn">
-                                                      <span class="IconContainer"> 
-                                                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                          </svg>
-                                                      </span>
-                                                      <p class="text">Add to Cart</p>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  `;
-                      tableBody.innerHTML += row;
-                  });
-              }
+                const searchQuery = document.getElementById('searchQuery').value;
 
-              // Call the fetchData function when the page loads
-              window.onload = fetchData;
+                // If search query is not empty, perform search
+                if (searchQuery.trim() !== '') {
+                    fetch('search.php', {
+                        method: 'POST',
+                        body: new FormData(this)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const searchResults = document.querySelector('.cem');
 
+                        if (data.length === 0) {
+                            searchResults.innerHTML = ' <div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
+                        } else {
+                            searchResults.innerHTML = ''; // Clear previous results
+                            populateTable(data, searchResults);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                } else {
+                  // else the display of no result was disapeard
+                  document.querySelector('#no_result').style.display="none";
+                    // If search query is empty, display all products
+                    fetchData();
+                }  
+            });
+
+            // Function to fetch data using AJAX
+            function fetchData() {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(this.responseText);
+                        const allProductsContainer = document.querySelector('.cem');
+                        allProductsContainer.innerHTML = ''; // Clear previous results
+                        populateTable(data, allProductsContainer);
+                    }
+                };
+                xhr.open("GET", "gaming_accessories_fetchdata.php", true);
+                xhr.send();
+            }
+
+            // Function to populate table with fetched data
+            function populateTable(data, container) {
+                data.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('col-md-3', 'id="cem"');
+                    productDiv.innerHTML = `
+                        <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                            <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
+                            <div class="card-body" style="position:relative;">
+                                <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                <p class="card-text">${product.Category}</p>
+                                <p class="card-text">₱ ${product.Price}</p>
+                                <button class="CartBtn">
+                                    <span class="IconContainer"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                            <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                        </svg>
+                                    </span>
+                                    <p class="text">Add to Cart</p>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(productDiv);
+                });
+            }
+
+            // Call the fetchData function when the page loads
+            window.onload = fetchData;
 
           </script>
               <!--Javascript file-->
