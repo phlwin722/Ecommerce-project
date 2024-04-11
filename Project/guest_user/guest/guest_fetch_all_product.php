@@ -13,7 +13,7 @@
     }
 
     // Fetch data from database
-    $sql = "SELECT Product_code,Product_name, Price, Category, Image FROM product_list";
+    $sql = "SELECT Product_code,Product_name, Price, Category, Image FROM product_list order by rand()";
     $result = $con->query($sql);
 
     // Fetch and store data in an array

@@ -214,62 +214,86 @@
           </div>
 
           <script>
-                                  // Search product
-                                  document.getElementById('searchForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission
+           document.getElementById('searchForm').addEventListener('submit', function(event) {
+                      event.preventDefault(); // Prevent form submission
 
-                const searchQuery = document.getElementById('searchQuery').value;
+                      const searchQuery = document.getElementById('searchQuery').value.trim(); // Trim the search query
 
-                // If search query is not empty, perform search
-                if (searchQuery.trim() !== '') {
-                    fetch('search.php', {
-                        method: 'POST',
-                        body: new FormData(this)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const searchResults = document.querySelector('.cem');
-
-                        if (data.length === 0) {
-                            searchResults.innerHTML = ' <div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
-                        } else {
-                            searchResults.innerHTML = ''; // Clear previous results
-                            populateTable(data, searchResults);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                } else {
-                  // else the display of no result was disapeard
-                  document.querySelector('#no_result').style.display="none";
-                    // If search query is empty, display all products
-                    fetchData();
-                }  
-            });
-
-                // function to fetch data using ajax
-                  // Function to fetch data using AJAX
-              function fetchData() {
-                  let xhr = new XMLHttpRequest();
-                  xhr.onreadystatechange = function() {
-                      if (this.readyState === 4 && this.status === 200) {
-                          let data = JSON.parse(this.responseText);
-                          populateTable(data);
+                      // Check if search query is empty
+                      if (searchQuery !== '') {
+                          fetch('search.php', {
+                              method: 'POST',
+                              body: new FormData(this)
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                              const searchResults = document.querySelector('.cem');
+                              searchResults.innerHTML = ''; // Clear previous results
+                              if (data.length === 0) {
+                                  searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
+                              } else {
+                                const tableBody = document.querySelector('.cem');
+                                tableBody.innerHTML = ''; // Clear previous results
+                                data.forEach(product => {
+                                    const row = `<div class="col-md-3">
+                                                    <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                        <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
+                                                        <div class="card-body" style="position:relative;">
+                                                            <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                            <p class="card-text">${product.Category}</p>
+                                                            <p class="card-text">₱ ${product.Price}</p>
+                                                            <button class="CartBtn">
+                                                                <span class="IconContainer"> 
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                                    </svg>
+                                                                </span>
+                                                                <p class="text">Add to Cart</p>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
+                                    tableBody.innerHTML += row;
+                                  });
+                              }
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                          });
+                      } else if (searchQuery === ''){
+                        // Fetch and display all products
+                        fetchData();
+                      } 
+                      else {
+                          // If search query is empty, hide the "No results found" message
+                          document.querySelector('#no_result').style.display = "none";
+                          // Fetch and display all products
+                          fetchData();
                       }
-                  };
-                  xhr.open("GET", "Computer_Accessories_fetch.php", true);
-                  xhr.send();
-              }
+                  });
 
-              // Function to populate table with fetched data
-              function populateTable(data) {
-                  const tableBody = document.querySelector('.cem');
-                  data.forEach(product => {
-                      const row = `<div class="col-md-3 id="cem"">
+                  // Function to fetch data using AJAX to fetch all products
+                  function fetchData() {
+                      let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                              let data = JSON.parse(this.responseText);
+                              populateTable(data);
+                          }
+                      };
+                      xhr.open("GET", "Computer_Accessories_fetch.php", true);
+                      xhr.send();
+                  }
+
+                  // Function to populate table with fetched data
+                  function populateTable(data) {
+                      const tableBody = document.querySelector('.cem');
+                      tableBody.innerHTML = ''; // Clear previous results
+                      data.forEach(product => {
+                          const row = `<div class="col-md-3">
                                           <div class="card" style="width: 18rem; padding:10px; height:420px;">
                                               <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                              <div class="card-body" style="postion:relative;">
+                                              <div class="card-body" style="position:relative;">
                                                   <h6 style="font-weight:bold;">${product.Product_name}</h6>
                                                   <p class="card-text">${product.Category}</p>
                                                   <p class="card-text">₱ ${product.Price}</p>
@@ -283,14 +307,14 @@
                                                   </button>
                                               </div>
                                           </div>
-                                      </div>
-                                  `;
-                      tableBody.innerHTML += row;
-                  });
-              }
+                                      </div>`;
+                          tableBody.innerHTML += row;
+                      });
+                  }
 
-              // Call the fetchData function when the page loads
-              window.onload = fetchData;
+                  // Call the fetchData function when the page loads
+                  window.onload = fetchData;
+
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
