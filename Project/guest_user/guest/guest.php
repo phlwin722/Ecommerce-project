@@ -66,7 +66,12 @@
                   <form class="d-flex" role="search" style="margin-right: 100px;" id="searchForm" method="post" enctype="multipart/form-data">
                     <input class="form-control me-2 search_input" type="search" placeholder="Search" id="searchQuery" name="search_data" aria-label="Search">
                     <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass" name="search_data_product"></i></button>
-                    <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
+                        <button class="btn shopping_cart  position-relative" type="submit"><i class="fa-solid fa-cart-shopping"></i>
+                            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                                99+
+                                <span class="visually-hidden">unread messages</span>
+                              </span>
+                      </button>
                   </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
