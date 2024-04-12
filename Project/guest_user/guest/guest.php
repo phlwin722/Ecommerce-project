@@ -358,7 +358,7 @@
                   // Call the fetchData function when the page loads
                   window.onload = fetchData;
 
-                  // when click product code
+                  // when click add to cart
                   function productCode(element) {
                 let value = element.getAttribute('value');
                 alert(value)
