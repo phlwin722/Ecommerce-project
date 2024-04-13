@@ -51,11 +51,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/Add_to_cart/add_to_cart.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/user_login/Add_to_cart/add_to_cart.css">
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
-        <title>Computer Accessories</title>
+        <title>Add to Cart</title>
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -163,8 +163,30 @@
                <!--Display product-->
             <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
+
+                        <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
+                              <div class="card-body" style="position:relative;">
+                                <label style="font-weight:bold;">Product</label>
+                                <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
+                                <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
+                                <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
+                                <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
+                              </div>
+                        </div>
                 <!--products-->
-                 <div class="row cem" style=""> </div>
+                 <div class="row cem" style=""> 
+                 <div class="col-md-12">
+
+                        <!--<div class="card-body" style="position:relative;">
+                         <img src="/shopping-cart-oche/Project/Image/logo.png" width="150" height="100" alt="${product.Product_name}">  
+                          <label style="font-weight:bold;">${product.Product_name}</label>
+                          <label class="card-text">${product.Category}</label>
+                          <label class="card-text">₱ ${product.Price}</label>
+                          <label class="card-text"  style="position:absolute; right:40px;"> <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a></label>
+                            </div>-->
+                         </div>
+                      </div>
+                </div>
               </div>
             </div>
             <!--end Display product-->
@@ -290,24 +312,44 @@
                       const tableBody = document.querySelector('.cem');
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
-                          const row = `<div class="col-md-3">
-                                          <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                              <div class="card-body" style="position:relative;">
-                                                  <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                  <p class="card-text">${product.Category}</p>
-                                                  <p class="card-text">₱ ${product.Price}</p>
-                                                  <button class="CartBtn">
-                                                      <span class="IconContainer"> 
-                                                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                          </svg>
-                                                      </span>
-                                                      <p class="text">Add to Cart</p>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                      </div>`;
+                          const row = `<div class="card" style="width: 100%; padding:5px; height:115px;">
+                    
+                          <div class="row">
+                            <div class="col-6">
+                              <img src="/shopping-cart-oche/Project/Image/logo.png" width="150" height="100" alt="${product.Product_name}">  
+                              <label style="font-weight:bold;">${product.Product_name}</label>
+                            </div>
+                            <div class="col-1 position-relative" 
+                                  style=" width:120px; ">
+                              <label style="font-weight:bold; 
+                                            position: absolute;
+                                            top: 40%;
+                                            left:20%;">
+                                            ₱ 200.20
+                                        </label>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">                  
+                                <div style=" position: absolute;
+                                            top: 30%;
+                                            left:15%;">
+                                  <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                  <input value="" class="text-center  border border-light-subtle" style="width:70px;">
+                                  <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                              <label class="card-text" style=" position: absolute;
+                                                               top: 36%;
+                                                               left:15%;">
+                                            ₱ 200.20</label>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                            <a href="#" class="btn btn-sm delete-data" style=" position: absolute;
+                                                               top: 35%;
+                                                               left:42%;">
+                                                               <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a>
+                            </div>
+                          </div>`;
                           tableBody.innerHTML += row;
                       });
                   }
