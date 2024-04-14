@@ -303,7 +303,7 @@
                               populateTable(data);
                           }
                       };
-                      xhr.open("GET", "musical_instrument_fetch.php", true);
+                      xhr.open("GET", "add_to_cart_fetch.php", true);
                       xhr.send();
                   }
 
@@ -316,8 +316,8 @@
                     
                           <div class="row">
                             <div class="col-6">
-                              <img src="/shopping-cart-oche/Project/Image/logo.png" width="150" height="100" alt="${product.Product_name}">  
-                              <label style="font-weight:bold;">${product.Product_name}</label>
+                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                              <label style="">${product.Product_name}</label>
                             </div>
                             <div class="col-1 position-relative" 
                                   style=" width:120px; ">
@@ -325,7 +325,7 @@
                                             position: absolute;
                                             top: 40%;
                                             left:20%;">
-                                            ₱ 200.20
+                                            ₱ ${product.Price}
                                         </label>
                             </div>
                             <div class="col position-relative" style="width:125px;">                  
@@ -333,7 +333,7 @@
                                             top: 30%;
                                             left:15%;">
                                   <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                  <input value="" class="text-center  border border-light-subtle" style="width:70px;">
+                                  <input class="text-center  border border-light-subtle" style="width:70px;" value="${product.Quantity}">
                                   <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-plus" style="color:black"></i></button>
                                 </div>
                             </div>
@@ -341,7 +341,8 @@
                               <label class="card-text" style=" position: absolute;
                                                                top: 36%;
                                                                left:15%;">
-                                            ₱ 200.20</label>
+                                                               ₱ ${product.Price}
+                                                               </label>
                             </div>
                             <div class="col-2 position-relative" style="width:180px;">
                             <a href="#" class="btn btn-sm delete-data" style=" position: absolute;

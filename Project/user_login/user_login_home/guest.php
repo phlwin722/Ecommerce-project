@@ -46,67 +46,40 @@
 
 
               // Check if the form is submitted
-if (isset($_POST['cart'])) {
-  // Check if the necessary form fields are set
-  if (isset($_POST['product_name'], $_POST['price'], $_FILES['image'])) {
-      $productname = $_POST['product_name'];
-      $price = $_POST['price'];
-      $quantity = '1';
-      $email = isset($_SESSION['email']) ? $_SESSION['email'] : ''; // Check if email session is set
+              if (isset($_POST['cart'])) {
+                // Check if the necessary form fields are set
+                    $productcode = $_POST['product_code'];
+                    $productname = $_POST['product_name'];
+                    $price = $_POST['price'];
+                    $quantity = '1';
+                    $image = $_POST['product_image'];
+                    $email = isset($_SESSION['email']) ? $_SESSION['email'] : ''; // Check if email session is set
 
-      // Check if image file is uploaded successfully
-      if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-          $filename = $_FILES["image"]["name"];
-          $tmpname = $_FILES["image"]["tmp_name"];
+                            // Establish database connection
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "ecommerce";
+                            $con = new mysqli($servername, $username, $password, $dbname);
 
-          $validExtension = ['jpg', 'jpeg', 'png'];
-          $imageExtension = pathinfo($filename, PATHINFO_EXTENSION);
+                            // Check connection
+                            if ($con->connect_error) {
+                                die("Connection error: " . $con->connect_error);
+                            }
 
-          // Check if the uploaded file has a valid extension
-          if (in_array(strtolower($imageExtension), $validExtension)) {
-              // Generate a unique image name
-              $newImagename = uniqid() . '.' . $imageExtension;
-
-              // Move the uploaded file to the destination directory
-              move_uploaded_file($tmpname, '/shopping-cart-oche/Project/user_login/Add_to_Cart/list_image_cart/' . $newImagename);
-
-              // Establish database connection
-              $servername = "localhost";
-              $username = "root";
-              $password = "";
-              $dbname = "ecommerce";
-              $con = new mysqli($servername, $username, $password, $dbname);
-
-              // Check connection
-              if ($con->connect_error) {
-                  die("Connection error: " . $con->connect_error);
+                            // Prepare and bind statement to insert data into the database
+                            $stmt = $con->prepare("INSERT INTO cart_product (Product_code, Product_name, Quantity, Price, Email, Image) VALUES (?, ?, ?, ?, ?, ?)");
+                            $stmt->bind_param('ssssss', $productcode, $productname, $quantity, $price, $email, $image);
+                            if ($stmt->execute()) {
+                                // Insertion successful
+                                // Redirect or display success message
+                            } else {
+                                // Insertion failed
+                                // Handle the error
+                            }
+                            $stmt->close();
+                            $con->close();
               }
-
-              // Prepare and bind statement to insert data into the database
-              $stmt = $con->prepare("INSERT INTO cart_product (Product_name, Quantity, Price, Email, Image) VALUES (?, ?, ?, ?, ?)");
-              $stmt->bind_param('sssss', $productname, $quantity, $price, $email, $newImagename);
-              if ($stmt->execute()) {
-                  // Insertion successful
-                  // Redirect or display success message
-              } else {
-                  // Insertion failed
-                  // Handle the error
-              }
-              $stmt->close();
-              $con->close();
-            } else {
-              // Invalid file extension
-              // Handle the error
-          }
-      } else {
-          // File upload error
-          // Handle the error
-      }
-  } else {
-      // Required form fields not set
-      // Handle the error
-  }
-}
 
           ?>
 
@@ -418,47 +391,54 @@ if (isset($_POST['cart'])) {
                       xhr.send();
                   }
 
+
                   // Function to populate table with fetched data
                   function populateTable(data) {
                       const tableBody = document.querySelector('.cem');
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
                           const row = `<div class="col-md-3">
+                          <form action="" method="post" enctype="multipart/form-data">
                                       <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                          <form action="" method="post" enctype="multipart/form-data">
-                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" name="image" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
+                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
+                                              <input type="text" name="product_image" value="${product.Image}" style="display:none;">
                                               <div class="card-body" style="position:relative;">
-                                                  <h6 style="font-weight:bold;" name="product_name" value="${product.Product_name}">${product.Product_name}</h6>
-                                                  <p class="card-text" name="product_Category">${product.Category}</p>
+                                                  <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                  <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
+                                                  <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
+                                                  <p class="card-text">${product.Category}</p>
                                                   <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
+                                                  <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
                                                   <button class="CartBtn" type="submit" name="cart">
                                                       <span class="IconContainer">
                                                           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
                                                               <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
                                                           </svg>
                                                       </span>
-                                                      <p class="text" name="cart" value="${product.Product_code}">Add to Cart</p>
+                                                      <p class="text" name="cart">Add to Cart</p>
                                                   </button>
                                               </div>
-                                          </form>
+                                          
                                       </div>
+                                      </form>
                                   </div>
                                   `;
                           tableBody.innerHTML += row;
                       });
                   }
-
-                  // Call the fetchData function when the page loads
-                  window.onload = fetchData;
-
-                  // when click add to cart button of each will be get the value id of each product
-                  function productCode(element) {
+                   // when click add to cart button of each will be get the value id of each product
+                   function productCode(element) {
                 let value = element.getAttribute('value');
                 alert(value)
               }
 
+                  // Call the fetchData function when the page loads
+                  window.onload = fetchData;
+
               // when click cart icon the page will be go on add to cart interface
-             
+                  document.querySelector('.shopping_cart').addEventListener('click', function(){
+                    window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
+                  });
 
             </script>
 

@@ -1,11 +1,11 @@
 <?php
+    session_start();
     // Establish connection to the database
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "ecommerce";
-    $category = "Musical Instrument";
-
+    $email = $_SESSION ['email'];
     $con = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
@@ -14,9 +14,9 @@
     }
    
     // Prepare and bind SQL query with parameter
-    $sql = "SELECT Product_code, Product_name, Price, Category, Image FROM product_list WHERE Category = ?";
+    $sql = "SELECT Product_code, Product_name, Quantity, Price , Image FROM cart_product WHERE Email = ?" ;
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $category);
+    $stmt->bind_param("s", $email);
 
     // Execute SQL query
     $stmt->execute();
