@@ -339,26 +339,31 @@
                                 tableBody.innerHTML = ''; // Clear previous results
                                 data.forEach(product => {
                                     const row = `<div class="col-md-3">
-                                      <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                          <form action="" method="post" enctype="multipart/form-data">
-                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" name="image" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
-                                              <div class="card-body" style="position:relative;">
-                                                  <h6 style="font-weight:bold;" name="product_name">${product.Product_name}</h6>
-                                                  <p class="card-text" name="product_Category">${product.Category}</p>
-                                                  <p class="card-text" name="price">₱ ${product.Price}</p>
-                                                  <button class="CartBtn" type="submit" name="cart">
-                                                      <span class="IconContainer">
-                                                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                          </svg>
-                                                      </span>
-                                                      <p class="text" name="cart" value="${product.Product_code}">Add to Cart</p>
-                                                  </button>
+                                              <form action="" method="post" enctype="multipart/form-data">
+                                                  <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                          <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
+                                                          <input type="text" name="product_image" value="${product.Image}" style="display:none;">
+                                                          <div class="card-body" style="position:relative;">
+                                                              <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                              <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
+                                                              <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
+                                                              <p class="card-text">${product.Category}</p>
+                                                              <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
+                                                              <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
+                                                              <button class="CartBtn" type="submit" name="cart">
+                                                                  <span class="IconContainer">
+                                                                      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                          <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                                      </svg>
+                                                                  </span>
+                                                                  <p class="text" name="cart">Add to Cart</p>
+                                                              </button>
+                                                          </div>
+                                                      
+                                                  </div>
+                                                  </form>
                                               </div>
-                                          </form>
-                                      </div>
-                                  </div>
-                                  `;
+                                              `;
                                     tableBody.innerHTML += row;
                                   });
                               }
@@ -398,40 +403,35 @@
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
                           const row = `<div class="col-md-3">
-                          <form action="" method="post" enctype="multipart/form-data">
-                                      <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
-                                              <input type="text" name="product_image" value="${product.Image}" style="display:none;">
-                                              <div class="card-body" style="position:relative;">
-                                                  <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                  <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
-                                                  <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
-                                                  <p class="card-text">${product.Category}</p>
-                                                  <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
-                                                  <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
-                                                  <button class="CartBtn" type="submit" name="cart">
-                                                      <span class="IconContainer">
-                                                          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                          </svg>
-                                                      </span>
-                                                      <p class="text" name="cart">Add to Cart</p>
-                                                  </button>
-                                              </div>
-                                          
-                                      </div>
-                                      </form>
-                                  </div>
+                                        <form id="addToCartForm">
+                                            <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
+                                                <input type="text" name="product_image" value="${product.Image}" style="display:none;">
+                                                <div class="card-body" style="position:relative;">
+                                                    <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                    <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
+                                                    <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
+                                                    <p class="card-text">${product.Category}</p>
+                                                    <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
+                                                    <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
+                                                    <button class="CartBtn" type="button" id="addToCartButton">
+                                                        <span class="IconContainer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <p class="text" name="cart">Add to Cart</p>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                   `;
                           tableBody.innerHTML += row;
                       });
                   }
-                   // when click add to cart button of each will be get the value id of each product
-                   function productCode(element) {
-                let value = element.getAttribute('value');
-                alert(value)
-              }
-
+            
                   // Call the fetchData function when the page loads
                   window.onload = fetchData;
 

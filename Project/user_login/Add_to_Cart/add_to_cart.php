@@ -312,51 +312,111 @@
                       const tableBody = document.querySelector('.cem');
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
-                          const row = `<div class="card" style="width: 100%; padding:5px; height:115px;">
-                    
-                          <div class="row">
-                            <div class="col-6">
-                              <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                              <label style="">${product.Product_name}</label>
-                            </div>
-                            <div class="col-1 position-relative" 
-                                  style=" width:120px; ">
-                              <label style="font-weight:bold; 
-                                            position: absolute;
-                                            top: 40%;
-                                            left:20%;">
-                                            ₱ ${product.Price}
-                                        </label>
-                            </div>
-                            <div class="col position-relative" style="width:125px;">                  
-                                <div style=" position: absolute;
-                                            top: 30%;
-                                            left:15%;">
-                                  <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                  <input class="text-center  border border-light-subtle" style="width:70px;" value="${product.Quantity}">
-                                  <button class="btn btn-link border border-light-subtle"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-1 position-relative">
-                              <label class="card-text" style=" position: absolute;
-                                                               top: 36%;
-                                                               left:15%;">
-                                                               ₱ ${product.Price}
-                                                               </label>
-                            </div>
-                            <div class="col-2 position-relative" style="width:180px;">
-                            <a href="#" class="btn btn-sm delete-data" style=" position: absolute;
-                                                               top: 35%;
-                                                               left:42%;">
-                                                               <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a>
-                            </div>
-                          </div>`;
+                          const row = `<div class="col-12">
+                                            <div class="card" style="width: 100%; padding:10px; height:120px;">
+                                      
+                                            <div class="row">
+                                              <div class="col-2" style="padding-left:30px">
+                                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                              </div>
+                                              <div class="col-4">
+                                              <label style="padding-top:15px;">${product.Product_name}</label>
+                                              </div>
+                                              <div class="col-1 position-relative" 
+                                                    style=" width:120px; ">
+                                                    <div  style=" position: absolute;
+                                                                                top: 36%;
+                                                                                left:20%;">
+                                                <lable>₱ </label> 
+                                                <input class="text-center" id="unitprice_${product.Product_code}" style="position: absolute;
+                                                                                background-color:transparent;
+                                                                                width:70px;
+                                                                                border:none;" 
+                                                                                value="${product.Price}" min="1" disabled>
+                                            
+                                               </div>
+                                              </div>
+
+                                              <div class="col position-relative" style="width:125px;">                  
+                                                  <div style=" position: absolute;
+                                                              top: 30%;
+                                                              left:10%;">
+                                                              <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                                              <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                                              <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                                              </div>
+                                              </div>
+                                              <div class="col-1 position-relative">
+                                              <div  style=" position: absolute;
+                                                                                top: 36%;
+                                                                                left:20%;">
+                                                <lable>₱ </label> 
+                                                
+                                                <input class="text-center" id="totalprice_${product.Product_code}" style="position: absolute;
+                                                                                background-color:transparent;
+                                                                                width:70px;
+                                                                                border:none;" 
+                                                                                value="${product.Price}" min="1" disabled>
+                                               </div>
+                                              </div>
+                                              <div class="col-2 position-relative" style="width:180px;">
+                                              <a href="#" class="btn btn-sm delete-data" style=" position: absolute;
+                                                                                top: 35%;
+                                                                                left:42%;">
+                                                                                <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a>
+                                              </div>
+                                            </div>
+                                        </div>`;
                           tableBody.innerHTML += row;
                       });
                   }
 
                   // Call the fetchData function when the page loads
                   window.onload = fetchData;
+
+                  // quantity add or minus
+                  function minus(Product_code) {
+                      let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                      let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                      let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                      console.log(quantityElement)
+                      let quantity = parseInt(quantityElement.value);
+                      let unitprice = parseInt(unitpriceElement.value);
+                      let totalprice = parseInt(totalpriceElement.value);
+
+                      if (quantity > 1) {
+                          let decrement = 1;
+                          quantity -= decrement;
+
+                          totalprice -= unitprice;
+
+                          totalpriceElement.value = totalprice.toString();
+                          quantityElement.value = quantity.toString();
+                      } else {
+                          // If the quantity is already 1, do nothing or display a message
+                          // In this example, we're leaving it as is
+                      }
+                  }
+
+                  function add(Product_code) {
+                      let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                      let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                      let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+
+                      let unitprice = parseInt(unitpriceElement.value);
+                      let quantity = parseInt(quantityElement.value);
+
+                      let increment = 1;
+                      quantity += increment;
+                      let totalPrice = unitprice * quantity;
+
+                      // Update the value displayed on the webpage
+                      quantityElement.value = quantity.toString();
+                      totalpriceElement.value = totalPrice.toString();
+                  }
+
+                      
+                
 
           </script>
          <!--This is for fontawesome icon-->
