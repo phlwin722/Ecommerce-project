@@ -403,7 +403,7 @@
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
                           const row = `<div class="col-md-3">
-                                        <form id="addToCartForm">
+                                         <form id="productForm" enctype="multipart/form-data">
                                             <div class="card" style="width: 18rem; padding:10px; height:420px;">
                                                 <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
                                                 <input type="text" name="product_image" value="${product.Image}" style="display:none;">
@@ -439,6 +439,31 @@
                   document.querySelector('.shopping_cart').addEventListener('click', function(){
                     window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
                   });
+
+                  // add to cart 
+                $(document).ready(function() {
+                $('.CartBtn').click(function() {
+                    // Serialize form data into JSON
+                    var formData = JSON.stringify($('#productForm').serializeArray());
+
+                    // Send AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        url: 'add_to_cart_insert.php',
+                        data: formData,
+                        contentType: 'application/json',
+                        success: function(response) {
+                            // Handle success response
+                            alert('Product added to cart successfully');
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(error);
+                        }
+                    });
+                });
+            });
+
 
             </script>
 
