@@ -161,35 +161,43 @@
               <!--end of aboout-->
 
                <!--Display product-->
-            <div class="row " style="padding-left:20px;">
+           <!--Display product-->
+          <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
-
-                        <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
-                              <div class="card-body" style="position:relative;">
-                                <label style="font-weight:bold;">Product</label>
-                                <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
-                                <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
-                                <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
-                                <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
-                              </div>
-                        </div>
-                <!--products-->
-                 <div class="row cem" style=""> 
-                 <div class="col-md-12">
-
-                        <!--<div class="card-body" style="position:relative;">
-                         <img src="/shopping-cart-oche/Project/Image/logo.png" width="150" height="100" alt="${product.Product_name}">  
-                          <label style="font-weight:bold;">${product.Product_name}</label>
-                          <label class="card-text">${product.Category}</label>
-                          <label class="card-text">₱ ${product.Price}</label>
-                          <label class="card-text"  style="position:absolute; right:40px;"> <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a></label>
-                            </div>-->
-                         </div>
+                  <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
+                      <div class="card-body" style="position:relative;">
+                          <label style="font-weight:bold;">  
+                              <input class="form-check-input productCheckbox" type="checkbox" value="" id="">  Product
+                          </label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
                       </div>
-                </div>
+                  </div>
+                  <!--products-->
+                  <div class="row cem" style=""> 
+                      <div class="col-md-12"></div>
+                  </div>
+                  <div class="card sticky-bottom" style="width: 100%; padding:10px; height:70px;">
+                      <div class="card-body" style="position:relative;">
+                          <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
+                          <label style="" for="selectAllCheckbox">Select All</label>
+                          <label style=" margin-left:20px;" for="">Delete All</label>
+                          <label class="card-text" style=" position:absolute; right:350px;">Total (0 item)</label>
+                          <label class="card-text" style=" position:absolute; right:250px;">₱ 2200.00</label>
+                          <button type="button" class="btn btn-primary" style="font-weight:bold; position:absolute; right:40px ; top:9px;">Buy now</button>
+                      </div>
+                  </div>
               </div>
-            </div>
+          </div>
+
+
             <!--end Display product-->
+
+              <!---->
+              
+              <!---->
 
               <!--Footer-->
           <div class="container-fluid footer" id="footer">
@@ -259,6 +267,7 @@
                                 data.forEach(product => {
                                     const row = `<div class="col-md-3">
                                                     <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                      <input class="form-check-input" type="checkbox" value="" id="">
                                                         <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
                                                         <div class="card-body" style="position:relative;">
                                                             <h6 style="font-weight:bold;">${product.Product_name}</h6>
@@ -313,62 +322,60 @@
                       tableBody.innerHTML = ''; // Clear previous results
                       data.forEach(product => {
                           const row = `<div class="col-12">
-                                            <div class="card" style="width: 100%; padding:10px; height:120px;">
-                                      
-                                            <div class="row">
-                                              <div class="col-2" style="padding-left:30px">
-                                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                              </div>
-                                              <div class="col-4">
-                                              <label style="padding-top:15px;">${product.Product_name}</label>
-                                              </div>
-                                              <div class="col-1 position-relative" 
-                                                    style=" width:120px; ">
-                                                    <div  style=" position: absolute;
-                                                                                top: 36%;
-                                                                                left:20%;">
-                                                <lable>₱ </label> 
-                                                <input class="text-center" id="unitprice_${product.Product_code}" style="position: absolute;
-                                                                                background-color:transparent;
-                                                                                width:70px;
-                                                                                border:none;" 
-                                                                                value="${product.Price}" min="1" disabled>
-                                            
-                                               </div>
-                                              </div>
-
-                                              <div class="col position-relative" style="width:125px;">                  
-                                                  <div style=" position: absolute;
-                                                              top: 30%;
-                                                              left:10%;">
-                                                              <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                                              <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                                              <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                                              </div>
-                                              </div>
-                                              <div class="col-1 position-relative">
-                                              <div  style=" position: absolute;
-                                                                                top: 36%;
-                                                                                left:20%;">
-                                                <lable>₱ </label> 
-                                                
-                                                <input class="text-center" id="totalprice_${product.Product_code}" style="position: absolute;
-                                                                                background-color:transparent;
-                                                                                width:70px;
-                                                                                border:none;" 
-                                                                                value="${product.Price}" min="1" disabled>
-                                               </div>
-                                              </div>
-                                              <div class="col-2 position-relative" style="width:180px;">
-                                              <a href="#" class="btn btn-sm delete-data" style=" position: absolute;
-                                                                                top: 35%;
-                                                                                left:42%;">
-                                                                                <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i></a>
-                                              </div>
+                                <div class="card" style="width: 100%; padding:10px; height:120px;">
+                                    <div class="row">
+                                        <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                            <input class="form-check-input productCheckbox" type="checkbox" value="" id="productCheckbox">
+                                        </div>
+                                        <div class="" style=" width:165px;">
+                                            <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                        </div>
+                                        <div class="col-4">
+                                            <label style="padding-top:15px;">${product.Product_name}</label>
+                                        </div>
+                                        <div class="col-1 position-relative" style="width:120px;">
+                                            <div style="position: absolute; top: 36%; left:20%;">
+                                                <lable>₱ </lable> 
+                                                <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
                                             </div>
-                                        </div>`;
+                                        </div>
+                                        <div class="col position-relative" style="width:125px;">
+                                            <div style="position: absolute; top: 30%; left:10%;">
+                                                <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                                <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                                <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 position-relative">
+                                            <div style="position: absolute; top: 36%; left:20%;">
+                                                <lable>₱ </lable> 
+                                                <input class="text-center" id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 position-relative" style="width:180px;">
+                                            <a href="#" class="btn btn-sm delete-data" style="position: absolute; top: 35%; left:42%;">
+                                                <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
                           tableBody.innerHTML += row;
                       });
+                      
+                             // Get the "Select All" checkbox and all product checkboxes
+                          const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+                          const productCheckboxes = document.querySelectorAll('.productCheckbox');
+
+                          // Add event listener to the "Select All" checkbox
+                          selectAllCheckbox.addEventListener('change', function() {
+                              // Iterate through each product checkbox
+                              productCheckboxes.forEach(checkbox => {
+                                  // Set the checked property of each product checkbox to match the "Select All" checkbox
+                                  checkbox.checked = selectAllCheckbox.checked;
+                              });
+                          });
+                            // End the "Select All" checkbox and all product checkboxes
                   }
 
                   // Call the fetchData function when the page loads
@@ -415,8 +422,7 @@
                       totalpriceElement.value = totalPrice.toString();
                   }
 
-                      
-                
+
 
           </script>
          <!--This is for fontawesome icon-->

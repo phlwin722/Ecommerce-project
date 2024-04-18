@@ -77,9 +77,12 @@
                 <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
                     <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
                     <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button class="btn shopping_cart  position-relative" type="submit"><i class="fa-solid fa-cart-shopping"></i>
-                            <!---counting display-->
-                      </button>
+                    <button class="btn shopping_cart position-relative" type="submit">
+                      <i class="fa-solid fa-cart-shopping"></i>
+                      <!---counting display-->
+                      <div class="shopping_cartt"></div>
+                  </button>
+
                 </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
                    <!--my account-->
@@ -351,43 +354,45 @@
                       } else if (searchQuery === ''){
                         // Fetch and display all products
                         fetchData();
+                        fetchCart();
                       } 
                       else {
                           // If search query is empty, hide the "No results found" message
                           document.querySelector('#no_result').style.display = "none";
                           // Fetch and display all products
                           fetchData();
+                          fetchCart();
                       }
                   });
                   
                   // function to fetch data using ajax to add to card
-
-                  function fetchcCart (){
+                  function fetchCart() {
                       let xhr = new XMLHttpRequest();
-                      xhr.onreadystatechange =function (){
-                        if (this.readyState === 4 && this.status === 200){
-                          let data =JSON.parse(this.responseText);
-                          fetchcartCount(data);
-                        }
-                      }
-                      xhr.open("GET","fetch_cart.php",true);
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  fetchCartCount(data);
+                          }else {
+                                  console.error("Failed to fetch cart count. Status code: " + this.status);
+                              }
+                      };
+                      xhr.open("GET", "fetch_cart.php", true);
                       xhr.send();
-                  } 
-
-                  function fetchcartCount(data){
-                      const cartcount =document.querySelector('.shopping_cart');
-                      cartcount.innerHTML = ''; // clear previous result
-                      data.forEach(product => {
-                        const count = `
-                        <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
-                                99+
-                                <span class="visually-hidden">unread messages</span>
-                              </span>
-                        `;
-                      });
-                      cartcount.innerHTML += count;
                   }
-                    window.onload =fetchcartCount;
+
+                  function fetchCartCount(data) {
+                      const cartcount = document.querySelector('.shopping_cartt');
+                      cartcount.innerHTML = ''; // clear previous result
+                      if (data && data.count) {
+                          const count = `
+                              <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                                  ${data.count}
+                                  <span class="visually-hidden">unread messages</span>
+                              </span>
+                          `;
+                          cartcount.innerHTML = count;
+                      }
+                    }
                     // end counting cart
 
                   // Function to fetch data using AJAX to fetch all products
@@ -402,7 +407,6 @@
                       xhr.open("GET", "guest_fetch_all_product.php", true);
                       xhr.send();
                   }
-
 
                   // Function to populate table with fetched data
                 function populateTable(data) {
@@ -460,9 +464,7 @@
                           });
                       });
                   });
-                }
-
-            
+                }          
                   // Call the fetchData function when the page loads
                   window.onload = fetchData;
 
