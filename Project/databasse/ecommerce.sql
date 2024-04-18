@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2024 at 10:00 AM
+-- Generation Time: Apr 17, 2024 at 07:43 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -64,6 +64,21 @@ CREATE TABLE `archives_product` (
 INSERT INTO `archives_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Catergory`, `Image`) VALUES
 (12, '121', 212, '12', 'agasg', '660d16bf2bc08.jpg'),
 (23232, '12', 12, '12', 'agadga', '660d15b1cf650.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_product`
+--
+
+CREATE TABLE `cart_product` (
+  `Product_code` int(255) NOT NULL,
+  `Product_name` varchar(255) NOT NULL,
+  `Quantity` varchar(255) NOT NULL,
+  `Price` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -260,6 +275,12 @@ ALTER TABLE `archives_product`
   ADD PRIMARY KEY (`Product_code`);
 
 --
+-- Indexes for table `cart_product`
+--
+ALTER TABLE `cart_product`
+  ADD PRIMARY KEY (`Product_code`);
+
+--
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -298,6 +319,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `archives_product`
   MODIFY `Product_code` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23233;
+
+--
+-- AUTO_INCREMENT for table `cart_product`
+--
+ALTER TABLE `cart_product`
+  MODIFY `Product_code` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feedback`

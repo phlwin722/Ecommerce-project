@@ -43,44 +43,6 @@
               // Close connection
               $con->close();
               }
-
-
-              // Check if the form is submitted
-              if (isset($_POST['cart'])) {
-                // Check if the necessary form fields are set
-                    $productcode = $_POST['product_code'];
-                    $productname = $_POST['product_name'];
-                    $price = $_POST['price'];
-                    $quantity = '1';
-                    $image = $_POST['product_image'];
-                    $email = isset($_SESSION['email']) ? $_SESSION['email'] : ''; // Check if email session is set
-
-                            // Establish database connection
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "ecommerce";
-                            $con = new mysqli($servername, $username, $password, $dbname);
-
-                            // Check connection
-                            if ($con->connect_error) {
-                                die("Connection error: " . $con->connect_error);
-                            }
-
-                            // Prepare and bind statement to insert data into the database
-                            $stmt = $con->prepare("INSERT INTO cart_product (Product_code, Product_name, Quantity, Price, Email, Image) VALUES (?, ?, ?, ?, ?, ?)");
-                            $stmt->bind_param('ssssss', $productcode, $productname, $quantity, $price, $email, $image);
-                            if ($stmt->execute()) {
-                                // Insertion successful
-                                // Redirect or display success message
-                            } else {
-                                // Insertion failed
-                                // Handle the error
-                            }
-                            $stmt->close();
-                            $con->close();
-              }
-
           ?>
 
 <!DOCTYPE html>
@@ -116,10 +78,7 @@
                     <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
                     <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <button class="btn shopping_cart  position-relative" type="submit"><i class="fa-solid fa-cart-shopping"></i>
-                            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
-                                99+
-                                <span class="visually-hidden">unread messages</span>
-                              </span>
+                            <!---counting display-->
                       </button>
                 </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
@@ -310,11 +269,6 @@
                               </div>
                               </div>
 
-                              <!--Add to cart function-->
-                            
-
-                              <!--End Add to cart function-->
-
                     <!--end Modal section successfull submit-->
                     <script>
                       document.getElementById('searchForm').addEventListener('submit', function(event) {
@@ -339,32 +293,55 @@
                                 tableBody.innerHTML = ''; // Clear previous results
                                 data.forEach(product => {
                                     const row = `<div class="col-md-3">
-                                              <form action="" method="post" enctype="multipart/form-data">
-                                                  <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                                          <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
-                                                          <input type="text" name="product_image" value="${product.Image}" style="display:none;">
-                                                          <div class="card-body" style="position:relative;">
-                                                              <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                              <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
-                                                              <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
-                                                              <p class="card-text">${product.Category}</p>
-                                                              <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
-                                                              <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
-                                                              <button class="CartBtn" type="submit" name="cart">
-                                                                  <span class="IconContainer">
-                                                                      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                                          <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                                      </svg>
-                                                                  </span>
-                                                                  <p class="text" name="cart">Add to Cart</p>
-                                                              </button>
-                                                          </div>
-                                                      
-                                                  </div>
-                                                  </form>
-                                              </div>
+                                                        <form class="productForm" enctype="multipart/form-data">
+                                                            <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
+                                                                <input type="hidden" name="product_image" value="${product.Image}">
+                                                                <div class="card-body" style="position:relative;">
+                                                                    <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                                    <input type="hidden" name="product_code" value="${product.Product_code}">
+                                                                    <input type="hidden" name="product_name" value="${product.Product_name}">
+                                                                    <p class="card-text">${product.Category}</p>
+                                                                    <p class="card-text" value="${product.Price}">₱ ${product.Price}</p>
+                                                                    <input type="hidden" name="price" value="${product.Price}">
+                                                                    <button class="CartBtn" type="button">
+                                                                        <span class="IconContainer">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <p class="text" name="cart">Add to Cart</p>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                               `;
                                     tableBody.innerHTML += row;
+                                  });
+                                  // Attach event listeners to newly created buttons
+                                    document.querySelectorAll('.CartBtn').forEach(btn => {
+                                      btn.addEventListener('click', function() {
+                                          const form = this.closest('.productForm'); // Find the closest form element
+                                          const formData = new FormData(form); // Create FormData object from the form
+
+                                          // Send AJAX request
+                                          fetch('add_to_cart_insert.php', {
+                                              method: 'POST',
+                                              body: formData // Send FormData directly
+                                          })
+                                          .then(response => response.json()) // Parse response as JSON
+                                          .then(data => {
+                                              if (data.success) {
+                                                //    alert(data.message); // Display success message
+                                              } else {
+                                                  alert('Error: ' + data.message); // Display error message
+                                              }
+                                          })
+                                          .catch(error => {
+                                              console.error('Error:', error);
+                                          });
+                                      });
                                   });
                               }
                           })
@@ -382,6 +359,36 @@
                           fetchData();
                       }
                   });
+                  
+                  // function to fetch data using ajax to add to card
+
+                  function fetchcCart (){
+                      let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange =function (){
+                        if (this.readyState === 4 && this.status === 200){
+                          let data =JSON.parse(this.responseText);
+                          fetchcartCount(data);
+                        }
+                      }
+                      xhr.open("GET","fetch_cart.php",true);
+                      xhr.send();
+                  } 
+
+                  function fetchcartCount(data){
+                      const cartcount =document.querySelector('.shopping_cart');
+                      cartcount.innerHTML = ''; // clear previous result
+                      data.forEach(product => {
+                        const count = `
+                        <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                                99+
+                                <span class="visually-hidden">unread messages</span>
+                              </span>
+                        `;
+                      });
+                      cartcount.innerHTML += count;
+                  }
+                    window.onload =fetchcartCount;
+                    // end counting cart
 
                   // Function to fetch data using AJAX to fetch all products
                   function fetchData() {
@@ -398,23 +405,23 @@
 
 
                   // Function to populate table with fetched data
-                  function populateTable(data) {
-                      const tableBody = document.querySelector('.cem');
-                      tableBody.innerHTML = ''; // Clear previous results
-                      data.forEach(product => {
-                          const row = `<div class="col-md-3">
-                                         <form id="productForm" enctype="multipart/form-data">
+                function populateTable(data) {
+                    const tableBody = document.querySelector('.cem');
+                    tableBody.innerHTML = ''; // Clear previous results
+                    data.forEach(product => {
+                        const row = `<div class="col-md-3">
+                                         <form class="productForm" enctype="multipart/form-data">
                                             <div class="card" style="width: 18rem; padding:10px; height:420px;">
                                                 <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">
-                                                <input type="text" name="product_image" value="${product.Image}" style="display:none;">
+                                                <input type="hidden" name="product_image" value="${product.Image}">
                                                 <div class="card-body" style="position:relative;">
                                                     <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                    <input type="text" name="product_code" value="${product.Product_code}" style="display:none;">
-                                                    <input type="text" name="product_name" value="${product.Product_name}" style="display:none;">
+                                                    <input type="hidden" name="product_code" value="${product.Product_code}">
+                                                    <input type="hidden" name="product_name" value="${product.Product_name}">
                                                     <p class="card-text">${product.Category}</p>
-                                                    <p class="card-text" name="price" value="${product.Price}">₱ ${product.Price}</p>
-                                                    <input type="text"  name="price" value="${product.Price}" style="display:none;"> 
-                                                    <button class="CartBtn" type="button" id="addToCartButton">
+                                                    <p class="card-text" value="${product.Price}">₱ ${product.Price}</p>
+                                                    <input type="hidden" name="price" value="${product.Price}">
+                                                    <button class="CartBtn" type="button">
                                                         <span class="IconContainer">
                                                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
                                                                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
@@ -425,12 +432,36 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div>`;
+                        tableBody.innerHTML += row;
+                    });
 
-                                  `;
-                          tableBody.innerHTML += row;
+                    // Attach event listeners to newly created buttons
+                    document.querySelectorAll('.CartBtn').forEach(btn => {
+                      btn.addEventListener('click', function() {
+                          const form = this.closest('.productForm'); // Find the closest form element
+                          const formData = new FormData(form); // Create FormData object from the form
+
+                          // Send AJAX request
+                          fetch('add_to_cart_insert.php', {
+                              method: 'POST',
+                              body: formData // Send FormData directly
+                          })
+                          .then(response => response.json()) // Parse response as JSON
+                          .then(data => {
+                              if (data.success) {
+                                //    alert(data.message); // Display success message
+                              } else {
+                                  alert('Error: ' + data.message); // Display error message
+                              }
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                          });
                       });
-                  }
+                  });
+                }
+
             
                   // Call the fetchData function when the page loads
                   window.onload = fetchData;
@@ -439,31 +470,6 @@
                   document.querySelector('.shopping_cart').addEventListener('click', function(){
                     window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
                   });
-
-                  // add to cart 
-                $(document).ready(function() {
-                $('.CartBtn').click(function() {
-                    // Serialize form data into JSON
-                    var formData = JSON.stringify($('#productForm').serializeArray());
-
-                    // Send AJAX request
-                    $.ajax({
-                        type: 'POST',
-                        url: 'add_to_cart_insert.php',
-                        data: formData,
-                        contentType: 'application/json',
-                        success: function(response) {
-                            // Handle success response
-                            alert('Product added to cart successfully');
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle error
-                            console.error(error);
-                        }
-                    });
-                });
-            });
-
 
             </script>
 
@@ -476,4 +482,43 @@
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
      
     </body>
+
+
+    
+    <!--Check if the form is submitted
+              if (isset($_POST['cart'])) {
+                // Check if the necessary form fields are set
+                    $productcode = $_POST['product_code'];
+                    $productname = $_POST['product_name'];
+                    $price = $_POST['price'];
+                    $quantity = '1';
+                    $image = $_POST['product_image'];
+                    $email = isset($_SESSION['email']) ? $_SESSION['email'] : ''; // Check if email session is set
+
+                            // Establish database connection
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "ecommerce";
+                            $con = new mysqli($servername, $username, $password, $dbname);
+
+                            // Check connection
+                            if ($con->connect_error) {
+                                die("Connection error: " . $con->connect_error);
+                            }
+
+                            // Prepare and bind statement to insert data into the database
+                            $stmt = $con->prepare("INSERT INTO cart_product (Product_code, Product_name, Quantity, Price, Email, Image) VALUES (?, ?, ?, ?, ?, ?)");
+                            $stmt->bind_param('ssssss', $productcode, $productname, $quantity, $price, $email, $image);
+                            if ($stmt->execute()) {
+                                // Insertion successful
+                                // Redirect or display success message
+                            } else {
+                                // Insertion failed
+                                // Handle the error
+                            }
+                            $stmt->close();
+                            $con->close();
+              }-->
 </html>
+
