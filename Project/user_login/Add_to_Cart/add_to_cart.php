@@ -183,9 +183,9 @@
                       <div class="card-body" style="position:relative;">
                           <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
                           <label style="" for="selectAllCheckbox">Select All</label>
-                          <label style=" margin-left:20px;" for="">Delete All</label>
-                          <label class="card-text" style=" position:absolute; right:350px;">Total (0 item)</label>
-                          <label class="card-text" style=" position:absolute; right:250px;">₱ 2200.00</label>
+                          <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
+                          <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
+                          <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
                           <button type="button" class="btn btn-primary" style="font-weight:bold; position:absolute; right:40px ; top:9px;">Buy now</button>
                       </div>
                   </div>
@@ -244,186 +244,261 @@
           </div>
 
           <script>
-           document.getElementById('searchForm').addEventListener('submit', function(event) {
-                      event.preventDefault(); // Prevent form submission
+              document.getElementById('searchForm').addEventListener('submit', function(event) {
+                  event.preventDefault(); // Prevent form submission
 
-                      const searchQuery = document.getElementById('searchQuery').value.trim(); // Trim the search query
+                  const searchQuery = document.getElementById('searchQuery').value.trim(); // Trim the search query
 
-                      // Check if search query is empty
-                      if (searchQuery !== '') {
-                          fetch('search.php', {
-                              method: 'POST',
-                              body: new FormData(this)
-                          })
-                          .then(response => response.json())
-                          .then(data => {
-                              const searchResults = document.querySelector('.cem');
-                              searchResults.innerHTML = ''; // Clear previous results
-                              if (data.length === 0) {
-                                  searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
-                              } else {
-                                const tableBody = document.querySelector('.cem');
-                                tableBody.innerHTML = ''; // Clear previous results
-                                data.forEach(product => {
-                                    const row = `<div class="col-md-3">
-                                                    <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                                      <input class="form-check-input" type="checkbox" value="" id="">
-                                                        <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                                        <div class="card-body" style="position:relative;">
-                                                            <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                            <p class="card-text">${product.Category}</p>
-                                                            <p class="card-text">₱ ${product.Price}</p>
-                                                            <button class="CartBtn">
-                                                                <span class="IconContainer"> 
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                                        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                                <p class="text">Add to Cart</p>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>`;
-                                    tableBody.innerHTML += row;
-                                  });
-                              }
-                          })
-                          .catch(error => {
-                              console.error('Error:', error);
-                          });
-                      } else if (searchQuery === ''){
-                        // Fetch and display all products
-                        fetchData();
-                      } 
-                      else {
-                          // If search query is empty, hide the "No results found" message
-                          document.querySelector('#no_result').style.display = "none";
-                          // Fetch and display all products
-                          fetchData();
+                  // Check if search query is empty
+                  if (searchQuery !== '') {
+                      fetch('search.php', {
+                          method: 'POST',
+                          body: new FormData(this)
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                          const searchResults = document.querySelector('.cem');
+                          searchResults.innerHTML = ''; // Clear previous results
+                          if (data.length === 0) {
+                              searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
+                          } else {
+                              const tableBody = document.querySelector('.cem');
+                              tableBody.innerHTML = ''; // Clear previous results
+                              data.forEach(product => {
+                                  const row = `<div class="col-md-3">
+                                                  <div class="card" style="width: 18rem; padding:10px; height:420px;">
+                                                    <input class="form-check-input productCheckbox" type="checkbox" value="" id="" data-product-code="${product.Product_code}">
+                                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
+                                                      <div class="card-body" style="position:relative;">
+                                                          <h6 style="font-weight:bold;">${product.Product_name}</h6>
+                                                          <p class="card-text">${product.Category}</p>
+                                                          <p class="card-text">₱ ${product.Price}</p>
+                                                          <button class="CartBtn">
+                                                              <span class="IconContainer"> 
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                                                      <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                                                                  </svg>
+                                                              </span>
+                                                              <p class="text">Add to Cart</p>
+                                                          </button>
+                                                      </div>
+                                                  </div>
+                                              </div>`;
+                                  tableBody.innerHTML += row;
+                              });
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error:', error);
+                      });
+                  } else if (searchQuery === ''){
+                      // Fetch and display all products
+                      fetchData();
+                  } else {
+                      // If search query is empty, hide the "No results found" message
+                      document.querySelector('#no_result').style.display = "none";
+                      // Fetch and display all products
+                      fetchData();
+                  }
+              });
+
+              // Function to fetch data using AJAX to fetch all products
+              function fetchData() {
+                  let xhr = new XMLHttpRequest();
+                  xhr.onreadystatechange = function() {
+                      if (this.readyState === 4 && this.status === 200) {
+                          let data = JSON.parse(this.responseText);
+                          populateTable(data);
+                      }
+                  };
+                  xhr.open("GET", "add_to_cart_fetch.php", true);
+                  xhr.send();
+              }
+
+              // Function to populate table with fetched data
+              function populateTable(data) {
+                  const tableBody = document.querySelector('.cem');
+                  tableBody.innerHTML = ''; // Clear previous results
+                  data.forEach(product => {
+                      const row = `<div class="col-12">
+                          <div class="card" style="width: 100%; padding:10px; height:120px;">
+                              <div class="row">
+                                  <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                      <input class="form-check-input productCheckbox"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                                  </div>
+                                  <div class="" style=" width:165px;">
+                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                  </div>
+                                  <div class="col-4">
+                                      <label style="padding-top:15px;">${product.Product_name}</label>
+                                  </div>
+                                  <div class="col-1 position-relative" style="width:120px;">
+                                      <div style="position: absolute; top: 36%; left:20%;">
+                                          <lable>₱ </lable> 
+                                          <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                      </div>
+                                  </div>
+                                  <div class="col position-relative" style="width:125px;">
+                                      <div style="position: absolute; top: 30%; left:10%;">
+                                          <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                          <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                          <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="col-1 position-relative">
+                                      <div style="position: absolute; top: 36%; left:20%;">
+                                          <lable>₱ </lable> 
+                                          <input class="text-center totalpricee"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                      </div>
+                                  </div>
+                                  <div class="col-2 position-relative" style="width:180px;">
+                                    <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                        <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                    </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>`;
+                      tableBody.innerHTML += row;
+                  });
+
+                  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
+                  // Delete All data
+                  const deleteAllData = document.getElementById('DeleteDataAll');
+
+                  // Add event listener to the "Select All" checkbox
+                  selectAllCheckbox.addEventListener('change', function() {
+                      // Iterate through each product checkbox
+                      productCheckboxes.forEach(checkbox => {
+                          // Set the checked property of each product checkbox to match the "Select All" checkbox
+                          checkbox.checked = selectAllCheckbox.checked;
+                      });
+                      calculateTotalPrice(); // Recalculate total price when "Select All" checkbox is clicked
+                  });
+
+                  deleteAllData.addEventListener('click', function (){
+                  let checkedProducts = [];
+                  productCheckboxes.forEach(checkbox => {
+                      if (checkbox.checked) {
+                          checkedProducts.push(checkbox.dataset.productCode);
                       }
                   });
 
-                  // Function to fetch data using AJAX to fetch all products
-                  function fetchData() {
-                      let xhr = new XMLHttpRequest();
-                      xhr.onreadystatechange = function() {
-                          if (this.readyState === 4 && this.status === 200) {
-                              let data = JSON.parse(this.responseText);
-                              populateTable(data);
-                          }
-                      };
-                      xhr.open("GET", "add_to_cart_fetch.php", true);
-                      xhr.send();
-                  }
-
-                  // Function to populate table with fetched data
-                  function populateTable(data) {
-                      const tableBody = document.querySelector('.cem');
-                      tableBody.innerHTML = ''; // Clear previous results
-                      data.forEach(product => {
-                          const row = `<div class="col-12">
-                                <div class="card" style="width: 100%; padding:10px; height:120px;">
-                                    <div class="row">
-                                        <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
-                                            <input class="form-check-input productCheckbox" type="checkbox" value="" id="productCheckbox">
-                                        </div>
-                                        <div class="" style=" width:165px;">
-                                            <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                        </div>
-                                        <div class="col-4">
-                                            <label style="padding-top:15px;">${product.Product_name}</label>
-                                        </div>
-                                        <div class="col-1 position-relative" style="width:120px;">
-                                            <div style="position: absolute; top: 36%; left:20%;">
-                                                <lable>₱ </lable> 
-                                                <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col position-relative" style="width:125px;">
-                                            <div style="position: absolute; top: 30%; left:10%;">
-                                                <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                                <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                                <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="col-1 position-relative">
-                                            <div style="position: absolute; top: 36%; left:20%;">
-                                                <lable>₱ </lable> 
-                                                <input class="text-center" id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-2 position-relative" style="width:180px;">
-                                            <a href="#" class="btn btn-sm delete-data" style="position: absolute; top: 35%; left:42%;">
-                                                <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`;
-                          tableBody.innerHTML += row;
-                      });
-                      
-                             // Get the "Select All" checkbox and all product checkboxes
-                          const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-                          const productCheckboxes = document.querySelectorAll('.productCheckbox');
-
-                          // Add event listener to the "Select All" checkbox
-                          selectAllCheckbox.addEventListener('change', function() {
-                              // Iterate through each product checkbox
+                  // Check if any product is checked
+                  if (checkedProducts.length > 0) {
+                     // Send a request to delete all checked products
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange =function (){
+                           if (this.readyState == 4 && this.status == 200){
+                            fetchData();
+                              calculateTotalPrice(); // Recalculate total price after deletion
+                              alert('Products deleted successfully');
+                               // Uncheck all checkboxes
                               productCheckboxes.forEach(checkbox => {
-                                  // Set the checked property of each product checkbox to match the "Select All" checkbox
-                                  checkbox.checked = selectAllCheckbox.checked;
+                                  checkbox.checked = false;
                               });
-                          });
-                            // End the "Select All" checkbox and all product checkboxes
+                              selectAllCheckbox.checked = false; // Uncheck selectAllCheckbox
+                           }
+                        }
+                        xmlHttp.open("GET","delete_all_data_cart.php",true);
+                        xmlHttp.send();
+                      // Send a request to delete all checked products
+                  } else {
+                      // If no product is checked, display a message
+                      alert('Please select at least one product to delete.');
                   }
+              });
 
-                  // Call the fetchData function when the page loads
-                  window.onload = fetchData;
+                  productCheckboxes.forEach(checkbox => {
+                      checkbox.addEventListener('change', calculateTotalPrice);
+                  });
 
-                  // quantity add or minus
-                  function minus(Product_code) {
-                      let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                      let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                      let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                      console.log(quantityElement)
-                      let quantity = parseInt(quantityElement.value);
-                      let unitprice = parseInt(unitpriceElement.value);
-                      let totalprice = parseInt(totalpriceElement.value);
+                  calculateTotalPrice(); // Calculate total price initially
+              }
 
-                      if (quantity > 1) {
-                          let decrement = 1;
-                          quantity -= decrement;
+              // Function to recalculate and display total price
+              function calculateTotalPrice() {
+                  let totalPrice = 0;
+                  let totalItems = 0; // Initialize totalItems variable
+                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
 
-                          totalprice -= unitprice;
-
-                          totalpriceElement.value = totalprice.toString();
-                          quantityElement.value = quantity.toString();
-                      } else {
-                          // If the quantity is already 1, do nothing or display a message
-                          // In this example, we're leaving it as is
+                  // Iterate through each product checkbox
+                  productCheckboxes.forEach(checkbox => {
+                      if (checkbox.checked) {
+                          // Get the corresponding total price element for the checked product
+                          let productCode = checkbox.dataset.productCode;
+                          let totalPriceElement = document.getElementById(`totalprice_${productCode}`);
+                          if (totalPriceElement) {
+                              // Parse the total price value and add it to the total price accumulator
+                              let price = parseFloat(totalPriceElement.value);
+                              if (!isNaN(price)) {
+                                  totalPrice += price;
+                                  totalItems++; // Increment totalItems when a checkbox is checked
+                                  
+                              }
+                          }
                       }
-                  }
+                  });
 
-                  function add(Product_code) {
-                      let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                      let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                      let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                  // Display the total price somewhere on the page
+                  document.getElementById('totalPriceDisplay').textContent = "₱ " + totalPrice.toFixed(2);
+                  document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
+              }
 
-                      let unitprice = parseInt(unitpriceElement.value);
-                      let quantity = parseInt(quantityElement.value);
+              // Call the fetchData function when the page loads
+              window.onload = fetchData;
 
-                      let increment = 1;
-                      quantity += increment;
-                      let totalPrice = unitprice * quantity;
+              // Quantity add or minus
+              function minus(Product_code) {
+                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                  let quantity = parseInt(quantityElement.value);
+                  let unitprice = parseInt(unitpriceElement.value);
+                  let totalprice = parseInt(totalpriceElement.value);
 
-                      // Update the value displayed on the webpage
+                  if (quantity > 1) {
+                      let decrement = 1;
+                      quantity -= decrement;
+                      totalprice -= unitprice;
+                      totalpriceElement.value = totalprice.toString();
                       quantityElement.value = quantity.toString();
-                      totalpriceElement.value = totalPrice.toString();
+                  } else {
+                      // If the quantity is already 1, do nothing or display a message
+                      // In this example, we're leaving it as is
                   }
+                  calculateTotalPrice(); // Recalculate total price after quantity change
+              }
 
+              function add(Product_code) {
+                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                  let unitprice = parseInt(unitpriceElement.value);
+                  let quantity = parseInt(quantityElement.value);
+                  let increment = 1;
+                  quantity += increment;
+                  let totalPrice = unitprice * quantity;
 
+                  // Update the value displayed on the webpage
+                  quantityElement.value = quantity.toString();
+                  totalpriceElement.value = totalPrice.toString();
+                  calculateTotalPrice(); // Recalculate total price after quantity change
+              }
 
+            // Function to delete a product
+            function DeleteProduct(Product_code) {
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                      calculateTotalPrice();  // Recalculate total price after quantity change
+                      fetchData(); // Fetch updated data after deletion
+                  }
+              };
+              xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
+              xmlhttp.send();
+              }
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
