@@ -197,15 +197,23 @@
                   <div class="row cem" style=""> 
                       <div class="col-md-12"></div>
                   </div>
-                  <div class="card sticky-bottom" style="width: 100%; padding:10px; height:70px;">
+                  <div class="card position-relative sticky-bottom" style="width: 100%; padding:10px; height:70px;">
                       <div class="card-body" style="position:relative;">
                           <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
                           <label style="" for="selectAllCheckbox">Select All</label>
                           <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
+                          <label for="payment" style="margin-left:120px;">Payment</label>
+                             
                           <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
                           <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
-                          <button type="button" id="buy_now" class="btn btn-primary" style="font-weight:bold; position:absolute; right:40px ; top:9px;">Buy now</button>
+                          <button type="button" id="buy_now" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
+                                Buy now
+                            </button>
                       </div>
+                            <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:20px; left:400px;">
+                                <option value="1">Cash On Delivery</option>
+                                <option disabled value="2">Gcash (Not Available)</option>
+                            </select>
                   </div>
               </div>
           </div>
@@ -514,6 +522,27 @@
                     </div>
                     </div>
                      <!-- modal edit -->
+
+                     <!--Modal payment Verification-->
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Checking</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are  you really sure the provided address is correct?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                     <!--Modal payment Verification-->
               <!---->
           <script>
               document.getElementById('searchForm').addEventListener('submit', function(event) {
@@ -575,76 +604,6 @@
                       fetchDataUserInfo();
                   }
               });
-              // function to fetch user information using ajax to fetch user info
-              function fetchDataUserInfo() {
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-
-                        fetchData();
-                        
-                        let data = JSON.parse(this.responseText);
-
-                        const full_name = document.querySelector('#full_name');
-                        const address = document.querySelector('#address');
-                        const barangaySelect = document.querySelector('#barangaySelect');
-                        const citySelect = document.querySelector('#citySelect');
-                        const provinceSelect = document.querySelector('#provinceSelect');
-                        const block_lot = document.querySelector('#block_lote');
-                        const contact = document.querySelector('#contact');
-                        // Clear previous content
-                        full_name.innerHTML = "";
-                        address.innerHTML = "";
-                        block_lot.innerHTML = "";
-
-                        data.forEach(product => {
-                            // Concatenate full name
-                            full_name.innerHTML += `${product.First_name} ${product.Last_name} ${product.Contact_No} `;
-                            // Concatenate address
-                            address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
-                            // concatenate block_lot
-                            block_lot.value += `${product["Block_&_Lot"]}`;
-                            // concatenate block_lot
-                            contact.value += `${product.Contact_No}`;
-
-                            // set into let from the database
-                            let barangay = `${product.Barangay}`;
-                            let city = `${product.City}`;
-                            let province = `${product.Province}`;
-
-                            //Iterate through each option
-                            barangaySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === barangay){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //Iterate through each option
-                            citySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === city){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //iterate throuch each option
-                            provinceSelect.querySelectorAll('option').forEach(option => {
-                              // check if the option values matches the fetched barangay
-                              if (option.value === province){
-                                // set the selected attribute if theres a match
-                                option.selected  =true;
-                              }
-                            }); 
-                      
-                        });
-                    }
-                };
-                xhr.open("GET", "user_information_fetch.php", true);
-                xhr.send();
-            }
 
               // Function to fetch data using AJAX to fetch all products
               function fetchData() {
@@ -790,12 +749,6 @@
                   document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
               }
 
-              // buy now
-              document.querySelector('#buy_now').addEventListener('click', function () {
-                window.location.href= "/shopping-cart-oche/Project/user_login/Payment/payment.php";
-              });
-              // end buy now
-
               // Quantity add or minus
               function minus(Product_code) {
                   let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
@@ -833,6 +786,77 @@
                   totalpriceElement.value = totalPrice.toString();
                   calculateTotalPrice(); // Recalculate total price after quantity change
               }
+
+              // function to fetch user information using ajax to fetch user info
+             
+              function fetchDataUserInfo() {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        fetchData();
+
+                        let data = JSON.parse(this.responseText);
+
+                        const full_name = document.querySelector('#full_name');
+                        const address = document.querySelector('#address');
+                        const barangaySelect = document.querySelector('#barangaySelect');
+                        const citySelect = document.querySelector('#citySelect');
+                        const provinceSelect = document.querySelector('#provinceSelect');
+                        const block_lot = document.querySelector('#block_lote');
+                        const contact = document.querySelector('#contact');
+                        // Clear previous content
+                        full_name.innerHTML = "";
+                        address.innerHTML = "";
+                        block_lot.innerHTML = "";
+
+                        data.forEach(product => {
+                            // Concatenate full name
+                            full_name.innerHTML += `${product.First_name} ${product.Last_name} ${product.Contact_No} `;
+                            // Concatenate address
+                            address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
+                            // concatenate block_lot
+                            block_lot.value += `${product["Block_&_Lot"]}`;
+                            // concatenate block_lot
+                            contact.value += `${product.Contact_No}`;
+
+                            // set into let from the database
+                            let barangay = `${product.Barangay}`;
+                            let city = `${product.City}`;
+                            let province = `${product.Province}`;
+
+                            //Iterate through each option
+                            barangaySelect.querySelectorAll('option').forEach(option => {
+                              // check if the option value maches the feteched barangay
+                              if (option.value === barangay){
+                                // set the selected attribute if there a match
+                                option.selected = true;
+                              }
+                            });
+
+                            //Iterate through each option
+                            citySelect.querySelectorAll('option').forEach(option => {
+                              // check if the option value maches the feteched barangay
+                              if (option.value === city){
+                                // set the selected attribute if there a match
+                                option.selected = true;
+                              }
+                            });
+
+                            //iterate throuch each option
+                            provinceSelect.querySelectorAll('option').forEach(option => {
+                              // check if the option values matches the fetched barangay
+                              if (option.value === province){
+                                // set the selected attribute if theres a match
+                                option.selected  =true;
+                              }
+                            }); 
+                      
+                        });
+                    }
+                };
+                xhr.open("GET", "user_information_fetch.php", true);
+                xhr.send();
+            }
 
             // Function to delete a product
             function DeleteProduct(Product_code) {

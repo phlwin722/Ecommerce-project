@@ -35,11 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editChange'])) {
         // Check if any rows were affected
         if ($stmt->affected_rows > 0) {
             // Redirect to payment page or any other page
-            header('Location: /shopping-cart-oche/Project/user_login/Payment/payment.php');
+            header('Location: /shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php');
             exit();
         } else {
-            header('Location: /shopping-cart-oche/Project/user_login/Payment/payment.php');
-            exit();
+           
         }
     } else {
         echo "Error updating record: " . $stmt->error;
