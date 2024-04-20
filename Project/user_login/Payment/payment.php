@@ -10,6 +10,7 @@
                   $email = $_SESSION ['email'];
                   $contact = $_SESSION ['contact'];
                   $block = $_SESSION ['block'];
+                  $barangay = $_SESSION['barangay'];
                   $city = $_SESSION ['city'];
                   $province = $_SESSION ['province'];
 
@@ -44,8 +45,11 @@
                             </script>';
                     }             
               // Close connection
+              $stmt->close();
               $con->close();
               }
+
+            
           ?>
 
 <!DOCTYPE html>
@@ -176,10 +180,10 @@
                         </div>
 
                       <div class="card-body" style="position:relative;">
-                          <label style="font-weight:bold;">  
-                               <?php echo $firstname ." ". $lastname . " ". $contact;?>
+                          <label style="font-weight:bold;" id="full_name">  
+                               <!--?php echo $firstname ." ". $lastname . " ". $contact;?-->
                               </label>
-                          <label> <?php echo " " .$block . " " . $city. " " . $province?></label>
+                          <label id="address"> <!-- ?php echo " " .$block . " " . $barangay. " " . $city. " " . $province? --></label>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change">
                             Change
@@ -222,27 +226,249 @@
                             
                         </div>
                         <div class="modal-body">
-                            <form class="" action="" method="post">
+                            <form class="" action="edit_address.php" method="post">
                                 <div class="mb-3 form-floating">
-                                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
-                                    <label for="floatingInput">Email address</label>
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                    <input type="text" class="form-control" id="floatingInput" name="contact" value="<?php echo $contact ;?>" >
+                                    <label for="floatingInput">Contact</label>
+                                    
                                 </div>
-                                <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-                                <label for="floatingPassword">Password</label>
+                                <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control" id="floatingInput" name="block_lot" value="<?php echo $block ;?>" placeholder="name@example.com">
+                                    <label for="floatingInput">Block & Lot</label>
+                                    
                                 </div>
-                                    <a>Forget Password</a>
-                                    <br>
-                                    <br>
-                                <button type="submit" class="btn btn-primary form-control" name="sign_button">Sign in</button>
-                                <a  href="/shopping-cart-oche/Project/login/signup.php" class="btn btn-outline-dark form-control" style="margin-top: 10px;">Sign up</a>
-                            </form>
+                                <div class="mb-3 form-floating">
+                                <select class="form-select" id="mySelect" onclick="removePlaceholderOption()" name="barangay" required>
+                                    <option selected disabled value="<?php echo $barangay;?>"><?php echo $barangay;?></option>
+                                    <option value="FVR">FVR</option>
+                                    <option value="San Rafael 1">San Rafael 1</option>
+                                    <option value="San Rafael 2">San Rafael 2</option>
+                                    <option value="San Rafael 3">San Rafael 3</option>
+                                    <option value="San Rafael 4">San Rafael 5</option>
+                                    <option value="Kaypian">Kaypian</option>
+                                </select>
+                                <label for="floatingInput">Barangay</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                <select class="form-select"  id="mySelect" onclick="removePlaceholderOption()"  name="cityy" value="" required>
+                                    <option selected disabled value="<?php echo $city ;?>"><?php echo $city ;?></option>
+                                    <option value="Manila">Manila</option>
+                                    <option value="Quezon City">Quezon City</option>
+                                    <option value="Davao City">Davao City</option>
+                                    <option value="Cebu City">Cebu City</option>
+                                    <option value="Caloocan">Caloocan</option>
+                                    <option value="Zamboanga City">Zamboanga City</option>
+                                    <option value="Taguig">Taguig</option>
+                                    <option value="Pasig">Pasig</option>
+                                    <option value="Antipolo">Antipolo</option>
+                                    <option value="Cagayan de Oro City">Cagayan de Oro City</option>
+                                    <option value="Parañaque">Parañaque</option>
+                                    <option value="Makati">Makati</option>
+                                    <option value="Bacolod">Bacolod</option>
+                                    <option value="Pasay">Pasay</option>
+                                    <option value="Angeles City">Angeles City</option>
+                                    <option value="General Santos City">General Santos City</option>
+                                    <option value="Cainta">Cainta</option>
+                                    <option value="Marikina">Marikina</option>
+                                    <option value="Iloilo City">Iloilo City</option>
+                                    <option value="Dasmarinas">Dasmarinas</option>
+                                    <option value="Valenzuela">Valenzuela</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Muntinlupa">Muntinlupa</option>
+                                    <option value="San Juan">San Juan</option>
+                                    <option value="Navotas">Navotas</option>
+                                    <option value="Lapu-Lapu City">Lapu-Lapu City</option>
+                                    <option value="Mandaluyong">Mandaluyong</option>
+                                    <option value="Imus">Imus</option>
+                                    <option value="Las Piñas">Las Piñas</option>
+                                    <option value="Baguio">Baguio</option>
+                                    <option value="Malabon">Malabon</option>
+                                    <option value="Santa Rosa">Santa Rosa</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Taytay">Taytay</option>
+                                    <option value="Lucena">Lucena</option>
+                                    <option value="Lipa">Lipa</option>
+                                    <option value="Legazpi">Legazpi</option>
+                                    <option value="Ormoc">Ormoc</option>
+                                    <option value="Naga">Naga</option>
+                                    <option value="San Fernando">San Fernando</option>
+                                    <option value="Panabo">Panabo</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Toledo">Toledo</option>
+                                    <option value="Roxas City">Roxas City</option>
+                                    <option value="Tabaco">Tabaco</option>
+                                    <option value="Gingoog">Gingoog</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Sorsogon City">Sorsogon City</option>
+                                    <option value="Surigao City">Surigao City</option>
+                                    <option value="Ozamiz">Ozamiz</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Bayawan">Bayawan</option>
+                                    <option value="Isabela">Isabela</option>
+                                    <option value="Bogo">Bogo</option>
+                                    <option value="Silay">Silay</option>
+                                    <option value="Guihulngan">Guihulngan</option>
+                                    <option value="Kabankalan">Kabankalan</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Tuguegarao">Tuguegarao</option>
+                                    <option value="Dipolog">Dipolog</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Tanauan">Tanauan</option>
+                                    <option value="Cauayan">Cauayan</option>
+                                    <option value="Calapan">Calapan</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="Surallah">Surallah</option>
+                                    <option value="Cabadbaran">Cabadbaran</option>
+                                    <option value="Maasin">Maasin</option>
+                                    <option value="Kidapawan">Kidapawan</option>
+                                    <option value="Bislig">Bislig</option>
+                                    <option value="Bais">Bais</option>
+                                    <option value="Cotabato City">Cotabato City</option>
+                                    <option value="La Carlota">La Carlota</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="San Carlos">San Carlos</option>
+                                    <option value="Legaspi">Legaspi</option>
+                                    <option value="Laoag">Laoag</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Bulacan">Bulacan</option>
+                                    <option value="Samar">Samar</option>
+                                    <option value="Sorsogon">Sorsogon</option>
+                                    <option value="Surigao">Surigao</option>
+                                    <option value="Tarlac">Tarlac</option>
+                                    <option value="Zambales">Zambales</option>
+                                    <option value="Marawi">Marawi</option>
+                                    <option value="Catarman">Catarman</option>
+                                    <option value="Calbayog">Calbayog</option>
+                                    <option value="Pagadian">Pagadian</option>
+                                    <option value="Tacloban">Tacloban</option>
+                                    <option value="Digos">Digos</option>
+                                    <option value="La Trinidad">La Trinidad</option>
+                                    <option value="Trece Martires">Trece Martires</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Catbalogan">Catbalogan</option>
+                                    <option value="Dapitan">Dapitan</option>
+                                    <option value="Tandag">Tandag</option>
+                                    <option value="Baler">Baler</option>
+                                    <option value="Libmanan">Libmanan</option>
+                                    <option value="Mati">Mati</option>
+                                    <option value="Bongao">Bongao</option>
+                                    <option value="Virac">Vir
+                                    </select>
+                                    <label for="floatingInput">City</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                <select class="form-select"  id="mySelect" onclick="removePlaceholderOption()"  name="province" required>
+                                <option selected disabled value="<?php echo $barangay;?>"><?php echo $province;?></option>
+                                    <option value="Manila">Manila</option>
+                                    <option value="Quezon City">Quezon City</option>
+                                    <option value="Davao City">Davao City</option>
+                                    <option value="Cebu City">Cebu City</option>
+                                    <option value="Caloocan">Caloocan</option>
+                                    <option value="Zamboanga City">Zamboanga City</option>
+                                    <option value="Taguig">Taguig</option>
+                                    <option value="Pasig">Pasig</option>
+                                    <option value="Antipolo">Antipolo</option>
+                                    <option value="Cagayan de Oro City">Cagayan de Oro City</option>
+                                    <option value="Parañaque">Parañaque</option>
+                                    <option value="Makati">Makati</option>
+                                    <option value="Bacolod">Bacolod</option>
+                                    <option value="Pasay">Pasay</option>
+                                    <option value="Angeles City">Angeles City</option>
+                                    <option value="General Santos City">General Santos City</option>
+                                    <option value="Cainta">Cainta</option>
+                                    <option value="Marikina">Marikina</option>
+                                    <option value="Iloilo City">Iloilo City</option>
+                                    <option value="Dasmarinas">Dasmarinas</option>
+                                    <option value="Valenzuela">Valenzuela</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Muntinlupa">Muntinlupa</option>
+                                    <option value="San Juan">San Juan</option>
+                                    <option value="Navotas">Navotas</option>
+                                    <option value="Lapu-Lapu City">Lapu-Lapu City</option>
+                                    <option value="Mandaluyong">Mandaluyong</option>
+                                    <option value="Imus">Imus</option>
+                                    <option value="Las Piñas">Las Piñas</option>
+                                    <option value="Baguio">Baguio</option>
+                                    <option value="Malabon">Malabon</option>
+                                    <option value="Santa Rosa">Santa Rosa</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Taytay">Taytay</option>
+                                    <option value="Lucena">Lucena</option>
+                                    <option value="Lipa">Lipa</option>
+                                    <option value="Legazpi">Legazpi</option>
+                                    <option value="Ormoc">Ormoc</option>
+                                    <option value="Naga">Naga</option>
+                                    <option value="San Fernando">San Fernando</option>
+                                    <option value="Panabo">Panabo</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Toledo">Toledo</option>
+                                    <option value="Roxas City">Roxas City</option>
+                                    <option value="Tabaco">Tabaco</option>
+                                    <option value="Gingoog">Gingoog</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Sorsogon City">Sorsogon City</option>
+                                    <option value="Surigao City">Surigao City</option>
+                                    <option value="Ozamiz">Ozamiz</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Bayawan">Bayawan</option>
+                                    <option value="Isabela">Isabela</option>
+                                    <option value="Bogo">Bogo</option>
+                                    <option value="Silay">Silay</option>
+                                    <option value="Guihulngan">Guihulngan</option>
+                                    <option value="Kabankalan">Kabankalan</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Tuguegarao">Tuguegarao</option>
+                                    <option value="Dipolog">Dipolog</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Tanauan">Tanauan</option>
+                                    <option value="Cauayan">Cauayan</option>
+                                    <option value="Calapan">Calapan</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="Surallah">Surallah</option>
+                                    <option value="Cabadbaran">Cabadbaran</option>
+                                    <option value="Maasin">Maasin</option>
+                                    <option value="Kidapawan">Kidapawan</option>
+                                    <option value="Bislig">Bislig</option>
+                                    <option value="Bais">Bais</option>
+                                    <option value="Cotabato City">Cotabato City</option>
+                                    <option value="La Carlota">La Carlota</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="San Carlos">San Carlos</option>
+                                    <option value="Legaspi">Legaspi</option>
+                                    <option value="Laoag">Laoag</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Bulacan">Bulacan</option>
+                                    <option value="Samar">Samar</option>
+                                    <option value="Sorsogon">Sorsogon</option>
+                                    <option value="Surigao">Surigao</option>
+                                    <option value="Tarlac">Tarlac</option>
+                                    <option value="Zambales">Zambales</option>
+                                    <option value="Marawi">Marawi</option>
+                                    <option value="Catarman">Catarman</option>
+                                    <option value="Calbayog">Calbayog</option>
+                                    <option value="Pagadian">Pagadian</option>
+                                    <option value="Tacloban">Tacloban</option>
+                                    <option value="Digos">Digos</option>
+                                    <option value="La Trinidad">La Trinidad</option>
+                                    <option value="Trece Martires">Trece Martires</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Catbalogan">Catbalogan</option>
+                                    <option value="Dapitan">Dapitan</option>
+                                    <option value="Tandag">Tandag</option>
+                                    <option value="Baler">Baler</option>
+                                    <option value="Libmanan">Libmanan</option>
+                                    <option value="Mati">Mati</option>
+                                    <option value="Bongao">Bongao</option>
+                                    <option value="Virac">Vir
+                                    </select><label for="floatingInput">Province</label>
+                                </div>
+                          
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button class="btn btn-primary" type="submit" name="editChange">Save changes</button>
                         </div>
+                        </form>
                         </div>
                     </div>
                     </div>
@@ -354,63 +580,36 @@
 
               // Function to fetch data using AJAX to fetch all products
               function fetchData() {
-                  let xhr = new XMLHttpRequest();
-                  xhr.onreadystatechange = function() {
-                      if (this.readyState === 4 && this.status === 200) {
-                          let data = JSON.parse(this.responseText);
-                          populateTable(data);
-                      }
-                  };
-                  xhr.open("GET", "add_to_cart_fetch.php", true);
-                  xhr.send();
-              }
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(this.responseText);
+
+                        const full_name = document.querySelector('#full_name');
+                        const address = document.querySelector('#address');
+
+                        // Clear previous content
+                        full_name.innerHTML = "";
+                        address.innerHTML = "";
+
+                        data.forEach(product => {
+                            // Concatenate full name
+                            full_name.innerHTML += `${product.First_name} ${product.Last_name} ${product.Contact_No} `;
+                            // Concatenate address
+                            address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
+                        });
+
+                        populateTable(data);
+                    }
+                };
+                xhr.open("GET", "user_information_fetch.php", true);
+                xhr.send();
+            }
+
 
               // Function to populate table with fetched data
               function populateTable(data) {
-                  const tableBody = document.querySelector('.cem');
-                  tableBody.innerHTML = ''; // Clear previous results
-                  data.forEach(product => {
-                      const row = `<div class="col-12">
-                          <div class="card" style="width: 100%; padding:10px; height:120px;">
-                              <div class="row">
-                                  <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
-                                      <input class="form-check-input productCheckbox"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
-                                  </div>
-                                  <div class="" style=" width:165px;">
-                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                  </div>
-                                  <div class="col-4">
-                                      <label style="padding-top:15px;">${product.Product_name}</label>
-                                  </div>
-                                  <div class="col-1 position-relative" style="width:120px;">
-                                      <div style="position: absolute; top: 36%; left:20%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col position-relative" style="width:125px;">
-                                      <div style="position: absolute; top: 30%; left:10%;">
-                                          <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                          <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                          <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                      </div>
-                                  </div>
-                                  <div class="col-1 position-relative">
-                                      <div style="position: absolute; top: 36%; left:20%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center totalpricee"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col-2 position-relative" style="width:180px;">
-                                    <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
-                                        <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
-                                    </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>`;
-                      tableBody.innerHTML += row;
-                  });
+               
 
                   const selectAllCheckbox = document.getElementById('selectAllCheckbox');
                   const productCheckboxes = document.querySelectorAll('.productCheckbox');
@@ -496,8 +695,22 @@
                   document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
               }
 
+              function removePlaceholderOption (){
+                var selectElement = document.getElementById("mySelect");
+                var placeholderOption = selectElement.options[0];
+                
+                // Remove the placeholder option
+                selectElement.removeChild(placeholderOption);
+                
+                // Remove the onclick event to prevent further removals
+                selectElement.onclick = null;
+              }
+
               // Call the fetchData function when the page loads
-              window.onload = fetchData;
+              window.onload = function() {
+                fetchData();
+                removePlaceholderOption();
+              };
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

@@ -70,6 +70,7 @@
                         $_SESSION ['email'] = $total ['Email'];
                         $_SESSION ['contact'] = $total ['Contact_No'];
                         $_SESSION ['block'] = $total ['Block_&_Lot'];
+                        $_SESSION ['barangay'] = $total ['Barangay'];
                         $_SESSION ['city'] = $total ['City'];
                         $_SESSION ['province'] = $total ['Province'];
                         header ("Location: /shopping-cart-oche/Project/user_login/user_login_home/guest.php");
