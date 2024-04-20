@@ -68,6 +68,10 @@
                         $_SESSION ['ffname']  = $total ['First_name'];
                         $_SESSION ['llname'] = $total ['Last_name'];
                         $_SESSION ['email'] = $total ['Email'];
+                        $_SESSION ['contact'] = $total ['Contact_No'];
+                        $_SESSION ['block'] = $total ['Block_&_Lot'];
+                        $_SESSION ['city'] = $total ['City'];
+                        $_SESSION ['province'] = $total ['Province'];
                         header ("Location: /shopping-cart-oche/Project/user_login/user_login_home/guest.php");
                       }
                       else {
@@ -101,7 +105,6 @@
                 <br>
               <button type="submit" class="btn btn-primary form-control" name="sign_button">Sign in</button>
               <a  href="/shopping-cart-oche/Project/login/signup.php" class="btn btn-outline-dark form-control" style="margin-top: 10px;">Sign up</a>
-          
             </form>
           </div>
         </div>

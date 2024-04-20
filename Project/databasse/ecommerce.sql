@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 07:43 AM
+-- Generation Time: Apr 20, 2024 at 05:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,6 +79,15 @@ CREATE TABLE `cart_product` (
   `Email` varchar(255) NOT NULL,
   `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_product`
+--
+
+INSERT INTO `cart_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Email`, `Image`) VALUES
+(20235031, 'NEW Wireless Bluetooth Headphones Colored LED Lights Gaming OverEar Headset Stereo Headphone&Mic', '1', '231', 'jamerodexter13@gmail.com', '66100cbdab839.png'),
+(20235074, 'KAYA LYRE XYLOPHONE - with Free Bag, Lyre Beater , Strap (Percussion Instrument)', '1', '600', 'jamerodexter13@gmail.com', '66102960f3e54.png'),
+(20235083, 'Jordan NBA Bulls Graphic T-shirt ', '1', '230', 'danicagois@gmail.com', '66109c46c44ee.png');
 
 -- --------------------------------------------------------
 
@@ -239,6 +248,7 @@ CREATE TABLE `user_information` (
   `First_name` varchar(255) NOT NULL,
   `Last_name` varchar(255) NOT NULL,
   `Middle_name` varchar(255) NOT NULL,
+  `Contact_No` varchar(255) NOT NULL,
   `Block_&_Lot` varchar(255) NOT NULL,
   `Barangay` varchar(255) NOT NULL,
   `City` varchar(255) NOT NULL,
@@ -252,11 +262,12 @@ CREATE TABLE `user_information` (
 -- Dumping data for table `user_information`
 --
 
-INSERT INTO `user_information` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Image`) VALUES
-(2021, 'w', 'w', 'w', 'w', 'San Rafael 1', 'Angeles City', 'Bukidnon', 'daw@gmail', 'w', ''),
-(2022, 'w', 'w', 'wd', 'wd', 'FVR', 'Manila', 'Agusan del Norte', 'aadmin@gmail.com', 'a', ''),
-(2023, 'Dexter', 'Jamero', 'Patan', 'block 25 lot 16 ', 'FVR', 'Mandaluyong', 'Bulacan', 'jamerodexter13@gmail.com', 'a', ''),
-(2024, 'asf', 'fasd', 'fas', 'fas', 'San Rafael 1', 'Pasay', 'Bulacan', 'w@gmail.com', 'fasfasf', '');
+INSERT INTO `user_information` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Contact_No`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Image`) VALUES
+(2021, 'w', 'w', 'w', '09266891561', 'w', 'San Rafael 1', 'Angeles City', 'Bukidnon', 'daw@gmail', 'w', ''),
+(2022, 'w', 'w', 'wd', '09266891561', 'wd', 'FVR', 'Manila', 'Agusan del Norte', 'aadmin@gmail.com', 'a', ''),
+(2023, 'Dexter', 'Jamero', 'Patan', '09266891561', 'block 25 lot 16 ', 'FVR', 'Mandaluyong', 'Bulacan', 'jamerodexter13@gmail.com', 'a', ''),
+(2024, 'asf', 'fasd', 'fas', '09266891561', 'fas', 'San Rafael 1', 'Pasay', 'Bulacan', 'w@gmail.com', 'fasfasf', ''),
+(2025, 'Danica', 'Gois ', 'Villobino', '09266891561', 'fasfas', 'FVR', 'Angeles City', 'Bohol', 'danicagois@gmail.com', 'a', '');
 
 --
 -- Indexes for dumped tables
@@ -324,7 +335,7 @@ ALTER TABLE `archives_product`
 -- AUTO_INCREMENT for table `cart_product`
 --
 ALTER TABLE `cart_product`
-  MODIFY `Product_code` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_code` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235094;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -348,7 +359,7 @@ ALTER TABLE `product_list`
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2025;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2026;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

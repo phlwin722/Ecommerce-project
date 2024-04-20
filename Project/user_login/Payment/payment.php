@@ -8,6 +8,10 @@
                   $firstname = $_SESSION['ffname'];
                   $lastname = $_SESSION['llname'];
                   $email = $_SESSION ['email'];
+                  $contact = $_SESSION ['contact'];
+                  $block = $_SESSION ['block'];
+                  $city = $_SESSION ['city'];
+                  $province = $_SESSION ['province'];
 
                 //            <!--start sent feedback php-->
                 $servername = "localhost";
@@ -51,11 +55,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="/shopping-cart-oche/Project/user_login/Add_to_cart/add_to_cart.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/user_login/Payment/payment.css">
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
-        <title>Add to Cart</title>
+        <title>Payment</title>
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -164,17 +168,27 @@
            <!--Display product-->
           <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
-                  <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
+                  <div class="card position-relative" style="width: 100%; padding:10px; height:100px;">
+                        
+                        <div class="" style="font-size:18px; margin-left:15px;">
+                            <i class="fa-solid fa-location-dot" style="color: #de0202;"></i>
+                                Delivery Address
+                        </div>
+
                       <div class="card-body" style="position:relative;">
                           <label style="font-weight:bold;">  
-                              <input class="form-check-input productCheckbox" type="checkbox" value="" id="">  Product
-                          </label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
-                      </div>
+                               <?php echo $firstname ." ". $lastname . " ". $contact;?>
+                              </label>
+                          <label> <?php echo " " .$block . " " . $city. " " . $province?></label>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change">
+                            Change
+                            </button>
+                            <!-- Button trigger modal -->
+                      </div>    
+                        
                   </div>
+
                   <!--products-->
                   <div class="row cem" style=""> 
                       <div class="col-md-12"></div>
@@ -186,17 +200,53 @@
                           <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
                           <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
                           <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
-                          <button type="button" id="buy_now" class="btn btn-primary" style="font-weight:bold; position:absolute; right:40px ; top:9px;">Check out</button>
+                          <button type="button" class="btn btn-primary" style="font-weight:bold; position:absolute; right:40px ; top:9px;">Buy now</button>
                       </div>
                   </div>
               </div>
           </div>
 
 
+          
             <!--end Display product-->
 
               <!---->
-              
+                
+                  <!-- modal edit -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="change" tabindex="-1" style="margin-right: 200px;" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Address</h1>
+                            
+                        </div>
+                        <div class="modal-body">
+                            <form class="" action="" method="post">
+                                <div class="mb-3 form-floating">
+                                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+                                    <label for="floatingInput">Email address</label>
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="form-floating">
+                                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
+                                </div>
+                                    <a>Forget Password</a>
+                                    <br>
+                                    <br>
+                                <button type="submit" class="btn btn-primary form-control" name="sign_button">Sign in</button>
+                                <a  href="/shopping-cart-oche/Project/login/signup.php" class="btn btn-outline-dark form-control" style="margin-top: 10px;">Sign up</a>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                     <!-- modal edit -->
               <!---->
 
               <!--Footer-->
@@ -213,8 +263,8 @@
     
             <!--Feed back-->
            <div class="feedback_Container">
-            <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Feedback</button>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModale" data-bs-whatever="@mdo">Feedback</button>
+              <div class="modal fade" id="exampleModale" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -448,63 +498,6 @@
 
               // Call the fetchData function when the page loads
               window.onload = fetchData;
-
-              // buy now
-              document.querySelector('#buy_now').addEventListener('click', function () {
-                window.location.href= "/shopping-cart-oche/Project/user_login/Payment/payment.php";
-              });
-              // end buy now
-
-              // Quantity add or minus
-              function minus(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let quantity = parseInt(quantityElement.value);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let totalprice = parseInt(totalpriceElement.value);
-
-                  if (quantity > 1) {
-                      let decrement = 1;
-                      quantity -= decrement;
-                      totalprice -= unitprice;
-                      totalpriceElement.value = totalprice.toString();
-                      quantityElement.value = quantity.toString();
-                  } else {
-                      // If the quantity is already 1, do nothing or display a message
-                      // In this example, we're leaving it as is
-                  }
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-              function add(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let quantity = parseInt(quantityElement.value);
-                  let increment = 1;
-                  quantity += increment;
-                  let totalPrice = unitprice * quantity;
-
-                  // Update the value displayed on the webpage
-                  quantityElement.value = quantity.toString();
-                  totalpriceElement.value = totalPrice.toString();
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-            // Function to delete a product
-            function DeleteProduct(Product_code) {
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.onreadystatechange = function() {
-                  if (this.readyState == 4 && this.status == 200) {
-                      calculateTotalPrice();  // Recalculate total price after quantity change
-                      fetchData(); // Fetch updated data after deletion
-                  }
-              };
-              xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
-              xmlhttp.send();
-              }
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
