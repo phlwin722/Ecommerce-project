@@ -250,7 +250,7 @@
                                 if (response.success) {
                                     // Product deleted successfully
                                     fetchData(); // Fetch updated data after deletion
-                                    alert("Product deleted successfully.");
+                                    alert("Product restored successfully.");
                                 } else {
                                     // Error deleting product
                                     console.error("Error deleting product: " + response.message);
