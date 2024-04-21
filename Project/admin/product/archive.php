@@ -17,7 +17,7 @@
         <meta name="viewport" content="width:device-width, initial-scale=1">
                  <!--This is bootstrap-->
                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/archive.css">
+         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/archivee.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -172,64 +172,102 @@
                     </div> 
                            
                         <!--table of content-->
-                        <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966);">
+                        <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 0px 10px;">
                           <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted Product</label>
                          <!--this is the list of table product-->
-                         <table class="table table-hover" id="archieveTable" style="margin-top:10px ;">
-                          <thead>
-                            <tr>
-                                <th scope="col" class="">Code</th>
-                                <th scope="col" class="">Product name</th>
-                                <th scope="col" class="">Price</th>
-                                <th scope="col" class="">Quantity</th>
-                                <th scope="col" class="">Image</th>
-                                <th scope="col" class="">Category</th>
-                                <th scope="col" class=" text-center">Action</th>
-                           <!--   <th scope="col" class="table_description">Description</th> -->
-                            </tr>
-                          </thead>
-                          <tbody>
-                           
-                          </tbody>
-                        </table>
+                         <div class="dispaly_Table" style="margin-top:10px; right:-4px">
+                           <table class="table table-hover " id="archieveTable">
+                               <thead>
+                                   <tr>
+                                       <th scope="col" class="">Code</th>
+                                       <th scope="col" class="">Product name</th>
+                                       <th scope="col" class="">Price</th>
+                                       <th scope="col" class="">Quantity</th>
+                                       <th scope="col" class="">Image</th>
+                                       <th scope="col" class="">Category</th>
+                                       <th scope="col" class="text-center">Action</th>
+                                   </tr>
+                               </thead>
+                               <tbody >
+                                   <!-- Table data will be populated here -->
+                               </tbody>
+                           </table>
+                           </div>
                         <!--end this is the list of table product-->
                         </div>
                 </div>
             </div>
+                <!--JQuerry library-->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <!--Costum JavaScript-->
             <script>
-                function fetchData(){
-                  let xhr = new XMLHttpRequest ();
-                  xhr.onreadystatechange = function(){
-                    if (this.readyState === 4 && this.status === 200){
-                       let data =JSON.parse(this.responseText);
-                       populateTable(data);
+                // Function to fetch data using ajax
+        function fetchData() {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        let data = JSON.parse(this.responseText);
+                        populateTable(data);
+                    } else {
+                        console.error("Error fetching data: " + this.status);
                     }
-                  };
-                  xhr.open("GET","archive_fetch.php",true);
-                  xhr.send();
                 }
-                //function to populate table with fetched data
-                function populateTable (data){
-                  const tableBody = document.querySelector('#archieveTable tbody');
-                  data.forEach(archieves => {
-                      const row =`<tr>
-                                      <td>${archieves.Product_code}</td>
-                                      <td>${archieves.Product_name}</td>
-                                      <td>${archieves.Price}</td>
-                                      <td>${archieves.Quantity}</td>
-                                      <td><img src="product_image_list/${archieves.Image}" width:"200" height="100" title="${archieves.Product_name}"></td>
-                                      <td>${archieves.Catergory}</td>
-                                      <td class="text-center"> 
-                                          <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                          <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                      </td>
-                                  </tr>`;  
-                                  tableBody.innerHTML += row;
-                  });
+            };
+            xhr.open("GET", "archive_fetch.php", true);
+            xhr.send();
+        }
+
+        // Function to populate table with fetched data
+        function populateTable(data) {
+            const tableBody = document.querySelector('#archieveTable tbody');
+            tableBody.innerHTML = ""; // Clear existing table rows
+            data.forEach(product => {
+                const row = `<tr>
+                                    <td>${product.Product_code}</td>
+                                    <td>${product.Product_name}</td>
+                                    <td>${product.Price}</td>
+                                    <td>${product.Quantity}</td>
+                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                    <td>${product.Category}</td>
+                                    <td class="text-center"> 
+                                        <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                    </td>
+                                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Call the fetchData function when the page loads
+        window.onload = fetchData;
+
+                  // Handler for archive specific product
+                  function deleteprodSpecific(Product_code) {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                                var response = JSON.parse(this.responseText);
+                                if (response.success) {
+                                    // Product deleted successfully
+                                    fetchData(); // Fetch updated data after deletion
+                                    alert("Product deleted successfully.");
+                                } else {
+                                    // Error deleting product
+                                    console.error("Error deleting product: " + response.message);
+                                    alert("Error deleting product: " + response.message);
+                                }
+
+                        }
+                    };
+                    // Send a GET request to the PHP file with the product code as a parameter
+                    xmlhttp.open("GET", "archieve_product_and_delete_archieve.php?q=" + Product_code, true);
+                    xmlhttp.send();
                 }
-                // call the fetchdata function when the page loads
-                window.onload = fetchData;
+
+
+                
+
+            
             </script>
         <!-- JavaScript dependencies -->
           <!-- jQuery -->

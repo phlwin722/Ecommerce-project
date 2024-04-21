@@ -103,4 +103,10 @@ body{
       .table_action{
         width:90px;
       }
+      .dispaly_Table {
+        width: 100%;
+        height: 530px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }    
 }

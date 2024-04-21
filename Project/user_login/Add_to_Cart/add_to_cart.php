@@ -865,6 +865,7 @@
                   if (this.readyState == 4 && this.status == 200) {
                       calculateTotalPrice();  // Recalculate total price after quantity change
                       fetchData(); // Fetch updated data after deletion
+                      console.log(Product_code)
                   }
               };
               xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);

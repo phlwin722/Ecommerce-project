@@ -172,18 +172,15 @@
                         </ul> 
                     </div>        
                     <!--this is second grid of data display-->
-                        <div class="col-md text-start position-relative" id="grid_size" style=" background-color: rgba(241, 240, 236, 0.966); padding:0px 0px 0px 0px;  overflow-x: hidden; overflow-y: auto;">
-
-                
-                        <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px; margin-left:10px;">Product</label>
-                          
+                    <!--table of content-->
+                    <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 10px 10px;">
+                          <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;"> Product</label>
                           <br>
-                         
                            <!--this is button of new product-->
                            <button type="button" class="btn btn-primary new_button" style="margin-left:875px;"><i class="fa-solid fa-plus"></i> New</button>
-                           <div class="container" >
-                           <div class="dispaly_Table position-absolute" style="margin-top:10px; right:-4px">
-                           <table class="table table-hover position-absolute" id="productTable">
+                         <!--this is the list of table product-->
+                         <div class="dispaly_Table" style="margin-top:10px; right:-4px">
+                           <table class="table table-hover " id="productTable">
                                <thead>
                                    <tr>
                                        <th scope="col" class="">Code</th>
@@ -200,73 +197,80 @@
                                </tbody>
                            </table>
                            </div>
+                        <!--end this is the list of table product-->
                         </div>
 
-                </div>
             </div>
                <!--JQuerry library-->
                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                
                <script>
-              // function to fetch data using ajax
-              function fetchData() {
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
+        // Function to fetch data using ajax
+        function fetchData() {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
                         let data = JSON.parse(this.responseText);
                         populateTable(data);
+                    } else {
+                        console.error("Error fetching data: " + this.status);
                     }
-                };
-                xhr.open("GET", "product_fetch.php", true);
-                xhr.send();
-            }
-
-            // Function to populate table with fetched data
-            function populateTable(data) {
-                const tableBody = document.querySelector('#productTable tbody');
-                data.forEach(product => {
-                    const row = `<tr>
-                                      <td>${product.Product_code}</td>
-                                      <td>${product.Product_name}</td>
-                                      <td>${product.Price}</td>
-                                      <td>${product.Quantity}</td>
-                                      <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
-                                      <td>${product.Category}</td>
-                                      <td class="text-center"> 
-                                          <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                          <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                      </td>
-                                  </tr>`;
-                    tableBody.innerHTML += row;
-                });
-            }
-
-            // call the fetchData function when the page loads
-            window.onload = fetchData;
-
-            // this is when click the new button to add product
-            let new_button = document.querySelector('.new_button');
-              new_button.addEventListener("click",function(){
-                  window.location.href="/shopping-cart-oche/Project/admin/product/newproduct.php";
-              });
-              
-              // delete specific product:
-                function deleteprodSpecific(Product_code) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.onreadystatechange = function() {
-                        if (this.readyState === 4 && this.status === 200) {
-                            // Reload the table data after deletion
-                            fetchData(); // to retrieve product
-                            console.log(Product_code)
-                        }
-                    }
-                    // Send a GET request to the PHP file with the product code as a parameter
-                    xmlHttp.open("GET", "delete_product_and_archives.php?q=" + Product_code, true);
-                    xmlHttp.send();
                 }
+            };
+            xhr.open("GET", "product_fetch.php", true);
+            xhr.send();
+        }
 
+        // Function to populate table with fetched data
+        function populateTable(data) {
+            const tableBody = document.querySelector('#productTable tbody');
+            tableBody.innerHTML = ""; // Clear existing table rows
+            data.forEach(product => {
+                const row = `<tr>
+                                    <td>${product.Product_code}</td>
+                                    <td>${product.Product_name}</td>
+                                    <td>${product.Price}</td>
+                                    <td>${product.Quantity}</td>
+                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                    <td>${product.Category}</td>
+                                    <td class="text-center"> 
+                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                        <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                    </td>
+                                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
 
-            </script>
+        // Call the fetchData function when the page loads
+        window.onload = fetchData;
+
+       // Handler for deleting specific product
+        function deleteprodSpecific(Product_code) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                        var response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            // Product deleted successfully
+                            fetchData(); // Fetch updated data after deletion
+                            alert("Product deleted successfully.");
+                        } else {
+                            // Error deleting product
+                            console.error("Error deleting product: " + response.message);
+                            alert("Error deleting product: " + response.message);
+                        }
+
+                }
+            };
+            // Send a GET request to the PHP file with the product code as a parameter
+            xmlhttp.open("GET", "delete_product_and_archives.php?q=" + Product_code, true);
+            xmlhttp.send();
+        }
+
+    </script>
+
         <script src="newproduct.js" ></script>
         <!--This is for fontawesome icon-->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
