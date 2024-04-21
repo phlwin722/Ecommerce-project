@@ -92,4 +92,9 @@ body{
       .table_email{
         width: 290px;
       }
+      #feedbackTable{
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
 }

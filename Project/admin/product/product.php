@@ -116,7 +116,7 @@
                             <h4 class="offcanvas-title" id="offcanvasExampleLabel">
                             <div class="container-fluid">
                             <a class="navba-brand"  href="#" style="text-decoration: none;">
-                              <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
+                              <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">
                               <!-- <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">--> 
                               </a>
                           <a class="navba-brand color" style="text-decoration: none;" href="#">Ecommerce</a>
@@ -172,17 +172,18 @@
                         </ul> 
                     </div>        
                     <!--this is second grid of data display-->
-                        <div class="col-md text-start" id="grid_size" style=" background-color: rgba(241, 240, 236, 0.966); padding:0px 0px 0px 0px;  overflow-x: hidden; overflow-y: scroll;">
+                        <div class="col-md text-start position-relative" id="grid_size" style=" background-color: rgba(241, 240, 236, 0.966); padding:0px 0px 0px 0px;  overflow-x: hidden; overflow-y: auto;">
 
-                        <div class="dispaly_Table">
+                
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px; margin-left:10px;">Product</label>
                           
                           <br>
                          
                            <!--this is button of new product-->
                            <button type="button" class="btn btn-primary new_button" style="margin-left:875px;"><i class="fa-solid fa-plus"></i> New</button>
-                           <div class="container" style="overflow-x: auto;">
-                           <table class="table table-hover" id="productTable" style="margin-top:10px;">
+                           <div class="container" >
+                           <div class="dispaly_Table position-absolute" style="margin-top:10px; right:-4px">
+                           <table class="table table-hover position-absolute" id="productTable">
                                <thead>
                                    <tr>
                                        <th scope="col" class="">Code</th>
@@ -194,13 +195,13 @@
                                        <th scope="col" class="text-center">Action</th>
                                    </tr>
                                </thead>
-                               <tbody>
+                               <tbody >
                                    <!-- Table data will be populated here -->
                                </tbody>
                            </table>
+                           </div>
                         </div>
 
-                      </div>
                 </div>
             </div>
                <!--JQuerry library-->
@@ -225,17 +226,17 @@
                 const tableBody = document.querySelector('#productTable tbody');
                 data.forEach(product => {
                     const row = `<tr>
-                                    <td>${product.Product_code}</td>
-                                    <td>${product.Product_name}</td>
-                                    <td>${product.Price}</td>
-                                    <td>${product.Quantity}</td>
-                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
-                                    <td>${product.Category}</td>
-                                    <td class="text-center"> 
-                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                        <a href="#" id="deleteprod_${product.Product_code}" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                    </td>
-                                </tr>`;
+                                      <td>${product.Product_code}</td>
+                                      <td>${product.Product_name}</td>
+                                      <td>${product.Price}</td>
+                                      <td>${product.Quantity}</td>
+                                      <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                      <td>${product.Category}</td>
+                                      <td class="text-center"> 
+                                          <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                          <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                      </td>
+                                  </tr>`;
                     tableBody.innerHTML += row;
                 });
             }
@@ -248,6 +249,22 @@
               new_button.addEventListener("click",function(){
                   window.location.href="/shopping-cart-oche/Project/admin/product/newproduct.php";
               });
+              
+              // delete specific product:
+                function deleteprodSpecific(Product_code) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange = function() {
+                        if (this.readyState === 4 && this.status === 200) {
+                            // Reload the table data after deletion
+                            fetchData(); // to retrieve product
+                            console.log(Product_code)
+                        }
+                    }
+                    // Send a GET request to the PHP file with the product code as a parameter
+                    xmlHttp.open("GET", "delete_product_and_archives.php?q=" + Product_code, true);
+                    xmlHttp.send();
+                }
+
 
             </script>
         <script src="newproduct.js" ></script>
