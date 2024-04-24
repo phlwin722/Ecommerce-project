@@ -65,8 +65,15 @@
                           <li class="nav-item">
                             <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
-                          <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
+                          <li class="nav-item">                  
+                            <!--This is product accordotion-->
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-users "style="margin-right:10px;" ></i> Manage user</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php">List user</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive user</a></li>
+                              </ul>
+                              </div>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
@@ -177,21 +184,24 @@
                          
                         <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Manage user</label>
                           
-                     
-                          <table class="table table-hover" id="employeeTable" style="margin-top:10px ;">
-                            <thead>
-                              <tr>
-                              <th scope="col"class="">#</th>
-                                <th scope="col"class="table_name">Full name</th>
-                                <th scope="col" class="table_address">Address</th>
-                                <th scope="col" class="table_email ">Email</th>
-                                <th scope="col" class="table_action text-center">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            
-                            </tbody>
-                          </table>
+
+                        <div class="dispaly_Table" style="margin-top:10px; right:-4px">
+                           <table class="table table-hover " id="employeeTable">
+                               <thead>
+                                   <tr>
+                                      <th scope="col"class="">#</th>
+                                      <th scope="col"class="table_name">Full name</th>
+                                      <th scope="col" class="table_address">Address</th>
+                                      <th scope="col" class="table_email ">Email</th>
+                                      <th scope="col" class="table_action text-center">Action</th>
+                                   </tr>
+                               </thead>
+                               <tbody >
+                                   <!-- Table data will be populated here -->
+                               </tbody>
+                           </table>
+                           </div>
+
                           <!--end this is the list of table product-->
                         </div>
                 </div>
@@ -221,11 +231,27 @@
                                 <td>${user.Email}</td>
                                 <td> 
                                     <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                    <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                    <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                 </td>
                             </tr>`;
                 tableBody.innerHTML += row;
             });
+        }
+
+        function delete_user(user_id){
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function (){
+              if (this.readyState === 4 && this.status === 200){
+                let response = JSON.parse(this.responseText);
+                if (response.success){
+                  alert("Sucessfull deleted");
+                }else{
+                    alert("Error");
+                }
+              }
+            }
+            xhr.open("GET", "delete_user_and_archives.php?user_id="+user_id, true);
+            xhr.send();
         }
 
         // Call the fetchData function when the page loads

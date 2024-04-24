@@ -17,7 +17,7 @@
         <meta name="viewport" content="width:device-width, initial-scale=1">
                  <!--This is bootstrap-->
                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/archivee.css">
+         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/archive.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -174,6 +174,49 @@
                         <!--table of content-->
                         <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 0px 10px;">
                           <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted Product</label>
+                          <br>
+                          <br>
+                          <form class="row gx-3 gy-2 d-flex" id="searchForm" style="height:45px;">
+                            <div class="col-sm-3">
+                              <label class="visually-hidden" for="specificSizeInputName">Category</label>
+
+                             <!-- Select element for category -->
+                             <select class="form-select" id="producttCategory" onchange="showProduct(this.value)" style="width: 250px;" aria-label="Default select example">
+                               <option value="allproducts">All</option>
+                                  <?php 
+                                      $servername = "localhost";
+                                      $username = "root";
+                                      $password = "";
+                                      $dbname = "ecommerce";
+
+                                      $con = new mysqli ($servername,$username,$password,$dbname);
+                                      if ($con->connect_error){
+                                        die("Connection error" .$con->connect_error);
+                                      }else {
+                                        $sql = "SELECT DISTINCT Category FROM product_list"; // Use DISTINCT to get unique categories
+                                        $result = $con->query($sql);
+
+                                        if ($result->num_rows > 0){
+                                          while ($row = $result->fetch_assoc()){
+                                  ?>
+                                          <option value="<?php echo $row['Category']?>"><?php echo $row['Category']?></option>           
+                                  <?php 
+                                            }
+                                        }
+                                      } 
+                                      $con->close();
+                                  ?>
+                            </select>
+
+                            </div>
+                            <div class="col-sm-7 d-flex">
+                              <input class="form-control me-2 search_input" style="width: 400px;"  id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                              <button class="btn btn-success" style="margin-left:-10px;" type="submit" id="submitSearch" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="newbuttin text-right" style=" width:160px; padding-right:0px; padding-left:80px">
+                          </div>
+                          </form>
+
                          <!--this is the list of table product-->
                          <div class="dispaly_Table" style="margin-top:10px; right:-4px">
                            <table class="table table-hover " id="archieveTable">
@@ -201,68 +244,168 @@
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <!--Costum JavaScript-->
             <script>
-                // Function to fetch data using ajax
-        function fetchData() {
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        let data = JSON.parse(this.responseText);
-                        populateTable(data);
+              // search prduct
+              document.querySelector('#submitSearch').addEventListener('click', function() {
+                event.preventDefault(); // Prevent default form submission or prevent refresh when click button
+                    // Get the input of user
+                    let searchQuery = document.querySelector('#searchQuery').value;
+                    console.log(searchQuery);
+                    if (searchQuery !== "") {
+                        searchResult(searchQuery);
                     } else {
-                        console.error("Error fetching data: " + this.status);
+                        fetchData();
+                        searchQuery.innerHTML="";
                     }
-                }
-            };
-            xhr.open("GET", "archive_fetch.php", true);
-            xhr.send();
-        }
+                });
 
-        // Function to populate table with fetched data
-        function populateTable(data) {
-            const tableBody = document.querySelector('#archieveTable tbody');
-            tableBody.innerHTML = ""; // Clear existing table rows
-            data.forEach(product => {
-                const row = `<tr>
-                                    <td>${product.Product_code}</td>
-                                    <td>${product.Product_name}</td>
-                                    <td>${product.Price}</td>
-                                    <td>${product.Quantity}</td>
-                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
-                                    <td>${product.Category}</td>
-                                    <td class="text-center"> 
-                                        <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
-                                    </td>
-                                </tr>`;
-                tableBody.innerHTML += row;
-            });
-        }
-
-        // Call the fetchData function when the page loads
-        window.onload = fetchData;
-
-                  // Handler for archive specific product
-                  function deleteprodSpecific(Product_code) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                                var response = JSON.parse(this.responseText);
-                                if (response.success) {
-                                    // Product deleted successfully
-                                    fetchData(); // Fetch updated data after deletion
-                                    alert("Product restored successfully.");
-                                } else {
-                                    // Error deleting product
-                                    console.error("Error deleting product: " + response.message);
-                                    alert("Error deleting product: " + response.message);
-                                }
-
+                function searchResult(searchQuery) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState === 4 && this.status === 200) {
+                            let data = JSON.parse(this.responseText);
+                            searchResullt(data); // Corrected function name
                         }
                     };
-                    // Send a GET request to the PHP file with the product code as a parameter
-                    xmlhttp.open("GET", "archieve_product_and_delete_archieve.php?q=" + Product_code, true);
-                    xmlhttp.send();
+                    xhr.open("GET", "search_archieve_product.php?searchQuery=" + searchQuery, true); // Corrected file name
+                    xhr.send();
                 }
+
+                function searchResullt(data) { // Corrected function name
+                    const tableBody = document.querySelector('#archieveTable tbody');
+                    let searchQuery = document.querySelector('#searchQuery');
+                    tableBody.innerHTML = "";
+                    if (data.length === 0) {
+                      searchQuery.innerHTML="";
+                        fetchData();
+                        searchQuery.innerHTML="";
+                    } else {
+                        
+                        data.forEach(product => {
+                            const row = `<tr>
+                                              <td>${product.Product_code}</td>
+                                              <td>${product.Product_name}</td>
+                                              <td>${product.Price}</td>
+                                              <td>${product.Quantity}</td>
+                                              <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                              <td>${product.Category}</td>
+                                              <td class="text-center"> 
+                                                  <a href="#" onclick="restoreSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                              </td>
+                                          </tr>`;
+                            tableBody.innerHTML += row;
+                            searchQuery.innerHTML="";
+                        });
+                    }
+                }
+
+              // end searh product
+
+              // this is to display the product when category is select 
+              function showProduct(selecterProduct){
+                let xhr = new XMLHttpRequest ();
+                xhr.onreadystatechange = function () {
+                  if (this.readyState === 4 && this.status === 200) {
+                      let data = JSON.parse(this.responseText);
+                      showresult(data);
+                  }
+                }
+                xhr.open("GET","search_selected_product.php?selectedCategory=" +selecterProduct, true);
+                xhr.send();
+              }
+
+              function showresult (data){
+                const tableBody = document.querySelector('#archieveTable tbody');
+                tableBody.innerHTML="";
+                console.log(data)
+                  if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                  }else {
+                    data.forEach(product => {
+                    const row = `<tr>
+                                              <td>${product.Product_code}</td>
+                                              <td>${product.Product_name}</td>
+                                              <td>${product.Price}</td>
+                                              <td>${product.Quantity}</td>
+                                              <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                              <td>${product.Category}</td>
+                                              <td class="text-center"> 
+                                                  <a href="#" onclick="restoreSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                              </td>
+                                          </tr>`;
+                                tableBody.innerHTML +=row;
+                  })
+                  }
+              }
+                // Function to fetch data using ajax
+                  function fetchData() {
+                      let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4) {
+                              if (this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  populateTable(data);
+                              } else {
+                                  console.error("Error fetching data: " + this.status);
+                              }
+                          }
+                      };
+                      xhr.open("GET", "archive_fetch.php", true);
+                      xhr.send();
+                  }
+
+                  // Function to populate table with fetched data
+                  function populateTable(data) {
+                      const tableBody = document.querySelector('#archieveTable tbody');
+                      tableBody.innerHTML = ""; // Clear existing table rows
+                      console.log(data)
+                      if (data.length === 0){
+                        console.log(data)
+                        tableBody.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                      }else {
+                        data.forEach(product => {
+                          const row = `<tr>
+                                              <td>${product.Product_code}</td>
+                                              <td>${product.Product_name}</td>
+                                              <td>${product.Price}</td>
+                                              <td>${product.Quantity}</td>
+                                              <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                              <td>${product.Category}</td>
+                                              <td class="text-center"> 
+                                                  <a href="#" onclick="restoreSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                              </td>
+                                          </tr>`;
+                          tableBody.innerHTML += row;
+                      });
+                      }
+                  }
+
+                  // Call the fetchData function when the page loads
+                  window.onload = fetchData;
+
+                            // Handler for archive specific product
+                            function restoreSpecific(Product_code) {
+                              let searchQuery =document.querySelector('#searchQuery');
+                              var xmlhttp = new XMLHttpRequest();
+                              xmlhttp.onreadystatechange = function() {
+                                  if (this.readyState == 4 && this.status == 200) {
+                                          var response = JSON.parse(this.responseText);
+                                          if (response.success) {
+                                              // Product deleted successfully
+                                              fetchData(); // Fetch updated data after deletion
+                                              searchQuery.innerHTML="";
+                                              alert("Product restored successfully.");
+                                          } else {
+                                              // Error deleting product
+                                              console.error("Error deleting product: " + response.message);
+                                              alert("Error deleting product: " + response.message);
+                                          }
+
+                                  }
+                              };
+                              // Send a GET request to the PHP file with the product code as a parameter
+                              xmlhttp.open("GET", "archieve_product_and_delete_archieve.php?q=" + Product_code, true);
+                              xmlhttp.send();
+                          }
 
 
                 

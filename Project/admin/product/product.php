@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta content="autor" autor="Dexter Jamero">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/productt.css">
+        <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/product.css">
         <link rel="stylesheet" href="/shopping-cart-oche/Project/login/logo.css">
         <title>Product</title>
          <!--This is bootstrap-->
@@ -176,8 +176,49 @@
                     <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 10px 10px;">
                           <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;"> Product</label>
                           <br>
-                           <!--this is button of new product-->
-                           <button type="button" class="btn btn-primary new_button" style="margin-left:875px;"><i class="fa-solid fa-plus"></i> New</button>
+                          <br>
+                          <form class="row gx-3 gy-2 d-flex" id="searchForm" style="height:45px;">
+                            <div class="col-sm-3">
+                              <label class="visually-hidden" for="specificSizeInputName">Category</label>
+
+                             <!-- Select element for category -->
+                             <select class="form-select" id="producttCategory" onchange="showProduct(this.value)" style="width: 250px;" aria-label="Default select example">
+                               <option value="allproducts">All</option>
+                                  <?php 
+                                      $servername = "localhost";
+                                      $username = "root";
+                                      $password = "";
+                                      $dbname = "ecommerce";
+
+                                      $con = new mysqli ($servername,$username,$password,$dbname);
+                                      if ($con->connect_error){
+                                        die("Connection error" .$con->connect_error);
+                                      }else {
+                                        $sql = "SELECT DISTINCT Category FROM product_list"; // Use DISTINCT to get unique categories
+                                        $result = $con->query($sql);
+
+                                        if ($result->num_rows > 0){
+                                          while ($row = $result->fetch_assoc()){
+                                  ?>
+                                          <option value="<?php echo $row['Category']?>"><?php echo $row['Category']?></option>           
+                                  <?php 
+                                            }
+                                        }
+                                      } 
+                                      $con->close();
+                                  ?>
+                            </select>
+
+                            </div>
+                            <div class="col-sm-7 d-flex">
+                              <input class="form-control me-2 search_input" style="width: 400px;"  onkeyup="search()" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                              <button class="btn btn-success" style="margin-left:-10px;" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="newbuttin text-right" style=" width:160px; padding-right:0px; padding-left:80px">
+                            <button type="button" class="btn btn-primary new_button" style=""><i class="fa-solid fa-plus"></i> New</button>
+                          </div>
+                          </form>
+                      
                          <!--this is the list of table product-->
                          <div class="dispaly_Table" style="margin-top:10px; right:-4px">
                            <table class="table table-hover " id="productTable">
@@ -205,6 +246,42 @@
                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                
                <script>
+                // show selecected product using selected Category
+                function showProduct (categorySelected){
+                  let xhr = new XMLHttpRequest();
+                  xhr.onreadystatechange = function (){
+                    if (this.readyState === 4 && this.status === 200){
+                      console.log(categorySelected);
+                        let data =JSON.parse(this.responseText);
+                        display_select_category(data);
+                    }
+                  }
+                  xhr.open("GET","product_display_catergory.php?selectedCategory=" + categorySelected, true);
+                  xhr.send();
+                }
+                function display_select_category (data){
+                  const tableBody =document.querySelector('#productTable tbody');
+                  tableBody.innerHTML="";
+                  if (data.length === 0) {
+                    fetchData ();
+                  }else {
+                    data.forEach(product => {
+                    const row = `<tr>
+                                    <td>${product.Product_code}</td>
+                                    <td>${product.Product_name}</td>
+                                    <td>${product.Price}</td>
+                                    <td>${product.Quantity}</td>
+                                    <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                    <td>${product.Category}</td>
+                                    <td class="text-center"> 
+                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                        <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                    </td>
+                                </tr>`;
+                                tableBody.innerHTML +=row;
+                  })
+                  }
+                }
         // Function to fetch data using ajax
         function fetchData() {
             let xhr = new XMLHttpRequest();
@@ -224,8 +301,11 @@
 
         // Function to populate table with fetched data
         function populateTable(data) {
+          console.log(data)
             const tableBody = document.querySelector('#productTable tbody');
+          //  const productCategory = document.querySelector('#producttCategory');
             tableBody.innerHTML = ""; // Clear existing table rows
+           // productCategory.innerHTML = ""; // Clear existing options
             data.forEach(product => {
                 const row = `<tr>
                                     <td>${product.Product_code}</td>
@@ -241,6 +321,13 @@
                                 </tr>`;
                 tableBody.innerHTML += row;
             });
+          /* data.forEach(product => {
+                const row = `
+                <option value="${product.Category}">All</option>
+                <option value="${product.Category}">${product.Category}</option>
+               `;
+               productCategory.innerHTML += row;
+            });*/
         }
 
         // Call the fetchData function when the page loads
@@ -261,15 +348,78 @@
                             console.error("Error deleting product: " + response.message);
                             alert("Error deleting product: " + response.message);
                         }
-
                 }
             };
             // Send a GET request to the PHP file with the product code as a parameter
             xmlhttp.open("GET", "delete_product_and_archives.php?q=" + Product_code, true);
             xmlhttp.send();
         }
+        // to go the new product interface
+        document.querySelector(".new_button").addEventListener("click", function () {
+            window.location.href="/shopping-cart-oche/Project/admin/product/newproduct.php"
+        })
 
-    </script>
+        //
+        document.getElementById('searchQuery').addEventListener('input', function(event) {
+        search();
+                });
+
+                document.getElementById('searchForm').addEventListener('submit', function(event) {
+                      event.preventDefault(); // Prevent form submission
+
+                      const searchQuery = document.getElementById('searchQuery').value.trim(); // Trim the search query
+
+                      // Check if search query is empty
+                      if (searchQuery !== '') {
+                          fetch('search.php', {
+                              method: 'POST',
+                              body: new FormData(this)
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                              const searchResults = document.querySelector('#productTable tbody');
+                              searchResults.innerHTML = ''; // Clear previous results
+                              if (data.length === 0) {
+                                  searchResults.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                              } else {
+                                const tableBody = document.querySelector('#productTable tbody');
+                                tableBody.innerHTML = ''; // Clear previous results
+                                data.forEach(product => {
+                                    const row = `<tr>
+                                                        <td>${product.Product_code}</td>
+                                                        <td>${product.Product_name}</td>
+                                                        <td>${product.Price}</td>
+                                                        <td>${product.Quantity}</td>
+                                                        <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
+                                                        <td>${product.Category}</td>
+                                                        <td class="text-center"> 
+                                                            <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                                            <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                                        </td>
+                                                    </tr>
+                                              `;
+                                    tableBody.innerHTML += row;
+                                  });
+                              }
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                          });
+                      } else if (searchQuery === ''){
+                        // Fetch and display all products
+                        fetchData();
+
+                      } 
+                      else {
+                          // If search query is empty, hide the "No results found" message
+                          document.querySelector('#no_result').style.display = "none";
+                          // Fetch and display all products
+                          fetchData();
+
+                      }
+                  });
+
+      </script>
 
         <script src="newproduct.js" ></script>
         <!--This is for fontawesome icon-->

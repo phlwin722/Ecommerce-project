@@ -1,18 +1,17 @@
 body{
     padding: 0px;
     margin: 0px;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 *{
     box-sizing: border-box;
+
 }
 
-@media only screen and (min-width:1024px) and (max-width:1439px) {
-      /* laptop layout*/
+@media only screen and (min-width:1024px) and (max-width:1439px){
+     /* laptop layout*/
  #wid{
-    width: 270px;
+    width: 260px;
     background-color:  rgb(43, 43, 43);
     padding: 0px 10px 0px 20px;
  }
@@ -25,7 +24,6 @@ body{
     .navicon{
         background-color: rgb(43, 43, 43);
     }
-    /*will be adjust the height base on screen*/
     .row{
         height: 585px;
     }
@@ -35,7 +33,7 @@ body{
         background-color:  rgb(43, 43, 43);
         color: #f3f3f3;
         cursor: pointer;
-        padding: 5px;
+        padding: 5px 10px 5px 10px;
         width: 100%;
         border: none;
         text-align: left;
@@ -82,17 +80,33 @@ body{
       .nav-link{
         text-align: left;
       }
-   #grid_size{
-    width: 1100px;
-   }
-   #roww{
-    justify-content: center;
-   }
-   .dispaly_Table {
-    width: 100%;
-    height: 530px;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }    
-  
+      .table_content{
+        padding: 0px 25px 0px 15px;
+      }
+
+       /*table css*/
+       .table_code{
+        width: 50px;
+      }
+      .table_product{
+        width: 150px;
+      }
+      .table_quantity{
+        width: 0px;
+      }
+      .table_img{
+        width: 200px;
+      }
+      .table_price{
+        width: 90px;
+      }
+      .table_action{
+        width:90px;
+      }
+      .dispaly_Table {
+        width: 100%;
+        height: 480px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }    
 }
