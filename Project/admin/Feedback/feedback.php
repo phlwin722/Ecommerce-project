@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Manage User</title>
+    <title>Feedback</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width:device-width, initial-scale=1">
     <meta name="autor" content="Dexter Jamero "> 
@@ -62,50 +62,58 @@
                     </h4>
                     <hr style="color: white;">
                     
-                      <li class="nav-item">
-                        <a class=" nav-link" style="color: white;" href="/Project/admin/dashboard/dashboard.html"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class=" nav-link" style="color: white;" href="/Project/admin/Manage_user/manage_user.html"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
-                          Message
-                      </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
-                          Feedback
-                      </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
-                          Sales Report
-                      </a>
-                      </li> 
-                      <li class="nav-item">                  
-                        <!--This is product accordotion-->
-                        <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
-                        <div class="panel">
-                          <ul class="nav flex-column">
-                            <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
-                            <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
-                          </ul>
-                          </div>
-                      </li>
-                      <li class="nav-item">                  
-                        <!-- this is settings-->
-                        <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                        <div class="panel">
-                          <ul class="nav flex-column">
-                            <li><a class="dropdown-item" href="/Project/admin/product.html">List product</a></li>
-                            <li><a class="dropdown-item" href="#">Archive product</a></li>
-                          </ul>
-                          </div>
-                    </li>
                     <li class="nav-item">
-                      <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
-                    </li>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                          </li>
+                          <li class="nav-item">                  
+                            <!--This is product accordotion-->
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-users "style="margin-right:10px;" ></i> Manage user</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php">List user</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/archieve_user.php">Archive user</a></li>
+                              </ul>
+                              </div>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Order/order.php">  <i class="fas fa-shopping-bag" style="margin-right:10px;"></i>
+                              Orders
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php"> <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                              Feedback
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
+                              Sales Report
+                              
+                          </a>
+                          </li> 
+                          <li class="nav-item">                  
+                            <!--This is product accordotion-->
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
+                              </ul>
+                              </div>
+                          </li>
+                          <li class="nav-item">                  
+                            <!-- this is settings-->
+                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/Project/admin/product.html">List product</a></li>
+                                <li><a class="dropdown-item" href="#">Archive product</a></li>
+                              </ul>
+                              </div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                        </li>
                     </ul>
                     </div>
                       <!--Off Canvas-->
@@ -131,10 +139,10 @@
                         <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
-                          Message
-                      </a>
-                      </li>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Order/order.php">  <i class="fas fa-shopping-bag" style="margin-right:10px;"></i>
+                              Orders
+                          </a>
+                          </li>
                       <li class="nav-item">
                         <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                           Feedback
@@ -219,7 +227,7 @@
                                     <td>${feedback.Email}</td>
                                     <td>${feedback.Description}</td>
                                     <td class="text-center"> 
-                                       <a href="#" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                       <a href="#" onclick="deleteMessage('${feedback.Email}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                     </td>
                                  </tr> `;
                                  tableBody.innerHTML += row;
@@ -227,6 +235,23 @@
               }
               // call the fetch data  function when the page loads
               window.onload =fetchData;
+
+              // delete message
+                function deleteMessage (Email){
+                  let xhr = new XMLHttpRequest();
+                  xhr.onreadystatechange =function (){
+                    if (this.readyState === 4 && this.status === 200){
+                      let data =JSON.parse(this.readyState);
+                        if (data.success){
+                          fetchData();
+                          alert("Successfull")
+                        }
+                    }
+                  }
+                  xhr.open("GET","delete_feedback.php?email=" + Email,true);
+                  xhr.send();
+                }
+               // delete message
           </script>
           
      <!-- JavaScript dependencies -->

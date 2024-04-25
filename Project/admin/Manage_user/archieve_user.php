@@ -138,9 +138,9 @@
                             <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
-                                Message
-                            </a>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Order/order.php">  <i class="fas fa-shopping-bag" style="margin-right:10px;"></i>
+                              Orders
+                          </a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
@@ -179,11 +179,10 @@
                         </ul> 
                     </div>        
                     <!--this is second grid of data display-->
-                        <div class="col-md" id="grid_size" style=" background-color: rgba(236, 236, 236, 0.966);">
-                          <!--message error of modal or successfull-->
-                         
-                        <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Manage user</label>
-                        <br>
+                        <!--table of content-->
+                        <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 0px 10px;">
+                          <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted Product</label>
+                          <br>
                           <br>
                           <form class="row gx-3 gy-2 d-flex" id="searchForm" style="height:45px;">
                             
@@ -195,8 +194,9 @@
                           </div>
                           </form>
 
-                        <div class="dispaly_Table" style="margin-top:10px; right:-4px">
-                           <table class="table table-hover " id="employeeTable">
+                         <!--this is the list of table product-->
+                         <div class="dispaly_Table" style="margin-top:10px; right:-4px">
+                          <table class="table table-hover " id="archieveTable">
                                <thead>
                                    <tr>
                                       <th scope="col"class="">#</th>
@@ -211,13 +211,12 @@
                                </tbody>
                            </table>
                            </div>
-
-                          <!--end this is the list of table product-->
+                        <!--end this is the list of table product-->
                         </div>
                 </div>
             </div>
             <script>
-              // search prduct
+                  // search prduct
               document.querySelector('#submitSearch').addEventListener('click', function() {
                 event.preventDefault(); // Prevent default form submission or prevent refresh when click button
                     // Get the input of user
@@ -239,12 +238,12 @@
                             searchResullt(data); // Corrected function name
                         }
                     };
-                    xhr.open("GET", "search_archieve_user copy.php?searchQuery=" + searchQuery, true); // Corrected file name
+                    xhr.open("GET", "search_archieve_user.php?searchQuery=" + searchQuery, true); // Corrected file name
                     xhr.send();
                 }
 
                 function searchResullt(data) { // Corrected function name
-                    const tableBody = document.querySelector('#employeeTable tbody');
+                    const tableBody = document.querySelector('#archieveTable tbody');
                     let searchQuery = document.querySelector('#searchQuery');
                     tableBody.innerHTML = "";
                     if (searchQuery.value == ""){
@@ -273,57 +272,111 @@
 
               // end searh product
 
-                  // Function to fetch data using AJAX
-        function fetchData() {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                    var data = JSON.parse(this.responseText);
-                    populateTable(data);
+              // this is to display the product when category is select 
+              function showProduct(selecterProduct){
+                let xhr = new XMLHttpRequest ();
+                xhr.onreadystatechange = function () {
+                  if (this.readyState === 4 && this.status === 200) {
+                      let data = JSON.parse(this.responseText);
+                      showresult(data);
+                  }
                 }
-            };
-            xhr.open("GET", "manage_fetchdate.php", true);
-            xhr.send();
-        }
-
-        // Function to populate table with fetched data
-        function populateTable(data) {
-            const tableBody = document.querySelector('#employeeTable tbody');
-            tableBody.innerHTML="";
-            data.forEach(user => {
-                const row = `<tr>
-                                <td>${user.ID}</td>
-                                <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
-                                <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
-                                <td>${user.Email}</td>
-                                <td> 
-                                    <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                    <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                </td>
-                            </tr>`;
-                tableBody.innerHTML += row;
-            });
-        }
-
-        function delete_user(user_id){
-          event.preventDefault();
-          console.log(user_id)
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function (){
-              if (this.readyState === 4 && this.status === 200){
-                var response = JSON.parse(this.responseText);
-                if (response.success) {
-                  fetchData();
-                  alert("Sucessfull deleted");
-                }else{
-                    alert("Error");
-                }
+                xhr.open("GET","search_selected_product.php?selectedCategory=" +selecterProduct, true);
+                xhr.send();
               }
-            }
-            xhr.open("GET", "delete_user_and_archives.php?user_id="+user_id, true);
-            xhr.send();
-        }
 
+              function showresult (data){
+                event.preventDefault();
+                const tableBody = document.querySelector('#archieveTable tbody');
+                tableBody.innerHTML="";
+                console.log(data)
+                  if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                  }else {
+                    data.forEach(user => {
+                      const row = `<tr>
+                                      <td>${user.ID}</td>
+                                      <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
+                                      <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
+                                      <td>${user.Email}</td>
+                                      <td> 
+                                          <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                          <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                                      </td>
+                                  </tr>`;
+                      tableBody.innerHTML += row;
+                });
+                  }
+              }
+                // Function to fetch data using ajax
+                  function fetchData() {
+                      let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4) {
+                              if (this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  populateTable(data);
+                              } else {
+                                  console.error("Error fetching data: " + this.status);
+                              }
+                          }
+                      };
+                      xhr.open("GET", "archive_fetch.php", true);
+                      xhr.send();
+                  }
+
+                  // Function to populate table with fetched data
+                  function populateTable(data) {
+                      const tableBody = document.querySelector('#archieveTable tbody');
+                      tableBody.innerHTML = ""; // Clear existing table rows
+                      console.log(data)
+                      if (data.length === 0){
+                        console.log(data)
+                        tableBody.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                      }else {
+                        data.forEach(user => {
+                            const row = `<tr>
+                                            <td>${user.ID}</td>
+                                            <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
+                                            <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
+                                            <td>${user.Email}</td>
+                                            <td class="text-center"> 
+                                                  <a href="#" onclick="restoreSpecific('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                              </td>
+                                        </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                        
+                      }
+                  }
+
+                  // Call the fetchData function when the page loads
+                  window.onload = fetchData;
+
+                            // Handler for archive specific product
+                            function restoreSpecific(Product_code) {
+                              let searchQuery =document.querySelector('#searchQuery');
+                              var xmlhttp = new XMLHttpRequest();
+                              xmlhttp.onreadystatechange = function() {
+                                  if (this.readyState == 4 && this.status == 200) {
+                                          var response = JSON.parse(this.responseText);
+                                          if (response.success) {
+                                              // Product deleted successfully
+                                              fetchData(); // Fetch updated data after deletion
+                                              searchQuery.innerHTML="";
+                                              alert("Product restored successfully.");
+                                          } else {
+                                              // Error deleting product
+                                              console.error("Error deleting product: " + response.message);
+                                              alert("Error deleting product: " + response.message);
+                                          }
+
+                                  }
+                              };
+                              // Send a GET request to the PHP file with the product code as a parameter
+                              xmlhttp.open("GET", "archieve_user_and_delete_archieve.php?q=" + Product_code, true);
+                              xmlhttp.send();
+                          }
         // Call the fetchData function when the page loads
         window.onload = fetchData;
             </script>

@@ -62,81 +62,26 @@
                         </h4>
                         <hr style="color: white;">
                         
-                          <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                        <li class="nav-item">
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Projet/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
-                          <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
-                              Message
-                          </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
-                              Feedback
-                          </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
-                              Sales Report
-                              
-                          </a>
-                          </li> 
                           <li class="nav-item">                  
                             <!--This is product accordotion-->
-                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-users "style="margin-right:10px;" ></i> Manage user</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
-                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php">List user</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/archieve_user.php">Archive user</a></li>
                               </ul>
                               </div>
                           </li>
-                          <li class="nav-item">                  
-                            <!-- this is settings-->
-                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                            <div class="panel">
-                              <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="#">List product</a></li>
-                                <li><a class="dropdown-item" href="#">Archive product</a></li>
-                              </ul>
-                              </div>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
-                        </li>
-                        </ul>
-                        </div>
-                          <!--Off Canvas-->
-                    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" style="padding:10px 20px 10px 20px; " aria-labelledby="offcanvasDarkNavbarLabel">
-                        <ul class="nav flex-column">
-                            <h4 class="offcanvas-title" id="offcanvasExampleLabel">
-                            <div class="container-fluid">
-                            <a class="navba-brand"  href="#" style="text-decoration: none;">
-                              <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
-                              <!-- <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">--> 
-                              </a>
-                          <a class="navba-brand color" style="text-decoration: none;" href="#">Ecommerce</a>
-          
-                          </div>
-                        </h4>
-                        <hr style="color: white;">
-                        
                           <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php"><i class="fa-solid fa-users "style="margin-right:10px;" ></i>Manage user</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Message/Message_user.php">  <i class="fa-solid fa-message" style="margin-right:10px;"></i>
-                              Message
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Order/order.php">  <i class="fas fa-shopping-bag" style="margin-right:10px;"></i>
+                              Orders
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
                               Feedback
                           </a>
                           </li>
@@ -161,13 +106,82 @@
                             <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
                             <div class="panel">
                               <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="#">List product</a></li>
+                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
                                 <li><a class="dropdown-item" href="#">Archive product</a></li>
                               </ul>
                               </div>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
+                        </li>
+                        </ul>
+                        </div>
+                          <!--Off Canvas-->
+                    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" style="padding:10px 20px 10px 20px; " aria-labelledby="offcanvasDarkNavbarLabel">
+                        <ul class="nav flex-column">
+                            <h4 class="offcanvas-title" id="offcanvasExampleLabel">
+                            <div class="container-fluid">
+                            <a class="navba-brand"  href="#" style="text-decoration: none;">
+                              <img src="/Project/Image/logo.png" alt="Lo" width="30" height="24">
+                              <!-- <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Lo" width="30" height="24">--> 
+                              </a>
+                          <a class="navba-brand color" style="text-decoration: none;" href="#">Ecommerce</a>
+          
+                          </div>
+                        </h4>
+                        <hr style="color: white;">
+                        
+                        <li class="nav-item">
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Projet/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                          </li>
+                          <li class="nav-item">                  
+                            <!--This is product accordotion-->
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-users "style="margin-right:10px;" ></i> Manage user</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/manage_user.php">List user</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/Manage_user/archieve_user.php">Archive user</a></li>
+                              </ul>
+                              </div>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Order/order.php">  <i class="fas fa-shopping-bag" style="margin-right:10px;"></i>
+                              Orders
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/Feedback/feedback.php">  <i class="fa-solid fa-comment" style="margin-right:10px;"></i>
+                              Feedback
+                          </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
+                              Sales Report
+                              
+                          </a>
+                          </li> 
+                          <li class="nav-item">                  
+                            <!--This is product accordotion-->
+                            <button class="accordion nav-link" style="color: white;">  <i class="fa-solid fa-box-open" style="margin-right:10px;"></i> Product</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/product.php">List product</a></li>
+                                <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/product/archive.php">Archive product</a></li>
+                              </ul>
+                              </div>
+                          </li>
+                          <li class="nav-item">                  
+                            <!-- this is settings-->
+                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
+                            <div class="panel">
+                              <ul class="nav flex-column">
+                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
+                                <li><a class="dropdown-item" href="#">Archive product</a></li>
+                              </ul>
+                              </div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
                         </ul> 
                     </div>        
@@ -254,25 +268,19 @@
                                   <div class="row row-cols-1">
                                     <div class="col">
                                       <label for="validationDefault01" class="form-label">Current Password</label>
-                                      <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
-                                    
+                                      <input type="text" id="currentPassword" class="form-control" id="validationDefault01" required>                                   
                                     </div>
                                     <div class="col">
                                       <label for="validationDefault01" class="form-label">New Password</label>
-                                      <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
-                                    
+                                      <input type="text" id="newPassword" class="form-control" id="validationDefault01" required>                                   
                                     </div>
                                     <div class="col">
                                       <label for="validationDefault01" class="form-label">Re-type Password</label>
-                                      <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
-                            
+                                      <input type="text" id="retypePassword" class="form-control" id="validationDefault01" required>                         
                                     </div>
-                                    <div class="col"  style="margin-top: 20px;">    
-                                    
-                                        <button type="button" class="btn btn-primary">Change Password</button>
-                                        <button type="button" class="btn btn-secondary">Cancel</button>
-                                        
-                                  
+                                    <div class="col"  style="margin-top: 20px;">                                      
+                                        <button type="button" id="changepassword" class="btn btn-primary">Change Password</button>
+                                        <button type="button" class="btn btn-secondary">Cancel</button>    
                                     </div>
                                   </div>
                                 </div>
@@ -282,6 +290,32 @@
                         </div>
                 </div>
             </div>
+            <script>
+                // change password
+                document.querySelector('#changepassword').addEventListener("click", function () {
+                    let currentPassword =document.querySelector('#currentPassword');
+                    let newPassword = document.querySelector('#newPassword');
+                    let retypePassword = document.querySelector("#retypePassword");
+
+                    if (newPassword.value != retypePassword){
+                      alert ("Please check the new password or retype Password")
+                    }
+                    else{
+                      let xhr = new XMLHttpRequest ();
+                      xhr.onreadystatechange = function(){
+                        if (this.readyState === 4 && this.status === 200){
+
+                        }
+                      }
+                      // Construct the URL with parameters
+                      let url = "changepassword.php?currentpassword=" + currentPassword + "&newpassword=" + newPassword;
+
+                      xhr.open ("GET",url,true);
+                      xhr.send();
+                    }
+                });
+
+            </script>
              <script src="myacct.js" defer></script>
           <!--This is for fontawesome icon-->
           <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

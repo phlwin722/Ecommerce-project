@@ -1,3 +1,4 @@
+<!-- PHP (Message_fetch.php) -->
 <?php
 $servername = "localhost";
 $username = "root";
