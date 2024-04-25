@@ -38,8 +38,8 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
-                      <!--Name of user-->
-                      <?php echo $firtname ." ". $lastname;?>
+                      <!--Name of the user-->
+                      <label id="firstname"></label> <label id="lastname"></label>
                     </button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
@@ -280,6 +280,25 @@
                 if (this.readyState === 4 && this.status === 200) {
                     var data = JSON.parse(this.responseText);
                     populateTable(data);
+
+                    let firstname = document.querySelector("#firstname");
+                    let lastname = document.querySelector('#lastname');
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                      if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(this.responseText);
+
+                        // Assuming data is an array of objects
+                        data.forEach(info => {
+                          console.log (info.First_name)
+                          lastname.innerHTML = info.Last_name;
+                          firstname.innerHTML = info.First_name;
+                        });
+                      }
+                    };
+                    xhr.open("GET", "/shopping-cart-oche/Project/admin/my_account/admin_fetch_info.php", true);
+                    xhr.send();
                 }
             };
             xhr.open("GET", "manage_fetchdate.php", true);
@@ -296,8 +315,7 @@
                                 <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
                                 <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
                                 <td>${user.Email}</td>
-                                <td> 
-                                    <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                <td class="text-center"> 
                                     <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                 </td>
                             </tr>`;

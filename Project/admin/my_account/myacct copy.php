@@ -40,7 +40,7 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
                      <!--Name of the user-->
-                     <label id="firstname"></label> <label id="lastname"></label>
+                     <?php echo $firtname ." ". $lastname;?>
                     </button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
@@ -63,7 +63,7 @@
                         <hr style="color: white;">
                         
                         <li class="nav-item">
-                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
+                            <a class=" nav-link" style="color: white;" href="/shopping-cart-oche/Projet/admin/dashboard/dashboard.php"><img width="20" height="20" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png " style="margin-right:10px;" alt="dashboard-layout"/>Dashboard</a>
                           </li>
                           <li class="nav-item">                  
                             <!--This is product accordotion-->
@@ -217,26 +217,33 @@
                                     
                                     </div>
                                     <div class="col">
-                                      <label for="validationDefault03" class="form-label">Username</label>
-                                      <input type="text" class="form-control" id="input_email" required>
+                                      <label for="validationDefault03" class="form-label">Middle name</label>
+                                      <input type="text" class="form-control" id="input_middlename" required>
                                     
                                     </div>
                                   </div>
                                   <div class="row" style="margin-top: 20px;">
                                     <div class="col">
-                                     
+                                      <label for="validationDefault04" class="form-label">Secret Question</label>
+                                      <select class="form-select" id="selectedQuestion" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option value="What is your first pet name">What is your first pet name</option>
+                                        <option value="Mother Maiden name">Mother Maiden name</option>
+                                      </select>
                                     </div>
                                     <div class="col">
-                                    
+                                      <label for="validationDefault05" class="form-label">Answer</label>
+                                      <input type="text" class="form-control" id="input_answer" required>
                                     </div>
                                     <div class="col">
-                                     
+                                      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="input_email">
                                     </div>
                                   </div>
   
                                   <div class="row text-start" style="margin-top: 100px; justify-content: left;">
                                      <div class="col">
-                                      <button type="button" id="changeinfo" class="btn btn-primary">Submit</button>
+                                      <button type="button" class="btn btn-primary">Submit</button>
                                      <button type="button" class="btn btn-secondary">Cancel</button>
                                      </div>
                                </div>
@@ -286,35 +293,33 @@
             </div>
             <script>
                 // fetch information
-              function fetchinfo() {
-                let input_lastname = document.querySelector('#input_lastname');
-                let input_firstname = document.querySelector('#input_firstname');
-                let input_email = document.querySelector('#input_email');
-                let firstname = document.querySelector("#firstname");
-                let lastname = document.querySelector('#lastname');
+                function fetchinfo (){
+                  let input_lastname = document.querySelector('#input_lastname');
+                  let input_firstname = document.querySelector('#input_first_name');
+                  let input_middlename = document.querySelector('#input_middlename');
+                  let selectedQuestion = document.querySelector('#selectedQuestion');
+                  let input_answer = document.querySelector('#input_answer');
+                  let input_email = document.querySelector('#input_email');
 
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                  if (this.readyState === 4 && this.status === 200) {
-                    let data = JSON.parse(this.responseText);
+                  let xhr = new XMLHttpRequest ();
+                  xhr.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let data = JSON.parse(this.responseText);
 
-                    // Assuming data is an array of objects
-                    data.forEach(info => {
-                      console.log (info.First_name)
-                      input_lastname.value = info.Last_name;
-                      input_firstname.value = info.First_name;
-                      input_email.value = info.Username; 
-                      lastname.innerHTML = info.Last_name;
-                      firstname.innerHTML = info.First_name;
-                    });
+                        data.forEach(info => {
+                            input_lastname.innerHTML =`${data.Last_name}`;
+                            input_firstname.innerHTML =`${data.First_name}`;
+                            input_lastname.innerHTML =`${data.First_name}`;
+                            input_lastname.innerHTML =`${data.First_name}`;
+                            input_lastname.innerHTML =`${data.First_name}`;
+                            input_lastname.innerHTML =`${data.First_name}`;
+                        });
+                    }
                   }
-                };
-                xhr.open("GET", "admin_fetch_info.php", true);
-                xhr.send();
-              }
-              // Call fetchinfo function when the window is loaded
-              window.onload = fetchinfo;
-                 // fetch information
+                  xhr.open ("GET", "admin_fetch_info.php", true);
+                  xhr.send ();
+                }
+                // fetch information
 
                 // change password
                 document.querySelector('#changepassword').addEventListener("click", function () {
@@ -345,30 +350,7 @@
                 });
                 // change password
 
-                // change info
-                document.querySelector('#changeinfo').addEventListener('click', function () {
-                  let input_lastname = document.querySelector('#input_lastname').value;
-                  let input_firstname = document.querySelector('#input_firstname').value;
-                  let input_email = document.querySelector('#input_email').value;
 
-                  let xhr = new XMLHttpRequest ();
-                  xhr.onreadystatechange =function () {
-                    if (this.readyState === 4 && this.status === 200) {
-                      let data =JSON.parse(this.responseText);
-                      if (data.success){
-                        fetchinfo();
-                        alert("Successfull updated");
-                      }else{
-
-                      }
-                    }
-                  }
-                  // contruct the url with parameters
-                  let url = "changeinfo.php?changelastname=" + encodeURIComponent(input_lastname) + "&changefirstname=" + encodeURIComponent (input_firstname) + "&changeusername=" + encodeURIComponent (input_email);
-                  xhr.open ("GET",url,true);
-                  xhr.send();
-                })
-                // change info
             </script>
              <script src="myacct.js" defer></script>
           <!--This is for fontawesome icon-->

@@ -608,13 +608,7 @@
 
               // Function to fetch data using AJAX to fetch all products
               function fetchData() {
-                  let xhr = new XMLHttpRequest();
-                  xhr.onreadystatechange = function() {
-                      if (this.readyState === 4 && this.status === 200) {
-                          let data = JSON.parse(this.responseText);
-                          populateTable(data);
-
-                            let firstname = document.querySelector("#firstname");
+                             let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
 
                               let xhr = new XMLHttpRequest();
@@ -633,11 +627,7 @@
                               xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
                               xhr.send();
                       }
-                  };
-                  xhr.open("GET", "add_to_cart_fetch.php", true);
-                  xhr.send();
-              }
-
+        
               // Function to populate table with fetched data
               function populateTable(data) {
                   const tableBody = document.querySelector('.cem');

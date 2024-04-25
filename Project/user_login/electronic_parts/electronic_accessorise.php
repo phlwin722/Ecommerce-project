@@ -85,13 +85,14 @@
             <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
-                      <!--Name of user-->
-                      <?php echo $firstname ." ". $lastname;?>
+                      <!--Name of the user-->
+                      <label id="firstname"></label> <label id="lastname"></label>
                     </button>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/logout/logout.php">Logout</a></li>
+                    <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/my_account/my_account.php">My Account</a></li>
                       <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/logout/logout.php">Logout</a></li>
                     </ul>
                   </div>
                <!--end my account-->
@@ -313,6 +314,25 @@
                           if (this.readyState === 4 && this.status === 200) {
                               let data = JSON.parse(this.responseText);
                               populateTable(data);
+
+                              let firstname = document.querySelector("#firstname");
+                              let lastname = document.querySelector('#lastname');
+
+                              let xhr = new XMLHttpRequest();
+                              xhr.onreadystatechange = function () {
+                                if (this.readyState === 4 && this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+
+                                  // Assuming data is an array of objects
+                                  data.forEach(info => {
+                                    console.log (info.First_name)
+                                    lastname.innerHTML = info.Last_name;
+                                    firstname.innerHTML = info.First_name;
+                                  });
+                                }
+                              };
+                              xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
+                              xhr.send();
                           }
                       };
                       xhr.open("GET", "electronic_accessorise_fetch.php", true);
