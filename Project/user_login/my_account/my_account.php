@@ -55,7 +55,7 @@
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
-        <title>Add to Cart</title>
+        <title>My account</title>
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -166,56 +166,135 @@
           <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
 
-              <div class="card position-relative" style="width: 100%; padding:10px; height:100px;">            
-                        <div class="" style="font-size:18px; margin-left:15px;">
-                            <i class="fa-solid fa-location-dot" style="color: #de0202;"></i>
-                                Delivery Address
-                        </div>
-                      <div class="card-body" style="position:relative;">
-                          <label style="font-weight:bold;" id="full_name"></label>
-                          <label id="address"></label>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change">
-                            Change
-                            </button>
-                            <!-- Button trigger modal -->
-                      </div>  
-                  </div>
+              <div class="co" style=" margin-top:10PX; ">
+                              <ul class="nav nav-tabs" id="myTab" role="tablist" style="">
+                                <label style="padding: 10px; font-weight: bold;">PROFILE ACCOUNT</label>
+                                <li class="nav-item" role="presentation" style="margin-left: 559px;">
+                                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">User Account info</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Change Avatar</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Change Password</button>
+                                </li>
+                      
+                              </ul>
+                              <div class="tab-content" id="myTabContent">
+                                <!--1St tab-->
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="padding: 10px;">
+                                  <div class="container" style="text-align: left;">
+                                    <div class="row" style="">
+                                      <div class="col">
+                                        <label for="validationDefault01" class="form-label">First name</label>
+                                        <input type="text" class="form-control" id="input_firstname" required>
+                                      
+                                      </div>
+                                      <div class="col">
+                                        <label for="validationDefault02" class="form-label">Last name</label>
+                                        <input type="text" class="form-control" id="input_lastname" required>
+                                      
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Middle name</label>
+                                        <input type="text" class="form-control" id="input_middlename" required>
+                                      
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Contact No</label>
+                                        <input type="text" class="form-control" id="input_contact" required>
+                                      
+                                      </div>    
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Block/Lot</label>
+                                        <input type="text" class="form-control" id="input_block" required>
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Barangay</label>
+                                        <input type="text" class="form-control" id="input_barangay" required>
+                                     
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="input_city" required>
+                                     
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Province</label>
+                                        <input type="text" class="form-control" id="input_province" required>
+                                     
+                                      </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="input_email" required>
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Secret Question</label>
+                                        <input type="text" class="form-control" id="input_sec_ques" required>
+                                     
+                                      </div>
+                                      <div class="col">
+                                      <label for="validationDefault02" class="form-label">Answer</label>
+                                        <input type="text" class="form-control" id="input_answer" required>
+                                     
+                                      </div>
+                                      <div class="col">
+                                      </div>
+                                    </div>
+    
+                                    <div class="row text-start" style="margin-top: 100px; justify-content: left;">
+                                      <div class="col">
+                                        <button type="button" id="changeinfo" class="btn btn-primary">Submit</button>
+                                      <button type="button" class="btn btn-secondary">Cancel</button>
+                                      </div>
+                                </div>
+                                  </div>
 
-
-                  <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
-                      <div class="card-body" style="position:relative;">
-                          <label style="font-weight:bold;">  
-                              <input class="form-check-input productCheckbox" type="checkbox" value="" id="">  Product
-                          </label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
-                      </div>
-                  </div>
-                  <!--products-->
-                  <div class="row cem" style=""> 
-                      <div class="col-md-12"></div>
-                  </div>
-                  <div class="card position-relative sticky-bottom" style="width: 100%; padding:10px; height:70px;">
-                      <div class="card-body" style="position:relative;">
-                          <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
-                          <label style="" for="selectAllCheckbox">Select All</label>
-                          <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
-                          <label for="payment" style="margin-left:120px;">Payment</label>
-                             
-                          <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
-                          <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
-                          <button type="button" id="buy_now" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
-                                Buy now
-                            </button>
-                      </div>
-                            <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:20px; left:400px;">
-                                <option value="1">Cash On Delivery</option>
-                                <option disabled value="2">Gcash (Not Available)</option>
-                            </select>
-                  </div>
+                                </div>
+                                <!--2nd tab-->
+                                <div class="tab-pane fade text-start" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="">
+                                <div class="container"> 
+                                  <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" class="img-thumbnail rounded text-start" alt="...">   
+                                    <br>  
+                                  <button type="button" class="btn btn-light">Select Image</button>
+                                  <br>
+                                  <p style="color: rgb(14, 14, 14);"><label style="padding: 5px; background-color: rgb(241, 63, 63); width: 50px; border-radius: 5px; color: white;">Note!</label>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</p>
+                                  <a><button type="button" class="btn btn-primary">Submit</button></a>
+                                <a><button type="button" class="btn btn-secondary">Cancel</button></a>
+                                </div>  
+                              </div>
+                              <!--end tag of 2nd tab-->
+                                <!--3rd tab-->
+                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0" style="padding: 10px;height: 360px;">
+                                  <div class="container text-start">
+                                    <div class="row row-cols-1">
+                                      <div class="col">
+                                        <label for="validationDefault01" class="form-label">Current Password</label>
+                                        <input type="text" id="currentPassword" class="form-control" id="validationDefault01" required>                                   
+                                      </div>
+                                      <div class="col">
+                                        <label for="validationDefault01" class="form-label">New Password</label>
+                                        <input type="text" id="newPassword" class="form-control" id="validationDefault01" required>                                   
+                                      </div>
+                                      <div class="col">
+                                        <label for="validationDefault01" class="form-label">Re-type Password</label>
+                                        <input type="text" id="retypePassword" class="form-control" id="validationDefault01" required>                         
+                                      </div>
+                                      <div class="col"  style="margin-top: 50px;">                                      
+                                          <button type="button" id="changepassword" class="btn btn-primary">Change Password</button>
+                                          <button type="button" class="btn btn-secondary">Cancel</button>    
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--end of 3rd tab-->
+                            </div>
+                          </div>
+              
               </div>
           </div>
 
@@ -546,70 +625,22 @@
                      <!--Modal payment Verification-->
               <!---->
           <script>
-              document.getElementById('searchForm').addEventListener('submit', function(event) {
-                  event.preventDefault(); // Prevent form submission
-
-                  const searchQuery = document.getElementById('searchQuery').value.trim(); // Trim the search query
-
-                  // Check if search query is empty
-                  if (searchQuery !== '') {
-                      fetch('search.php', {
-                          method: 'POST',
-                          body: new FormData(this)
-                      })
-                      .then(response => response.json())
-                      .then(data => {
-                          const searchResults = document.querySelector('.cem');
-                          searchResults.innerHTML = ''; // Clear previous results
-                          if (data.length === 0) {
-                              searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
-                          } else {
-                              const tableBody = document.querySelector('.cem');
-                              tableBody.innerHTML = ''; // Clear previous results
-                              data.forEach(product => {
-                                  const row = `<div class="col-md-3">
-                                                  <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                                    <input class="form-check-input productCheckbox" type="checkbox" value="" id="" data-product-code="${product.Product_code}">
-                                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                                      <div class="card-body" style="position:relative;">
-                                                          <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                          <p class="card-text">${product.Category}</p>
-                                                          <p class="card-text">₱ ${product.Price}</p>
-                                                          <button class="CartBtn">
-                                                              <span class="IconContainer"> 
-                                                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                                      <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                                  </svg>
-                                                              </span>
-                                                              <p class="text">Add to Cart</p>
-                                                          </button>
-                                                      </div>
-                                                  </div>
-                                              </div>`;
-                                  tableBody.innerHTML += row;
-                              });
-                          }
-                      })
-                      .catch(error => {
-                          console.error('Error:', error);
-                      });
-                  } else if (searchQuery === ''){
-                      // Fetch and display all products
-                      fetchData();
-                      fetchDataUserInfo();
-                  } else {
-                      // If search query is empty, hide the "No results found" message
-                      document.querySelector('#no_result').style.display = "none";
-                      // Fetch and display all products
-                      fetchData();
-                      fetchDataUserInfo();
-                  }
-              });
-
+             
               // Function to fetch data using AJAX to fetch all products
               function fetchData() {
                              let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
+                              let input_firstname = document.querySelector("#input_firstname");
+                              let input_lastname = document.querySelector('#input_lastname');
+                              let input_middlename = document.querySelector("#input_middlename");
+                              let input_contact = document.querySelector('#input_contact');
+                              let input_block = document.querySelector("#input_block");
+                              let input_barangay = document.querySelector('#input_barangay');
+                              let input_city = document.querySelector("#input_city");
+                              let input_province = document.querySelector('#input_province');
+                              let input_email = document.querySelector("#input_email");
+                              let input_sec_ques = document.querySelector('#input_sec_ques');
+                              let input_answer = document.querySelector("#input_answer");
 
                               let xhr = new XMLHttpRequest();
                               xhr.onreadystatechange = function () {
@@ -621,270 +652,40 @@
                                     console.log (info.First_name)
                                     lastname.innerHTML = info.Last_name;
                                     firstname.innerHTML = info.First_name;
+                                    input_firstname.value = info.First_name;
+                                    input_lastname.value = info.Last_name;
+                                    input_middlename.value = info.Middle_name;
+                                    input_contact.value = info.Contact_No;
+                                    input_block.value = info['Block_&_Lot'];
+                                    input_barangay.value = info.Barangay;
+                                    input_city.value = info.City;
+                                    input_province.value = info.Province;
+                                    input_email.value = info.Email;
+                                    input_sec_ques.value = info.Secret_question;
+                                    input_answer.value = info.Answer;
                                   });
                                 }
                               };
                               xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
                               xhr.send();
                       }
-        
-              // Function to populate table with fetched data
-              function populateTable(data) {
-                  const tableBody = document.querySelector('.cem');
-                  tableBody.innerHTML = ''; // Clear previous results
-                  data.forEach(product => {
-                      const row = `<div class="col-12">
-                          <div class="card" style="width: 100%; padding:10px; height:120px;">
-                              <div class="row">
-                                  <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
-                                      <input class="form-check-input productCheckbox"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
-                                  </div>
-                                  <div class="" style=" width:165px;">
-                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                  </div>
-                                  <div class="col-4">
-                                      <label style="padding-top:15px;">${product.Product_name}</label>
-                                  </div>
-                                  <div class="col-1 position-relative" style="width:120px;">
-                                      <div style="position: absolute; top: 36%; left:20%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col position-relative" style="width:125px;">
-                                      <div style="position: absolute; top: 30%; left:10%;">
-                                          <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                          <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                          <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                      </div>
-                                  </div>
-                                  <div class="col-1 position-relative">
-                                      <div style="position: absolute; top: 36%; left:20%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center totalpricee"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col-2 position-relative" style="width:180px;">
-                                    <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
-                                        <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
-                                    </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>`;
-                      tableBody.innerHTML += row;
-                  });
+              // function to fetch user information using ajax to fetch user info   
 
-                  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
-                  // Delete All data
-                  const deleteAllData = document.getElementById('DeleteDataAll');
-
-                  // Add event listener to the "Select All" checkbox
-                  selectAllCheckbox.addEventListener('change', function() {
-                      // Iterate through each product checkbox
-                      productCheckboxes.forEach(checkbox => {
-                          // Set the checked property of each product checkbox to match the "Select All" checkbox
-                          checkbox.checked = selectAllCheckbox.checked;
-                      });
-                      calculateTotalPrice(); // Recalculate total price when "Select All" checkbox is clicked
-                  });
-
-                  deleteAllData.addEventListener('click', function (){
-                  let checkedProducts = [];
-                  productCheckboxes.forEach(checkbox => {
-                      if (checkbox.checked) {
-                          checkedProducts.push(checkbox.dataset.productCode);
-                      }
-                  });
-
-                  // Check if any product is checked
-                  if (checkedProducts.length > 0) {
-                     // Send a request to delete all checked products
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.onreadystatechange =function (){
-                           if (this.readyState == 4 && this.status == 200){
-                            fetchData();
-                              calculateTotalPrice(); // Recalculate total price after deletion
-                              alert('Products deleted successfully');
-                               // Uncheck all checkboxes
-                              productCheckboxes.forEach(checkbox => {
-                                  checkbox.checked = false;
-                              });
-                              selectAllCheckbox.checked = false; // Uncheck selectAllCheckbox
-                           }
-                        }
-                        xmlHttp.open("GET","delete_all_data_cart.php",true);
-                        xmlHttp.send();
-                      // Send a request to delete all checked products
-                  } else {
-                      // If no product is checked, display a message
-                      alert('Please select at least one product to delete.');
-                  }
-              });
-
-                  productCheckboxes.forEach(checkbox => {
-                      checkbox.addEventListener('change', calculateTotalPrice);
-                  });
-
-                  calculateTotalPrice(); // Calculate total price initially
-              }
-
-              // Function to recalculate and display total price
-              function calculateTotalPrice() {
-                  let totalPrice = 0;
-                  let totalItems = 0; // Initialize totalItems variable
-                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
-
-                  // Iterate through each product checkbox
-                  productCheckboxes.forEach(checkbox => {
-                      if (checkbox.checked) {
-                          // Get the corresponding total price element for the checked product
-                          let productCode = checkbox.dataset.productCode;
-                          let totalPriceElement = document.getElementById(`totalprice_${productCode}`);
-                          if (totalPriceElement) {
-                              // Parse the total price value and add it to the total price accumulator
-                              let price = parseFloat(totalPriceElement.value);
-                              if (!isNaN(price)) {
-                                  totalPrice += price;
-                                  totalItems++; // Increment totalItems when a checkbox is checked
-
-                              }
-                          }
-                      }
-                  });
-
-                  // Display the total price somewhere on the page
-                  document.getElementById('totalPriceDisplay').textContent = "₱ " + totalPrice.toFixed(2);
-                  document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
-              }
-
-              // Quantity add or minus
-              function minus(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let quantity = parseInt(quantityElement.value);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let totalprice = parseInt(totalpriceElement.value);
-
-                  if (quantity > 1) {
-                      let decrement = 1;
-                      quantity -= decrement;
-                      totalprice -= unitprice;
-                      totalpriceElement.value = totalprice.toString();
-                      quantityElement.value = quantity.toString();
-                  } else {
-                      // If the quantity is already 1, do nothing or display a message
-                      // In this example, we're leaving it as is
-                  }
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-              function add(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let quantity = parseInt(quantityElement.value);
-                  let increment = 1;
-                  quantity += increment;
-                  let totalPrice = unitprice * quantity;
-
-                  // Update the value displayed on the webpage
-                  quantityElement.value = quantity.toString();
-                  totalpriceElement.value = totalPrice.toString();
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-              // function to fetch user information using ajax to fetch user info
-             
-              function fetchDataUserInfo() {
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        fetchData();
-
-                        let data = JSON.parse(this.responseText);
-
-                        const full_name = document.querySelector('#full_name');
-                        const address = document.querySelector('#address');
-                        const barangaySelect = document.querySelector('#barangaySelect');
-                        const citySelect = document.querySelector('#citySelect');
-                        const provinceSelect = document.querySelector('#provinceSelect');
-                        const block_lot = document.querySelector('#block_lote');
-                        const contact = document.querySelector('#contact');
-                        // Clear previous content
-                        full_name.innerHTML = "";
-                        address.innerHTML = "";
-                        block_lot.innerHTML = "";
-
-                        data.forEach(product => {
-                            // Concatenate full name
-                            full_name.innerHTML += `${product.First_name} ${product.Last_name} ${product.Contact_No} `;
-                            // Concatenate address
-                            address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
-                            // concatenate block_lot
-                            block_lot.value += `${product["Block_&_Lot"]}`;
-                            // concatenate block_lot
-                            contact.value += `${product.Contact_No}`;
-
-                            // set into let from the database
-                            let barangay = `${product.Barangay}`;
-                            let city = `${product.City}`;
-                            let province = `${product.Province}`;
-
-                            //Iterate through each option
-                            barangaySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === barangay){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //Iterate through each option
-                            citySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === city){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //iterate throuch each option
-                            provinceSelect.querySelectorAll('option').forEach(option => {
-                              // check if the option values matches the fetched barangay
-                              if (option.value === province){
-                                // set the selected attribute if theres a match
-                                option.selected  =true;
-                              }
-                            }); 
-                      
-                        });
-                    }
-                };
-                xhr.open("GET", "user_information_fetch.php", true);
-                xhr.send();
-            }
-
-            // Function to delete a product
-            function DeleteProduct(Product_code) {
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.onreadystatechange = function() {
-                  if (this.readyState == 4 && this.status == 200) {
-                      calculateTotalPrice();  // Recalculate total price after quantity change
-                      fetchData(); // Fetch updated data after deletion
-                      console.log(Product_code)
-                  }
-              };
-              xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
-              xmlhttp.send();
-              }
-
+              document.querySelector('#changeinfo').addEventListener('click', function () {
+                let input_firstname = document.querySelector("#input_firstname").value;
+                let input_lastname = document.querySelector('#input_lastname').value;
+                let input_middlename = document.querySelector("#input_middlename").value;
+                let input_contact = document.querySelector('#input_contact').value;
+                let input_block = document.querySelector("#input_block").value;
+                let input_barangay = document.querySelector('#input_barangay').value;
+                let input_city = document.querySelector("#input_city").value;
+                let input_province = document.querySelector('#input_province').value;
+                let input_email = document.querySelector("#input_email").value;
+                let input_sec_ques = document.querySelector('#input_sec_ques').value;
+                let input_answer = document.querySelector("#input_answer").value;  
+              })
               window.onload = function() {
-                fetchData();
-                fetchDataUserInfo();
+                fetchData();    
               };
           </script>
          <!--This is for fontawesome icon-->
