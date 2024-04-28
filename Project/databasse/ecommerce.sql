@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 07:04 PM
+-- Generation Time: Apr 28, 2024 at 01:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,7 +62,6 @@ CREATE TABLE `archives_product` (
 --
 
 INSERT INTO `archives_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Category`, `Image`) VALUES
-(20235032, '1 Pair (2pcs) Gamers Sweatproo', 50, '20', 'Gaming Accessories', '66100d88173a8.png'),
 (20235033, 'Smilee K-21 Pubg Portable Game', 50, '150', 'Gaming Accessories', '66100daf31501.png'),
 (20235034, 'Mobile Phone Gaming Radiator C', 50, '158', 'Gaming Accessories', '66100dd98f520.png'),
 (20235036, '830 Breadboard Set Tie-points ', 50, '380', 'Electronic Accessories', '661011bd9bd2e.png'),
@@ -89,8 +88,9 @@ CREATE TABLE `cart_product` (
 
 INSERT INTO `cart_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Email`, `Image`) VALUES
 (20235031, 'NEW Wireless Bluetooth Headphones Colored LED Lights Gaming OverEar Headset Stereo Headphone&Mic', '1', '231', 'jamerodexter13@gmail.com', '66100cbdab839.png'),
-(20235074, 'KAYA LYRE XYLOPHONE - with Free Bag, Lyre Beater , Strap (Percussion Instrument)', '1', '600', 'jamerodexter13@gmail.com', '66102960f3e54.png'),
-(20235083, 'Jordan NBA Bulls Graphic T-shirt ', '1', '230', 'danicagois@gmail.com', '66109c46c44ee.png');
+(20235054, 'Motorcycle Signal Light Switch Big', '1', '25', 'jamerodexter13@gmail.com', '66101d592cf08.png'),
+(20235083, 'Jordan NBA Bulls Graphic T-shirt ', '1', '230', 'danicagois@gmail.com', '66109c46c44ee.png'),
+(20235086, 'Fashion Top Brand Luxury Women Bracelet Watches Ladies Rose Gold Diamond Quartz Waterproof Women\\\'s', '1', '1430', 'jamerodexter13@gmail.com', '66109fdc67af2.png');
 
 -- --------------------------------------------------------
 
@@ -154,6 +154,7 @@ CREATE TABLE `product_list` (
 
 INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Category`, `Image`) VALUES
 (20235031, 'NEW Wireless Bluetooth Headpho', '50', '231', 'Gaming Accessories', '66100cbdab839.png'),
+(20235032, '1 Pair (2pcs) Gamers Sweatproo', '50', '20', 'Gaming Accessories', '66100d88173a8.png'),
 (20235035, 'Mobile Controller for pc Gaming Keyboard and Mouse bluetooth controller for android phone', '50', '238', 'Gaming Accessories', '66100e6f815c7.png'),
 (20235038, 'Soldering Iron Set Electronic ', '50', '265', 'Electronic Accessories', '661011fb3940f.png'),
 (20235039, 'Mitsushi 31In1 Screwdriver Set Mini Electronic Screwdriver Bits Multi-Size Mobile Phone Repair Tool', '50', '58', 'Electronic Accessories', '6610121dda8c7.png'),
@@ -253,6 +254,8 @@ CREATE TABLE `user_information` (
   `Province` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  `Secret_question` varchar(255) NOT NULL,
+  `Answer` varchar(255) NOT NULL,
   `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -260,12 +263,10 @@ CREATE TABLE `user_information` (
 -- Dumping data for table `user_information`
 --
 
-INSERT INTO `user_information` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Contact_No`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Image`) VALUES
-(2021, 'w', 'w', 'w', '09266891561', 'w', 'San Rafael 1', 'Angeles City', 'Bukidnon', 'daw@gmail', 'w', ''),
-(2022, 'w', 'w', 'wd', '09266891561', 'wd', 'FVR', 'Manila', 'Agusan del Norte', 'aadmin@gmail.com', 'a', ''),
-(2023, 'Dexter', 'Jamero', 'Patan', '09266891561', 'block 25 lot 16 ', 'FVR', 'Mandaluyong', 'Bulacan', 'jamerodexter13@gmail.com', 'a', ''),
-(2024, 'asf', 'fasd', 'fas', '09266891561', 'fas', 'San Rafael 1', 'Pasay', 'Bulacan', 'w@gmail.com', 'fasfasf', ''),
-(2025, 'Danica', 'Gois ', 'Villobino', '09266891561', 'fasfas', 'FVR', 'Angeles City', 'Bohol', 'danicagois@gmail.com', 'a', '');
+INSERT INTO `user_information` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Contact_No`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Secret_question`, `Answer`, `Image`) VALUES
+(2023, 'Dexter', 'Jamero', 'Patan', '09266891561', 'block 25 lot 16 ', 'FVR', 'Mandaluyong', 'Bulacan', 'jamerodexter13@gmail.com', 'ad', 'Who is your first love', 'Danica Gois', ''),
+(2025, 'Danica', 'Gois ', 'Villobino', '09266891561', 'fasfas', 'FVR', 'Angeles City', 'Bohol', 'danicagois@gmail.com', 'ad', '', '', ''),
+(2026, 'testing', 'test', 'testt', '', 'abc', 'San Rafael 1', 'Quezon City', 'Batangas', 'Test@gmail.com', 'abcd', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -384,7 +385,7 @@ ALTER TABLE `product_list`
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2026;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2027;
 
 --
 -- AUTO_INCREMENT for table `user_information_archieve`
