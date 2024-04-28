@@ -105,7 +105,14 @@
                     Please provide Middle name
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-4">
+                <label for="validationCustom03" class="form-label">Contact No</label>
+                    <input type="text" class="form-control" id="validationCustom03" name="mname" required>
+                    <div class="invalid-feedback">
+                    Please provide Contact No
+                    </div>
+                </div>
+                <div class="col-md-8">
                     <label for="validationCustom04" class="form-label">Block Lot & Street</label>
                     <input type="text" class="form-control" id="validationCustom04" name="blk_lot" required>
                     <div class="invalid-feedback">
@@ -359,6 +366,45 @@
                     Please provide password
                     </div>
                 </div>
+                <div class="col-md-6">
+                <label for="validationCustom08" class="form-label">Secret Question</label>
+
+                    <select class="form-select" id="validationCustom08" name="barangay" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option value="Who is your first love">Who is your first love</option>
+                       <option value="First pet name">First pet name</option>
+                        <option value="Mother Maiden name">Mother Maiden name</option>
+                    </select>
+
+                    <div class="invalid-feedback">
+                    Please provide Secret Question
+                    </div>
+                </div>
+                <div class="col-md-6">
+                <label for="validationCustom03" class="form-label">Answer</label>
+                    <input type="text" class="form-control" id="validationCustom03" name="mname" required>
+                    <div class="invalid-feedback">
+                    Please provide Answer
+                    </div>
+                </div>
+                <div class="col-12">
+                <div class="wrapper">
+                    <header>Captcha</header>
+                    <div class="captcha-area">
+                      <div class="captcha-img">
+                        <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" alt="">
+                        <span class="captacha"><i class="captachaa"></i></span> 
+                      </div>
+                      <a class="reload-btn"><i class="fa-sharp fa-solid fa-rotate-right"></i></a>
+                    </div>
+                    <form action="#" class="input_area">
+                      <input type="text" class="form-control captcha_input"  placeholder="Enter captcha" required>
+                   <!--   <button class="check-btn">Check</button> -->
+                    </form>
+                    <div class="status-txt"></div>
+                  </div>
+                </div>
+                <br>
                 <div class="col-12">
                     <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
