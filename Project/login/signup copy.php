@@ -1,30 +1,37 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Signup</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--This is bootstrap-->
-    <link rel="icon" type="image/x-icon" href="/shopping-cart-oche/Project/Image/logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="signup.css">
-    <link rel="stylesheet" href="logo.css">
-</head>
-<body>
-<div class="container-fluid signup_container">
-    <div class="container-fluid sign_up_logo">
-        Sign up
-    </div>
-    <form class="row g-3" id="signupForm">
-        <div class="col-md-4">
-            <label for="validationDefault01" class="form-label">First name</label>
-            <input type="text" class="form-control" id="validationDefault01" required>
-        </div>
-        <div class="col-md-4">
-            <label for="validationDefault02" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="validationDefault02" required>
-        </div>
-        <div class="col-md-4">
+    <head>
+        <title>Signup</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+           <!--This is bootstrap-->
+           <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+         <link rel="stylesheet" href="signup.css">
+         <link rel="stylesheet" href="logo.css">
+    </head>
+    <body>
+        <div class="container-fluid signup_container">
+            <div class="container-fluid sign_up_logo" >
+              Sign up
+            </div>
+            <form class="row g-3">
+          
+                <div class="col-md-4">
+                    <label for="validationDefault01" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="validationDefault01" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="validationDefault02" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="validationDefault02" required>
+                </div>
+                <div class="col-md-4">
                     <label for="validationDefault06" class="form-label">Middle name</label>
                     <input type="text" class="form-control" id="validationDefault06" required>
                 </div>
@@ -260,16 +267,15 @@
                      <option value="Zamboanga city">Zamboanga Sibugay</option> 
                     </select>
                 </div>
-
-        <div class="col-md-12">
-            <label for="validationDefault11" class="form-label">Email</label>
-            <input type="email" class="form-control" id="validationDefault11" required>
-        </div>
-        <div class="col-md-12">
-            <label for="validationDefault12" class="form-label">Password</label>
-            <input type="password" class="form-control" id="validationDefault12" required>
-        </div>
-        <div class="col-md-6">
+                <div class="col-md-12">
+                    <label for="validationDefault11" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="validationDefault11" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="validationDefault12" class="form-label">Password</label>
+                    <input type="Password" class="form-control" id="validationDefault12" required>
+                </div>
+                <div class="col-md-6">
                     
                     <label for="validationDefault13" class="form-label">Secret Question</label>
                     <select class="form-select" id="validationDefault13" name="barangay" required>
@@ -283,63 +289,128 @@
                     <label for="validationDefault14" class="form-label">Answer</label>
                     <input type="text" class="form-control" id="validationDefault14" required>
                 </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label for="captcha">Captcha</label>
-                <div class="input-group">
-                    <input type="text" class="form-control captcha_input" id="captcha" required>
-                    <span class="input-group-text captachaa"></span>
+
+                <div class="col-12">
+                <div class="wrapper">
+                    <header>Captcha</header>
+                    <div class="captcha-area">
+                      <div class="captcha-img">
+                        <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" alt="">
+                        <span class="captacha"><i class="captachaa"></i></span> 
+                      </div>
+                      <a class="reload-btn"><i class="fa-sharp fa-solid fa-rotate-right"></i></a>
+                    </div>
+
+                      <input type="text" class="form-control captcha_input"  placeholder="Enter captcha" required>
+                   <!--   <button class="check-btn">Check</button> -->
+
+                    <div class="status-txt"></div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                    <label class="form-check-label" for="invalidCheck2">
+                        Agree to terms and conditions
+                    </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary check-btn" type="submit">Sign up</button>
+                </div>
+                </form>
+            </div>
+
+            <!--Modal section successfull register-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="text-align: center; justify-content:center; align-items:center;">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                <div class="modal-body">
+                <button type="button" class="btn-close" style="margin-left: 430px;" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="check-container" style="margin-left:180px;">
+                    <div class="check-background">
+                        <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                        </div>
+                    <div class="check-shadow"></div> 
+                </div>
+                <h3>Successfull Registered!</h3>
+                <div >
+                    <br>
+                <button type="button" class="btn btn-secondary" id="ok" style="margin-bottom: 20px;" data-bs-dismiss="modal">OK</button>
+                </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-secondary reload-btn">Reload Captcha</button>
-        </div>
-        <!-- Add other form fields here -->
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                <label class="form-check-label" for="invalidCheck2">
-                    Agree to terms and conditions
-                </label>
             </div>
-        </div>
-        <div class="col-12">
-            <button class="btn btn-primary check-btn" type="submit">Sign up</button>
-        </div>
-    </form>
-</div>
-<!-- JavaScript for form validation -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById('signupForm');
-        const captchaField = document.getElementById('captcha');
-        const captchaDisplay = document.querySelector('.captachaa');
-        const reloadBtn = document.querySelector('.reload-btn');
+            <!--end Modal section successfull register-->
 
-        // Function to generate captcha
-        function getCaptcha() {
-            const allcharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let captchaText = '';
-            for (let i = 0; i < 6; i++) {
-                captchaText += allcharacters.charAt(Math.floor(Math.random() * allcharacters.length));
+              <!--Modal section have a existing email account-->
+              <div class="modal fade" id="exampleModa2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="text-align: center; justify-content:center; align-items:center;">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                <div class="modal-body">
+                <button type="button" class="btn-close" style="margin-left: 430px;" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="wrong-container" style="margin-left:180px;">
+                    <div class="wrong-background">
+                        <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                        </div>
+                    <div class="wrong-shadow"></div> 
+                </div>
+                <h3>Already Email Registered!</h3>
+                <div >
+                    <br>
+                <button type="button" class="btn btn-secondary" id="ok" style="margin-bottom: 20px;" data-bs-dismiss="modal">OK</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!--end Modal ssection have a existing email account-->
+        </div>
+        <script>
+                        
+            const captchaa = document.querySelector(".captachaa");
+            reloadBtn = document.querySelector('.reload-btn');
+            inputField = document.querySelector('.captcha_input');
+            checkBtn = document.querySelector('.check-btn');
+            statustxt = document.querySelector('.status-txt');
+            // string all captcha charactes in array
+            let allcharacters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
+                                'P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d',
+                                'e','f','g','h','i','j','k','l','m','n','o','p','q','r','s',
+                                't','u','v','w','x','y','z',0,1,2,3,4,5,6,7,8,9];
+            function getCaptcha (){
+                for (let i = 0; i <6; i++) {//getting 6 random characters from the array
+                    let randomChar = allcharacters[Math.floor(Math.random()  * allcharacters.length)];
+                    captchaa.textContent += `${randomChar}`; // passing 6 random characters inside captcha text content
+                }
             }
-            return captchaText;
-        }
+            getCaptcha();
+            reloadBtn.addEventListener ("click", () =>{
+                captchaa.textContent ="";
+                getCaptcha();
+            });
 
-        // Initial captcha generation
-        captchaDisplay.textContent = getCaptcha();
+            checkBtn.addEventListener("click", e =>{
+            e.preventDefault();// preventing button from its defaul behavior 
+            statustxt.style.display = "block";
+            // adding space after each value if user entered captch becayse ive added spaces while generating
+            let inputVal = inputField.value.split('').join(``);
+                if (inputVal == captchaa.textContent){ // if captcha is matched
+                    statustxt.style.display ="";
+                    setTimeout (() => {// removing user entered value and change captcha textcontent after 4 seconds
+                        statustxt.style.display ="";
+                        inputField.value="";
+                        captchaa.textContent ="";
+                        getCaptcha();
 
-        // Reload captcha
-        reloadBtn.addEventListener('click', function () {
-            captchaDisplay.textContent = getCaptcha();
-        });
-
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Perform form validation
-            if (validateForm()) {
-                // If form is valid, submit the form
-                let firstname =document.querySelector('#validationDefault01').value;
+                        let firstname =document.querySelector('#validationDefault01').value;
                         let lastname =document.querySelector('#validationDefault02').value;
                         let contact =document.querySelector('#validationDefault07').value;
                         let middlename =document.querySelector('#validationDefault06').value;
@@ -351,8 +422,15 @@
                         let Password =document.querySelector('#validationDefault12').value;
                         let Secret =document.querySelector('#validationDefault13').value;
                         let Answer =document.querySelector('#validationDefault14').value;
+                        let invalidCheck2 =document.querySelector('#invalidCheck2');
 
-                let xhr = new XMLHttpRequest ();
+                        if (firstname == "" && lastname == "" && contact == "" && middlename == "" && Block == "" &&  Barangay == "" && City == "" &&
+                        Province == "" && Email == "" && Password == "" && Secret == "" && Answer == "" ) {
+                            alert("Please fill up all blank");
+                         }else if (!invalidCheck2.checked){
+                            alert("Please Agree to terms and conditions");
+                         } else {
+                            let xhr = new XMLHttpRequest ();
                             xhr.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status==200){
                                     let data =JSON.parse(this.responseText);
@@ -382,118 +460,16 @@
                             + "&Answer=" + encodeURIComponent(Answer);
                             xhr.open("GET", url ,true)
                             xhr.send();
-            }
-        });
+                         }
 
-        function validateForm() {
-            let isValid = true;
-            
-             //  Secret question
-             const Secret = document.getElementById('validationDefault13');
-            if (Secret.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your Secret question');
-            }
+                    },4000); // removing user entered value and change captcha textcontent after 4 seconds
+                }else {
+                    statustxt.style.color = "#ff0000"
+                    statustxt.textContent = "Captcha not matched. Please try again!";
+                }
+            });
 
-             // Validate answer
-             const answer = document.getElementById('validationDefault14');
-            if (answer.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your answer');
-            }
-
-             // Validate first name
-             const Province = document.getElementById('validationDefault10');
-            if (Province.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-             // Validate first name
-             const City = document.getElementById('validationDefault09');
-            if (City.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-             // Validate first name
-             const Barangay = document.getElementById('validationDefault08');
-            if (Barangay.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-             // Validate first name
-             const Block = document.getElementById('validationDefault03');
-            if (Block.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-             // Validate first name
-             const contact = document.getElementById('validationDefault07');
-            if (contact.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-             // Validate first name
-             const middlename = document.getElementById('validationDefault06');
-            if (middlename.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your middle name');
-            }
-
-            // Validate first name
-            const firstNameInput = document.getElementById('validationDefault01');
-            if (firstNameInput.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your first name');
-            }
-
-            // Validate last name
-            const lastNameInput = document.getElementById('validationDefault02');
-            if (lastNameInput.value.trim() === '') {
-                isValid = false;
-                alert('Please enter your last name');
-            }
-
-            // Validate email
-            const emailInput = document.getElementById('validationDefault11');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value)) {
-                isValid = false;
-                alert('Please enter a valid email address');
-            }
-
-            // Validate password
-            const passwordInput = document.getElementById('validationDefault12');
-            if (passwordInput.value.trim() === '') {
-                isValid = false;
-                alert('Please enter a password');
-            }
-
-            // Validate captcha
-            if (captchaField.value.trim() !== captchaDisplay.textContent) {
-                isValid = false;
-                alert('Captcha does not match');
-                // Reload captcha
-                captchaDisplay.textContent = getCaptcha();
-                captchaField.value = ''; // Clear input field
-            }
-
-            // Validate terms and conditions checkbox
-            const termsCheckbox = document.getElementById('invalidCheck2');
-            if (!termsCheckbox.checked) {
-                isValid = false;
-                alert('Please agree to the terms and conditions');
-            }
-
-            return isValid;
-        }
-    });
-
-    function existing_email () {
+            function existing_email () {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -506,29 +482,17 @@
                 text: "Successfull register",
                 icon: "success"
                 });
-                        let firstname =document.querySelector('#validationDefault01').value;
-                        let lastname =document.querySelector('#validationDefault02').value = "";
-                        let contact =document.querySelector('#validationDefault07').value = "";
-                        let middlename =document.querySelector('#validationDefault06').value = "";
-                        let Block =document.querySelector('#validationDefault03').value = "";
-                        let Barangay =document.querySelector('#validationDefault08').value = "";
-                        let City =document.querySelector('#validationDefault09').value = "";
-                        let Province =document.querySelector('#validationDefault10').value = "";
-                        let Email =document.querySelector('#validationDefault11').value = "";
-                        let Password =document.querySelector('#validationDefault12').value = "";
-                        let Secret =document.querySelector('#validationDefault13').value = "";
-                        let Answer =document.querySelector('#validationDefault14').value = "";
-                        let captchaField = document.getElementById('captcha').value = "";
-
             }
 </script>
 
-<!--This is for fontawesome icon-->
-<script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-<!--This is bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-<!--sweet  alert 2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
+
+     
+          <!--This is for fontawesome icon-->
+          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
+         <!--This is bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+            <!--sweet  alert 2 -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body><!--https://www.youtube.com/watch?v=_0B7wy05WHk-->
 </html>
