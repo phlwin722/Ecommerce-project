@@ -169,7 +169,7 @@
               <div class="co" style=" margin-top:10PX; ">
                               <ul class="nav nav-tabs" id="myTab" role="tablist" style="">
                                 <label style="padding: 10px; font-weight: bold;">PROFILE ACCOUNT</label>
-                                <li class="nav-item" role="presentation" style="margin-left: 559px;">
+                                <li class="nav-item" role="presentation" style="margin-left: 450px;">
                                   <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">User Account info</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
@@ -563,7 +563,12 @@
           </div>
 
           <script>
-             
+                           // when click cart icon the page will be go on add to cart interface
+                           document.querySelector('.shopping_cart').addEventListener('click', function(){
+                            event.preventDefault(); // to avoid refresh website
+                            console.log("POTa")
+                    window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
+                  });
               // Function to fetch data using AJAX to fetch all products
               function fetchData() {
                              let firstname = document.querySelector("#firstname");
