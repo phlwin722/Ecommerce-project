@@ -10,8 +10,8 @@
         die("Connection Error:" .$con->connect_error);
     } else {
         $selectedCroduct = $_GET ['selectedCategory'];
-
-        $Stmt = $con->prepare("SELECT * FROM product_list WHERE Category = ?");
+        $selectedCroduct = "%$selectedCroduct%";
+        $Stmt = $con->prepare("SELECT * FROM product_list WHERE Category LIKE ?");
         $Stmt->bind_param("s",$selectedCroduct);
         
         // store the  product on aaray

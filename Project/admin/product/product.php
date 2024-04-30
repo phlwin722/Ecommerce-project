@@ -256,6 +256,66 @@
                         </div>
 
             </div>
+                                      
+            <!-- Modal edit-->
+          <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body edit text-start">
+
+                           <form class="row" action="#" style="height:400px" method="POST" enctype="multipart/form-data">
+                              <div class="col-md-3">
+                                  <label for="validationDefault01" class="form-label">Product name</label>
+                                  <input type="text" class="form-control" id="product_name" name="product_name" required>
+                              </div>
+                              <div class="col-md-3">
+                                  <label for="validationDefault02" class="form-label">Price</label>
+                                  <input type="number" class="form-control" id="Price" name="price" value="1" required min="1">
+                              </div>
+                            
+                              <div class="col-md-3">
+                                  <label for="validationDefaultUsername" class="form-label">Quantity</label>
+                                  <div class="input-group">
+                                      <input type="number" class="form-control" id="Quantity" name="quantity" aria-describedby="inputGroupPrepend2" value="1" required min="1">
+                                  </div>
+                              </div>
+                              <div class="col-md-3">
+                                  <label for="validationDefault02" class="form-label">Category</label>
+                                  <select class="form-select" id="category" aria-label="Default select example" name="category" required>
+                                      <option hidden>Choose...</option>
+                                      <option value="Gaming Accessories">Gaming Accessories</option>
+                                      <option value="Musical Instrument">Musical Instrument</option>
+                                      <option value="Kitchen Tools">Kitchen Tools</option>
+                                      <option value="Women's Fassion & Accessories">Womens Fassion & Accessories</option>
+                                      <option value="Computer Accessories">Computer Accessories</option>
+                                      <option value="Automotive & Motorcyle Parts">Automotive & Motorcyle Parts</option>
+                                      <option value="Electronic Accessories">Electronic Accessories</option>
+                                      <option value="Health &  Beauty">Health & Beauty</option>
+                                      <option value="Men's Fassion & Accessories">Mens Fassion & Accessories</option>
+                                </select>
+                              </div>
+                              <div class="col-md-12" style="margin-top: -1px;">
+                                  <img src="/shopping-cart-oche/Project/Image/default-image.jpg" id="imagePreview" class="" alt="Default Image" height="250px" width="250px">
+                              </div>
+                              <div class="col-12">
+                              <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" value="" required  accept="image/png, image/jpeg, image/jpg">
+                                  <div class="invalid-feedback">Please select an image.</div>
+                              </div>
+                          </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Upload</button>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- Modal edit-->
+
                <!--JQuerry library-->
                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                
@@ -288,7 +348,7 @@
                                     <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
                                     <td>${product.Category}</td>
                                     <td class="text-center"> 
-                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                        <a href="#" onclick="editprodSpecific('${product.Product_code}')" class="btn btn-sm edit-data" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
                                         <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                     </td>
                                 </tr>`;
@@ -296,6 +356,8 @@
                   })
                   }
                 }
+
+
         // Function to fetch data using ajax
         function fetchData() {
             let xhr = new XMLHttpRequest();
@@ -348,7 +410,7 @@
                                     <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
                                     <td>${product.Category}</td>
                                     <td class="text-center"> 
-                                        <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                        <a href="#" onclick="editprodSpecific('${product.Product_code}')"  class="btn btn-sm edit-data" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
                                         <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                     </td>
                                 </tr>`;
@@ -365,7 +427,64 @@
 
         // Call the fetchData function when the page loads
         window.onload = fetchData;
+                // edit product
+        // Handler for editing specific product
+        function editprodSpecific (Product_code) {
+          let xhr = new XMLHttpRequest ();
+          xhr.onreadystatechange = function () {
+            if (this.readyState === 4  && this.status === 200 ) {
+                let data =  JSON.parse (this.responseText);
+                
+                 if (data.length === 0)  {
 
+                 }else {
+                  let product_name =document.querySelector('#product_name');
+                  let Price =document.querySelector('#Price');
+                  let Quantity =document.querySelector('#Quantity');
+                  let category =document.querySelector('#category');
+                  let imageInput =document.querySelector('#imageInput');
+                  let imagePreview = document.querySelector('#imagePreview');
+                    data.forEach(product => {
+                    product_name.value = `${product.Product_name}`;
+                    Price.value = `${product.Price}`;
+                    Quantity.value = `${product.Quantity}` ; 
+                    // set image using src
+                    imagePreview.src= `product_image_list/${product.Image}`;
+
+                    //Iterate throuch each option
+                    category.querySelectorAll('option').forEach(option =>{
+                      // check if the option values matches the feteched category
+                      if(option.value === `${product.Category}`){
+                        // set the selected attribut if theres match
+                        option.selected = true;
+                      }
+                    })
+                    imageInput.src = `product_image_list/${product.Image}`;
+
+                  })
+                 }
+            }
+          }
+          xhr.open("GET",'display_edit_category.php?productcode='+Product_code,true);
+          xhr.send();
+        }
+       // this when click choose file the picture will show on web
+       $(document).ready(function(){
+                // listen for changes in the file input
+                    $('#imageInput').on('change', function (){
+                        var input = this;
+                        if (input.files && input.files[0]){
+                            var reader = new FileReader();
+                            reader.onload = function (e){
+                                // set the source of the image element to the upload image
+                                $('#imagePreview').attr('src', e.target.result);
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    });
+                });
+
+        // edit product
        // Handler for deleting specific product
         function deleteprodSpecific(Product_code) {
             var xmlhttp = new XMLHttpRequest();
@@ -426,7 +545,7 @@
                                                         <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
                                                         <td>${product.Category}</td>
                                                         <td class="text-center"> 
-                                                            <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
+                                                            <a href="#" onclick="editprodSpecific('${product.Product_code}')" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
                                                             <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
                                                         </td>
                                                     </tr>
@@ -454,6 +573,8 @@
 
       </script>
 
+       <!--JQuerry library-->
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="newproduct.js" ></script>
         <!--This is for fontawesome icon-->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
