@@ -101,11 +101,11 @@
               <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
               <label for="floatingPassword">Password</label>
             </div>
-                <a>Forget Password</a>
+                <a href="/shopping-cart-oche/Project/login/forget_password/forget.php" style="text-decoration: none;">Forget Password</a>
                 <br>
                 <br>
               <button type="submit" class="btn btn-primary form-control" name="sign_button">Sign in</button>
-              <a  href="/shopping-cart-oche/Project/login/signup.php" class="btn btn-outline-dark form-control" style="margin-top: 10px;">Sign up</a>
+              <a  href="/shopping-cart-oche/Project/login/signup.php" class="btn btn-outline-dark form-control" style="margin-top: 10px; ">Sign up</a>
             </form>
           </div>
         </div>
