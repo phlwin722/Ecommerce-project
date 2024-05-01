@@ -55,7 +55,7 @@
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
-        <title>Add to Cart</title>
+        <title>Order</title>
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -167,59 +167,25 @@
            <!--Display product-->
           <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
-
-              <div class="card position-relative" style="width: 100%; padding:10px; height:100px;">            
-                        <div class="" style="font-size:18px; margin-left:15px;">
-                            <i class="fa-solid fa-location-dot" style="color: #de0202;"></i>
-                                Delivery Address
-                        </div>
-                      <div class="card-body" style="position:relative;">
-                          <label style="font-weight:bold;" id="full_name"></label>
-                          <label id="address"></label>
-                          <input hidden type="text" id="addresss" >
-                          <input hidden type="text" id="fullname" >
-                          <input hidden type="text" id="contact" >
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change">
-                            Change
-                            </button>
-                            <!-- Button trigger modal -->
-                      </div>  
-                  </div>
-
-
+                <h2 style="margin:10px 0px 10px 0px">History order</h2>
                   <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
                       <div class="card-body" style="position:relative;">
                           <label style="font-weight:bold;">  
-                              <input class="form-check-input productCheckbox" type="checkbox" value="" id="">  Product
+                        Product
                           </label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
-                          <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:630px;">Unit Price</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:475px;">Quantity</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:320px;">Total Price</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:190px;">Status</label>
+                          <label class="card-text" style="font-weight:bold; position:absolute; right:10px;">Mode of payment</label>
                       </div>
                   </div>
                   <!--products-->
+
                   <div class="row cem" style=""> 
+                  
                  </div>
-                        <div class="card position-relative " style="width: 100%; padding:10px; height:70px;">
-                            <div class="card-body" style="position:relative;">
-                                <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
-                                <label style="" for="selectAllCheckbox">Select All</label>
-                                <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
-                                <label for="payment" style="margin-left:120px;">Payment</label>
-                                    
-                                <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
-                                <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
-                                <button type="button" id="buy_now" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
-                                        Buy now
-                                    </button>
-                            </div>
-                                    <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:20px; left:400px;">
-                                        <option value="Cash On Delivery">Cash On Delivery</option>
-                                        <option disabled value="Gcash">Gcash (Not Available)</option>
-                                    </select>
-                        </div>
+
               </div>
           </div>
 
@@ -542,85 +508,14 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="insertproduct" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                         </div>
                     </div>
                     </div>
                      <!--Modal payment Verification-->
               <!---->
-          <script> 
-// buy now product
-// buy now product
-document.querySelector('#insertproduct').addEventListener('click', function () {
-    // Select all checked checkboxes with the class 'productCheckbox'
-    const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
-    
-    // Iterate over each checked checkbox
-    productCheckboxes.forEach(checkbox => {
-        // Get the data-productCode attribute value from the checkbox
-        const productCode = checkbox.dataset.productCode;
-        
-        // Find the closest parent element with the class 'card' to access product information
-        const productCard = checkbox.closest('.card');
-        
-        // Find the corresponding input fields within the productCard
-        const productImageElement = productCard.querySelector('.product_Image');
-        const productImage = productImageElement ? productImageElement.value : '';
-        const productNameElement = productCard.querySelector('.product_name');
-        const productName = productNameElement ? productNameElement.value : '';
-        const productPriceElement = productCard.querySelector('.product_price');
-        const productPrice = productPriceElement ? productPriceElement.value : '';
-        const productQuantityElement = productCard.querySelector('.product_quantity');
-        const productQuantity = productQuantityElement ? productQuantityElement.value : '';
-        const productTotalPriceElement = productCard.querySelector('.product_totalprice');
-        const productTotalPrice = productTotalPriceElement ? productTotalPriceElement.value : '';
-        const userEmailElement = productCard.querySelector('.user_email');
-        const userEmail = userEmailElement ? userEmailElement.value : '';
-        const modal =document.querySelector('#modalpayment');
-        const modalInstance = bootstrap.Modal.getInstance(modal);
-        const payment =document.querySelector('#payment').value
-        const addresss = document.querySelector('#addresss').value;
-        const contact = document.querySelector('#contact').value;
-        const fullname = document.querySelector('#fullname').value;
-
-        // Prepare the data to be sent to the server
-        const formData = new FormData();
-        formData.append('product_code', productCode);
-        formData.append('product_name', productName);
-        formData.append('quantity', productQuantity);
-        formData.append('price', productPrice);
-        formData.append('total_price', productTotalPrice);
-        formData.append('email', userEmail);
-        formData.append('image', productImage);
-        formData.append('payment', payment);
-        formData.append('addresss', addresss);
-        formData.append('contact', contact);
-        formData.append('fullname', fullname);
-        
-        // Send the data to the server for insertion into the order_product table
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const data = JSON.parse(this.responseText);
-                if (data.success) {
-                    // If insertion is successful, delete the product from cart_product
-                    modalInstance.hide();
-                    fetchData();
-                } else {
-                    console.error('Failed to insert product into order_product table.');
-                }
-            }
-        };
-        xhr.open('POST', 'insert_order.php', true);
-        xhr.send(formData);
-    });
-});
-
-
-// buy now product
-
-            // search
+          <script>
               document.getElementById('searchForm').addEventListener('submit', function(event) {
                   event.preventDefault(); // Prevent form submission
 
@@ -687,9 +582,14 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                   xhr.onreadystatechange = function() {
                       if (this.readyState === 4 && this.status === 200) {
                           let data = JSON.parse(this.responseText);
-                          populateTable(data);
-
-                            let firstname = document.querySelector("#firstname");
+                          populateTable(data);             
+                      }
+                  };
+                  xhr.open("GET", "add_to_cart_fetch.php", true);
+                  xhr.send();
+              }
+              function fetch_user () {
+                let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
 
                               let xhr = new XMLHttpRequest();
@@ -707,287 +607,77 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                               };
                               xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
                               xhr.send();
-                      }
-                  };
-                  xhr.open("GET", "add_to_cart_fetch.php", true);
-                  xhr.send();
               }
 
               // Function to populate table with fetched data
               function populateTable(data) {
-
-                if (data.length === 0) {
-                    const tableBody = document.querySelector('.cem');
+                  const tableBody = document.querySelector('.cem');
+                  tableBody.innerHTML = ''; // Clear previous results
+                  if (data.length === 0) {
                     tableBody.innerHTML = `<div class="col-12">
-                          <div class="card" style="width: 100%; padding:10px; height:200px;">
+                          <div class="card" style="width: 100%; padding:10px; height:300px;">
                            
-                          <p class="text-center" style="font-size:40px; color:red; padding-top:50px;">No add to cart found!</p>
+                          <p class="text-center" style="font-size:40px; color:red; padding-top:100px;">No History found!</p>
                              
                           </div>
                       </div>`;
+                  }else {
+                    const tableBody = document.querySelector('.cem');
+                    tableBody.innerHTML = ''; // Clear previous results
+                    data.forEach(product => {
+                      const row = `
+                      <div class="col-12">
+                          <div class="card" style="width: 100%; padding:10px; height:125px;">
+                              <div class="row">
+                                  <div class="" style=" width:165px; ">
+                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                  </div>
+                                  <div class="col-3" style="">
+                                      <label style="padding-top:15px;">${product.Product_name}</label>
+                                  </div>
+                                  <div class="col position-relative" style="">
+                                      <div style="position: absolute; top: 36%; left:33%;">
+                                          <lable>₱ ${product.Price}</lable> 
                     
-                }else{
-                  const tableBody = document.querySelector('.cem');
-                  tableBody.innerHTML = ''; // Clear previous results
-                  data.forEach(product => {
-                    const row = `<div class="col-12">
-                    <div class="card" style="width: 100%; padding:10px; height:120px;">
-                        <div class="row">
-                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
-                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
-                            </div>
-                            <div class="" style=" width:165px;">
-                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                <input type ="text" hidden class="product_Image" value="${product.Image}">
-                            </div>
-                            <div class="col">
-                                <label style="padding-top:15px;">${product.Product_name}</label>
-                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
-                                <input type ="text" class="user_email" hidden  value="${product.Email}">
-                            </div>
-                            <div class="col-1 position-relative" style="width:130px;">
-                                <div style="position: absolute; top: 36%; left:33%;">
-                                    <label>₱ </label> 
-                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                </div>
-                            </div>
-                            <div class="col position-relative" style="width:125px;">
-                                <div style="position: absolute; top: 30%; left:15%;">
-                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-1 position-relative">
-                                <div style="position: absolute; top: 36%; left:20%;">
-                                    <label>₱ </label> 
-                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                </div>
-                            </div>
-                            <div class="col-2 position-relative" style="width:180px;">
-                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
-                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-                tableBody.innerHTML += row;
+                                      </div>
+                                  </div>
+                                  <div class="col position-relative" style="  ">
+                                      <div style="position: absolute; top: 36%; left:48%;">                         
+                                        <lable>${product.Quantity}</label>
+                                      </div>
+                                  </div>
+                                  <div class="col position-relative" style=" ">
+                                      <div style="position: absolute; top: 36%; left:35%;;">
+                                          <lable>₱ ${product.Total_price}</lable> 
+                                      </div>
+                                  </div>
+                                  <div class="col position-relative" style="">
+                                      <div style="position: absolute; top: 36%; left:28%;">
+                                          <lable>${product.Status} </lable> 
+                                      </div>
+                                  </div>
+                                  <div class="col position-relative text-center" style="">
+                                      <div style="position: absolute; top: 36%;">
+                                          <lable>${product.Mode_payment} </lable>
+                                      </div>
+                                  </div>                                
+                              </div>
+                          </div>
+                      </div>
+                      `;
+                      tableBody.innerHTML += row;
                   });
-                }
-                  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
-                  // Delete All data
-                  const deleteAllData = document.getElementById('DeleteDataAll');
-
-                  // Add event listener to the "Select All" checkbox
-                  selectAllCheckbox.addEventListener('change', function() {
-                      // Iterate through each product checkbox
-                      productCheckboxes.forEach(checkbox => {
-                          // Set the checked property of each product checkbox to match the "Select All" checkbox
-                          checkbox.checked = selectAllCheckbox.checked;
-                      });
-                      calculateTotalPrice(); // Recalculate total price when "Select All" checkbox is clicked
-                  });
-
-                  deleteAllData.addEventListener('click', function (){
-                  let checkedProducts = [];
-                  productCheckboxes.forEach(checkbox => {
-                      if (checkbox.checked) {
-                          checkedProducts.push(checkbox.dataset.productCode);
-                      }
-                  });
-
-                  // Check if any product is checked
-                  if (checkedProducts.length > 0) {
-                     // Send a request to delete all checked products
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.onreadystatechange =function (){
-                           if (this.readyState == 4 && this.status == 200){
-                            fetchData();
-                              calculateTotalPrice(); // Recalculate total price after deletion
-                              alert('Products deleted successfully');
-                               // Uncheck all checkboxes
-                              productCheckboxes.forEach(checkbox => {
-                                  checkbox.checked = false;
-                              });
-                              selectAllCheckbox.checked = false; // Uncheck selectAllCheckbox
-                           }
-                        }
-                        xmlHttp.open("GET","delete_all_data_cart.php",true);
-                        xmlHttp.send();
-                      // Send a request to delete all checked products
-                  } else {
-                      // If no product is checked, display a message
-                      alert('Please select at least one product to delete.');
                   }
-              });
+              }
 
-                  productCheckboxes.forEach(checkbox => {
-                      checkbox.addEventListener('change', calculateTotalPrice);
+                   // to go the add to cart
+                   document.querySelector('.shopping_cart').addEventListener('click', function (){
+                    window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
                   });
-
-                  calculateTotalPrice(); // Calculate total price initially
-              }
-
-              // Function to recalculate and display total price
-              function calculateTotalPrice() {
-                  let totalPrice = 0;
-                  let totalItems = 0; // Initialize totalItems variable
-                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
-
-                  // Iterate through each product checkbox
-                  productCheckboxes.forEach(checkbox => {
-                      if (checkbox.checked) {
-                          // Get the corresponding total price element for the checked product
-                          let productCode = checkbox.dataset.productCode;
-                          let totalPriceElement = document.getElementById(`totalprice_${productCode}`);
-                          if (totalPriceElement) {
-                              // Parse the total price value and add it to the total price accumulator
-                              let price = parseFloat(totalPriceElement.value);
-                              if (!isNaN(price)) {
-                                  totalPrice += price;
-                                  totalItems++; // Increment totalItems when a checkbox is checked
-
-                              }
-                          }
-                      }
-                  });
-
-                  // Display the total price somewhere on the page
-                  document.getElementById('totalPriceDisplay').textContent = "₱ " + totalPrice.toFixed(2);
-                  document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
-              }
-
-              // Quantity add or minus
-              function minus(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let quantity = parseInt(quantityElement.value);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let totalprice = parseInt(totalpriceElement.value);
-
-                  if (quantity > 1) {
-                      let decrement = 1;
-                      quantity -= decrement;
-                      totalprice -= unitprice;
-                      totalpriceElement.value = totalprice.toString();
-                      quantityElement.value = quantity.toString();
-                  } else {
-                      // If the quantity is already 1, do nothing or display a message
-                      // In this example, we're leaving it as is
-                  }
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-              function add(Product_code) {
-                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
-                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
-                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
-                  let unitprice = parseInt(unitpriceElement.value);
-                  let quantity = parseInt(quantityElement.value);
-                  let increment = 1;
-                  quantity += increment;
-                  let totalPrice = unitprice * quantity;
-
-                  // Update the value displayed on the webpage
-                  quantityElement.value = quantity.toString();
-                  totalpriceElement.value = totalPrice.toString();
-                  calculateTotalPrice(); // Recalculate total price after quantity change
-              }
-
-              // function to fetch user information using ajax to fetch user info
-             
-              function fetchDataUserInfo() {
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        fetchData();
-
-                        let data = JSON.parse(this.responseText);
-
-                        const full_name = document.querySelector('#full_name');
-                        const address = document.querySelector('#address');
-                        const barangaySelect = document.querySelector('#barangaySelect');
-                        const citySelect = document.querySelector('#citySelect');
-                        const provinceSelect = document.querySelector('#provinceSelect');
-                        const block_lot = document.querySelector('#block_lote');
-                        const addresss = document.querySelector('#addresss');
-                        const contact = document.querySelector('#contact');
-                        const fullname = document.querySelector('#fullname');
-                        // Clear previous content
-                        full_name.innerHTML = "";
-                        address.innerHTML = "";
-                        block_lot.innerHTML = "";
-
-                        data.forEach(product => {
-                            // Concatenate full name
-                            full_name.innerHTML += `${product.First_name} ${product.Last_name} ${product.Contact_No} `;
-                            fullname.value += `${product.First_name} ${product.Last_name}`;
-                            // Concatenate address
-                            address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
-                            addresss.value  += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
-                            // concatenate block_lot
-                            block_lot.value += `${product["Block_&_Lot"]}`;
-                            // concatenate block_lot
-                            contact.value += `${product.Contact_No}`;
-
-                            // set into let from the database
-                            let barangay = `${product.Barangay}`;
-                            let city = `${product.City}`;
-                            let province = `${product.Province}`;
-
-                            //Iterate through each option
-                            barangaySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === barangay){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //Iterate through each option
-                            citySelect.querySelectorAll('option').forEach(option => {
-                              // check if the option value maches the feteched barangay
-                              if (option.value === city){
-                                // set the selected attribute if there a match
-                                option.selected = true;
-                              }
-                            });
-
-                            //iterate throuch each option
-                            provinceSelect.querySelectorAll('option').forEach(option => {
-                              // check if the option values matches the fetched barangay
-                              if (option.value === province){
-                                // set the selected attribute if theres a match
-                                option.selected  =true;
-                              }
-                            }); 
-                      
-                        });
-                    }
-                };
-                xhr.open("GET", "user_information_fetch.php", true);
-                xhr.send();
-            }
-
-            // Function to delete a product
-            function DeleteProduct(Product_code) {
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.onreadystatechange = function() {
-                  if (this.readyState == 4 && this.status == 200) {
-                      calculateTotalPrice();  // Recalculate total price after quantity change
-                      fetchData(); // Fetch updated data after deletion
-                      console.log(Product_code)
-                  }
-              };
-              xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
-              xmlhttp.send();
-              }
 
               window.onload = function() {
                 fetchData();
+                fetch_user();
                 fetchDataUserInfo();
               };
           </script>

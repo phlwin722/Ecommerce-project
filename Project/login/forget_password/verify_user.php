@@ -11,11 +11,12 @@ if ($con->connect_error) {
     die("Connection Failed: " . $con->connect_error);
 } else {
     $secret_quest = $_GET['secret_quest'];
-    $answer = $_GET['answer'];
-
-    $sql = "SELECT Email FROM user_information WHERE Secret_question = ?";
+    $answer = $_GET['answer']; 
+    $email = $_GET['email'];
+ 
+    $sql = "SELECT * FROM user_information WHERE Email = ? AND Secret_question = ?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $secret_quest);
+    $stmt->bind_param("ss", $email, $secret_quest);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -23,14 +24,16 @@ if ($con->connect_error) {
     $response = array();
 
     if ($result->num_rows > 0) {
-        $sqll = "SELECT Email FROM user_information WHERE Answer = ?";
+        $sqll = "SELECT * FROM user_information WHERE Answer = ? AND Email = ?";
         $stmt_answer = $con->prepare($sqll);
-        $stmt_answer->bind_param("s", $answer);
+        $stmt_answer->bind_param("ss", $answer, $email);
         $stmt_answer->execute();
         $resultt = $stmt_answer->get_result();
 
         if ($resultt->num_rows > 0) {
             $response["success"] = true;
+        } else {
+            $response["success"] = false;
         }
     } else {
         $response["success"] = false;

@@ -111,9 +111,10 @@
           // secret question
           document.querySelector('#Verifysecret').addEventListener('click',function ( ) {
             event.preventDefault();
+            let email = document.querySelector('#validationDefault11').value;
             let selectquestion =document.querySelector('#validationDefault13').value;
             let answer =document.querySelector('#validationDefault16').value;    
-
+            console.log(email)
             let secret_ques = document.querySelector('#secret_ques');       
             let secret = document.querySelector('#secret');
 
@@ -135,7 +136,7 @@
                 }
               }
             }
-            xhr.open("GET","verify_user.php?secret_quest=" + selectquestion + "&answer=" + answer ,true);
+            xhr.open("GET","verify_user.php?secret_quest=" + selectquestion + "&answer=" + answer + "&email=" + email ,true);
             xhr.send();
           })
           ///  email

@@ -298,12 +298,12 @@
                                       <option value="Gaming Accessories">Gaming Accessories</option>
                                       <option value="Musical Instrument">Musical Instrument</option>
                                       <option value="Kitchen Tools">Kitchen Tools</option>
-                                      <option value="Women's Fassion & Accessories">Women's Fassion & Accessories</option>
+                                      <option value="Women's Fassion & Accessories">Womens Fassion & Accessories</option>
                                       <option value="Computer Accessories">Computer Accessories</option>
                                       <option value="Automotive & Motorcyle Parts">Automotive & Motorcyle Parts</option>
                                       <option value="Electronic Accessories">Electronic Accessories</option>
-                                      <option value="Health &  Beauty">Health &  Beauty</option>
-                                      <option value="Men's Fassion & Accessories">Men's Fassion & Accessories</option>
+                                      <option value="Health &  Beauty">Health & Beauty</option>
+                                      <option value="Men's Fassion & Accessories">Mens Fassion & Accessories</option>
                                 </select>
                               </div>
                               <div class="col-md-12" style="margin-top: -80px;">

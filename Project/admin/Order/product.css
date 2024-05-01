@@ -1,0 +1,98 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+*{
+    box-sizing: border-box;
+}
+
+@media only screen and (min-width:1024px) and (max-width:1439px) {
+      /* laptop layout*/
+ #wid{
+    width: 270px;
+    background-color:  rgb(43, 43, 43);
+    padding: 0px 10px 0px 20px;
+ }
+ .color{
+    color:white;
+    text-decoration: none;
+    margin-top: 10px;
+    }
+
+    .navicon{
+        background-color: rgb(43, 43, 43);
+    }
+    /*will be adjust the height base on screen*/
+    .row{
+        height: 585px;
+    }
+    
+    /*Accordion css*/
+    .accordion{
+        background-color:  rgb(43, 43, 43);
+        color: #f3f3f3;
+        cursor: pointer;
+        padding: 5px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition:  0.4s ease-out;
+        border-radius: 5px 5px 0px 0px;
+    }
+    .accordion:hover {
+        background-color: #ffffff;
+    }
+    .active{
+        background-color: rgb(68, 67, 67);
+    }
+    .accordion:after{
+        content: '\002B'; /*plus sign*/
+        color: #fafafa;
+        font-weight: bold;
+        float: right;
+        transition: 0.4s ease-out;
+        margin-left: 5px;
+    }
+    .active:after{
+        content: "\2212";
+    }
+    .panel{
+        max-width: 100%;
+        padding: 0px 18px;
+        background-color: rgb(68, 67, 67);
+        max-height:0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        color: white;
+    }
+    hr{
+       background-color: white;
+         }
+      .nav-link:hover{
+        background-color: #6d6d6d;
+        border-radius: 5px;
+        color: rgb(0, 0, 0);
+        
+      }
+      .nav-link{
+        text-align: left;
+      }
+   #grid_size{
+    width: 1100px;
+   }
+   #roww{
+    justify-content: center;
+   }
+   .dispaly_Table {
+    width: 100%;
+    height: 480px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }    
+ 
+}

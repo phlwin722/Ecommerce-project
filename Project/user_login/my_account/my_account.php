@@ -87,6 +87,8 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                     <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/my_account/my_account.php">My Account</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/order_cart/order_cart.php">My Purchase</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="/shopping-cart-oche/Project/user_login/logout/logout.php">Logout</a></li>
                     </ul>

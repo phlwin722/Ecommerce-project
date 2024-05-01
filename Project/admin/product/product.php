@@ -258,7 +258,7 @@
             </div>
                                       
             <!-- Modal edit-->
-          <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade "  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
@@ -286,8 +286,14 @@
             <select class="form-select" id="category" name="category" required>
                 <option hidden>Choose...</option>
                 <option value="Gaming Accessories">Gaming Accessories</option>
-                <option value="Musical Instrument">Musical Instrument</option>
-                <option value="Kitchen Tools">Kitchen Tools</option>
+               <option value="Musical Instrument">Musical Instrument</option>
+                                      <option value="Kitchen Tools">Kitchen Tools</option>
+                                      <option value="Women's Fassion & Accessories">Womens Fassion & Accessories</option>
+                                      <option value="Computer Accessories">Computer Accessories</option>
+                                      <option value="Automotive & Motorcyle Parts">Automotive & Motorcyle Parts</option>
+                                      <option value="Electronic Accessories">Electronic Accessories</option>
+                                      <option value="Health &  Beauty">Health & Beauty</option>
+                                      <option value="Men's Fassion & Accessories">Mens Fassion & Accessories</option>
                 <!-- Add more options as needed -->
             </select>
         </div>
@@ -422,81 +428,90 @@
         window.onload = fetchData;
                 // edit product
         // Handler for editing specific product
-        function editprodSpecific (Product_code) {
-          let xhr = new XMLHttpRequest ();
-          xhr.onreadystatechange = function () {
-            if (this.readyState === 4  && this.status === 200 ) {
-                let data =  JSON.parse (this.responseText);
-                
-                 if (data.length === 0)  {
+// Handler for editing specific product
+function editprodSpecific(Product_code) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let data = JSON.parse(this.responseText);
 
-                 }else {
-                  let product_code =document.querySelector('#product_code');
-                  let product_name =document.querySelector('#product_name');
-                  let Price =document.querySelector('#Price');
-                  let Quantity =document.querySelector('#Quantity');
-                  let category =document.querySelector('#category');
-                  let imageInput =document.querySelector('#imageInput');
-                  let imagePreview = document.querySelector('#imagePreview');
-                    data.forEach(product => {
-                      product_code.value = `${product.Product_code}`;
+            if (data.length === 0) {
+
+            } else {
+                let product_code = document.querySelector('#product_code');
+                let product_name = document.querySelector('#product_name');
+                let Price = document.querySelector('#Price');
+                let Quantity = document.querySelector('#Quantity');
+                let category = document.querySelector('#category');
+                let imagePreview = document.querySelector('#imagePreview');
+
+                data.forEach(product => {
+                    product_code.value = `${product.Product_code}`;
                     product_name.value = `${product.Product_name}`;
                     Price.value = `${product.Price}`;
-                    Quantity.value = `${product.Quantity}` ; 
-                    // set image using src
-                    imagePreview.src= `product_image_list/${product.Image}`;
+                    Quantity.value = `${product.Quantity}`;
 
-                    //Iterate throuch each option
-                    category.querySelectorAll('option').forEach(option =>{
-                      // check if the option values matches the feteched category
-                      if(option.value === `${product.Category}`){
-                        // set the selected attribut if theres match
-                        option.selected = true;
-                      }
-                    })
-                    imageInput.src = `product_image_list/${product.Image}`;
-                    console.log(`${product.Image}`);
-                  })
-                 }
+                    // Set image preview using src
+                    imagePreview.src = `product_image_list/${product.Image}`;
+
+                    // Iterate through each option
+                    category.querySelectorAll('option').forEach(option => {
+                        // Check if the option values match the fetched category
+                        if (option.value === `${product.Category}`) {
+                            // Set the selected attribute if there's a match
+                            option.selected = true;
+                        }
+                    });
+                });
             }
-          }
-          xhr.open("GET",'display_edit_category.php?productcode='+Product_code,true);
-          xhr.send();
         }
-        // upload image
-        document.querySelector('#edit_product').addEventListener('click', function () {
-            let product_code = document.querySelector('#product_code').value;
-            let product_name = document.querySelector('#product_name').value;
-            let price = document.querySelector('#Price').value;
-            let quantity = document.querySelector('#Quantity').value;
-            let category = document.querySelector('#category').value;
-            let imageInput = document.querySelector('#imageInput').files[0];
+    };
+    xhr.open("GET", 'display_edit_category.php?productcode=' + Product_code, true);
+    xhr.send();
+}
 
-            let formData = new FormData();
-            formData.append('product_code', product_code);
-            formData.append('product_name', product_name);
-            formData.append('price', price);
-            formData.append('quantity', quantity);
-            formData.append('category', category);
-            formData.append('image', imageInput);
+// Upload edit image
+document.querySelector('#edit_product').addEventListener('click', function() {
+    let product_code = document.querySelector('#product_code').value;
+    let product_name = document.querySelector('#product_name').value;
+    let price = document.querySelector('#Price').value;
+    let quantity = document.querySelector('#Quantity').value;
+    let category = document.querySelector('#category').value;
+    let modal = document.querySelector('#staticBackdrop');
+    let modalInstance = bootstrap.Modal.getInstance(modal);
+    let imageInput = document.querySelector('#imageInput').files[0];
 
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    let data = JSON.parse(this.responseText);
-                    if (data.success) {
-                        // Handle success
-                       fetchData ();
-                       alert('Sucessfull update')
-                    } else {
-                        // Handle failure
-                        alert("Failed to edit product.");
-                    }
-                }
+    let formData = new FormData();
+    formData.append('product_code', product_code);
+    formData.append('product_name', product_name);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('category', category);
+
+    // Check if a new image is selected
+    if (imageInput) {
+        formData.append('image', imageInput);
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            let data = JSON.parse(this.responseText);
+            if (data.success) {
+                // Handle success
+                modalInstance.hide();
+                alert('Successful update');
+                fetchData();
+            } else {
+                // Handle failure
+                alert("Failed to edit product.");
             }
-            xhr.open("POST", "product_edit.php", true);
-            xhr.send(formData);
-        });
+        }
+    };
+    xhr.open("POST", "product_edit.php", true);
+    xhr.send(formData);
+});
+
        // this when click choose file the picture will show on web
        $(document).ready(function(){
                 // listen for changes in the file input

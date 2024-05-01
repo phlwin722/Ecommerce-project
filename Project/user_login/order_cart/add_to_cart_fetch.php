@@ -14,7 +14,7 @@
     }
    
     // Prepare and bind SQL query with parameter
-    $sql = "SELECT Product_code, Product_name, Quantity, Price ,Email, Image FROM cart_product WHERE Email = ?" ;
+    $sql = "SELECT Product_code, Product_name, Quantity, Price ,Total_price,Status, Mode_payment,Image FROM order_product WHERE Email = ?" ;
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $email);
 
