@@ -87,7 +87,7 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><i class="fa-solid fa-chart-line"></i>
                               Sales Report
                               
                           </a>
@@ -225,50 +225,28 @@
 
             </div>
                                       
-        
-
                <!--JQuerry library-->
                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                
                <script>
 
-        // Function to fetch data using ajax
-        function fetchData() {
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        let data = JSON.parse(this.responseText);
-                        populateTable(data);
-
-                        let firstname = document.querySelector("#firstname");
-                        let lastname = document.querySelector('#lastname');
-
-                        let xhr = new XMLHttpRequest();
-                        xhr.onreadystatechange = function () {
-                          if (this.readyState === 4 && this.status === 200) {
-                            let data = JSON.parse(this.responseText);
-
-                            // Assuming data is an array of objects
-                            data.forEach(info => {
-                              console.log (info.First_name)
-                              lastname.innerHTML = info.Last_name;
-                              firstname.innerHTML = info.First_name;
-                            });
-                          }
-                        };
-                        xhr.open("GET", "/shopping-cart-oche/Project/admin/my_account/admin_fetch_info.php", true);
-                        xhr.send();
-                    } else {
-                        console.error("Error fetching data: " + this.status);
-                    }
-                }
-            };
-            xhr.open("GET", "Order_fetch.php", true);
-            xhr.send();
+ // Function to fetch data using ajax
+function fetchData() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            if (this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                populateTable(data);
+            } else {
+                console.error("Error fetching data: " + this.status);
+            }
         }
+    };
+    xhr.open("GET", "Order_fetch.php", true);
+    xhr.send();
+}
 
-        // Function to populate table with fetched data
 // Function to populate table with fetched data
 function populateTable(data) {
     const tableBody = document.querySelector('#productTable tbody');
@@ -281,8 +259,8 @@ function populateTable(data) {
                         <td>${message.Price}</td>
                         <td>${message.Total_price}</td>
                         <td>
-                            <select class="form-select" id="status_${message.Status}" style="width:200px;" aria-label="Default select example">
-                                <option hidden>Open this select menu</option>
+                            <select class="form-select status-select" data-product-code="${message.Product_code}" style="width:110px;" aria-label="Default select example">
+                                <option hidden>Choose..</option>
                                 <option value="Pending">Pending</option>
                                 <option value="On the way">On the way</option>
                                 <option value="Delivered">Delivered</option>
@@ -295,12 +273,43 @@ function populateTable(data) {
                     </tr>`;
         tableBody.innerHTML += row;
     });
+
+    // Set select options for each select element
+    const selectElements = document.querySelectorAll('.status-select');
+    selectElements.forEach(select => {
+        const productCode = select.dataset.productCode;
+        const selectedStatus = data.find(message => message.Product_code === productCode).Status;
+        const options = select.querySelectorAll('option');
+        options.forEach(option => {
+            if (option.value === selectedStatus) {
+                option.selected = true;
+            }
+        });
+        
+ // Add event listener to each select element
+ select.addEventListener('change', function() {
+            const selectedStatus = select.value; // Get the newly selected status
+            updateStatus(productCode, selectedStatus); // Call the function to update status in the database
+        });
+    });
 }
 
+// Function to update status in the database
+function updateStatus(productCode, selectedStatus) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_status.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            console.log('Status updated successfully');
+        }
+    };
+    let params = `productCode=${productCode}&selectedStatus=${selectedStatus}`;
+    xhr.send(params);
+}
 
-        // Call the fetchData function when the page loads
-        window.onload = fetchData;
-
+// Call the fetchData function when the page loads
+window.onload = fetchData;
         //
         document.getElementById('searchQuery').addEventListener('input', function(event) {
         search();
@@ -322,26 +331,52 @@ function populateTable(data) {
                               const searchResults = document.querySelector('#productTable tbody');
                               searchResults.innerHTML = ''; // Clear previous results
                               if (data.length === 0) {
-                                  searchResults.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
+                                  searchResults.innerHTML = '<tr><td colspan="10">No results found</td></tr>';
                               } else {
                                 const tableBody = document.querySelector('#productTable tbody');
                                 tableBody.innerHTML = ''; // Clear previous results
                                 data.forEach(product => {
                                     const row = `<tr>
-                                                        <td>${product.Product_code}</td>
-                                                        <td>${product.Product_name}</td>
-                                                        <td>${product.Price}</td>
-                                                        <td>${product.Quantity}</td>
-                                                        <td><img src="product_image_list/${product.Image}" width="100" height="100" title="${product.Product_name}"></td>
-                                                        <td>${product.Category}</td>
-                                                        <td class="text-center"> 
-                                                            <a href="#" onclick="editprodSpecific('${product.Product_code}')" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                                            <a href="#" onclick="deleteprodSpecific('${product.Product_code}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                                        </td>
-                                                    </tr>
+                                                    <td>${product.Product_name}</td>
+                                                    <td><img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="100"></td>
+                                                    <td>${product.Quantity}</td>
+                                                    <td>${product.Price}</td>
+                                                    <td>${product.Total_price}</td>
+                                                    <td>
+                                                        <select class="form-select status-select" data-product-code="${product.Product_code}" style="width:110px;" aria-label="Default select example">
+                                                            <option hidden>Choose..</option>
+                                                            <option value="Pending">Pending</option>
+                                                            <option value="On the way">On the way</option>
+                                                            <option value="Delivered">Delivered</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>${product.Full_name}</td>
+                                                    <td>${product.Contact_No}</td>
+                                                    <td>${product.Address}</td>
+                                                    <td>${product.Mode_payment}</td>
+                                                </tr>
                                               `;
                                     tableBody.innerHTML += row;
                                   });
+                                  
+                            // Set select options for each select element
+                            const selectElements = document.querySelectorAll('.status-select');
+                            selectElements.forEach(select => {
+                                const productCode = select.dataset.productCode;
+                                const selectedStatus = data.find(message => message.Product_code === productCode).Status;
+                                const options = select.querySelectorAll('option');
+                                options.forEach(option => {
+                                    if (option.value === selectedStatus) {
+                                        option.selected = true;
+                                    }
+                                });
+                                
+                        // Add event listener to each select element
+                        select.addEventListener('change', function() {
+                                    const selectedStatus = select.value; // Get the newly selected status
+                                    updateStatus(productCode, selectedStatus); // Call the function to update status in the database
+                                });
+                            });
                               }
                           })
                           .catch(error => {
