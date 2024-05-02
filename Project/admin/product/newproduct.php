@@ -87,7 +87,7 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><img width="" height="25" src="https://img.icons8.com/windows/32/FFFFFF/total-sales--v1.png" alt="total-sales--v1"/>
                               Sales Report
                               
                           </a>
@@ -102,16 +102,6 @@
                               </ul>
                               </div>
                           </li>
-                          <li class="nav-item">                  
-                            <!-- this is settings-->
-                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                            <div class="panel">
-                              <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="#">Archive product</a></li>
-                              </ul>
-                              </div>
-                        </li>
                         <li class="nav-item">
                           <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
@@ -156,7 +146,7 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><i class="fa-solid fa-chart-line"></i>
                               Sales Report
                           </a>
                           </li> 
@@ -170,16 +160,6 @@
                               </ul>
                               </div>
                           </li>
-                          <li class="nav-item">                  
-                            <!-- this is settings-->
-                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                            <div class="panel">
-                              <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="#">List product</a></li>
-                                <li><a class="dropdown-item" href="#">Archive product</a></li>
-                              </ul>
-                              </div>
-                        </li>
                         <li class="nav-item">
                           <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>

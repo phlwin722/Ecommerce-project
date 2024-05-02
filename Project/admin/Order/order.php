@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/product/product.css">
         <link rel="stylesheet" href="/shopping-cart-oche/Project/login/logo.css">
-        <title>Product</title>
+        <title>Order</title>
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
            
@@ -102,16 +102,6 @@
                               </ul>
                               </div>
                           </li>
-                          <li class="nav-item">                  
-                            <!-- this is settings-->
-                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                            <div class="panel">
-                              <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="/Project/admin/product.html">List product</a></li>
-                                <li><a class="dropdown-item" href="#">Archive product</a></li>
-                              </ul>
-                              </div>
-                        </li>
                         <li class="nav-item">
                           <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
@@ -156,7 +146,7 @@
                           </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/guest_user/guest.php"><i class="fa-solid fa-chart-line"></i>
+                            <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><i class="fa-solid fa-chart-line"></i>
                               Sales Report
                           </a>
                           </li> 
@@ -170,16 +160,6 @@
                               </ul>
                               </div>
                           </li>
-                          <li class="nav-item">                  
-                            <!-- this is settings-->
-                            <button class="accordion nav-link" style="color: white;" > <i class="fa-solid fa-gear" style="margin-right:10px;"></i> Setting</button>
-                            <div class="panel">
-                              <ul class="nav flex-column">
-                                <li><a class="dropdown-item" href="#">List product</a></li>
-                                <li><a class="dropdown-item" href="#">Archive product</a></li>
-                              </ul>
-                              </div>
-                        </li>
                         <li class="nav-item">
                           <a class="nav-link" style="color: white;"  href="/shopping-cart-oche/Project/admin/logout/logout.php"><i class="fa-solid fa-right-from-bracket"style="margin-right:10px;" ></i>Logout</a>
                         </li>
@@ -301,7 +281,7 @@ function updateStatus(productCode, selectedStatus) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log('Status updated successfully');
+             alert('Status updated successfully');
         }
     };
     let params = `productCode=${productCode}&selectedStatus=${selectedStatus}`;

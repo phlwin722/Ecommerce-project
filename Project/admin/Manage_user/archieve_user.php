@@ -255,15 +255,14 @@
                         
                           data.forEach(user => {
                           const row = `<tr>
-                                          <td>${user.ID}</td>
-                                          <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
-                                          <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
-                                          <td>${user.Email}</td>
-                                          <td> 
-                                              <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                              <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                          </td>
-                                      </tr>`;
+                                            <td>${user.ID}</td>
+                                            <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
+                                            <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
+                                            <td>${user.Email}</td>
+                                            <td class="text-center"> 
+                                                  <a href="#" onclick="restoreSpecific('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash-can-arrow-up" style="color: #29a805; font-size:25px;"></i></a>
+                                              </td>
+                                        </tr>`;
                             tableBody.innerHTML += row;
                             searchQuery.innerHTML="";
                         });
@@ -271,43 +270,6 @@
                 }
 
               // end searh product
-
-              // this is to display the product when category is select 
-              function showProduct(selecterProduct){
-                let xhr = new XMLHttpRequest ();
-                xhr.onreadystatechange = function () {
-                  if (this.readyState === 4 && this.status === 200) {
-                      let data = JSON.parse(this.responseText);
-                      showresult(data);
-                  }
-                }
-                xhr.open("GET","search_selected_product.php?selectedCategory=" +selecterProduct, true);
-                xhr.send();
-              }
-
-              function showresult (data){
-                event.preventDefault();
-                const tableBody = document.querySelector('#archieveTable tbody');
-                tableBody.innerHTML="";
-                console.log(data)
-                  if (data.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="7">No results found</td></tr>';
-                  }else {
-                    data.forEach(user => {
-                      const row = `<tr>
-                                      <td>${user.ID}</td>
-                                      <td>${user.First_name} ${user.Middle_name} ${user.Last_name}</td>
-                                      <td>${user['Block_&_Lot']} ${user.Barangay} ${user.City} ${user.Province}</td>
-                                      <td>${user.Email}</td>
-                                      <td> 
-                                          <a href="#" class="btn btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: green;"></i> </a>
-                                          <a href="#" onclick="delete_user('${user.ID}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                      </td>
-                                  </tr>`;
-                      tableBody.innerHTML += row;
-                });
-                  }
-              }
                 // Function to fetch data using ajax
                   function fetchData() {
                       let xhr = new XMLHttpRequest();
