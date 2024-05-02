@@ -655,7 +655,16 @@
               // function to fetch user information using ajax to fetch user info   
 
               document.querySelector('#changeinfo').addEventListener('click', function () {
-                let input_firstname = document.querySelector("#input_firstname").value;
+                Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  let input_firstname = document.querySelector("#input_firstname").value;
                 let input_lastname = document.querySelector('#input_lastname').value;
                 let input_middlename = document.querySelector("#input_middlename").value;
                 let input_contact = document.querySelector('#input_contact').value;
@@ -666,14 +675,14 @@
                 let input_email = document.querySelector("#input_email").value;
                 let input_sec_ques = document.querySelector('#input_sec_ques').value;
                 let input_answer = document.querySelector("#input_answer").value;  
-
+                
                 let xhr = new XMLHttpRequest ();
                 xhr.onreadystatechange =function () {
                   if (this.readyState === 4 && this.status === 200){
                     let data =JSON.parse(this.responseText);
                     if(data.success){
                       fetchData();
-                      alert ("Sucessfull updated")
+                      Swal.fire("Saved!", "", "success");
                     }
                   }
                 }
@@ -682,6 +691,10 @@
                 "&email=" +encodeURIComponent(input_email) + "&question=" +encodeURIComponent(input_sec_ques) + "&answer=" +encodeURIComponent(input_answer);
                 xhr.open("GET",url,true)
                 xhr.send();
+                } else if (result.isDenied) {
+                  Swal.fire("Changes are not saved", "", "info");
+                }
+              });
               })
               //changeinfo
               // change password
@@ -691,20 +704,45 @@
                 let retypePassword =document.querySelector('#retypePassword').value;
 
                 if (newPassword != retypePassword) {
-                  alert ('Please check the new password and retype password')
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Please check the new password and retype password",
+                  });
                 }else{
-                  let xhr = new XMLHttpRequest ();
+                  Swal.fire({
+                  title: "Do you want to save the changes?",
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: "Save",
+                  denyButtonText: `Don't save`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    let xhr = new XMLHttpRequest ();
                   xhr.onreadystatechange =function () {
                     if (this.readyState === 4 && this.status === 200) {
                       let data =JSON.parse (this.responseText);
                       if (data.success){
-                        window.location.href ='/shopping-cart-oche/Project/login/signin.php';
+                        Swal.fire("Saved!", "", "success");
+                        window.location.href ='/shopping-cart-oche/Project/user_login/logout/logout.php';
+                      }else {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "Please check the password",
+                        });
                       }
                     }
                   }
                   let url = "changePassword.php?currentPassword=" +encodeURIComponent(currentPassword) + "&newPassword=" + encodeURIComponent(newPassword) ;
                   xhr.open("GET",url,true);
                   xhr.send ();
+                    
+                  } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                  }
+                });
                 }
               })
               // change password
@@ -712,6 +750,7 @@
                 fetchData();    
               };
           </script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
          <!--This is bootstrap-->

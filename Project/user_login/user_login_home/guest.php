@@ -433,7 +433,27 @@
                   // Function to populate table with fetched data
                 function populateTable(data) {
                     const tableBody = document.querySelector('.cem');
-                    tableBody.innerHTML = ''; // Clear previous results
+                    if (data.length === 0 ){
+                      tableBody.innerHTML = ''; // Clear previous results
+                      const row = `<div class="card" aria-hidden="true">
+                                  <img src="..." class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h5 class="card-title placeholder-glow">
+                                      <span class="placeholder col-6"></span>
+                                    </h5>
+                                    <p class="card-text placeholder-glow">
+                                      <span class="placeholder col-7"></span>
+                                      <span class="placeholder col-4"></span>
+                                      <span class="placeholder col-4"></span>
+                                      <span class="placeholder col-6"></span>
+                                      <span class="placeholder col-8"></span>
+                                    </p>
+                                    <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                                  </div>
+                                </div>`;
+                      tableBody.innerHTML += row ;
+                    }else {
+                      tableBody.innerHTML = ''; // Clear previous results
                     data.forEach(product => {
                         const row = `<div class="col-md-3">
                                          <form class="productForm" enctype="multipart/form-data">
@@ -461,6 +481,7 @@
                                     </div>`;
                         tableBody.innerHTML += row;
                     });
+                    }
 
                     // Attach event listeners to newly created buttons
                     document.querySelectorAll('.CartBtn').forEach(btn => {

@@ -44,7 +44,7 @@
                 </button>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/my_account/myacct.html">My Account</a></li>
+                  <li><a class="dropdown-item" href="/shopping-cart-oche/Project/admin/my_account/myacct.php">My Account</a></li>
                   <li><hr class="dropdown-divider"></li>
                 </ul>
               </div>

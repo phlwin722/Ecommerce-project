@@ -180,7 +180,7 @@
                           <input hidden type="text" id="fullname" >
                           <input hidden type="text" id="contact" >
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change">
+                            <button type="button" class="btn " style="color:blue;" data-bs-toggle="modal" data-bs-target="#change_addresss">
                             Change
                             </button>
                             <!-- Button trigger modal -->
@@ -212,7 +212,7 @@
                                 <label class="card-text" style=" position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
                                 <label class="card-text" style=" position:absolute; right:250px;" id="totalPriceDisplay"></label>
                                 <button type="button" id="buy_now" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
-                                        Buy now
+                                        Check out
                                     </button>
                             </div>
                                     <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:20px; left:400px;">
@@ -277,7 +277,7 @@
 
           <!-- modal edit -->
                     <!-- Modal -->
-                    <div class="modal fade" id="change" tabindex="-1" style="margin-right: 200px;" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="change_addresss" tabindex="-1" style="margin-right: 200px;" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -285,14 +285,14 @@
                             
                         </div>
                         <div class="modal-body">
-                            <form class="" action="edit_address.php" method="post">
+                            <form class="">
                                 <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control" id="contact" name="contact" value="" >
+                                    <input type="text" class="form-control" id="contactt" name="contact" value="" >
                                     <label for="floatingInput">Contact</label>
                                     
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control" id="block_lote" name="block_lot" value="" placeholder="name@example.com">
+                                    <input type="text" class="form-control" id="block_lot" name="block_lot" value="" placeholder="name@example.com">
                                     <label for="floatingInput">Block & Lot</label>
                                     
                                 </div>
@@ -415,7 +415,7 @@
                                     <label for="floatingInput">City</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                <select class="form-select"  id="provinceSelect"  name="province" required>
+                                <select class="form-select"  id="provinceSelect"  required>
                                 <option value="Abra">Abra</option> 
                                 <option value="Agusan del Norte">Agusan del Norte</option> 
                                 <option value="Agusan del Sur">Agusan del Sur</option> 
@@ -520,7 +520,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit" name="editChange">Save changes</button>
+                            <button class="btn btn-primary" id="change_address"  type="submit" name="">Save changes</button>
                         </div>
                         </form>
                         </div>
@@ -542,7 +542,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="insertproduct" class="btn btn-primary">Save changes</button>
+                            <button type="button" id="insertproduct" class="btn btn-primary">Buy now</button>
                         </div>
                         </div>
                     </div>
@@ -550,6 +550,55 @@
                      <!--Modal payment Verification-->
               <!---->
           <script> 
+          // edit address
+          document.querySelector('#change_address').addEventListener('click', function() {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+    Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        let contact = document.querySelector('#contactt').value;
+            let block_lote = document.querySelector('#block_lot').value;
+            let barangaySelect = document.querySelector('#barangaySelect').value;
+            let citySelect = document.querySelector('#citySelect').value;
+            let provinceSelect = document.querySelector('#provinceSelect').value;
+            let change_addresss =document.querySelector('#change_addresss');
+            let modalInstance =bootstrap.Modal.getInstance(change_addresss);
+        if (result.isConfirmed) {
+    
+
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    let data = JSON.parse(this.responseText);
+                    if (data.success) {
+                        modalInstance.hide();
+                        fetchData();
+                        success();
+                        fetchDataUserInfo();
+                    }
+                }
+            }
+            let url = "edit_address.php?contact=" + encodeURIComponent(contact) +
+                "&block_lot=" + encodeURIComponent(block_lote) +
+                "&barangay=" + encodeURIComponent(barangaySelect) +
+                "&cityy=" + encodeURIComponent(citySelect) +
+                "&province=" + encodeURIComponent(provinceSelect);
+            xhr.open("GET", url, true);
+            xhr.send();
+        } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+            modalInstance.hide();
+                        fetchData();
+        }
+    });
+});
+
 // buy now product
 // buy now product
 document.querySelector('#insertproduct').addEventListener('click', function () {
@@ -566,17 +615,17 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
         
         // Find the corresponding input fields within the productCard
         const productImageElement = productCard.querySelector('.product_Image');
-        const productImage = productImageElement ? productImageElement.value : '';
+        const productImage =  productImageElement.value;
         const productNameElement = productCard.querySelector('.product_name');
-        const productName = productNameElement ? productNameElement.value : '';
+        const productName = productNameElement.value;
         const productPriceElement = productCard.querySelector('.product_price');
-        const productPrice = productPriceElement ? productPriceElement.value : '';
+        const productPrice = productPriceElement.value;
         const productQuantityElement = productCard.querySelector('.product_quantity');
-        const productQuantity = productQuantityElement ? productQuantityElement.value : '';
+        const productQuantity = productQuantityElement.value ;
         const productTotalPriceElement = productCard.querySelector('.product_totalprice');
-        const productTotalPrice = productTotalPriceElement ? productTotalPriceElement.value : '';
+        const productTotalPrice = productTotalPriceElement.value;
         const userEmailElement = productCard.querySelector('.user_email');
-        const userEmail = userEmailElement ? userEmailElement.value : '';
+        const userEmail = userEmailElement.value;
         const modal =document.querySelector('#modalpayment');
         const modalInstance = bootstrap.Modal.getInstance(modal);
         const payment =document.querySelector('#payment').value
@@ -605,6 +654,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                 const data = JSON.parse(this.responseText);
                 if (data.success) {
                     // If insertion is successful, delete the product from cart_product
+                    success();
                     modalInstance.hide();
                     fetchData();
                 } else {
@@ -688,12 +738,16 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                       if (this.readyState === 4 && this.status === 200) {
                           let data = JSON.parse(this.responseText);
                           populateTable(data);
+                      }
+                  };
+                  xhr.open("GET", "add_to_cart_fetch.php", true);
+                  xhr.send();
 
-                            let firstname = document.querySelector("#firstname");
+                  let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
 
-                              let xhr = new XMLHttpRequest();
-                              xhr.onreadystatechange = function () {
+                              let xhrs = new XMLHttpRequest();
+                              xhrs.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status === 200) {
                                   let data = JSON.parse(this.responseText);
 
@@ -705,12 +759,8 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                                   });
                                 }
                               };
-                              xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
-                              xhr.send();
-                      }
-                  };
-                  xhr.open("GET", "add_to_cart_fetch.php", true);
-                  xhr.send();
+                              xhrs.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
+                              xhrs.send();
               }
 
               // Function to populate table with fetched data
@@ -903,7 +953,6 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
                     if (this.readyState === 4 && this.status === 200) {
-                        fetchData();
 
                         let data = JSON.parse(this.responseText);
 
@@ -912,14 +961,14 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                         const barangaySelect = document.querySelector('#barangaySelect');
                         const citySelect = document.querySelector('#citySelect');
                         const provinceSelect = document.querySelector('#provinceSelect');
-                        const block_lot = document.querySelector('#block_lote');
+                        const block_lote = document.querySelector('#block_lot');
                         const addresss = document.querySelector('#addresss');
-                        const contact = document.querySelector('#contact');
+                        const contact = document.querySelector('#contactt');
                         const fullname = document.querySelector('#fullname');
                         // Clear previous content
                         full_name.innerHTML = "";
                         address.innerHTML = "";
-                        block_lot.innerHTML = "";
+                        block_lote.innerHTML = "";
 
                         data.forEach(product => {
                             // Concatenate full name
@@ -929,7 +978,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                             address.innerHTML += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
                             addresss.value  += `${product["Block_&_Lot"]} ${product.Barangay} ${product.City} ${product.Province}`;
                             // concatenate block_lot
-                            block_lot.value += `${product["Block_&_Lot"]}`;
+                            block_lote.value += `${product["Block_&_Lot"]}`;
                             // concatenate block_lot
                             contact.value += `${product.Contact_No}`;
 
@@ -985,12 +1034,21 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
               xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
               xmlhttp.send();
               }
+            //alert message
+              function success () {
+                Swal.fire({
+            title: "Successfull",
+            text: "",
+            icon: "success"
+            });
+              }
 
               window.onload = function() {
                 fetchData();
                 fetchDataUserInfo();
               };
           </script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
          <!--This is bootstrap-->

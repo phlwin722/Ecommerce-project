@@ -336,7 +336,17 @@
 
                             // Handler for archive specific product
                             function restoreSpecific(Product_code) {
-                              let searchQuery =document.querySelector('#searchQuery');
+                              Swal.fire({
+                              title: "Are you sure?",
+                              text: "You won't be able to revert this!",
+                              icon: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              confirmButtonText: "Yes, archieve it!"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                let searchQuery =document.querySelector('#searchQuery');
                               var xmlhttp = new XMLHttpRequest();
                               xmlhttp.onreadystatechange = function() {
                                   if (this.readyState == 4 && this.status == 200) {
@@ -345,7 +355,12 @@
                                               // Product deleted successfully
                                               fetchData(); // Fetch updated data after deletion
                                               searchQuery.innerHTML="";
-                                              alert("Product restored successfully.");
+                                              Swal.fire({
+                                                title: "Restored!",
+                                                text: "User information restored successfully.",
+                                                icon: "success"
+                                              });
+                                             
                                           } else {
                                               // Error deleting product
                                               console.error("Error deleting product: " + response.message);
@@ -357,12 +372,16 @@
                               // Send a GET request to the PHP file with the product code as a parameter
                               xmlhttp.open("GET", "archieve_user_and_delete_archieve.php?q=" + Product_code, true);
                               xmlhttp.send();
+                              }
+                            });
                           }
         // Call the fetchData function when the page loads
         window.onload = fetchData;
             </script>
         <script src="manage.js"></script>
         <!--This is for fontawesome icon-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
         <!--This is bootstrap-->
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

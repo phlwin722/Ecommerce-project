@@ -399,7 +399,17 @@
 
                             // Handler for archive specific product
                             function restoreSpecific(Product_code) {
-                              let searchQuery =document.querySelector('#searchQuery');
+                              Swal.fire({
+                              title: "Are you sure?",
+                              text: "You won't be able to revert this!",
+                              icon: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              confirmButtonText: "Yes, archieve it!"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                let searchQuery =document.querySelector('#searchQuery');
                               var xmlhttp = new XMLHttpRequest();
                               xmlhttp.onreadystatechange = function() {
                                   if (this.readyState == 4 && this.status == 200) {
@@ -408,7 +418,11 @@
                                               // Product deleted successfully
                                               fetchData(); // Fetch updated data after deletion
                                               searchQuery.innerHTML="";
-                                              alert("Product restored successfully.");
+                                              Swal.fire({
+                                              title: "Restored!",
+                                              text: "Product restored successfully.",
+                                              icon: "success"
+                                            });
                                           } else {
                                               // Error deleting product
                                               console.error("Error deleting product: " + response.message);
@@ -420,6 +434,9 @@
                               // Send a GET request to the PHP file with the product code as a parameter
                               xmlhttp.open("GET", "archieve_product_and_delete_archieve.php?q=" + Product_code, true);
                               xmlhttp.send();
+                              }
+                            });
+                            
                           }
 
 
@@ -428,6 +445,8 @@
             
             </script>
         <!-- JavaScript dependencies -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
           <!-- jQuery -->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
           <!-- Popper.js for Bootstrap -->

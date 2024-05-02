@@ -288,8 +288,6 @@ function updateStatus(productCode, selectedStatus) {
     xhr.send(params);
 }
 
-// Call the fetchData function when the page loads
-window.onload = fetchData;
         //
         document.getElementById('searchQuery').addEventListener('input', function(event) {
         search();
@@ -314,49 +312,48 @@ window.onload = fetchData;
                                   searchResults.innerHTML = '<tr><td colspan="10">No results found</td></tr>';
                               } else {
                                 const tableBody = document.querySelector('#productTable tbody');
-                                tableBody.innerHTML = ''; // Clear previous results
-                                data.forEach(product => {
-                                    const row = `<tr>
-                                                    <td>${product.Product_name}</td>
-                                                    <td><img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="100"></td>
-                                                    <td>${product.Quantity}</td>
-                                                    <td>${product.Price}</td>
-                                                    <td>${product.Total_price}</td>
-                                                    <td>
-                                                        <select class="form-select status-select" data-product-code="${product.Product_code}" style="width:110px;" aria-label="Default select example">
-                                                            <option hidden>Choose..</option>
-                                                            <option value="Pending">Pending</option>
-                                                            <option value="On the way">On the way</option>
-                                                            <option value="Delivered">Delivered</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>${product.Full_name}</td>
-                                                    <td>${product.Contact_No}</td>
-                                                    <td>${product.Address}</td>
-                                                    <td>${product.Mode_payment}</td>
-                                                </tr>
-                                              `;
-                                    tableBody.innerHTML += row;
-                                  });
-                                  
-                            // Set select options for each select element
-                            const selectElements = document.querySelectorAll('.status-select');
-                            selectElements.forEach(select => {
-                                const productCode = select.dataset.productCode;
-                                const selectedStatus = data.find(message => message.Product_code === productCode).Status;
-                                const options = select.querySelectorAll('option');
-                                options.forEach(option => {
-                                    if (option.value === selectedStatus) {
-                                        option.selected = true;
-                                    }
-                                });
-                                
-                        // Add event listener to each select element
-                        select.addEventListener('change', function() {
-                                    const selectedStatus = select.value; // Get the newly selected status
-                                    updateStatus(productCode, selectedStatus); // Call the function to update status in the database
-                                });
-                            });
+    tableBody.innerHTML = ""; // Clear existing table rows
+    data.forEach(message => {
+        const row = `<tr>
+                        <td>${message.Product_name}</td>
+                        <td><img src="/shopping-cart-oche/Project/admin/product/product_image_list/${message.Image}" width="100" height="100"></td>
+                        <td>${message.Quantity}</td>
+                        <td>${message.Price}</td>
+                        <td>${message.Total_price}</td>
+                        <td>
+                            <select class="form-select status-select" data-product-code="${message.Product_code}" style="width:110px;" aria-label="Default select example">
+                                <option hidden>Choose..</option>
+                                <option value="Pending">Pending</option>
+                                <option value="On the way">On the way</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </td>
+                        <td>${message.Full_name}</td>
+                        <td>${message.Contact_No}</td>
+                        <td>${message.Address}</td>
+                        <td>${message.Mode_payment}</td>
+                    </tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    // Set select options for each select element
+    const selectElements = document.querySelectorAll('.status-select');
+    selectElements.forEach(select => {
+        const productCode = select.dataset.productCode;
+        const selectedStatus = data.find(message => message.Product_code === productCode).Status;
+        const options = select.querySelectorAll('option');
+        options.forEach(option => {
+            if (option.value === selectedStatus) {
+                option.selected = true;
+            }
+        });
+        
+ // Add event listener to each select element
+ select.addEventListener('change', function() {
+            const selectedStatus = select.value; // Get the newly selected status
+            updateStatus(productCode, selectedStatus); // Call the function to update status in the database
+        });
+    });
                               }
                           })
                           .catch(error => {
@@ -376,11 +373,36 @@ window.onload = fetchData;
                       }
                   });
 
+                  function info () {
+                        let firstname = document.querySelector("#firstname");
+                        let lastname = document.querySelector('#lastname');
+
+                        let xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                            let data = JSON.parse(this.responseText);
+
+                            // Assuming data is an array of objects
+                            data.forEach(info => {
+                              console.log (info.First_name)
+                              lastname.innerHTML = info.Last_name;
+                              firstname.innerHTML = info.First_name;
+                            });
+                          }
+                        };
+                        xhr.open("GET", "/shopping-cart-oche/Project/admin/my_account/admin_fetch_info.php", true);
+                        xhr.send();
+                      }
+                      
+                      window.onload =function () {
+                        fetchData();
+                        info ();
+                      }
       </script>
 
        <!--JQuerry library-->
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="newproduct.js" ></script>
+        <script src="product.js" ></script>
         <!--This is for fontawesome icon-->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
         <!--This is bootstrap-->

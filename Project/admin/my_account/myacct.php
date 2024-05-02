@@ -216,7 +216,7 @@
   
                                   <div class="row text-start" style="margin-top: 100px; justify-content: left;">
                                      <div class="col">
-                                      <button type="button" id="changeinfo" class="btn btn-primary">Submit</button>
+                                      <button type="button" id="changeinfo" class="btn btn-primary">Save changes</button>
                                      <button type="button" class="btn btn-secondary">Cancel</button>
                                      </div>
                                </div>
@@ -303,16 +303,33 @@
                     let retypePassword = document.querySelector("#retypePassword").value;
 
                     if (newPassword !== retypePassword) {
-                        alert("Please check the new password or retype password");
+                          Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please check the new password and retype password",
+                      });
                     } else {
-                        let xhr = new XMLHttpRequest();
+                      Swal.fire({
+                          title: "Do you want to save the changes?",
+                          showDenyButton: true,
+                          showCancelButton: true,
+                          confirmButtonText: "Save",
+                          denyButtonText: `Don't save`
+                        }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if (result.isConfirmed) {
+                            let xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function () {
                             if (this.readyState === 4 && this.status === 200) {
                                 let data = JSON.parse(this.responseText);
                                 if (data.success) {
                                     window.location.href = "/shopping-cart-oche/Project/admin/logout/logout.php";
                                 } else {
-                                    alert("Password update failed. Please type current password.");
+                                  Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "Password update failed. Please type current password.",
+                        });
                                 }
                             }
                         }
@@ -321,13 +338,27 @@
 
                         xhr.open("GET", url, true);
                         xhr.send();
+                            Swal.fire("Saved!", "", "success");
+                          } else if (result.isDenied) {
+                            Swal.fire("Changes are not saved", "", "info");
+                          }
+                        });
                     }
                 });
                 // change password
 
                 // change info
                 document.querySelector('#changeinfo').addEventListener('click', function () {
-                  let input_lastname = document.querySelector('#input_lastname').value;
+                  Swal.fire({
+                  title: "Do you want to save the changes?",
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: "Save",
+                  denyButtonText: `Don't save`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    let input_lastname = document.querySelector('#input_lastname').value;
                   let input_firstname = document.querySelector('#input_firstname').value;
                   let input_email = document.querySelector('#input_email').value;
 
@@ -337,7 +368,7 @@
                       let data =JSON.parse(this.responseText);
                       if (data.success){
                         fetchinfo();
-                        alert("Successfull updated");
+                        Swal.fire("Saved!", "", "success");
                       }else{
 
                       }
@@ -347,9 +378,15 @@
                   let url = "changeinfo.php?changelastname=" + encodeURIComponent(input_lastname) + "&changefirstname=" + encodeURIComponent (input_firstname) + "&changeusername=" + encodeURIComponent (input_email);
                   xhr.open ("GET",url,true);
                   xhr.send();
+                  } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                  }
+                });
+                
                 })
                 // change info
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
              <script src="myacct.js" defer></script>
           <!--This is for fontawesome icon-->
           <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

@@ -306,13 +306,27 @@
         function delete_user(user_id){
           event.preventDefault();
           console.log(user_id)
-            let xhr = new XMLHttpRequest();
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function (){
               if (this.readyState === 4 && this.status === 200){
                 var response = JSON.parse(this.responseText);
                 if (response.success) {
                   fetchData();
-                  alert("Sucessfull deleted");
+                  Swal.fire({
+                title: "Deleted!",
+                text: "User information has been deleted.",
+                icon: "success"
+              });
                 }else{
                     alert("Error");
                 }
@@ -320,11 +334,14 @@
             }
             xhr.open("GET", "delete_user_and_archives.php?user_id="+user_id, true);
             xhr.send();
+            }
+          });
         }
 
         // Call the fetchData function when the page loads
         window.onload = fetchData;
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="manage.js"></script>
         <!--This is for fontawesome icon-->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

@@ -452,44 +452,57 @@ function editprodSpecific(Product_code) {
 
 // Upload edit image
 document.querySelector('#edit_product').addEventListener('click', function() {
-    let product_code = document.querySelector('#product_code').value;
-    let product_name = document.querySelector('#product_name').value;
-    let price = document.querySelector('#Price').value;
-    let quantity = document.querySelector('#Quantity').value;
-    let category = document.querySelector('#category').value;
-    let modal = document.querySelector('#staticBackdrop');
-    let modalInstance = bootstrap.Modal.getInstance(modal);
-    let imageInput = document.querySelector('#imageInput').files[0];
+      Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        let product_code = document.querySelector('#product_code').value;
+        let product_name = document.querySelector('#product_name').value;
+        let price = document.querySelector('#Price').value;
+        let quantity = document.querySelector('#Quantity').value;
+        let category = document.querySelector('#category').value;
+        let modal = document.querySelector('#staticBackdrop');
+        let modalInstance = bootstrap.Modal.getInstance(modal);
+        let imageInput = document.querySelector('#imageInput').files[0];
 
-    let formData = new FormData();
-    formData.append('product_code', product_code);
-    formData.append('product_name', product_name);
-    formData.append('price', price);
-    formData.append('quantity', quantity);
-    formData.append('category', category);
+        let formData = new FormData();
+        formData.append('product_code', product_code);
+        formData.append('product_name', product_name);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('category', category);
 
-    // Check if a new image is selected
-    if (imageInput) {
-        formData.append('image', imageInput);
-    }
-
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            let data = JSON.parse(this.responseText);
-            if (data.success) {
-                // Handle success
-                modalInstance.hide();
-                alert('Successful update');
-                fetchData();
-            } else {
-                // Handle failure
-                alert("Failed to edit product.");
-            }
+        // Check if a new image is selected
+        if (imageInput) {
+            formData.append('image', imageInput);
         }
-    };
-    xhr.open("POST", "product_edit.php", true);
-    xhr.send(formData);
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                if (data.success) {
+                    // Handle success
+                    modalInstance.hide();
+                    Swal.fire("Saved!", "", "success");
+                    fetchData();
+                } else {
+                    // Handle failure
+                    alert("Failed to edit product.");
+                }
+            }
+        };
+        xhr.open("POST", "product_edit.php", true);
+        xhr.send(formData);
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
 });
 
        // this when click choose file the picture will show on web
@@ -511,14 +524,28 @@ document.querySelector('#edit_product').addEventListener('click', function() {
         // edit product
        // Handler for deleting specific product
         function deleteprodSpecific(Product_code) {
-            var xmlhttp = new XMLHttpRequest();
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                         var response = JSON.parse(this.responseText);
                         if (response.success) {
                             // Product deleted successfully
                             fetchData(); // Fetch updated data after deletion
-                            alert("Product deleted successfully.");
+                            Swal.fire({
+                          title: "Deleted!",
+                          text: "Product has been deleted.",
+                          icon: "success"
+                        });
                         } else {
                             // Error deleting product
                             console.error("Error deleting product: " + response.message);
@@ -529,6 +556,9 @@ document.querySelector('#edit_product').addEventListener('click', function() {
             // Send a GET request to the PHP file with the product code as a parameter
             xmlhttp.open("GET", "delete_product_and_archives.php?q=" + Product_code, true);
             xmlhttp.send();
+            }
+          });
+
         }
         // to go the new product interface
         document.querySelector(".new_button").addEventListener("click", function () {
@@ -598,6 +628,8 @@ document.querySelector('#edit_product').addEventListener('click', function() {
       </script>
 
        <!--JQuerry library-->
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="newproduct.js" ></script>
         <!--This is for fontawesome icon-->
