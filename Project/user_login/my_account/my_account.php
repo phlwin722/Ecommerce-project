@@ -54,7 +54,7 @@
         <link rel="stylesheet" href="/shopping-cart-oche/Project/user_login/Add_to_cart/add_to_cartt.css">
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
-  
+           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>My account</title>
     </head>
     <body>
@@ -80,7 +80,7 @@
             <!--my account-->
             <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" id="srcimage" height="25" style="border-radius: 50%; width:30px;">
                       <!--Name of the user-->
                       <label id="firstname"></label> <label id="lastname"></label>
                     </button>
@@ -471,18 +471,18 @@
 
                                 </div>
                                 <!--2nd tab-->
-                                <div class="tab-pane fade text-start" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="">
-                                <div class="container"> 
-                                  <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" class="img-thumbnail rounded text-start" alt="...">   
-                                    <br>  
-                                  <button type="button" class="btn btn-light">Select Image</button>
-                                  <br>
-                                  <p style="color: rgb(14, 14, 14);"><label style="padding: 5px; background-color: rgb(241, 63, 63); width: 50px; border-radius: 5px; color: white;">Note!</label>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</p>
-                                  <a><button type="button" class="btn btn-primary">Submit</button></a>
-                                <a><button type="button" class="btn btn-secondary">Cancel</button></a>
-                                </div>  
-                              </div>
-                              <!--end tag of 2nd tab-->
+                              <div class="tab-pane fade text-start" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="padding: 10px;">
+                              <div class="container"> 
+                                 <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg"style="width: 400px; height: 300px; " id="imagePreview" class="img-thumbnail rounded text-start" alt="...">   
+                                  <br>  
+                                  <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" value="" style="margin-top: 5px;" required accept="image/png, image/jpeg, image/jpg">
+                                <br>
+                                <p style="color: rgb(14, 14, 14);"><label style="padding: 5px; background-color: rgb(241, 63, 63); width: 50px; border-radius: 5px; color: white;">Note!</label>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</p>
+                                <a><button type="button" id="changepicture" class="btn btn-primary">Submit</button></a>
+                               <a><button type="button" class="btn btn-secondary">Cancel</button></a>
+                              </div>  
+                            </div>
+                            <!--end tag of 2nd tab-->
                                 <!--3rd tab-->
                                 <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0" style="padding: 10px;height: 360px;">
                                   <div class="container text-start">
@@ -565,6 +565,48 @@
           </div>
 
           <script>
+            $(document).ready(function () {
+                $('#changepicture').click(function () {
+                  Swal.fire({
+                  title: "Do you want to save the changes?",
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: "Save",
+                  denyButtonText: `Don't save`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    let name = document.querySelector('#firstname').innerHTML;
+                    let imageInput = document.querySelector('#imageInput').files[0];
+                    console.log(name)
+                    let formData = new FormData();
+                    formData.append('firstname', name);
+                    // Check if a new image is selected
+                    if (imageInput) {
+                        formData.append('image', imageInput);
+                    }
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState === 4 && this.status === 200) {
+                            let data = JSON.parse(this.responseText);
+                            if (data.success) {
+                                // Handle success
+                                Swal.fire("Saved!", "", "success");
+                            } else {
+                                // Handle failure
+                                alert("Failed to edit product.");
+                            }
+                        }
+                    };
+                    xhr.open("POST", "picture_update.php", true);
+                    xhr.send(formData);
+                  } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                  }
+                });
+                })
+              })
                            // when click cart icon the page will be go on add to cart interface
                            document.querySelector('.shopping_cart').addEventListener('click', function(){
                             event.preventDefault(); // to avoid refresh website
@@ -586,6 +628,8 @@
                               let input_email = document.querySelector("#input_email");
                               let input_sec_ques = document.querySelector('#input_sec_ques');
                               let input_answer = document.querySelector("#input_answer");
+                              let srcimage =document.querySelector('#srcimage');
+                              let imagePreview =document.querySelector ('#imagePreview');
 
                               let xhr = new XMLHttpRequest();
                               xhr.onreadystatechange = function () {
@@ -604,6 +648,8 @@
                                     input_email.value = info.Email;
                                     console.log(info.City)
                                     input_answer.value = info.Answer;
+                                    srcimage.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
+                                    imagePreview.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
 
                                     let barangay = `${info.Barangay}`;
                                     let city = `${info.City}`;
@@ -749,6 +795,22 @@
               window.onload = function() {
                 fetchData();    
               };
+
+                 // this when click choose file the picture will show on web
+$(document).ready(function(){
+    // listen for changes in the file input
+    $('#imageInput').on('change', function (){
+        var input = this;
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function (e){
+                // set the source of the image element to the upload image
+                $('#imagePreview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+});
           </script>
           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
          <!--This is for fontawesome icon-->

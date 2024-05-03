@@ -38,7 +38,7 @@
                 <form class="d-flex" role="search" style="margin-right: 15px;" >
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" id="srcimage" height="25" style="border-radius: 50%;">
                     <!--Name of the user-->
                     <label id="firstname"></label> <label id="lastname"></label>
                     </button>
@@ -345,7 +345,7 @@
                     if (this.status === 200) {
                         let data = JSON.parse(this.responseText);
                         populateTable(data);
-
+                        let srcimage =document.querySelector('#srcimage');
                         let firstname = document.querySelector("#firstname");
                         let lastname = document.querySelector('#lastname');
 
@@ -359,6 +359,7 @@
                               console.log (info.First_name)
                               lastname.innerHTML = info.Last_name;
                               firstname.innerHTML = info.First_name;
+                              srcimage.src = `/shopping-cart-oche/Project/admin/my_account/admin_image/${info.Image}`;
                             });
                           }
                         };

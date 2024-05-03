@@ -19,7 +19,7 @@
         <title>Dashboard</title>
          <!--This is bootstrap-->
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-           
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -38,7 +38,7 @@
                 <form class="d-flex" role="search" style="margin-right: 15px;" >
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" id="srcimage" height="25" style="border-radius: 50%;">
                     <!--Name of the user-->
                     <label id="firstname"></label> <label id="lastname"></label>
                     </button>
@@ -88,8 +88,7 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" style="color: white;" href="/shopping-cart-oche/Project/admin/Sales_report/sale_report.php"><i class="fa-solid fa-chart-line"></i>
-                              Sales Report
-                              
+                              Sales Report                  
                           </a>
                           </li> 
                           <li class="nav-item">                  
@@ -174,10 +173,60 @@
                           <br>            
                           <div class="container text-center" style="height:120px;">
                               <div class="row">
-                                <div class="col" style="background-color:white; height:120px;">col</div>
-                                <div class="col" style="background-color:white; height:120px; margin-left:10px; margin-right:10px;">col</div>
-                                <div class="col" style="background-color:white; height:120px; margin-right:10px;">col</div>
-                                <div class="col" style="background-color:white; height:120px;">col</div>
+                                <div class="col" style="background-color:white; height:120px; width: 200px;">
+                                    <label style="font-size:25px; font-weight:bold;">User</label>
+                                    <br>
+                                    <div class="row">
+                                      <div class="col" style="padding-top:15px;">
+                                      <i class="fa-solid fa-users" style="font-size:30px;"></i>
+                                      </div>
+                                      <div class="col" style="padding-top:10px;">
+                                        <label for="" id="user" style="font-size:30px;"></label>
+                                      </div>
+                                    </div>
+                             
+                              </div>
+                                <div class="col" style="background-color:white; height:120px; margin-left:10px; margin-right:10px;">
+                                <label style="font-size:25px; font-weight:bold;">Order</label>
+                                <br>
+                                <div class="col"> 
+                                  <div class="row">
+                                      <div class="col" style="padding-top:15px;">
+                                      <i class="fas fa-shopping-bag" style="font-size:30px;"></i>   
+                                      </div>
+                                      <div class="col" style="padding-top:10px;">
+                                        <label for="" id="order" style="font-size:30px;"></label>
+                                      </div>
+                                    </div>
+                              </div>
+  
+                              </div>
+                                <div class="col" style="background-color:white; height:120px; margin-right:10px;">
+                                <label style="font-size:25px; font-weight:bold;">Product</label>
+                                <br>
+                                <div class="row">
+                                      <div class="col" style="padding-top:15px;">
+                                      <i class="fa-solid fa-box-open" style="font-size:30px;"> </i>
+                                      </div>
+                                      <div class="col" style="padding-top:10px;">
+                                        <label for="" id="product" style="font-size:30px;"></label>
+                                      </div>
+                                    </div>
+                                    
+                              </div>
+                                <div class="col" style="background-color:white; height:120px;">
+                                <label style="font-size:25px; font-weight:bold;">Total sales</label>
+                                <br>
+                                <div class="row">
+                                      <div class="col" style="padding-top:15px;">
+                                      <i class="fa-solid fa-chart-line" style="font-size:30px;"></i>
+                                      </div>
+                                      <div class="col" style="padding-top:10px;">
+                                        <label for="" id="sales" style="font-size:30px;"></label>
+                                      </div>
+                                    </div>
+                                    
+                              </div>
                               </div>
                           </div> 
                            <!--this is the list of table product-->
@@ -239,6 +288,7 @@
                       function info () {
                         let firstname = document.querySelector("#firstname");
                         let lastname = document.querySelector('#lastname');
+                        let srcimage =document.querySelector('#srcimage');
 
                         let xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function () {
@@ -250,16 +300,41 @@
                               console.log (info.First_name)
                               lastname.innerHTML = info.Last_name;
                               firstname.innerHTML = info.First_name;
+                              srcimage.src = `/shopping-cart-oche/Project/admin/my_account/admin_image/${info.Image}`;
                             });
                           }
                         };
                         xhr.open("GET", "/shopping-cart-oche/Project/admin/my_account/admin_fetch_info.php", true);
                         xhr.send();
                       }
+
+
                       window.onload =function () {
                         info ();
                         fetchData();
                       }
+
+                      $(document).ready(function () {
+                        let xhr = new XMLHttpRequest ();
+                        xhr.onreadystatechange = function () {
+                          if (this.readyState === 4 && this.status === 200){
+                            let response =JSON.parse(this.responseText);
+                            
+                            let user =document.querySelector('#user');
+                                    let product =document.querySelector('#product');
+                                    let order =document.querySelector('#order');
+                                    let sales =document.querySelector('#sales');
+
+                                    user.innerHTML =response.total_user;
+                                    product.innerHTML =response.total_product;
+                                    order.innerHTML =response.total_order;
+                                    sales.innerHTML =response.total_sales;
+                          }
+                        }
+                        xhr.open("GET","fetch.php",true);
+                        xhr.send();
+                      })
+
                 </script>
 
 

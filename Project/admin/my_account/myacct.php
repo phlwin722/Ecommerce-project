@@ -19,7 +19,8 @@
            <meta name="autor" content="Dexter Jamero">
             <!--This is bootstrap-->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  
+               <!--JQuerry library-->
+               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -38,7 +39,7 @@
                 <form class="d-flex" role="search" style="margin-right: 15px;">
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                      <img src="/shopping-cart-oche/Project/Image/logo.png" id="srcimage" height="25" style="border-radius: 50%;">
                      <!--Name of the user-->
                      <label id="firstname"></label> <label id="lastname"></label>
                     </button>
@@ -226,12 +227,12 @@
                               <!--2nd tab-->
                               <div class="tab-pane fade text-start" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="padding: 10px;">
                               <div class="container"> 
-                                 <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg" class="img-thumbnail rounded text-start" alt="...">   
+                                 <img src="/shopping-cart-oche/Project/Image/back-img-capha.jpg"style="width: 400px; height: 300px; " id="imagePreview" class="img-thumbnail rounded text-start" alt="...">   
                                   <br>  
-                                <button type="button" class="btn btn-light">Select Image</button>
+                                  <input type="file" class="form-control" aria-label="file example" id="imageInput" name="image" value="" style="margin-top: 5px;" required accept="image/png, image/jpeg, image/jpg">
                                 <br>
                                 <p style="color: rgb(14, 14, 14);"><label style="padding: 5px; background-color: rgb(241, 63, 63); width: 50px; border-radius: 5px; color: white;">Note!</label>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</p>
-                                <a><button type="button" class="btn btn-primary">Submit</button></a>
+                                <a><button type="button" id="changepicture" class="btn btn-primary">Submit</button></a>
                                <a><button type="button" class="btn btn-secondary">Cancel</button></a>
                               </div>  
                             </div>
@@ -265,6 +266,49 @@
                 </div>
             </div>
             <script>
+              $(document).ready(function () {
+                $('#changepicture').click(function () {
+                  Swal.fire({
+                  title: "Do you want to save the changes?",
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: "Save",
+                  denyButtonText: `Don't save`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    let name = document.querySelector('#firstname').innerHTML;
+                    let imageInput = document.querySelector('#imageInput').files[0];
+                    console.log(name)
+                    let formData = new FormData();
+                    formData.append('firstname', name);
+                    // Check if a new image is selected
+                    if (imageInput) {
+                        formData.append('image', imageInput);
+                    }
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState === 4 && this.status === 200) {
+                            let data = JSON.parse(this.responseText);
+                            if (data.success) {
+                                // Handle success
+                                Swal.fire("Saved!", "", "success");
+                            } else {
+                                // Handle failure
+                                alert("Failed to edit product.");
+                            }
+                        }
+                    };
+                    xhr.open("POST", "picture_update.php", true);
+                    xhr.send(formData);
+                  } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                  }
+                });
+                })
+              })
+
                 // fetch information
               function fetchinfo() {
                 let input_lastname = document.querySelector('#input_lastname');
@@ -272,7 +316,8 @@
                 let input_email = document.querySelector('#input_email');
                 let firstname = document.querySelector("#firstname");
                 let lastname = document.querySelector('#lastname');
-
+                let srcimage =document.querySelector('#srcimage');
+                let imagePreview =document.querySelector ('#imagePreview');
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                   if (this.readyState === 4 && this.status === 200) {
@@ -286,6 +331,8 @@
                       input_email.value = info.Username; 
                       lastname.innerHTML = info.Last_name;
                       firstname.innerHTML = info.First_name;
+                      srcimage.src = `/shopping-cart-oche/Project/admin/my_account/admin_image/${info.Image}`;
+                      imagePreview.src = `/shopping-cart-oche/Project/admin/my_account/admin_image/${info.Image}`;
                     });
                   }
                 };
@@ -385,6 +432,23 @@
                 
                 })
                 // change info
+
+                
+            // this when click choose file the picture will show on web
+$(document).ready(function(){
+    // listen for changes in the file input
+    $('#imageInput').on('change', function (){
+        var input = this;
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function (e){
+                // set the source of the image element to the upload image
+                $('#imagePreview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+});
             </script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
              <script src="myacct.js" defer></script>

@@ -84,7 +84,7 @@
             <!--my account-->
             <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="/shopping-cart-oche/Project/Image/logo.png" height="25" style="border-radius: 50%;">
+                    <img src="/shopping-cart-oche/Project/Image/logo.png" id="srcimage" height="25" style="border-radius: 50%; width:30px;">
                       <!--Name of the user-->
                       <label id="firstname"></label> <label id="lastname"></label>
                     </button>
@@ -171,7 +171,38 @@
             <div class="row " style="padding-left:20px;">
               <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
                 <!--products-->
-                 <div class="row cem" style=""> </div>
+                 <div class="row cem" style="">
+                 <div class="card" aria-hidden="true" style="height:200px;">
+                          <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                              <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                              <span class="placeholder col-7"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-6"></span>
+                              <span class="placeholder col-8"></span>
+                            </p>
+                            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                          </div>
+                      </div>
+                      <div class="card" aria-hidden="true" style="height:200px;";>
+                          <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                              <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                              <span class="placeholder col-7"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-6"></span>
+                              <span class="placeholder col-8"></span>
+                            </p>
+                            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                          </div>
+                      </div>
+                </div>
               </div>
             </div>
             <!--end Display product-->
@@ -319,6 +350,7 @@
 
                               let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
+                              let srcimage =document.querySelector('#srcimage');
 
                               let xhr = new XMLHttpRequest();
                               xhr.onreadystatechange = function () {
@@ -330,6 +362,7 @@
                                     console.log (info.First_name)
                                     lastname.innerHTML = info.Last_name;
                                     firstname.innerHTML = info.First_name;
+                                    srcimage.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
                                   });
                                 }
                               };
