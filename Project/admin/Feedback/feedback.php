@@ -170,7 +170,7 @@
                           <tr>
                             <th scope="col" class="table_email">Email</th>
                             <th >Description</th>
-                            <th scope="col" class="table_action text-center">Action</th>
+                           
                           </tr>
                         </thead>
                         <tbody>
@@ -230,9 +230,7 @@
                     const row = `<tr>
                                     <td>${feedback.Email}</td>
                                     <td>${feedback.Description}</td>
-                                    <td class="text-center"> 
-                                       <a href="#" onclick="deleteMessage('${feedback.Email}')" class="btn btn-sm delete-data"><i class="fa-solid fa-trash" style="color: red;"></i></a>
-                                    </td>
+                                    
                                  </tr> `;
                                  tableBody.innerHTML += row;
                 });
@@ -242,6 +240,7 @@
 
               // delete message
                 function deleteMessage (Email){
+                  console.log(Email)
                   let xhr = new XMLHttpRequest();
                   xhr.onreadystatechange =function (){
                     if (this.readyState === 4 && this.status === 200){
