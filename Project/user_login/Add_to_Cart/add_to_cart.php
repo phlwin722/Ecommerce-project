@@ -667,6 +667,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                 const data = JSON.parse(this.responseText);
                 if (data.success) {
                     // If insertion is successful, delete the product from cart_product
+                    fetchCart();
                     success();
                     modalInstance.hide();
                     fetchData();
@@ -1090,6 +1091,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                   if (this.readyState == 4 && this.status == 200) {
                       calculateTotalPrice();  // Recalculate total price after quantity change
                       fetchData(); // Fetch updated data after deletion
+                      fetchCart()
                       console.log(Product_code)
                   }
               };
