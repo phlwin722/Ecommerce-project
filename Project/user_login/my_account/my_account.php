@@ -588,7 +588,9 @@
                             let data = JSON.parse(this.responseText);
                             if (data.success) {
                                 // Handle success
+                              
                                 Swal.fire("Saved!", "", "success");
+                                fetchData();
                             } else {
                                 // Handle failure
                                 alert("Failed to edit product.");

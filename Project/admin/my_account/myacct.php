@@ -293,6 +293,7 @@
                             let data = JSON.parse(this.responseText);
                             if (data.success) {
                                 // Handle success
+                                fetchinfo();
                                 Swal.fire("Saved!", "", "success");
                             } else {
                                 // Handle failure

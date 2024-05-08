@@ -191,7 +191,7 @@
                   <div class="card position-relative" style="width: 100%; padding:10px; height:70px;">
                       <div class="card-body" style="position:relative;">
                           <label style="font-weight:bold;">  
-                              <input class="form-check-input productCheckbox" type="checkbox" value="" id="">  Product
+                               Product
                           </label>
                           <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
                           <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
@@ -201,6 +201,7 @@
                   </div>
                   <!--products-->
                   <div class="row cem" style=""> 
+                  
                  </div>
                         <div class="card position-relative " style="width: 100%; padding:10px; height:70px;">
                             <div class="card-body" style="position:relative;">
@@ -774,10 +775,8 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                 if (data.length === 0) {
                     const tableBody = document.querySelector('.cem');
                     tableBody.innerHTML = `<div class="col-12">
-                          <div class="card" style="width: 100%; padding:10px; height:200px;">
-                           
-                          <p class="text-center" style="font-size:40px; color:red; padding-top:50px;">No add to cart found!</p>
-                             
+                          <div class="card" style="width: 100%; padding:10px; height:200px;">                     
+                          <p class="text-center" style="font-size:40px; color:red; padding-top:50px;">No add to cart found!</p>                    
                           </div>
                       </div>`;
                     
