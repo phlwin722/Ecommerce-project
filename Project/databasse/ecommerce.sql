@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 01:27 PM
+-- Generation Time: May 08, 2024 at 02:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,15 +32,16 @@ CREATE TABLE `admin` (
   `First_name` varchar(255) NOT NULL,
   `Last_name` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL
+  `Password` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`ID`, `First_name`, `Last_name`, `Username`, `Password`) VALUES
-(1, 'Dexter', 'Jamero', 'admin@gmail.com', 'admin');
+INSERT INTO `admin` (`ID`, `First_name`, `Last_name`, `Username`, `Password`, `Image`) VALUES
+(1, 'Danica', 'Gois', 'admin@gmail.com', 'ad', '434607856_1624622068335044_875137588036415118_n.jpg');
 
 -- --------------------------------------------------------
 
@@ -62,10 +63,8 @@ CREATE TABLE `archives_product` (
 --
 
 INSERT INTO `archives_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Category`, `Image`) VALUES
-(20235033, 'Smilee K-21 Pubg Portable Game', 50, '150', 'Gaming Accessories', '66100daf31501.png'),
 (20235034, 'Mobile Phone Gaming Radiator C', 50, '158', 'Gaming Accessories', '66100dd98f520.png'),
-(20235036, '830 Breadboard Set Tie-points ', 50, '380', 'Electronic Accessories', '661011bd9bd2e.png'),
-(20235037, ' Original AD 220V 60W Electric', 50, '150', 'Electronic Accessories', '661011e26fe52.png');
+(20235094, 'dasda', 1, '1', 'Kitchen Tools', 'haha.jpg');
 
 -- --------------------------------------------------------
 
@@ -87,10 +86,9 @@ CREATE TABLE `cart_product` (
 --
 
 INSERT INTO `cart_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Email`, `Image`) VALUES
-(20235031, 'NEW Wireless Bluetooth Headphones Colored LED Lights Gaming OverEar Headset Stereo Headphone&Mic', '1', '231', 'jamerodexter13@gmail.com', '66100cbdab839.png'),
-(20235054, 'Motorcycle Signal Light Switch Big', '1', '25', 'jamerodexter13@gmail.com', '66101d592cf08.png'),
-(20235083, 'Jordan NBA Bulls Graphic T-shirt ', '1', '230', 'danicagois@gmail.com', '66109c46c44ee.png'),
-(20235086, 'Fashion Top Brand Luxury Women Bracelet Watches Ladies Rose Gold Diamond Quartz Waterproof Women\\\'s', '1', '1430', 'jamerodexter13@gmail.com', '66109fdc67af2.png');
+(20235036, '830 Breadboard Set Tie-points ', '1', '380', 'wa@gmail.com', '661011bd9bd2e.png'),
+(20235045, 'Warts Remover Foot Corn Pads treatment first aid removal pain patch Calluses health foot care', '1', '85', 'wa@gmail.com', '6610198d9332b.png'),
+(20235083, 'Jordan NBA Bulls Graphic T-shirt ', '1', '230', 'danicagois@gmail.com', '66109c46c44ee.png');
 
 -- --------------------------------------------------------
 
@@ -109,7 +107,7 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`ID`, `Email`, `Description`) VALUES
-(20245049, 'Ecommerce', 'tangina mo ');
+(20245052, 'jamerodexter13@gmail.com', 'pangit\\r\\n');
 
 -- --------------------------------------------------------
 
@@ -136,6 +134,40 @@ INSERT INTO `message` (`Code`, `Full_name`, `Email`, `Product`, `Message`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order_product`
+--
+
+CREATE TABLE `order_product` (
+  `Product_code` int(255) NOT NULL,
+  `Product_name` varchar(255) NOT NULL,
+  `Quantity` varchar(255) NOT NULL,
+  `Price` varchar(255) NOT NULL,
+  `Total_price` varchar(255) NOT NULL,
+  `Status` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Full_name` varchar(255) NOT NULL,
+  `Contact_No` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Mode_payment` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Total_price`, `Status`, `Email`, `Full_name`, `Contact_No`, `Address`, `Mode_payment`, `Image`) VALUES
+(20235050, ' Bosch Spark Plug \\', '1', '120', '120', 'Delivered', 'jamerodexter13@gmail.com', 'Dexter Jamero', '', 'block 25 lot 16 block 25 lot 16  San Rafael 2 Manila Abra', 'Cash On Delivery', '66101cd942f86.png'),
+(20235035, 'Mobile Controller for pc Gaming Keyboard and Mouse bluetooth controller for android phone', '1', '238', '238', 'Delivered', 'jamerodexter13@gmail.com', 'Dexter Jamero', '', 'block 25 lot 16 block 25 lot 16  San Rafael 2 Manila Abra', 'Cash On Delivery', '66100e6f815c7.png'),
+(20235033, 'Smilee K-21 Pubg Portable Game', '1', '150', '150', 'Delivered', 'jamerodexter13@gmail.com', 'Dexter Jamero', '', 'block 25 lot 16 block 25 lot 16  San Rafael 2 Manila Abra', 'Cash On Delivery', '66100daf31501.png'),
+(20235070, 'Professional Mandolin Slicer Julienne Cutter Chopper Fruit Vegetable Peelers', '1', '195', '195', 'On the way', 'goisdanica@gmail.com', 'Danica Gois', '', 'block 25 lot 3 FVR Angeles City Bukidnon', 'Cash On Delivery', '6610238333879.png'),
+(20235049, 'YANJIAYI Glutathione Collagen Glow Gummies Anti-Aging Whitening Face Beauty Skin Supplement 60pc', '1', '500', '500', 'Delivered', 'goisdanica@gmail.com', 'Danica Gois', '', 'block 25 lot 3 FVR Angeles City Bukidnon', 'Cash On Delivery', '66101acd6dd4c.png'),
+(20235060, 'Inplay M10 Rainbow Rgb 120mm Led Cooling Fan For Pc/Computer/Desktop Accessories/Peripherals', '1', '120', '120', 'Pending', 'goisdanica@gmail.com', 'Danica Gois', '', 'block 25 lot 3 FVR Angeles City Bukidnon', 'Cash On Delivery', '661020c600325.png'),
+(20235081, 'In Fashioning Basketball Sport Sweat Shorts', '1', '150', '150', 'Pending', 'goisdanica@gmail.com', 'Danica Gois', '', 'block 25 lot 3 FVR Angeles City Bukidnon', 'Cash On Delivery', '66109bfc1bcbb.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_list`
 --
 
@@ -153,9 +185,12 @@ CREATE TABLE `product_list` (
 --
 
 INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`, `Category`, `Image`) VALUES
-(20235031, 'NEW Wireless Bluetooth Headpho', '50', '231', 'Gaming Accessories', '66100cbdab839.png'),
+(20235031, 'NEW Wireless Bluetooth Headpho', '51', '231', 'Gaming Accessories', '66100cbdab839.png'),
 (20235032, '1 Pair (2pcs) Gamers Sweatproo', '50', '20', 'Gaming Accessories', '66100d88173a8.png'),
-(20235035, 'Mobile Controller for pc Gaming Keyboard and Mouse bluetooth controller for android phone', '50', '238', 'Gaming Accessories', '66100e6f815c7.png'),
+(20235033, 'Smilee K-21 Pubg Portable Game', '49', '150', 'Gaming Accessories', '66100daf31501.png'),
+(20235035, 'Mobile Controller for pc Gaming Keyboard and Mouse bluetooth controller for android phone', '40', '238', 'Gaming Accessories', '66100e6f815c7.png'),
+(20235036, '830 Breadboard Set Tie-points ', '50', '380', 'Electronic Accessories', '661011bd9bd2e.png'),
+(20235037, ' Original AD 220V 60W Electric', '50', '150', 'Electronic Accessories', '661011e26fe52.png'),
 (20235038, 'Soldering Iron Set Electronic ', '50', '265', 'Electronic Accessories', '661011fb3940f.png'),
 (20235039, 'Mitsushi 31In1 Screwdriver Set Mini Electronic Screwdriver Bits Multi-Size Mobile Phone Repair Tool', '50', '58', 'Electronic Accessories', '6610121dda8c7.png'),
 (20235040, '858D Hot Air Rework Station Digtal LCD Display Hot Air Soldering Station SMD SMT Hot Air Station', '50', '1180', 'Electronic Accessories', '6610123f6667c.png'),
@@ -167,8 +202,8 @@ INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`,
 (20235046, 'Collagen Gummies Skin Beauty Hair Skin & Nail Support Whitening Vitamin Biotin + Vitamin C', '50', '400', 'Health &  Beauty', '661019a9d4f39.png'),
 (20235047, 'Beauty White Slimming & Whitening Glutathione & Collagen With Vitamin C You Glow Babe 30 Capsules', '50', '300', 'Health &  Beauty', '661019e9ac0fd.png'),
 (20235048, 'MeiYanQiong Breast Enhancement Cream + Essence Breast Lift Firming Massage Bust Care 50g+10ml', '50', '380', 'Health &  Beauty', '66101ab116ffc.png'),
-(20235049, 'YANJIAYI Glutathione Collagen Glow Gummies Anti-Aging Whitening Face Beauty Skin Supplement 60pc', '50', '500', 'Health &  Beauty', '66101acd6dd4c.png'),
-(20235050, ' Bosch Spark Plug \\\" Nickel-Copper\\\" K6tc0r (Fr8dcx+) For Motorcycle', '50', '120', 'Automotive & Motorcyle Parts', '66101cd942f86.png'),
+(20235049, 'YANJIAYI Glutathione Collagen Glow Gummies Anti-Aging Whitening Face Beauty Skin Supplement 60pc', '49', '500', 'Health &  Beauty', '66101acd6dd4c.png'),
+(20235050, ' Bosch Spark Plug \\\" Nickel-Copper\\\" K6tc0r (Fr8dcx+) For Motorcycle', '35', '120', 'Automotive & Motorcyle Parts', '66101cd942f86.png'),
 (20235051, 'HOTSPEED 2Pcs Mini Driving light Motorcycle LED Headlight Waterproof Super Bright With 3 Way Switch', '50', '230', 'Automotive & Motorcyle Parts', '66101cfd1ee67.png'),
 (20235052, 'AUXITO 1PCS T19 P15D LED Motorcycle Headlight Dual Color 3200K 6500 White 9-30 V', '50', '180', 'Automotive & Motorcyle Parts', '66101d150ba81.png'),
 (20235053, 'GOLD SPROCKET CHAIN SET HIGH CARBON STEEL RAIDER150/FI SNIPER 150/FZ XRM12/WAVE/DREAM/C100', '50', '400', 'Automotive & Motorcyle Parts', '66101d3d34f54.png'),
@@ -194,7 +229,7 @@ INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`,
 (20235073, 'RIXTON Ukulele Soprano 4 Strings Spruce Basswood Guitar Set Complete Package 21 Inches', '50', '500', 'Musical Instrument', '66102940b5e5c.png'),
 (20235074, 'KAYA LYRE XYLOPHONE - with Free Bag, Lyre Beater , Strap (Percussion Instrument)', '50', '600', 'Musical Instrument', '66102960f3e54.png'),
 (20235075, 'RIXTON Professional Music Global Flute Recorder (Ivory) Music Instrument for Kids and Adults', '50', '320', 'Musical Instrument', '661029865062c.png'),
-(20235076, 'HotCompact Double Half Moon Music Tambourine Percussion Tamborine Drum Durable', '50', '120', 'Musical Instrument', '661029a66e38c.png'),
+(20235076, 'HotCompact Double Half Moon Music Tambourine Percussion Tamborine Drum Durable', '47', '120', 'Musical Instrument', '661029a66e38c.png'),
 (20235077, 'Mamy poko Children Kids Jazz Drum Set Musical Instrument ', '50', '900', 'Musical Instrument', '661029cd804e8.png'),
 (20235078, 'Random Cotton shorts for men\\\'s', '50', '150', 'Men\\\'s Fassion & Accessories', '66109b7b48c94.png'),
 (20235079, 'Men\\\'s t-shirt skull graphic print t-shirt cotton streetwear men\\\'s women\\\'s black oversize t-shirt', '50', '230', 'Men\\\'s Fassion & Accessories', '66109b9a49dd7.png'),
@@ -206,12 +241,70 @@ INSERT INTO `product_list` (`Product_code`, `Product_name`, `Quantity`, `Price`,
 (20235085, 'Watch+Wallet+Belt Set Male', '50', '1430', 'Men\\\'s Fassion & Accessories', '66109caeb6f61.png'),
 (20235086, 'Fashion Top Brand Luxury Women Bracelet Watches Ladies Rose Gold Diamond Quartz Waterproof Women\\\'s', '50', '1430', 'Women\\\'s Fassion & Accessories', '66109fdc67af2.png'),
 (20235087, 'Eau De Toilette For Women Perfume Paris 3 In 1 Long Lasting Scent Perfume Perfume ', '50', '400', 'Women\\\'s Fassion & Accessories', '66109ff89a6ba.png'),
-(20235088, 'Random seamless Bra for womens Push up Bra Non-Wire Sexy Bra brallete', '50', '130', 'Women\\\'s Fassion & Accessories', '6610a01a44edd.png'),
+(20235088, 'Random seamless Bra for womens Push up Bra Non-Wire Sexy Bra brallete', '49', '130', 'Women\\\'s Fassion & Accessories', '6610a01a44edd.png'),
 (20235089, 'Rhian Plus size M-XXXL Hipsters Stretch mid waist Panties for women plus size seamless Full Panty', '50', '130', 'Women\\\'s Fassion & Accessories', '6610a072d8f75.png'),
 (20235090, 'Korean version of slip-on lazy flat sneakers for women lightweight student mesh shoes', '50', '150', 'Women\\\'s Fassion & Accessories', '6610a0a0a08a1.png'),
 (20235091, 'Women Fashion Ribbon Flat doll shoe Korean Shoes Ballet women shoes', '50', '120', 'Women\\\'s Fassion & Accessories', '6610a0b787ff5.png'),
 (20235092, 'Korean Fashion Cute Kitty Cartoon Tees', '50', '180', 'Women\\\'s Fassion & Accessories', '6610a0df98178.png'),
 (20235093, 'JOYCE PLAIN DRESS-TSHIRT WITH 2 POCKET FIT UP TO PLUS SIZE', '50', '170', 'Women\\\'s Fassion & Accessories', '6610a0faba6fe.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_report`
+--
+
+CREATE TABLE `sales_report` (
+  `Sales` varchar(255) NOT NULL,
+  `Date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales_report`
+--
+
+INSERT INTO `sales_report` (`Sales`, `Date`) VALUES
+('130', '2024-05-02'),
+('952', '2024-05-02'),
+('120', '2024-05-02'),
+('120', '2024-05-02'),
+('5000', '2024-05-1'),
+('5000', '2024-05-1'),
+('6000', '2024-04-30'),
+('5000', '2024-04-29'),
+('5000', '2024-05-1'),
+('5000', '2024-05-1'),
+('6000', '2024-04-30'),
+('5000', '2024-04-29'),
+('2000', '2024-04-28'),
+('500', '2024-04-28'),
+('5000', '2024-04-27'),
+('5000', '2024-04-27'),
+('5000', '2024-04-26'),
+('2000', '2024-05-02'),
+('2      000', '2024-05-02'),
+('2000', '2024-05-02'),
+('952', '2024-05-02'),
+('120', '2024-05-02'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('238', '2024-05-08'),
+('120', '2024-05-08'),
+('120', '2024-05-08'),
+('238', '2024-05-08'),
+('150', '2024-05-08'),
+('500', '2024-05-08');
 
 -- --------------------------------------------------------
 
@@ -235,6 +328,19 @@ INSERT INTO `tb_upload` (`id`, `name`, `image`) VALUES
 (0, 'dawdaw', '660ccff85295f.jpg'),
 (0, 'fasfas', '660ce3897adc1.jpg'),
 (0, 'gesaga', '660ce3e9b3f68.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `top_product`
+--
+
+CREATE TABLE `top_product` (
+  `Product_code` int(255) NOT NULL,
+  `Product_name` varchar(255) NOT NULL,
+  `Quantity` varchar(255) NOT NULL,
+  `Total_price` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -264,9 +370,9 @@ CREATE TABLE `user_information` (
 --
 
 INSERT INTO `user_information` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Contact_No`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Secret_question`, `Answer`, `Image`) VALUES
-(2023, 'Dexter', 'Jamero', 'Patan', '09266891561', 'block 25 lot 16 ', 'FVR', 'Mandaluyong', 'Bulacan', 'jamerodexter13@gmail.com', 'ad', 'Who is your first love', 'Danica Gois', ''),
-(2025, 'Danica', 'Gois ', 'Villobino', '09266891561', 'fasfas', 'FVR', 'Angeles City', 'Bohol', 'danicagois@gmail.com', 'ad', '', '', ''),
-(2026, 'testing', 'test', 'testt', '', 'abc', 'San Rafael 1', 'Quezon City', 'Batangas', 'Test@gmail.com', 'abcd', '', '', '');
+(2023, 'Danica', 'Jamero', 'Patan', '09934746', 'block 25 lot 16 block 25 lot 16 ', 'San Rafael 2', 'Manila', 'Abra', 'jamerodexter13@gmail.com', 'aha', 'Who is your first love', 'Danica Gois', '434607856_1624622068335044_875137588036415118_n.jpg'),
+(2044, 'danica', 'gois ', 'p', '092299', 'vnkn', 'San Rafael 3', 'Cainta', 'Benguet', 'wa@gmail.com', 'w', 'First pet name', 'aw', '434607856_1624622068335044_875137588036415118_n.jpg'),
+(2045, 'Mark', 'lyod', 'Angeles', '9dadsd', 'dsada', 'San Rafael 2', 'Pasay', 'Bukidnon', 'mark@gmail.com', 'a', 'First pet name', 'a', 'user-profile-icon-free-vector-removebg-preview (1).png');
 
 -- --------------------------------------------------------
 
@@ -286,8 +392,21 @@ CREATE TABLE `user_information_archieve` (
   `Province` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  `Secret_question` varchar(255) NOT NULL,
+  `Answer` varchar(255) NOT NULL,
   `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_information_archieve`
+--
+
+INSERT INTO `user_information_archieve` (`ID`, `First_name`, `Last_name`, `Middle_name`, `Contact_No`, `Block_&_Lot`, `Barangay`, `City`, `Province`, `Email`, `Password`, `Secret_question`, `Answer`, `Image`) VALUES
+(2025, 'Danica', 'Gois ', 'Villobino', '09266891561', 'fasfas', 'FVR', 'Angeles City', 'Bohol', 'danicagois@gmail.com', 'ad', '', '', ''),
+(2037, 'w', 'w', 'w', 'w', 'w', 'San Rafael 1', 'Pasay', 'Bohol', 'jamerodexter12@gmail.com', 'w', '', '', ''),
+(2038, 'w', 'w', 'w', 'w', 'w', 'San Rafael 1', 'Pasay', 'Bohol', 'jamerodexter15@gmail.com', 'w', '', '', ''),
+(2040, 'w', 'we', 'we', 'weae', 'wae', 'San Rafael 1', 'Zamboanga City', 'Apayao', 'dadsadadsd@gmalli.com', 'ewae', '', '', ''),
+(2041, 'aew', 'wea', 'wea', 'w', 'e', 'San Rafael 2', 'Pasay', 'Bukidnon', 'amso@gnaul.coim', 'weaweaw', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -355,7 +474,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `archives_product`
 --
 ALTER TABLE `archives_product`
-  MODIFY `Product_code` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235039;
+  MODIFY `Product_code` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235095;
 
 --
 -- AUTO_INCREMENT for table `cart_product`
@@ -367,7 +486,7 @@ ALTER TABLE `cart_product`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20245050;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20245054;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -379,19 +498,19 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `product_list`
 --
 ALTER TABLE `product_list`
-  MODIFY `Product_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235094;
+  MODIFY `Product_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20235095;
 
 --
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2027;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2046;
 
 --
 -- AUTO_INCREMENT for table `user_information_archieve`
 --
 ALTER TABLE `user_information_archieve`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2042;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
