@@ -340,7 +340,7 @@
                 xhr.send();
               }
               // Call fetchinfo function when the window is loaded
-              window.onload = fetchinfo;
+              window.onload = fetchinfo();
                  // fetch information
 
                 // change password
@@ -395,6 +395,7 @@
                 // change password
 
                 // change info
+                
                 document.querySelector('#changeinfo').addEventListener('click', function () {
                   Swal.fire({
                   title: "Do you want to save the changes?",

@@ -604,8 +604,10 @@
 document.querySelector('#insertproduct').addEventListener('click', function () {
     // Select all checked checkboxes with the class 'productCheckbox'
     const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
-    
-    // Iterate over each checked checkbox
+    if (productCheckboxes.length === 0){
+        selectproducts();
+    }else {
+        // Iterate over each checked checkbox
     productCheckboxes.forEach(checkbox => {
         // Get the data-productCode attribute value from the checkbox
         const productCode = checkbox.dataset.productCode;
@@ -665,6 +667,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
         xhr.open('POST', 'insert_order.php', true);
         xhr.send(formData);
     });
+    }
 });
 
 
@@ -1045,6 +1048,18 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
             });
               }
 
+              function selectproducts() {
+                Swal.fire({
+                    title: "<strong> Please select product </strong>",
+                    icon: "info",
+                    html: `
+                       
+                    `,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    });
+              }
               window.onload = function() {
                 fetchData();
                 fetchDataUserInfo();

@@ -1,8 +1,8 @@
 <?php
 // Check if the necessary POST parameters are set
-if (isset($_POST['productCode']) && isset($_POST['selectedStatus'])) {
-    $productCode = $_POST['productCode'];
-    $selectedStatus = $_POST['selectedStatus'];
+if (isset($_GET['productCode']) && isset($_GET['selectedStatus'])) {
+    $productCode = $_GET['productCode'];
+    $selectedStatus = $_GET['selectedStatus'];
     $quantity_orderproduct = "";
     $quantity_productlist = "";
     $total_sales = '';
@@ -26,7 +26,13 @@ if (isset($_POST['productCode']) && isset($_POST['selectedStatus'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }else {
-        if ($selectedStatus === 'Delivered') {
+        echo $selectedStatus;
+        if ($selectedStatus == "Delivered") {
+             // Prepare and execute SQL statement to update the status
+            $stmt = $conn->prepare("UPDATE order_product SET Status = ? WHERE Product_code = ?");
+            $stmt->bind_param("ss", $selectedStatus, $productCode);
+            $stmt->execute();
+
             $stmt_fetch = $conn->prepare('SELECT *  FROM order_product WHERE Product_code = ? ');
             $stmt_fetch->bind_param("s",$productCode);
             $stmt_fetch->execute();

@@ -516,10 +516,6 @@
 
             <!--end Display product-->
 
-              <!---->
-              
-              <!---->
-
               <!--Footer-->
           <div class="container-fluid footer" id="footer">
             <div class="copy-right"> 

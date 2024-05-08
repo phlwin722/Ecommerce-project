@@ -277,15 +277,14 @@ function populateTable(data) {
 // Function to update status in the database
 function updateStatus(productCode, selectedStatus) {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'update_status.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-             alert('Status updated successfully');
+             status ();
         }
     };
-    let params = `productCode=${productCode}&selectedStatus=${selectedStatus}`;
-    xhr.send(params);
+    console.log(selectedStatus)
+    xhr.open('GET', 'update_status.php?productCode=' + productCode + "&selectedStatus=" + selectedStatus, true);
+    xhr.send();
 }
 
         //
@@ -400,8 +399,17 @@ function updateStatus(productCode, selectedStatus) {
                         fetchData();
                         info ();
                       }
-      </script>
 
+                      function status(){
+                        Swal.fire({
+                        icon: "success",
+                        title: "Status updated successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
        <!--JQuerry library-->
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="product.js" ></script>

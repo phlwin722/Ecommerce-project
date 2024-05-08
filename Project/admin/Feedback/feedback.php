@@ -219,7 +219,10 @@
                 xhr.open("GET","feedback_fetch.php",true);
                 xhr.send();
               }
-
+              window.onload =function (){
+                fetchData();
+              }
+              
               //function to populate table with fetched data
               function populateTable (data){
                 const tableBody =document.querySelector('#feedbackTable tbody');
@@ -244,8 +247,8 @@
                     if (this.readyState === 4 && this.status === 200){
                       let data =JSON.parse(this.readyState);
                         if (data.success){
+                          status();
                           fetchData();
-                          alert("Successfull")
                         }
                     }
                   }
@@ -253,6 +256,15 @@
                   xhr.send();
                 }
                // delete message
+
+               function status(){
+                        Swal.fire({
+                        icon: "success",
+                        title: "Status updated successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      }
           </script>
           
      <!-- JavaScript dependencies -->
