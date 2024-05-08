@@ -209,9 +209,11 @@
                   <!--products-->
                   <div class="row cem" style=""> 
                   
-                 </div>
-                        <div class="card position-relative " style="width: 100%; padding:10px; height:70px;">
+                 </div> <div class="sticky-bottom">
+                        <div class="card position-relative  " style="width: 100%; padding:10px; height:70px;">
+                       
                             <div class="card-body" style="position:relative;">
+                           
                                 <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
                                 <label style="" for="selectAllCheckbox">Select All</label>
                                 <label style=" margin-left:20px;" id="DeleteDataAll" for="">Delete All</label>
@@ -227,6 +229,7 @@
                                         <option value="Cash On Delivery">Cash On Delivery</option>
                                         <option disabled value="Gcash">Gcash (Not Available)</option>
                                     </select>
+                        </div>
                         </div>
               </div>
           </div>
@@ -689,6 +692,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
 
                   // Check if search query is empty
                   if (searchQuery !== '') {
+                    event.preventDefault()
                       fetch('search.php', {
                           method: 'POST',
                           body: new FormData(this)
@@ -701,28 +705,52 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                               searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; padding: 170px; 0px 30px 0px">No results found!</p>  </div>';
                           } else {
                               const tableBody = document.querySelector('.cem');
+                              
                               tableBody.innerHTML = ''; // Clear previous results
                               data.forEach(product => {
-                                  const row = `<div class="col-md-3">
-                                                  <div class="card" style="width: 18rem; padding:10px; height:420px;">
-                                                    <input class="form-check-input productCheckbox" type="checkbox" value="" id="" data-product-code="${product.Product_code}">
-                                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="100" height="150" alt="${product.Product_name}" class="card-img-top" width="150" height="170">  
-                                                      <div class="card-body" style="position:relative;">
-                                                          <h6 style="font-weight:bold;">${product.Product_name}</h6>
-                                                          <p class="card-text">${product.Category}</p>
-                                                          <p class="card-text">₱ ${product.Price}</p>
-                                                          <button class="CartBtn">
-                                                              <span class="IconContainer"> 
-                                                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
-                                                                      <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                                                                  </svg>
-                                                              </span>
-                                                              <p class="text">Add to Cart</p>
-                                                          </button>
-                                                      </div>
-                                                  </div>
-                                              </div>`;
-                                  tableBody.innerHTML += row;
+                                  const row = `<div class="col-12">
+                    <div class="card" style="width: 100%; padding:10px; height:120px;">
+                        <div class="row">
+                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                            </div>
+                            <div class="" style=" width:165px;">
+                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                <input type ="text" hidden class="product_Image" value="${product.Image}">
+                            </div>
+                            <div class="col">
+                                <label style="padding-top:15px;">${product.Product_name}</label>
+                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
+                                <input type ="text" class="user_email" hidden  value="${product.Email}">
+                            </div>
+                            <div class="col-1 position-relative" style="width:130px;">
+                                <div style="position: absolute; top: 36%; left:33%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">
+                                <div style="position: absolute; top: 30%; left:15%;">
+                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                                <div style="position: absolute; top: 36%; left:20%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                tableBody.innerHTML += row;
                               });
                           }
                       })
@@ -877,6 +905,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                     xmlHttp.onreadystatechange =function (){
                            if (this.readyState == 4 && this.status == 200){
                             fetchData();
+                            fetchCart();
                               calculateTotalPrice(); // Recalculate total price after deletion
                               Swal.fire({
                                 title: "Deleted!",
