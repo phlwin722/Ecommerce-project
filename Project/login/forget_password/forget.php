@@ -92,7 +92,12 @@
             let retypepass = document.querySelector('#validationDefault18').value;
 
             if (newpassword != retypepass){
-              alert('Please correct new password or retype passowrd')
+              Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "Please correct new password or retype passowrd",
+                         
+                        });
             }else {
               let xhr = new XMLHttpRequest();
             xhr.onreadystatechange =function ( ) {
@@ -132,7 +137,12 @@
                   newpassword.style.display="block";
                   password.style.display="block";
                 }else {
-                  alert  ('Not Correct');  
+                  Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "Not Correct",
+                         
+                        });
                 }
               }
             }
@@ -157,7 +167,12 @@
                           secret.style.display = "block";
                           secret_ques.style.display = "block";
                       } else {
-                          alert('Email does not exist');
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "Email does not exist",
+                         
+                        });
                           secret_ques.style.display = "none";
                       }
                   }
@@ -168,6 +183,7 @@
           });
 
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
           <!--This is for fontawesome icon-->
           <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
           <!--This is bootstrap-->
