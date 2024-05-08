@@ -22,6 +22,7 @@
     $Password = $_GET['Password'];
     $Secret = $_GET['Secret'];
     $Answer = $_GET['Answer'];
+    $Image = 'user-profile-icon-free-vector-removebg-preview (1).png';
 
     $sql = "SELECT Email FROM user_information WHERE Email = ?";
     $stmt = $con->prepare($sql);
@@ -34,11 +35,11 @@
         echo json_encode(array("success" => true));
     } else {
         // Using prepared statement to prevent SQL injection
-    $sql = $con->prepare("INSERT INTO user_information (First_name, Last_name, Middle_name, Contact_No, `Block_&_Lot`, Barangay, City, Province, Email, Password, Secret_question, Answer) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $sql = $con->prepare("INSERT INTO user_information (First_name, Last_name, Middle_name, Contact_No, `Block_&_Lot`, Barangay, City, Province, Email, Password, Secret_question, Answer, Image) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
   
         // Bind parameters
-        $sql->bind_param("ssssssssssss", $firstname, $lastname, $middlename, $contact, $Block, $Barangay, $City, $Province, $Email,  $Password,  $Secret,  $Answer);
+        $sql->bind_param("sssssssssssss", $firstname, $lastname, $middlename, $contact, $Block, $Barangay, $City, $Province, $Email,  $Password,  $Secret,  $Answer,$Image);
   
         // Execute query
         if ($sql->execute()){

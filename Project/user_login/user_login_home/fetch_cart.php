@@ -20,17 +20,11 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT COUNT(*) FROM cart_product WHERE Email = ?");
-$stmt->bind_param("s", $email);
-
-if ($stmt->execute()) {
-    $stmt->bind_result($count);
-    $stmt->fetch();
+$stmt = $conn->query("SELECT COUNT(*) as count_product FROM cart_product WHERE Email = '$email'");
+$count = $stmt->fetch_assoc()['count_product'];
     $response = array("count" => $count);
     echo json_encode($response);
-} else {
-    echo json_encode(array("error" => "Execution failed."));
-}
+
 
 $stmt->close();
 $conn->close();

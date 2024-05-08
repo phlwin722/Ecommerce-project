@@ -23,7 +23,7 @@
 
                 // feedback 
                 if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $recipient =$_SESSION ['email'];
                     $message = mysqli_real_escape_string($con, $_POST['message']);
 
                     // Prepare and bind statement 
@@ -74,7 +74,13 @@
         <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
                     <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
                     <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
+                    <button type="submit" class="btn shopping_cart position-relative">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <label for="" id="count_of_cart">99+</label>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    </button>
                 </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!--my account-->
@@ -251,7 +257,7 @@
                       <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" disabled>
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
@@ -261,7 +267,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Send message</button>
+                          <button type="button" class="btn btn-primary" name="sent_message">Send message</button>
                     </div>
                   </div>
                 </div>
@@ -621,7 +627,7 @@
                 let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
                               let srcimage =document.querySelector('#srcimage');
-
+                              let recipient=document.querySelector('#recipient');
                               let xhr = new XMLHttpRequest();
                               xhr.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status === 200) {
@@ -632,6 +638,7 @@
                                     console.log (info.First_name)
                                     lastname.innerHTML = info.Last_name;
                                     firstname.innerHTML = info.First_name;
+                                    recipient.value = info.Email;
                                     srcimage.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
                                   });
                                 }
@@ -705,11 +712,27 @@
                    document.querySelector('.shopping_cart').addEventListener('click', function (){
                     window.location.href="/shopping-cart-oche/Project/user_login/Add_to_Cart/add_to_cart.php";
                   });
+                  function fetchCart() {
+                    let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  let count_of_cart = document.querySelector('#count_of_cart');
 
+                                  count_of_cart.innerHTML = data.count;
+                                  console.log(data.count)
+                                  
+                          }else {
+                                  console.error("Failed to fetch cart count. Status code: " + this.status);
+                              }
+                      };
+                      xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/fetch_cart.php", true);
+                      xhr.send();
+                  }
               window.onload = function() {
                 fetchData();
                 fetch_user();
-                fetchDataUserInfo();
+                fetchCart();
               };
           </script>
          <!--This is for fontawesome icon-->

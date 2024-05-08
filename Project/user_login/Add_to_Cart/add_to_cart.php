@@ -23,7 +23,7 @@
 
                 // feedback 
                 if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $recipient = $_SESSION ['email'];
                     $message = mysqli_real_escape_string($con, $_POST['message']);
 
                     // Prepare and bind statement 
@@ -73,8 +73,15 @@
         
         <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
                     <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
-                    <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button class="btn shopping_cart" type="submit"><i class="fa-solid fa-cart-shopping"></i></button>
+                    <button class="btn " type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                    <button type="submit" class="btn shopping_cart position-relative">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <label for="" id="count_of_cart">99+</label>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    </button>
                 </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!--my account-->
@@ -257,7 +264,7 @@
                       <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" disabled value="Ecommerce">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
@@ -267,7 +274,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Send message</button>
+                          <button type="button" class="btn btn-primary" name="sent_message">Send message</button>
                     </div>
                   </div>
                 </div>
@@ -750,7 +757,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                   let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
                               let srcimage =document.querySelector('#srcimage');
-
+                            let recipient =document.querySelector('#recipient');
                               let xhrs = new XMLHttpRequest();
                               xhrs.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status === 200) {
@@ -759,6 +766,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                                   // Assuming data is an array of objects
                                   data.forEach(info => {
                                     console.log (info.First_name)
+                                    recipient.value = info.Email
                                     lastname.innerHTML = info.Last_name;
                                     firstname.innerHTML = info.First_name;
                                     srcimage.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
@@ -854,13 +862,27 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
 
                   // Check if any product is checked
                   if (checkedProducts.length > 0) {
-                     // Send a request to delete all checked products
+                    Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                                           // Send a request to delete all checked products
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.onreadystatechange =function (){
                            if (this.readyState == 4 && this.status == 200){
                             fetchData();
                               calculateTotalPrice(); // Recalculate total price after deletion
-                              alert('Products deleted successfully');
+                              Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                                });
                                // Uncheck all checkboxes
                               productCheckboxes.forEach(checkbox => {
                                   checkbox.checked = false;
@@ -871,9 +893,16 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
                         xmlHttp.open("GET","delete_all_data_cart.php",true);
                         xmlHttp.send();
                       // Send a request to delete all checked products
+                    }
+                    });
                   } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Opps....",
+                        text: "Please select at least one product to delete.!",
+                       
+                        });
                       // If no product is checked, display a message
-                      alert('Please select at least one product to delete.');
                   }
               });
 
@@ -1038,6 +1067,26 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
               xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
               xmlhttp.send();
               }
+
+                function fetchCart() {
+
+                let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  let count_of_cart = document.querySelector('#count_of_cart');
+
+                                  count_of_cart.innerHTML = data.count;
+                                  console.log(data.count)
+                                  
+                          }else {
+                                  console.error("Failed to fetch cart count. Status code: " + this.status);
+                              }
+                      };
+                      xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/fetch_cart.php", true);
+                      xhr.send();
+
+                }
             //alert message
               function success () {
                 Swal.fire({
@@ -1061,6 +1110,7 @@ document.querySelector('#insertproduct').addEventListener('click', function () {
               }
               window.onload = function() {
                 fetchData();
+                fetchCart();
                 fetchDataUserInfo();
               };
           </script>

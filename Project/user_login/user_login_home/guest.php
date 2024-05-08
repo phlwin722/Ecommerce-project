@@ -24,7 +24,7 @@
 
                 // feedback 
                 if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $recipient = $_SESSION ['email'];
                     $message = mysqli_real_escape_string($con, $_POST['message']);
 
                     // Prepare and bind statement 
@@ -57,7 +57,8 @@
           <!--Favicon-->
           <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
           <link rel="stylesheet" href="/shopping-cart-oche/Project/login/logo.css">
-        <title>Guest - Ecommerce</title>
+        <title>User - Ecommerce</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
 
@@ -77,11 +78,13 @@
                 <form class="d-flex" id="searchForm" role="search" action="" method="post" style="margin-right: 100px;">
                     <input class="form-control me-2 search_input" id="searchQuery" enctype="multipart/form-data" type="search" placeholder="Search" aria-label="Search" name="search_data">
                     <button class="btn btn-success" type="submit" name="search_data_product"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button class="btn shopping_cart position-relative" type="submit">
-                      <i class="fa-solid fa-cart-shopping"></i>
-                      <!---counting display-->
-                      <div class="shopping_cartt"></div>
-                  </button>
+                    <button type="submit" class="btn shopping_cart position-relative">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <label for="" id="count_of_cart">99+</label>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    </button>
 
                 </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
@@ -261,7 +264,7 @@
                       <form action="" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" name="recipient" value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" name="recipient" disabled>
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
@@ -370,8 +373,10 @@
                                           .then(response => response.json()) // Parse response as JSON
                                           .then(data => {
                                               if (data.success) {
-                                                //    alert(data.message); // Display success message
+                                                fetchCart()
+                                                  alert(data.message); // Display success message
                                               } else {
+                                                fetchCart();
                                                   alert('Error: ' + data.message); // Display error message
                                               }
                                           })
@@ -400,12 +405,17 @@
                   });
                   
                   // function to fetch data using ajax to add to card
+                 
                   function fetchCart() {
-                      let xhr = new XMLHttpRequest();
+                    let xhr = new XMLHttpRequest();
                       xhr.onreadystatechange = function() {
                           if (this.readyState === 4 && this.status === 200) {
                                   let data = JSON.parse(this.responseText);
-                                  fetchCartCount(data);
+                                  let count_of_cart = document.querySelector('#count_of_cart');
+
+                                  count_of_cart.innerHTML = data.count;
+                                  console.log(data.count)
+                                  
                           }else {
                                   console.error("Failed to fetch cart count. Status code: " + this.status);
                               }
@@ -414,20 +424,6 @@
                       xhr.send();
                   }
 
-                  function fetchCartCount(data) {
-                      const cartcount = document.querySelector('.shopping_cartt');
-                      cartcount.innerHTML = ''; // clear previous result
-                      if (data && data.count) {
-                          const count = `
-                              <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
-                                  ${data.count}
-                                  <span class="visually-hidden">unread messages</span>
-                              </span>
-                          `;
-                          cartcount.innerHTML = count;
-                      }
-                    }
-                    // end counting cart
 
                   // Function to fetch data using AJAX to fetch all products
                   function fetchData() {
@@ -440,7 +436,7 @@
                               let firstname = document.querySelector("#firstname");
                               let lastname = document.querySelector('#lastname');
                               let srcimage =document.querySelector('#srcimage');
-
+                              let recipient = document.querySelector("#recipient");
                               let xhr = new XMLHttpRequest();
                               xhr.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status === 200) {
@@ -450,6 +446,7 @@
                                   data.forEach(info => {
                                     console.log (info.First_name)
                                     lastname.innerHTML = info.Last_name;
+                                    recipient.value = info.Email;
                                     firstname.innerHTML = info.First_name;
                                     srcimage.src = `/shopping-cart-oche/Project/user_login/my_account/user_image/${info.Image}`;
                                   });
@@ -530,8 +527,10 @@
                           .then(response => response.json()) // Parse response as JSON
                           .then(data => {
                               if (data.success) {
+                                fetchCart();
                                 //    alert(data.message); // Display success message
                               } else {
+                                fetchCart()
                                   alert('Error: ' + data.message); // Display error message
                               }
                           })
@@ -542,7 +541,10 @@
                   });
                 }          
                   // Call the fetchData function when the page loads
-                  window.onload = fetchData;
+                  window.onload = function (){
+                    fetchCart (); 
+                    fetchData();
+                  }
 
               // when click cart icon the page will be go on add to cart interface
                   document.querySelector('.shopping_cart').addEventListener('click', function(){
