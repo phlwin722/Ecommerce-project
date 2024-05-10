@@ -1,39 +1,4 @@
-              <!--start sent feedback php-->
-              <?php 
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ecommerce";
-
-                $con = new mysqli($servername, $username, $password, $dbname);
-
-                if ($con->connect_error){
-                    die("Connection error" . $con->connect_error);
-                }
-
-                // feedback 
-                if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
-                    $message = mysqli_real_escape_string($con, $_POST['message']);
-
-                    // Prepare and bind statement 
-                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
-                    // Use 's' for string data type
-                    $stmt->bind_param("ss", $recipient, $message);
-                    
-                    if ($stmt->execute()){
-                      echo '<script>
-                                document.addEventListener("DOMContentLoaded", function (){
-                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
-                                    modal.show();
-                                });
-                            </script>';
-                    }             
-              // Close connection
-              $con->close();
-              }
-          ?>
-
+  
 <!DOCTYPE html>
 <html>
     <head>
@@ -216,17 +181,17 @@
                       <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" disabled value="Ecommerce">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
+                          <textarea class="form-control" id="message"></textarea>
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" name="sent_message" >Send message</button>
+                          <button type="button" class="btn btn-primary sent_message" >Send message</button>
                     </div>
                   </div>
                 </div>
@@ -235,6 +200,33 @@
           </div>
 
           <script>
+                      // feed back
+          $('.sent_message').click (function () {
+            let recipient = document.querySelector('#recipient').value;
+            let message   = document.querySelector('#message').value;
+            let exampleModale =document.querySelector('#exampleModal');
+            let modalinstance =bootstrap.Modal.getInstance(exampleModale);
+            let xhr = new XMLHttpRequest ();
+            xhr.onreadystatechange =function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let data =JSON.parse (this.responseText);
+                    if (data.success) {
+                        modalinstance.hide()
+                        Swal.fire({
+                        icon: "success",
+                        title: "Successfull send",
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                    }
+                }
+            }   
+            let url = "/shopping-cart-oche/Project/guest_user/guest/insert_feedback.php?recipient="
+             + encodeURIComponent(recipient) + "&message=" + encodeURIComponent (message)
+            xhr.open ("GET", url, true);
+             xhr.send(); 
+          })
+
            document.getElementById('searchForm').addEventListener('submit', function(event) {
                       event.preventDefault(); // Prevent form submission
 
@@ -458,6 +450,7 @@
                 });      
 
           </script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
          <!--This is bootstrap-->

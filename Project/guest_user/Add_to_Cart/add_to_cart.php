@@ -1,38 +1,4 @@
               <!--start sent feedback php-->
-              <?php 
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ecommerce";
-
-                $con = new mysqli($servername, $username, $password, $dbname);
-
-                if ($con->connect_error){
-                    die("Connection error" . $con->connect_error);
-                }
-
-                // feedback 
-                if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
-                    $message = mysqli_real_escape_string($con, $_POST['message']);
-
-                    // Prepare and bind statement 
-                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
-                    // Use 's' for string data type
-                    $stmt->bind_param("ss", $recipient, $message);
-                    
-                    if ($stmt->execute()){
-                      echo '<script>
-                                document.addEventListener("DOMContentLoaded", function (){
-                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
-                                    modal.show();
-                                });
-                            </script>';
-                    }             
-              // Close connection
-              $con->close();
-              }
-          ?>
 
 <!DOCTYPE html>
 <html>
@@ -214,7 +180,7 @@
                 </button>
             </div>
             <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:15px; left:400px;">
-                <option value="1">Cash On Delivery</option>
+                <option value="Cash On Delivery">Cash On Delivery</option>
                 <option disabled value="2">Gcash (Not Available)</option>
             </select>
         </div>
@@ -249,17 +215,17 @@
                       <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" disabled value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" disabled value="Ecommerce">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
+                          <textarea class="form-control" id="message"></textarea>
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" name="sent_message">Send message</button>
+                          <button type="button" class="btn btn-primary sent_message" >Send message</button>
                     </div>
                   </div>
                 </div>
@@ -551,67 +517,94 @@
 
           
           <script> 
-            $('#Verification').click (function () {
-                let contact =document.querySelector('#contact').value;
-                let block_lot =document.querySelector('#block_lot').value;
-                let barangaySelect =document.querySelector('#barangaySelect').value;
-                let citySelect =document.querySelector('#citySelect').value;
-                let provinceSelect =document.querySelector('#provinceSelect').value;
-                let full_name =document.querySelector('#full_name').value;
-                let email =document.querySelector('#email').value;
-                let modalpayment = document.querySelector('#modalpayment');
-                let modalinstance = bootstrap.Modal.getInstance(modalpayment);
-                 // Select all checked checkboxes with the class 'productCheckbox'
-                 const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
-                  // Iterate over each checked checkbox
-                  const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
-                  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-
-                if (contact == '' || block_lot == '' || barangaySelect == '' || citySelect == '' || provinceSelect == ''
-                    ||full_name == '' ||email == '') {
+          // feed back
+          $('.sent_message').click (function () {
+            let recipient = document.querySelector('#recipient').value;
+            let message   = document.querySelector('#message').value;
+            let exampleModale =document.querySelector('#exampleModale');
+            let modalinstance =bootstrap.Modal.getInstance(exampleModale);
+            let xhr = new XMLHttpRequest ();
+            xhr.onreadystatechange =function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let data =JSON.parse (this.responseText);
+                    if (data.success) {
+                        modalinstance.hide()
                         Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Please fill up the blank !",
+                        icon: "success",
+                        title: "Successfull send",
+                        showConfirmButton: false,
+                        timer: 1500
                         });
+                    }
+                }
+            }   
+            let url = "/shopping-cart-oche/Project/guest_user/guest/insert_feedback.php?recipient="
+             + encodeURIComponent(recipient) + "&message=" + encodeURIComponent (message)
+            xhr.open ("GET", url, true);
+             xhr.send(); 
+          })
+          
+          // insert the product to card_product
+           $('#Verification').click(function () {
+    let contact = document.querySelector('#contact').value;
+    let block_lot = document.querySelector('#block_lot').value;
+    let barangaySelect = document.querySelector('#barangaySelect').value;
+    let citySelect = document.querySelector('#citySelect').value;
+    let provinceSelect = document.querySelector('#provinceSelect').value;
+    let full_name = document.querySelector('#full_name').value;
+    let email = document.querySelector('#email').value;
+    let modalpayment = document.querySelector('#modalpayment');
+    let modalinstance = bootstrap.Modal.getInstance(modalpayment);
+    // Select all checked checkboxes with the class 'productCheckbox'
+    const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
+    // Iterate over each checked checkbox
+    const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
 
-                }else {
-                    Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, process it!"
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        modalinstance.hide();
-                        if (productCheckboxes.length === 0){
-                            selectproducts();
-                        }else {
-                              // Iterate over each checked checkbox
+    if (contact == '' || block_lot == '' || barangaySelect == '' || citySelect == '' || provinceSelect == '' ||
+        full_name == '' || email == '') {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please fill up the blank !",
+        });
+
+    } else {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, process it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                modalinstance.hide();
+                if (productCheckboxes.length === 0) {
+                    selectproducts();
+                } else {
+                    // Iterate over each checked checkbox
                     productCheckboxes.forEach(checkbox => {
-                        productCheckboxes.forEach(checkbox => {
-                    // Get the data-productCode attribute value from the checkbox
-                    const productCode = checkbox.dataset.productCode;
-                    
-                    // Find the closest parent element with the class 'card' to access product information
-                    const productCard = checkbox.closest('.card');
-                    
-                    // Find the corresponding input fields within the productCard
-                    const productImageElement = productCard.querySelector('.product_Image');
-                    const productImage =  productImageElement.value;
-                    const productNameElement = productCard.querySelector('.product_name');
-                    const productName = productNameElement.value;
-                    const productPriceElement = productCard.querySelector('.product_price');
-                    const productPrice = productPriceElement.value;
-                    const productQuantityElement = productCard.querySelector('.product_quantity');
-                    const productQuantity = productQuantityElement.value ;
-                    const productTotalPriceElement = productCard.querySelector('.product_totalprice');
-                    const productTotalPrice = productTotalPriceElement.value;
-                    const payment =document.querySelector('#payment').value
-                    
+                        // Get the data-productCode attribute value from the checkbox
+                        const productCode = checkbox.dataset.productCode;
+
+                        // Find the closest parent element with the class 'card' to access product information
+                        const productCard = checkbox.closest('.card');
+
+                        // Find the corresponding input fields within the productCard
+                        const productImageElement = productCard.querySelector('.product_Image');
+                        const productImage = productImageElement.value;
+                        const productNameElement = productCard.querySelector('.product_name');
+                        const productName = productNameElement.value;
+                        const productPriceElement = productCard.querySelector('.product_price');
+                        const productPrice = productPriceElement.value;
+                        const productQuantityElement = productCard.querySelector('.product_quantity');
+                        const productQuantity = productQuantityElement.value;
+                        const productTotalPriceElement = productCard.querySelector('.product_totalprice');
+                        const productTotalPrice = productTotalPriceElement.value;
+                        const payment = document.querySelector('#payment').value;
+
 
                         // Prepare the data to be sent to the server
                         const formData = new FormData();
@@ -626,7 +619,7 @@
                         formData.append('addresss', addresss);
                         formData.append('contact', contact);
                         formData.append('fullname', full_name);
-                        
+
                         // Send the data to the server for insertion into the order_product table
                         const xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function () {
@@ -636,10 +629,10 @@
                                     // If insertion is successful, delete the product from cart_product
                                     fetchCart();
                                     fetchData();
-                                    selectAllCheckbox.checked=false;
+                                    selectAllCheckbox.checked = false;
                                     // Display the total price somewhere on the page
-                  document.getElementById('totalPriceDisplay').textContent = "₱ 0.00";
-                  document.getElementById('totalItemSelect').textContent = `Total (0 item)`;
+                                    document.getElementById('totalPriceDisplay').textContent = "₱ 0.00";
+                                    document.getElementById('totalItemSelect').textContent = `Total (0 item)`;
                                     Swal.fire({
                                         title: "Successfull",
                                         text: "",
@@ -653,12 +646,13 @@
                         xhr.open('POST', '/shopping-cart-oche/Project/user_login/Add_to_Cart/insert_order.php', true);
                         xhr.send(formData);
                     });
-                }) }
-                    }
-                    });
                 }
-            
-        })
+            }
+        });
+    }
+
+})
+
 
               document.getElementById('searchForm').addEventListener('submit', function(event) {
                   event.preventDefault(); // Prevent form submission

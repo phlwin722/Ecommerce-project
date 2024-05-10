@@ -1,39 +1,4 @@
-              <!--start sent feedback php-->
-              <?php 
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ecommerce";
-
-                $con = new mysqli($servername, $username, $password, $dbname);
-
-                if ($con->connect_error){
-                    die("Connection error" . $con->connect_error);
-                }
-
-                // feedback 
-                if (isset($_POST["sent_message"])){
-                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
-                    $message = mysqli_real_escape_string($con, $_POST['message']);
-
-                    // Prepare and bind statement 
-                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
-                    // Use 's' for string data type
-                    $stmt->bind_param("ss", $recipient, $message);
-                    
-                    if ($stmt->execute()){
-                      echo '<script>
-                                document.addEventListener("DOMContentLoaded", function (){
-                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
-                                    modal.show();
-                                });
-                            </script>';
-                    }             
-              // Close connection
-              $con->close();
-              }
-          ?>
-
+ 
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,6 +6,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <!--This is bootstrap-->
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/guest/gueest.css">
           <!--Favicon-->
@@ -229,66 +196,69 @@
            
     
             <!-- modal Feed back-->
-           <div class="feedback_Container">
+            <div class="feedback_Container">
             <button type="button" class="btn btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Feedback</button>
-              <div class="modal feedback_modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade feedback_modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Feedback</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="" method="POST" enctype="multipart/form-data">
+                      <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name" name="recipient" value="Ecommerce">
+                          <input type="text" class="form-control" id="recipient" disabled value="Ecommerce">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Message:</label>
-                          <textarea class="form-control" id="message-text" name="message"></textarea>
+                          <textarea class="form-control" id="message"></textarea>
                         </div>
-                    
+                      </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary" name="sent_message">Send message</button>
+                          <button type="button" class="btn btn-primary sent_message" >Send message</button>
                     </div>
-                    </form>
                   </div>
                 </div>
               </div>
            </div>
+
+
           </div>
            <!--  end modal Feed back-->
 
-        <!--Modal section successfull submit-->
-        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="text-align: center; justify-content:center; align-items:center;">
-                              <div class="modal-dialog" >
-                                  <div class="modal-content">
-                                  <div class="modal-body">
-                                  <button type="button" class="btn-close" style="margin-left: 430px;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  <div class="check-container" style="margin-left:180px;">
-                                      <div class="check-background">
-                                          <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
-                                          </svg>
-
-                                      </div>
-                                          </div>
-                                      <div class="check-shadow"></div> 
-                                  </div>
-                                  <h3>Successfull Send!</h3>
-                                  <div >
-                                      <br>
-                                  <button type="button" class="btn btn-secondary" id="ok" style="margin-bottom: 20px;" data-bs-dismiss="modal">OK</button>
-                                  </div>
-                                  </div>
-                              </div>
-                              </div>
-                    <!--end Modal section successfull submit-->
 
                     <script>
+          // feed back
+          $('.sent_message').click (function () {
+            let recipient = document.querySelector('#recipient').value;
+            let message   = document.querySelector('#message').value;
+            let exampleModale =document.querySelector('#exampleModal');
+            let modalinstance =bootstrap.Modal.getInstance(exampleModale);
+            let xhr = new XMLHttpRequest ();
+            xhr.onreadystatechange =function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let data =JSON.parse (this.responseText);
+                    if (data.success) {
+                        modalinstance.hide()
+                        Swal.fire({
+                        icon: "success",
+                        title: "Successfull send",
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                    }
+                }
+            }   
+            let url = "/shopping-cart-oche/Project/guest_user/guest/insert_feedback.php?recipient="
+             + encodeURIComponent(recipient) + "&message=" + encodeURIComponent (message)
+            xhr.open ("GET", url, true);
+             xhr.send(); 
+          }) 
+
                       // this is search product
                       document.getElementById('searchForm').addEventListener('submit', function(event) {
                       event.preventDefault(); // Prevent form submission
@@ -511,6 +481,7 @@
                   </script>
 
     <!--end sent feedback php-->
+
           <script src="guest.js" defer></script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
