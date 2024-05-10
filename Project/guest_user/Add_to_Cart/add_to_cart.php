@@ -843,7 +843,7 @@
                     xmlHttp.onreadystatechange =function (){
                            if (this.readyState == 4 && this.status == 200){
                             fetchData();
-                            fetch
+                            fetchData();
                               calculateTotalPrice(); // Recalculate total price after deletion
                               alert('Products deleted successfully');
                                // Uncheck all checkboxes
