@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="logo.css">
 </head>
 <body>
+<nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/shopping-cart-oche/Project/guest_user/guest/guest.php">
+            <img src="/shopping-cart-oche/Project/Image/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Ecommerce
+          </a>
+        </div>
+      </nav>
 <div class="container-fluid signup_container">
     <div class="container-fluid sign_up_logo">
         Sign up

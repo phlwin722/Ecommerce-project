@@ -1,4 +1,38 @@
+              <!--start sent feedback php-->
+              <?php 
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "ecommerce";
 
+                $con = new mysqli($servername, $username, $password, $dbname);
+
+                if ($con->connect_error){
+                    die("Connection error" . $con->connect_error);
+                }
+
+                // feedback 
+                if (isset($_POST["sent_message"])){
+                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $message = mysqli_real_escape_string($con, $_POST['message']);
+
+                    // Prepare and bind statement 
+                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
+                    // Use 's' for string data type
+                    $stmt->bind_param("ss", $recipient, $message);
+                    
+                    if ($stmt->execute()){
+                      echo '<script>
+                                document.addEventListener("DOMContentLoaded", function (){
+                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
+                                    modal.show();
+                                });
+                            </script>';
+                    }             
+              // Close connection
+              $con->close();
+              }
+          ?>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +44,7 @@
         <link rel="stylesheet" href="/shopping-cart-oche/Project/guest_user/Computer_Accessories/Computer_Accessoriess.css">
            <!--Favicon-->
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
-  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <title>Musical Instrument"</title>
     </head>
     <body>
@@ -386,6 +420,9 @@
                     fetchData ()
                   }
 
+                  $('.shopping_cart').click (function () {
+                    window.location.href="http://localhost/shopping-cart-oche/Project/guest_user/Add_to_Cart/add_to_cart.php";
+                });
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>

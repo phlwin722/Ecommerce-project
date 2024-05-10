@@ -1,3 +1,38 @@
+              <!--start sent feedback php-->
+              <?php 
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "ecommerce";
+
+                $con = new mysqli($servername, $username, $password, $dbname);
+
+                if ($con->connect_error){
+                    die("Connection error" . $con->connect_error);
+                }
+
+                // feedback 
+                if (isset($_POST["sent_message"])){
+                    $recipient = mysqli_real_escape_string($con, $_POST['recipient']);
+                    $message = mysqli_real_escape_string($con, $_POST['message']);
+
+                    // Prepare and bind statement 
+                    $stmt = $con->prepare("INSERT INTO feedback (Email, Description) VALUES (?, ?)");
+                    // Use 's' for string data type
+                    $stmt->bind_param("ss", $recipient, $message);
+                    
+                    if ($stmt->execute()){
+                      echo '<script>
+                                document.addEventListener("DOMContentLoaded", function (){
+                                    var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
+                                    modal.show();
+                                });
+                            </script>';
+                    }             
+              // Close connection
+              $con->close();
+              }
+          ?>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +46,7 @@
            <link rel="icon" type="image/x-icon" href = "/shopping-cart-oche/Project/Image/logo.png">
   
         <title>Add to Cart</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -29,9 +65,13 @@
                   <form class="d-flex" role="search" style="margin-right: 100px;" id="searchForm" method="post" enctype="multipart/form-data">
                     <input class="form-control me-2 search_input" type="search" placeholder="Search" id="searchQuery" name="search_data" aria-label="Search">
                     <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass" name="search_data_product"></i></button>
-                        <button class="btn shopping_cart  position-relative" type="submit"><i class="fa-solid fa-cart-shopping"></i>
-
-                      </button>
+                    <button type="submit" class="btn shopping_cart position-relative">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <label for="" id="count_of_cart">99+</label>
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    </button>
                   </form>
                   <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -114,23 +154,14 @@
         <!-- Display product -->
 <div class="row" style="padding-left: 20px;">
     <div class="col-md-11" style="margin-left:auto; margin-right:auto;">
-        <div class="card position-relative" style="width: 100%; padding: 10px; height: 100px;">
-            <div style="font-size: 18px; margin-left: 15px;">
-                <i class="fa-solid fa-location-dot" style="color: #de0202;"></i> Delivery Address
-            </div>
-            <div class="card-body" style="position:relative;">
-                <label style="font-weight:bold;" id="full_name"></label>
-                <label id="address"></label>
-            </div>
-        </div>
 
         <div class="card position-relative" style="width: 100%; padding: 10px; height: 70px;">
             <div class="card-body" style="position:relative;">
                 <label style="font-weight:bold;">
-                    <input class="form-check-input productCheckbox" type="checkbox" value="" id=""> Product
+                    Product
                 </label>
-                <label class="card-text" style="font-weight:bold; position:absolute; right:510px;">Unit Price</label>
-                <label class="card-text" style="font-weight:bold; position:absolute; right:350px;">Quantity</label>
+                <label class="card-text" style="font-weight:bold; position:absolute; right:590px;">Unit Price</label>
+                <label class="card-text" style="font-weight:bold; position:absolute; right:420px;">Quantity</label>
                 <label class="card-text" style="font-weight:bold; position:absolute; right:180px;">Total Price</label>
                 <label class="card-text" style="font-weight:bold; position:absolute; right:40px;">Actions</label>
             </div>
@@ -138,14 +169,39 @@
 
         <!-- Products -->
         <div class="row cem" style=""> 
-            <div class="col-md-12">
-                <div class="col-md-12 text-center" id="no_result">
-                    <p style="font-size: 40px; color:red; background-color:white; padding: 170px; margin-top:20px;">No results found!</p>
-                </div>
-            </div>
+        <div class="card" aria-hidden="true">
+                          <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                              <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                              <span class="placeholder col-7"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-6"></span>
+                              <span class="placeholder col-8"></span>
+                            </p>
+                            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                          </div>
+                      </div>
+                      <div class="card" aria-hidden="true">
+                          <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                              <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                              <span class="placeholder col-7"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-4"></span>
+                              <span class="placeholder col-6"></span>
+                              <span class="placeholder col-8"></span>
+                            </p>
+                            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                          </div>
+                      </div>
         </div>
 
-        <div class="card position-relative sticky-bottom" style="width: 100%; padding: 10px; height: 70px;">
+        <div class="card position-relative" style="width: 100%; padding: 10px; height: 70px;">
             <div class="card-body" style="position:relative;">
                 <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
                 <label style="" for="selectAllCheckbox">Select All</label>
@@ -153,11 +209,11 @@
                 <label for="payment" style="margin-left: 120px;">Payment</label>
                 <label class="card-text" style="position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
                 <label class="card-text" style="position:absolute; right:250px;" id="totalPriceDisplay"></label>
-                <button type="button" id="buy_now" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
-                    Buy now
+                <button type="button" id="check_out" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
+                   Check out
                 </button>
             </div>
-            <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:20px; left:400px;">
+            <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:15px; left:400px;">
                 <option value="1">Cash On Delivery</option>
                 <option disabled value="2">Gcash (Not Available)</option>
             </select>
@@ -209,11 +265,401 @@
                 </div>
               </div>
            </div>
-          </div>
+          </div>                                 
 
+
+                     <!--Modal payment Verification-->
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> <i class="fa-solid fa-location-dot" style="color: #de0202;"></i> Delivery Address</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form class="">
+                               <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" id="full_name" name="block_lot" value="" placeholder="name@example.com">
+                                    <label for="floatingInput">Full name</label>
+                                    
+                                </div>
+                                <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" id="email" name="block_lot" value="" placeholder="name@example.com">
+                                    <label for="floatingInput">Email</label>
+                                    
+                                </div>
+                                <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" id="contact" name="block_lot" value="" placeholder="name@example.com">
+                                    <label for="floatingInput">Contact</label>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                    <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control" id="block_lot" name="block_lot" value="" placeholder="name@example.com">
+                                    <label for="floatingInput">Block/ Lot/ Street</label>
+                                    
+                                </div>
+                                    </div>
+                                    <div class="col">
+                                    <div class="mb-3 form-floating">
+                                        <select class="form-select" id="barangaySelect" name="barangay" required>
+                                        <option selected disabled value="Abra">Choose...</option> 
+                                            <option value="FVR">FVR</option>
+                                            <option value="San Rafael 1">San Rafael 1</option>
+                                            <option value="San Rafael 2">San Rafael 2</option>
+                                            <option value="San Rafael 3">San Rafael 3</option>
+                                            <option value="San Rafael 4">San Rafael 4</option>
+                                            <option value="San Rafael 5">San Rafael 5</option>
+                                            <option value="Kaypian">Kaypian</option>
+                                        </select>
+                                        <label for="floatingInput">Barangay</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                    <div class="mb-3 form-floating">
+                                <select class="form-select"  id="citySelect"  name="cityy" value="" required>
+                                <option selected disabled value="Abra">Choose...</option> 
+                                    <option value="Manila">Manila</option>
+                                    <option value="Quezon City">Quezon City</option>
+                                    <option value="Davao City">Davao City</option>
+                                    <option value="Cebu City">Cebu City</option>
+                                    <option value="Caloocan">Caloocan</option>
+                                    <option value="Zamboanga City">Zamboanga City</option>
+                                    <option value="Taguig">Taguig</option>
+                                    <option value="Pasig">Pasig</option>
+                                    <option value="Antipolo">Antipolo</option>
+                                    <option value="Cagayan de Oro City">Cagayan de Oro City</option>
+                                    <option value="Parañaque">Parañaque</option>
+                                    <option value="Makati">Makati</option>
+                                    <option value="Bacolod">Bacolod</option>
+                                    <option value="Pasay">Pasay</option>
+                                    <option value="Angeles City">Angeles City</option>
+                                    <option value="General Santos City">General Santos City</option>
+                                    <option value="Cainta">Cainta</option>
+                                    <option value="Marikina">Marikina</option>
+                                    <option value="Iloilo City">Iloilo City</option>
+                                    <option value="Dasmarinas">Dasmarinas</option>
+                                    <option value="Valenzuela">Valenzuela</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Muntinlupa">Muntinlupa</option>
+                                    <option value="San Juan">San Juan</option>
+                                    <option value="Navotas">Navotas</option>
+                                    <option value="Lapu-Lapu City">Lapu-Lapu City</option>
+                                    <option value="Mandaluyong">Mandaluyong</option>
+                                    <option value="Imus">Imus</option>
+                                    <option value="Las Piñas">Las Piñas</option>
+                                    <option value="Baguio">Baguio</option>
+                                    <option value="Malabon">Malabon</option>
+                                    <option value="Santa Rosa">Santa Rosa</option>
+                                    <option value="Bacoor">Bacoor</option>
+                                    <option value="Taytay">Taytay</option>
+                                    <option value="Lucena">Lucena</option>
+                                    <option value="Lipa">Lipa</option>
+                                    <option value="Legazpi">Legazpi</option>
+                                    <option value="Ormoc">Ormoc</option>
+                                    <option value="Naga">Naga</option>
+                                    <option value="San Fernando">San Fernando</option>
+                                    <option value="Panabo">Panabo</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Toledo">Toledo</option>
+                                    <option value="Roxas City">Roxas City</option>
+                                    <option value="Tabaco">Tabaco</option>
+                                    <option value="Gingoog">Gingoog</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Sorsogon City">Sorsogon City</option>
+                                    <option value="Surigao City">Surigao City</option>
+                                    <option value="Ozamiz">Ozamiz</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Bayawan">Bayawan</option>
+                                    <option value="Isabela">Isabela</option>
+                                    <option value="Bogo">Bogo</option>
+                                    <option value="Silay">Silay</option>
+                                    <option value="Guihulngan">Guihulngan</option>
+                                    <option value="Kabankalan">Kabankalan</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Tuguegarao">Tuguegarao</option>
+                                    <option value="Dipolog">Dipolog</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Tanauan">Tanauan</option>
+                                    <option value="Cauayan">Cauayan</option>
+                                    <option value="Calapan">Calapan</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="Surallah">Surallah</option>
+                                    <option value="Cabadbaran">Cabadbaran</option>
+                                    <option value="Maasin">Maasin</option>
+                                    <option value="Kidapawan">Kidapawan</option>
+                                    <option value="Bislig">Bislig</option>
+                                    <option value="Bais">Bais</option>
+                                    <option value="Cotabato City">Cotabato City</option>
+                                    <option value="La Carlota">La Carlota</option>
+                                    <option value="Bayugan">Bayugan</option>
+                                    <option value="San Carlos">San Carlos</option>
+                                    <option value="Legaspi">Legaspi</option>
+                                    <option value="Laoag">Laoag</option>
+                                    <option value="Baybay">Baybay</option>
+                                    <option value="Bulacan">Bulacan</option>
+                                    <option value="Samar">Samar</option>
+                                    <option value="Sorsogon">Sorsogon</option>
+                                    <option value="Surigao">Surigao</option>
+                                    <option value="Tarlac">Tarlac</option>
+                                    <option value="Zambales">Zambales</option>
+                                    <option value="Marawi">Marawi</option>
+                                    <option value="Catarman">Catarman</option>
+                                    <option value="Calbayog">Calbayog</option>
+                                    <option value="Pagadian">Pagadian</option>
+                                    <option value="Tacloban">Tacloban</option>
+                                    <option value="Digos">Digos</option>
+                                    <option value="La Trinidad">La Trinidad</option>
+                                    <option value="Trece Martires">Trece Martires</option>
+                                    <option value="Koronadal">Koronadal</option>
+                                    <option value="Catbalogan">Catbalogan</option>
+                                    <option value="Dapitan">Dapitan</option>
+                                    <option value="Tandag">Tandag</option>
+                                    <option value="Baler">Baler</option>
+                                    <option value="Libmanan">Libmanan</option>
+                                    <option value="Mati">Mati</option>
+                                    <option value="Bongao">Bongao</option>
+                                    <option value="Virac">Vir
+                                    </select>
+                                    <label for="floatingInput">City</label>
+                                </div>
+                                    </div>
+                                    <div class="col">
+                                    <div class="mb-3 form-floating">
+                                <select class="form-select"  id="provinceSelect"  required>
+                                <option selected disabled value="Abra">Choose...</option> 
+                                <option value="Abra">Abra</option> 
+                                <option value="Agusan del Norte">Agusan del Norte</option> 
+                                <option value="Agusan del Sur">Agusan del Sur</option> 
+                                <option value="Aklan">Aklan</option> 
+                                <option value="Antique">Antique</option> 
+                                <option value="Apayao">Apayao</option> 
+                                <option value="Aurora">Aurora</option> 
+                          
+                                <option value="Basilan">Basilan</option> 
+                                <option value="Bataan">Bataan</option> 
+                                <option value="Batanes">Batanes</option> 
+                                <option value="Batangas">Batangas</option> 
+                                <option value="Benguet">Benguet</option> 
+                                <option value="Biliran">Biliran</option> 
+                                <option value="Bohol">Bohol</option> 
+                                <option value="Bukidnon">Bukidnon</option> 
+                                <option value="Bulacan" > Bulacan</option> 
+
+                                <option value="Cagayan">Cagayan</option> 
+                                <option value="Camarines Norte">Camarines Norte</option> 
+                                <option value="Camarines Sur"> Camarines Sur</option> 
+                                <option value="Camiguin">Camiguin</option> 
+                                <option value="Capiz">Capiz</option> 
+                                <option value="Catanduanes">Catanduanes</option> 
+                                <option value="Cavite">Cavite</option> 
+                                <option value="Cebu">Cebu</option> 
+                                <option value="Cotabato">Cotabato</option> 
+
+                                <option value=">Davao de Oro">Davao de Oro</option> 
+                                <option value="Davao del Norte">Davao del Norte</option> 
+                                <option value="Davao del Sur">Davao del Sur</option> 
+                                <option value="Davao Occidental">Davao Occidental</option> 
+                                <option value="Davao Oriental">Davao Oriental</option> 
+                                <option value="inagat Islands">Dinagat Islands</option> 
+
+                                <option value="astern Samar">Eastern Samar</option> 
+
+                                <option value="Guimaras">Guimaras</option> 
+
+                                <option value="Ifugao">Ifugao</option> 
+                                <option value="Ilocos Norte">Ilocos Norte</option> 
+                                <option value="Ilocos Sur">Ilocos Sur</option> 
+                                <option value="Iloilo">Iloilo</option> 
+                                <option value="Isabela">Isabela </option> 
+
+                                <option value="Kalinga">Kalinga</option> 
+
+                                <option value="La Union"> La Union</option> 
+                                <option value="Laguna">Laguna</option> 
+                                <option value="Lanao del Norte">Lanao del Norte</option> 
+                                <option value="Lanao del Sur">Lanao del Sur</option> 
+                                <option value="Leyte">Leyte</option> 
+
+                                <option value="Maguindana">Maguindana</option> 
+                                <option value="Maguindanao del Norte">Maguindanao del Norte</option> 
+                                <option value="Maguindanao del Sur">Maguindanao del Sur</option> 
+                                <option value="Marinduque">Marinduque</option> 
+                                <option value="Masbate">Masbate</option> 
+                                <option value="Misamis Occidenta">Misamis Occidental</option> 
+                                <option value="Mountain Province">Mountain Province</option> 
+
+                                <option value="Abra">Negros Occidental</option> 
+                                <option value="Abra">Negros Oriental</option> 
+                                <option value="Abra">Northern Samar</option> 
+                                <option value="Abra">Nueva Ecija</option> 
+                                <option value="Abra">Nueva Vizcaya</option> 
+
+                                <option value="Occidental Mindoro">Occidental Mindoro</option> 
+                                <option value="Oriental Mindoro<">Oriental Mindoro</option> 
+
+                                <option value="Palawan"> Palawan</option> 
+                                <option value="Pampanga">Pampanga</option> 
+                                <option value="Pangasinan">Pangasinan</option> 
+
+                                <option value="Quezon">Quezon</option> 
+                                <option value="Quirino">Quirino</option> 
+
+                                <option value="Rizal">Rizal</option> 
+                                <option value="Romblon">Romblon</option> 
+
+                                <option value="Samar">Samar</option> 
+                                <option value="Sarangani">Sarangani</option> 
+                                <option value="Siquijor"> Siquijor</option> 
+                                <option value="Sorsogon">Sorsogon</option> 
+                                <option value="South Cotabato"> South Cotabato</option> 
+                                <option value="Southern Leyte">Southern Leyte</option> 
+                                <option value="Sultan Kudarat">Sultan Kudarat</option> 
+                                <option value="Sulo">Sulo</option> 
+                                <option value="Surigao del Norte">Surigao del Norte</option> 
+                                <option value="Surigao del Sur">Surigao del Sur</option> 
+
+                                <option value="Tarlac">Tarlac</option> 
+                                <option value="Tawi-Tawi">Tawi-Tawi</option> 
+
+                                <option value="Zambales"> Zambales</option> 
+                                <option value="Zamboanga del Nort">Zamboanga del Nort</option> 
+                                <option value="Zamboanga del Sur">Zamboanga del Sur</option> 
+                                <option value="Zamboanga city">Zamboanga Sibugay</option> 
+                                    </select><label for="floatingInput">Province</label>
+                                </div>
+                                    </div>
+                                </div>
+
+                
+                          
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="Verification" class="btn btn-primary">Buy now</button>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                     <!--Modal payment Verification-->
 
           
-          <script>
+          <script> 
+            $('#Verification').click (function () {
+                let contact =document.querySelector('#contact').value;
+                let block_lot =document.querySelector('#block_lot').value;
+                let barangaySelect =document.querySelector('#barangaySelect').value;
+                let citySelect =document.querySelector('#citySelect').value;
+                let provinceSelect =document.querySelector('#provinceSelect').value;
+                let full_name =document.querySelector('#full_name').value;
+                let email =document.querySelector('#email').value;
+                let modalpayment = document.querySelector('#modalpayment');
+                let modalinstance = bootstrap.Modal.getInstance(modalpayment);
+                 // Select all checked checkboxes with the class 'productCheckbox'
+                 const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
+                  // Iterate over each checked checkbox
+                  const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
+                  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+                if (contact == '' || block_lot == '' || barangaySelect == '' || citySelect == '' || provinceSelect == ''
+                    ||full_name == '' ||email == '') {
+                        Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please fill up the blank !",
+                        });
+
+                }else {
+                    Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, process it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        modalinstance.hide();
+                        if (productCheckboxes.length === 0){
+                            selectproducts();
+                        }else {
+                              // Iterate over each checked checkbox
+                    productCheckboxes.forEach(checkbox => {
+                        productCheckboxes.forEach(checkbox => {
+                    // Get the data-productCode attribute value from the checkbox
+                    const productCode = checkbox.dataset.productCode;
+                    
+                    // Find the closest parent element with the class 'card' to access product information
+                    const productCard = checkbox.closest('.card');
+                    
+                    // Find the corresponding input fields within the productCard
+                    const productImageElement = productCard.querySelector('.product_Image');
+                    const productImage =  productImageElement.value;
+                    const productNameElement = productCard.querySelector('.product_name');
+                    const productName = productNameElement.value;
+                    const productPriceElement = productCard.querySelector('.product_price');
+                    const productPrice = productPriceElement.value;
+                    const productQuantityElement = productCard.querySelector('.product_quantity');
+                    const productQuantity = productQuantityElement.value ;
+                    const productTotalPriceElement = productCard.querySelector('.product_totalprice');
+                    const productTotalPrice = productTotalPriceElement.value;
+                    const payment =document.querySelector('#payment').value
+                    
+
+                        // Prepare the data to be sent to the server
+                        const formData = new FormData();
+                        formData.append('product_code', productCode);
+                        formData.append('product_name', productName);
+                        formData.append('quantity', productQuantity);
+                        formData.append('price', productPrice);
+                        formData.append('total_price', productTotalPrice);
+                        formData.append('email', email);
+                        formData.append('image', productImage);
+                        formData.append('payment', payment);
+                        formData.append('addresss', addresss);
+                        formData.append('contact', contact);
+                        formData.append('fullname', full_name);
+                        
+                        // Send the data to the server for insertion into the order_product table
+                        const xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (this.readyState === 4 && this.status === 200) {
+                                const data = JSON.parse(this.responseText);
+                                if (data.success) {
+                                    // If insertion is successful, delete the product from cart_product
+                                    fetchCart();
+                                    fetchData();
+                                    selectAllCheckbox.checked=false;
+                                    // Display the total price somewhere on the page
+                  document.getElementById('totalPriceDisplay').textContent = "₱ 0.00";
+                  document.getElementById('totalItemSelect').textContent = `Total (0 item)`;
+                                    Swal.fire({
+                                        title: "Successfull",
+                                        text: "",
+                                        icon: "success"
+                                    });
+                                } else {
+                                    console.error('Failed to insert product into order_product table.');
+                                }
+                            }
+                        };
+                        xhr.open('POST', '/shopping-cart-oche/Project/user_login/Add_to_Cart/insert_order.php', true);
+                        xhr.send(formData);
+                    });
+                }) }
+                    }
+                    });
+                }
+            
+        })
+
               document.getElementById('searchForm').addEventListener('submit', function(event) {
                   event.preventDefault(); // Prevent form submission
 
@@ -235,7 +681,48 @@
                               const tableBody = document.querySelector('.cem');
                               tableBody.innerHTML = ''; // Clear previous results
                               data.forEach(product => {
-                                  const row = `<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; background-color:white; padding: 170px; 0px 30px 0px; margin-top:20px;">No results found!</p>  </div>`;
+                                  const row = `<div class="col-12">
+                    <div class="card" style="width: 100%; padding:10px; height:120px;">
+                        <div class="row">
+                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                            </div>
+                            <div class="" style=" width:165px;">
+                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                <input type ="text" hidden class="product_Image" value="${product.Image}">
+                            </div>
+                            <div class="col">
+                                <label style="padding-top:15px;">${product.Product_name}</label>
+                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
+                                <input type ="text" class="user_email" hidden  value="${product.Email}">
+                            </div>
+                            <div class="col-1 position-relative" style="width:130px;">
+                                <div style="position: absolute; top: 36%; left:33%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">
+                                <div style="position: absolute; top: 30%; left:15%;">
+                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                                <div style="position: absolute; top: 36%; left:20%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
                                   tableBody.innerHTML += row;
                               });
                           }
@@ -264,24 +751,6 @@
                           let data = JSON.parse(this.responseText);
                           populateTable(data);
 
-                            let firstname = document.querySelector("#firstname");
-                              let lastname = document.querySelector('#lastname');
-
-                              let xhr = new XMLHttpRequest();
-                              xhr.onreadystatechange = function () {
-                                if (this.readyState === 4 && this.status === 200) {
-                                  let data = JSON.parse(this.responseText);
-
-                                  // Assuming data is an array of objects
-                                  data.forEach(info => {
-                                    console.log (info.First_name)
-                                    lastname.innerHTML = info.Last_name;
-                                    firstname.innerHTML = info.First_name;
-                                  });
-                                }
-                              };
-                              xhr.open("GET", "/shopping-cart-oche/Project/user_login/user_login_home/info_user.php", true);
-                              xhr.send();
                       }
                   };
                   xhr.open("GET", "add_to_cart_fetch.php", true);
@@ -292,48 +761,57 @@
               function populateTable(data) {
                   const tableBody = document.querySelector('.cem');
                   tableBody.innerHTML = ''; // Clear previous results
+                  if (data.length === 0) {
+                    tableBody.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; background-color:white; padding: 170px; 0px 30px 0px; margin-top:20px;">No results found!</p>  </div>';
+                          }else {
+                            const tableBody = document.querySelector('.cem');
+                  tableBody.innerHTML = ''; // Clear previous results
                   data.forEach(product => {
                       const row = `<div class="col-12">
-                          <div class="card" style="width: 100%; padding:10px; height:120px;">
-                              <div class="row">
-                                  <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
-                                      <input class="form-check-input productCheckbox"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
-                                  </div>
-                                  <div class="" style=" width:165px;">
-                                      <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
-                                  </div>
-                                  <div class="col">
-                                      <label style="padding-top:15px;">${product.Product_name}</label>
-                                  </div>
-                                  <div class="col-1 position-relative" style="width:130px;">
-                                      <div style="position: absolute; top: 36%; left:33%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col position-relative" style="width:125px;">
-                                      <div style="position: absolute; top: 30%; left:15%;">
-                                          <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
-                                          <input class="text-center  border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
-                                          <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
-                                      </div>
-                                  </div>
-                                  <div class="col-1 position-relative">
-                                      <div style="position: absolute; top: 36%; left:20%;">
-                                          <lable>₱ </lable> 
-                                          <input class="text-center totalpricee"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
-                                      </div>
-                                  </div>
-                                  <div class="col-2 position-relative" style="width:180px;">
-                                    <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
-                                        <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
-                                    </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>`;
+                    <div class="card" style="width: 100%; padding:10px; height:120px;">
+                        <div class="row">
+                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                            </div>
+                            <div class="" style=" width:165px;">
+                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                <input type ="text" hidden class="product_Image" value="${product.Image}">
+                            </div>
+                            <div class="col">
+                                <label style="padding-top:15px;">${product.Product_name}</label>
+                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
+                                <input type ="text" class="user_email" hidden  value="${product.Email}">
+                            </div>
+                            <div class="col-1 position-relative" style="width:130px;">
+                                <div style="position: absolute; top: 36%; left:33%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">
+                                <div style="position: absolute; top: 30%; left:15%;">
+                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                                <div style="position: absolute; top: 36%; left:20%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
                       tableBody.innerHTML += row;
                   });
+                          }
 
                   const selectAllCheckbox = document.getElementById('selectAllCheckbox');
                   const productCheckboxes = document.querySelectorAll('.productCheckbox');
@@ -391,19 +869,151 @@
 
               }
 
+              // Function to recalculate and display total price
+              function calculateTotalPrice() {
+                  let totalPrice = 0;
+                  let totalItems = 0; // Initialize totalItems variable
+                  const productCheckboxes = document.querySelectorAll('.productCheckbox');
 
-              // function to fetch user information using ajax to fetch user info
+                  // Iterate through each product checkbox
+                  productCheckboxes.forEach(checkbox => {
+                      if (checkbox.checked) {
+                          // Get the corresponding total price element for the checked product
+                          let productCode = checkbox.dataset.productCode;
+                          let totalPriceElement = document.getElementById(`totalprice_${productCode}`);
+                          if (totalPriceElement) {
+                              // Parse the total price value and add it to the total price accumulator
+                              let price = parseFloat(totalPriceElement.value);
+                              if (!isNaN(price)) {
+                                  totalPrice += price;
+                                  totalItems++; // Increment totalItems when a checkbox is checked
 
-            
-              document.querySelector('.shopping_cart').addEventListener('click',function  ( ) {
-                      window.location.href="/shopping-cart-oche/Project/guest_user/Add_to_Cart/add_to_cart.php";
-                    })
+                              }
+                          }
+                      }
+                  });
 
+                  // Display the total price somewhere on the page
+                  document.getElementById('totalPriceDisplay').textContent = "₱ " + totalPrice.toFixed(2);
+                  document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
+              }
+
+              // Quantity add or minus
+              function minus(Product_code) {
+                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                  let quantity = parseInt(quantityElement.value);
+                  let unitprice = parseInt(unitpriceElement.value);
+                  let totalprice = parseInt(totalpriceElement.value);
+
+                  if (quantity > 1) {
+                      let decrement = 1;
+                      quantity -= decrement;
+                      totalprice -= unitprice;
+                      totalpriceElement.value = totalprice.toString();
+                      quantityElement.value = quantity.toString();
+                  } else {
+                      // If the quantity is already 1, do nothing or display a message
+                      // In this example, we're leaving it as is
+                  }
+                  calculateTotalPrice(); // Recalculate total price after quantity change
+              }
+
+              function add(Product_code) {
+                  let unitpriceElement = document.querySelector(`#unitprice_${Product_code}`);
+                  let totalpriceElement = document.querySelector(`#totalprice_${Product_code}`);
+                  let quantityElement = document.querySelector(`#quantity_${Product_code}`);
+                  let unitprice = parseInt(unitpriceElement.value);
+                  let quantity = parseInt(quantityElement.value);
+                  let increment = 1;
+                  quantity += increment;
+                  let totalPrice = unitprice * quantity;
+
+                  // Update the value displayed on the webpage
+                  quantityElement.value = quantity.toString();
+                  totalpriceElement.value = totalPrice.toString();
+                  calculateTotalPrice(); // Recalculate total price after quantity change
+              }
+
+
+                // Function to delete a product
+            function DeleteProduct(Product_code) {
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                      calculateTotalPrice();  // Recalculate total price after quantity change
+                      fetchData(); // Fetch updated data after deletion
+                      fetchCart()
+                      console.log(Product_code)
+                  }
+              };
+              xmlhttp.open("GET", "delete_Add_to_cart.php?q=" + Product_code, true);
+              xmlhttp.send();
+              }
+
+                function fetchCart() {
+
+                let xhr = new XMLHttpRequest();
+                      xhr.onreadystatechange = function() {
+                          if (this.readyState === 4 && this.status === 200) {
+                                  let data = JSON.parse(this.responseText);
+                                  let count_of_cart = document.querySelector('#count_of_cart');
+
+                                  count_of_cart.innerHTML = data.count_cart;
+                                  console.log(data.count)
+                                  
+                          }else {
+                                  console.error("Failed to fetch cart count. Status code: " + this.status);
+                              }
+                      };
+                      xhr.open("GET", "/shopping-cart-oche/Project/guest_user/guest/fetch_cart.php", true);
+                      xhr.send();
+
+                }
+
+                $('.shopping_cart').click (function () {
+                    window.location.href="http://localhost/shopping-cart-oche/Project/guest_user/Add_to_Cart/add_to_cart.php";
+                });
+            //alert message
+              function success () {
+                Swal.fire({
+            title: "Successfull",
+            text: "",
+            icon: "success"
+            });
+              }
+
+              function selectproducts() {
+                Swal.fire({
+                    title: "<strong> Please select product </strong>",
+                    icon: "info",
+                    html: `
+                       
+                    `,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    });
+              }
+              function selectproducts() {
+                Swal.fire({
+                    title: "<strong> Please select product </strong>",
+                    icon: "info",
+                    html: `
+                       
+                    `,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    });
+              }
               window.onload = function() {
                 fetchData();
-                fetchDataUserInfo();
+                fetchCart();
               };
           </script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
          <!--This is bootstrap-->

@@ -16,11 +16,11 @@
         // Get the search query
         $searchQuery = $_POST['search_data'];
         // Prepare and execute the SQL statement
-        $stmt = $con->prepare("SELECT * FROM product_list WHERE Category = ? AND Product_name LIKE ?");
+        $stmt = $con->prepare("SELECT * FROM cart_product WHERE Email = ? AND Product_name LIKE ?");
         // Add wildcards to the search query
         $searchQuery = "%$searchQuery%";
         $stmt->bind_param("ss", $category, $searchQuery);
-        $category = 'Musical Instrument';
+        $category = 'guest';
         $stmt->execute();
         // Get the result
         $result = $stmt->get_result();

@@ -5,7 +5,7 @@
     $username = "root";
     $password = "";
     $dbname = "ecommerce";
-    $email = $_SESSION ['email'];
+    $email = 'guest';
     $con = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection

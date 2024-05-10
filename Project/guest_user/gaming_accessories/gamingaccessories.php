@@ -448,6 +448,10 @@
                     xhr.open("GET","/shopping-cart-oche/Project/guest_user/guest/delete_guest.php");
                     xhr.send()
                   }); 
+
+                  $('.shopping_cart').click (function () {
+                    window.location.href="http://localhost/shopping-cart-oche/Project/guest_user/Add_to_Cart/add_to_cart.php";
+                });
           </script>
          <!--This is for fontawesome icon-->
          <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
