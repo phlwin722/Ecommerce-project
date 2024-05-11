@@ -4,8 +4,7 @@
     if (!isset($_SESSION['ffname'])){
       header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
     }
-    $firtname = $_SESSION['ffname'];
-    $lastname = $_SESSION['llname'];
+
 ?>
 
 <!DOCTYPE html>
@@ -181,7 +180,7 @@
                     <!--this is second grid of data display-->
                         <!--table of content-->
                         <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding:0px 10px 0px 10px;">
-                          <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted Product</label>
+                          <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Deleted User</label>
                           <br>
                           <br>
                           <form class="row gx-3 gy-2 d-flex" id="searchForm" style="height:45px;">

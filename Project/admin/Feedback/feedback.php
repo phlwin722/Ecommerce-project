@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width:device-width, initial-scale=1">
     <meta name="autor" content="Dexter Jamero "> 
-    <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/Feedback/feedbackk.css">
+    <link rel="stylesheet" href="/shopping-cart-oche/Project/admin/Feedback/feedback.css">
         <!--This is bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
          
@@ -162,10 +162,10 @@
                        
                     <!--table of content-->
                     <div class="col text-start table_content"  style=" background-color: rgba(236, 236, 236, 0.966); padding: 0px 25px 0px 15px;">
-                      <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Feed Back</label>
-                      <div class="dispaly_Table">
+                      <label class="text-start " style="font-weight: bold; font-size: 20px; margin-top: 10px;">Feedback</label>
+                      <div class="dispaly_Table" >
                       <!--this is the list of table product-->
-                      <table class="table table-hover" id="feedbackTable" style="margin-top:10px ;">
+                      <table class="table table-hover" id="feedbackTable" style="margin-top:10px ; ">
                         <thead>
                           <tr>
                             <th scope="col" class="table_email">Email</th>

@@ -19,8 +19,12 @@ $stmt_countprod = $conn->query("SELECT COUNT(*) as total_product FROM product_li
 $total_product = $stmt_countprod->fetch_assoc()['total_product'];
 
 // count order
-$stmt_countorder = $conn->query("SELECT COUNT(*) as total_order FROM order_product");
+$stmt_countorder = $conn->query("SELECT COUNT(*) as total_order FROM order_product WHERE Status = 'Pending' OR Status = 'On the way'");
 $total_order = $stmt_countorder->fetch_assoc()['total_order'];
+
+# count of deliverd
+$stmt_countdelivered =  $conn->query("SELECT COUNT(*) as countdeliverd FROM order_product WHERE Status ='Delivered'");
+$total_delivered = $stmt_countdelivered->fetch_assoc()['countdeliverd'];
 
 // sum all total sales
 $total_saless =  $conn->query("SELECT SUM(Sales) as total_saless FROM sales_report"); // Changed table name here
@@ -29,6 +33,7 @@ $total_salee = $total_saless->fetch_assoc()['total_saless'];
 $response = array ("total_user" => $total_user, 
                    "total_product" => $total_product,
                     "total_order" => $total_order,
+                    "total_delivered" => $total_delivered,
                     "total_sales" => $total_salee);
     echo json_encode($response);
 

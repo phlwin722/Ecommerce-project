@@ -4,8 +4,6 @@
     if (!isset($_SESSION['ffname'])){
       header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
     }
-    $firtname = $_SESSION['ffname'];
-    $lastname = $_SESSION['llname'];
 ?>
 
 <!DOCTYPE html>
@@ -172,15 +170,15 @@
                           <br>
                           <br>            
                           <div class="container text-center" style="height:120px;">
-                              <div class="row">
+                              <div class="row" style="height:120px;">
                                 <div class="col" style="background-color:white; height:120px; width: 200px;">
                                     <label style="font-size:25px; font-weight:bold;">User</label>
                                     <br>
-                                    <div class="row">
-                                      <div class="col" style="padding-top:15px;">
+                                    <div class="row" style="height:120px;">
+                                      <div class="col" style="padding-top:15px; height:120px;">
                                       <i class="fa-solid fa-users" style="font-size:30px;"></i>
                                       </div>
-                                      <div class="col" style="padding-top:10px;">
+                                      <div class="col" style="padding-top:10px; height:120px;">
                                         <label for="" id="user" style="font-size:30px;"></label>
                                       </div>
                                     </div>
@@ -190,11 +188,11 @@
                                 <label style="font-size:25px; font-weight:bold;">Order</label>
                                 <br>
                                 <div class="col"> 
-                                  <div class="row">
+                                  <div class="row" style="height:120px;">
                                       <div class="col" style="padding-top:15px;">
-                                      <i class="fas fa-shopping-bag" style="font-size:30px;"></i>   
+                                      <i class="fas fa-shopping-bag" style="font-size:30px; height:120px;"></i>   
                                       </div>
-                                      <div class="col" style="padding-top:10px;">
+                                      <div class="col" style="padding-top:10px; height:120px;">
                                         <label for="" id="order" style="font-size:30px;"></label>
                                       </div>
                                     </div>
@@ -202,41 +200,66 @@
   
                               </div>
                                 <div class="col" style="background-color:white; height:120px; margin-right:10px;">
+                                <label style="font-size:25px; font-weight:bold;">Delivered</label>
+                                <br>
+                                <div class="row" style="height:120px;">
+                                      <div class="col" style="padding-top:15px; height:120px;">
+                                      <i class="fas fa-shopping-bag" style="font-size:30px; height:120px;"></i>   
+                                      </div>
+                                      <div class="col" style="padding-top:10px; height:120px;" >
+                                        <label for="" id="delivered" style="font-size:30px;"></label>
+                                      </div>
+                                    </div>
+                                    
+                              </div>
+                                
+                              </div>
+                          </div> 
+                          <div class="container text-center" style="height:120px; margin-top:10px">
+                              <div class="row" style="height:120px;">
+                                <div class="col" style="background-color:white; height:120px; width: 200px;">
                                 <label style="font-size:25px; font-weight:bold;">Product</label>
                                 <br>
-                                <div class="row">
-                                      <div class="col" style="padding-top:15px;">
+                                <div class="row" style="height:120px;">
+                                      <div class="col" style="padding-top:15px; height:120px;">
                                       <i class="fa-solid fa-box-open" style="font-size:30px;"> </i>
                                       </div>
-                                      <div class="col" style="padding-top:10px;">
+                                      <div class="col" style="padding-top:10px; height:120px;">
                                         <label for="" id="product" style="font-size:30px;"></label>
                                       </div>
                                     </div>
-                                    
+                             
                               </div>
-                                <div class="col" style="background-color:white; height:120px;">
+                                <div class="col" style="background-color:white; height:120px; margin-left:10px; margin-right:10px;">
                                 <label style="font-size:25px; font-weight:bold;">Total sales</label>
                                 <br>
-                                <div class="row">
+                                <div class="col"> 
+                                  <div class="row" style="height:120px;">
                                       <div class="col" style="padding-top:15px;">
                                       <i class="fa-solid fa-chart-line" style="font-size:30px;"></i>
                                       </div>
-                                      <div class="col" style="padding-top:10px;">
+                                      <div class="col" style="padding-top:10px; height:120px;">
                                         <label for="" id="sales" style="font-size:30px;"></label>
                                       </div>
                                     </div>
+                              </div>
+  
+                              </div>
+                                <div class="col" style=" height:120px; margin-right:10px;">
+
                                     
                               </div>
+                                
                               </div>
                           </div> 
-                           <!--this is the list of table product-->
+                           <!--this is the list of table product
                          <div class="dispaly_Table" style="margin-top:10px; right:-4px">
-                           <!-- Display the chart -->
+                            Display the chart 
                          <div id="chart_div" style="width: 100%; height: 450px;"></div>
 
                            </div>
                       </div>
-                        <!--end this is the list of table product-->
+                        <end this is the list of table product-->
                         </div>
 
             </div>
@@ -324,7 +347,8 @@
                                     let product =document.querySelector('#product');
                                     let order =document.querySelector('#order');
                                     let sales =document.querySelector('#sales');
-
+                                    let delivered =document.querySelector('#delivered')
+                                    delivered.innerHTML = response.total_delivered
                                     user.innerHTML =response.total_user;
                                     product.innerHTML =response.total_product;
                                     order.innerHTML =response.total_order;

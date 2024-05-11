@@ -10,6 +10,12 @@ body{
 
 @media only screen and (min-width:1024px) and (max-width:1439px){
      /* laptop layout*/
+     .dispaly_Table {
+      width: 100%;
+      height: 530px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    } 
  #wid{
     width: 260px;
     background-color:  rgb(43, 43, 43);
