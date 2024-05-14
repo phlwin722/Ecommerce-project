@@ -5,10 +5,6 @@
                       header ('Location: /shopping-cart-oche/Project/user_login/logout/logout.php');
                   }
                   
-                  $firstname = $_SESSION['ffname'];
-                  $lastname = $_SESSION['llname'];
-                  $email = $_SESSION ['email'];
-
           ?>
 
 <!DOCTYPE html>

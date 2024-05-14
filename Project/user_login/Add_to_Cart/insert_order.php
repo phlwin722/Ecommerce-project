@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $addresss = $_POST['addresss'];
     $contact = $_POST['contact'];
     $fullname = $_POST['fullname'];
-    $status = 'Pending';
+    $statuss = $_POST['status'];
+ 
     // Your database connection code goes here
     $servername = "localhost";
     $username = "root";
@@ -30,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare and bind the SQL statement
-    $stmt = $conn->prepare("INSERT INTO order_product ( Product_code, Product_name, Quantity, Price, Total_price, Status, Email, Full_name, Contact_No, Address, Mode_payment, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssiissssssss", $productCode, $productName, $quantity, $price, $totalPrice,$status, $email,$fullname,$contact,$addresss,$payment, $image);
+    $stmt = $conn->prepare("INSERT INTO order_product ( Product_code, Product_name, Quantity, Price, Total_price, Status, Email, Full_name, Contact_No, Address, Mode_payment,Stat, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssiisssssssss", $productCode, $productName, $quantity, $price, $totalPrice,$status, $email,$fullname,$contact,$addresss,$payment,$statuss, $image);
 
     // Execute the statement
     if ($stmt->execute()) {

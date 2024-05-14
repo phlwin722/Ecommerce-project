@@ -4,8 +4,6 @@
     if (!isset($_SESSION['ffname'])){
       header("Location: /shopping-cart-oche/Project/admin/logout/logout.php");
     }
-    $firtname = $_SESSION['ffname'];
-    $lastname = $_SESSION['llname'];
 ?>
 
 <!DOCTYPE html>
@@ -187,12 +185,13 @@
                                       <th scope="col">Image</th>
                                       <th scope="col">Quantity</th>
                                       <th scope="col">Price</th>
-                                        <th scope="col">total Price</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col">Deliver</th>
                                         <th scope="col">Full name</th>
                                         <th scope="col">Contact No</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">Mode of Payment</th>
+                                        <th scope="col">Status</th>
                                    </tr>
                                </thead>
                                <tbody >
@@ -250,6 +249,7 @@ function populateTable(data) {
                         <td>${message.Contact_No}</td>
                         <td>${message.Address}</td>
                         <td>${message.Mode_payment}</td>
+                        <td>${message.Stat}</td>
                     </tr>`;
         tableBody.innerHTML += row;
     });

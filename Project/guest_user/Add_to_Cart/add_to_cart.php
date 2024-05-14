@@ -1,6 +1,6 @@
               <!--start sent feedback php-->
 
-<!DOCTYPE html>
+              <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -13,6 +13,8 @@
   
         <title>Add to Cart</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=AWPZd1l7RhoRg-QQlFzCi0v9W2cK3d39R2PZkHwu5ZUjSIpgwLDmd4XTmTjth4D2z5FySI0_t9vHpXsp&currency=PHP"></script>
+
     </head>
     <body>
     <div class="container-fluid  sticky-top" style=" padding: 0px;" >
@@ -167,22 +169,19 @@
                       </div>
         </div>
 
-        <div class="card position-relative" style="width: 100%; padding: 10px; height: 70px;">
+        <div class="card position-relative" id="Buttom_bot" style="width: 100%; padding: 10px; height: 70px;">
             <div class="card-body" style="position:relative;">
                 <input class="form-check-input" type="checkbox" value="" id="selectAllCheckbox">
                 <label style="" for="selectAllCheckbox">Select All</label>
                 <label style="margin-left: 20px;" id="DeleteDataAll" for="">Delete All</label>
-                <label for="payment" style="margin-left: 120px;">Payment</label>
                 <label class="card-text" style="position:absolute; right:350px;" id="totalItemSelect">Total (0 item)</label>
                 <label class="card-text" style="position:absolute; right:250px;" id="totalPriceDisplay"></label>
+                <input type="text" hidden  id="totalPriceDisplayy">
                 <button type="button" id="check_out" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpayment" style="font-weight:bold; position:absolute; right:40px ; top:9px;">
                    Check out
                 </button>
             </div>
-            <select class="form-select position-absolute" id="payment" aria-label="Default select example" style="width:200px; top:15px; left:400px;">
-                <option value="Cash On Delivery">Cash On Delivery</option>
-                <option disabled value="2">Gcash (Not Available)</option>
-            </select>
+
         </div>
     </div>
 </div>
@@ -256,7 +255,7 @@
                                     
                                 </div>
                                 <div class="mb-3 form-floating">
-                                <input type="text" class="form-control" id="contact" name="block_lot" value="" placeholder="name@example.com">
+                                <input type="text" class="form-control" id="contactt" name="block_lot" value="" placeholder="name@example.com">
                                     <label for="floatingInput">Contact</label>
                                     
                                 </div>
@@ -506,7 +505,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="Verification" class="btn btn-primary">Buy now</button>
+                            <button type="button" class="btn btn-primary" id="Verification">Buy now</button>
                         </div>
                         </form>
                         </div>
@@ -515,8 +514,142 @@
                     </div>
                      <!--Modal payment Verification-->
 
-          
+          <!-- Paypal modal -->
+                    <div class="modal fade" id="paypal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Payment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                             <div id="paypal-button-container"></div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                       <!-- Paypal -->
           <script> 
+// paypal
+// PayPal initialization
+paypal.Buttons({
+    createOrder: function(data, actions) {
+        let totalPriceDisplayy = document.querySelector('#totalPriceDisplayy').value;
+        console.log("Total Price Displayed:", totalPriceDisplayy); // Debug statement
+        return actions.order.create({
+            purchase_units: [{
+                amount: { 
+                    value: totalPriceDisplayy // Change this to your desired amount
+                }
+            }]
+        });
+    },
+    onApprove: function(data, actions) {
+        // Handle approval logic here
+        return actions.order.capture().then(function(details) {
+                // Select all checked checkboxes with the class 'productCheckbox'
+            const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
+            // Iterate over each checked checkbox
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+            // Iterate over each checked checkbox
+            productCheckboxes.forEach(checkbox => {
+                // Get the data-productCode attribute value from the checkbox
+                const productCode = checkbox.dataset.productCode;
+                console.log("Product Code:", productCode); // Debug statement
+
+                // Find the closest parent element with the class 'card' to access product information
+                const productCard = checkbox.closest('.card');
+                // close modal payment
+                let paypal =document.querySelector("#paypal");
+                let modalpaypal =bootstrap.Modal.getInstance(paypal);
+
+                // Extract product information from the card elements
+                const productImage = productCard.querySelector('.product_Image').value;
+                console.log("Product Image:", productImage); // Debug statement
+                const productName = productCard.querySelector('.product_name').value;
+                console.log("Product Name:", productName); // Debug statement
+                const productPrice = productCard.querySelector('.product_price').value;
+                console.log("Product Price:", productPrice); // Debug statement
+                const productQuantity = productCard.querySelector('.product_quantity').value;
+                console.log("Product Quantity:", productQuantity); // Debug statement
+                const productTotalPrice = productCard.querySelector('.product_totalprice').value;
+                console.log("Product Total Price:", productTotalPrice); // Debug statement
+                let contact = document.querySelector('#contactt').value;
+                console.log("Contact:", contact); // Debug statement
+                let block_lot = document.querySelector('#block_lot').value;
+                console.log("Block/Lot:", block_lot); // Debug statement
+                let barangaySelect = document.querySelector('#barangaySelect').value;
+                console.log("Barangay:", barangaySelect); // Debug statement
+                let citySelect = document.querySelector('#citySelect').value;
+                console.log("City:", citySelect); // Debug statement
+                let provinceSelect = document.querySelector('#provinceSelect').value;
+                console.log("Province:", provinceSelect); // Debug statement
+                let full_name = document.querySelector('#full_name').value;
+                console.log("Full Name:", full_name); // Debug statement
+                let email = document.querySelector('#email').value;
+                console.log("Email:", email); // Debug statement
+                const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
+                console.log("Address:", addresss); // Debug statement
+                const payment = 'Paypal';
+                const stat = 'Paid';
+
+                // Prepare the data to be sent to the server
+                const formData = new FormData();
+                formData.append('product_code', productCode);
+                formData.append('product_name', productName);
+                formData.append('quantity', productQuantity);
+                formData.append('price', productPrice);
+                formData.append('total_price', productTotalPrice);
+                formData.append('email', email); // Assuming email is defined somewhere
+                formData.append('image', productImage);
+                formData.append('payment', payment);
+                formData.append('addresss', addresss); // Assuming addresss is defined somewhere
+                formData.append('contact', contact); // Assuming contact is defined somewhere
+                formData.append('fullname', full_name); // Assuming full_name is defined somewhere
+                formData.append('status', stat);
+
+                // Send the data to the server for insertion into the order_product table
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        const data = JSON.parse(this.responseText);
+                        if (data.success) {
+                            // If insertion is successful, update the cart and display a success message
+                            fetchCart();
+                            fetchData();
+                            modalpaypal.hide()
+                            selectAllCheckbox.checked = false;
+                            document.getElementById('totalPriceDisplay').textContent = "₱ 0.00";
+                            document.getElementById('totalItemSelect').textContent = `Total (0 item)`;
+                            Swal.fire({
+                                title: "Successful",
+                                text: "",
+                                icon: "success"
+                            });
+                        } else {
+                            console.error('Failed to insert product into order_product table.');
+                        }
+                    }
+                };
+                xhr.open('POST', '/shopping-cart-oche/Project/user_login/Add_to_Cart/insert_order.php', true);
+                xhr.send(formData);
+            });
+        });
+    },
+    onError: function(err) {
+        // Handle payment initiation rejection here
+        console.error('Payment initiation rejected:', err);
+        alert('Payment initiation rejected. Please try again later or contact support.');
+        // You can perform additional actions here, such as displaying an error message to the user.
+    }
+}).render('#paypal-button-container');
+
+          // paypal
+
           // feed back
           $('.sent_message').click (function () {
             let recipient = document.querySelector('#recipient').value;
@@ -546,20 +679,13 @@
           
           // insert the product to card_product
            $('#Verification').click(function () {
-    let contact = document.querySelector('#contact').value;
-    let block_lot = document.querySelector('#block_lot').value;
-    let barangaySelect = document.querySelector('#barangaySelect').value;
-    let citySelect = document.querySelector('#citySelect').value;
-    let provinceSelect = document.querySelector('#provinceSelect').value;
-    let full_name = document.querySelector('#full_name').value;
-    let email = document.querySelector('#email').value;
-    let modalpayment = document.querySelector('#modalpayment');
-    let modalinstance = bootstrap.Modal.getInstance(modalpayment);
     // Select all checked checkboxes with the class 'productCheckbox'
     const productCheckboxes = document.querySelectorAll('.productCheckbox:checked');
-    // Iterate over each checked checkbox
-    const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
-    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    let modalpayment = document.querySelector('#modalpayment');
+    let modalinstance = bootstrap.Modal.getInstance(modalpayment);
+    let paypalmodal = document.querySelector ('#paypal')
+    // Create a Bootstrap Modal instance
+    let modalInstance = new bootstrap.Modal(paypalmodal);
 
     if (contact == '' || block_lot == '' || barangaySelect == '' || citySelect == '' || provinceSelect == '' ||
         full_name == '' || email == '') {
@@ -570,7 +696,7 @@
         });
 
     } else {
-        Swal.fire({
+      Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
@@ -584,68 +710,7 @@
                 if (productCheckboxes.length === 0) {
                     selectproducts();
                 } else {
-                    // Iterate over each checked checkbox
-                    productCheckboxes.forEach(checkbox => {
-                        // Get the data-productCode attribute value from the checkbox
-                        const productCode = checkbox.dataset.productCode;
-
-                        // Find the closest parent element with the class 'card' to access product information
-                        const productCard = checkbox.closest('.card');
-
-                        // Find the corresponding input fields within the productCard
-                        const productImageElement = productCard.querySelector('.product_Image');
-                        const productImage = productImageElement.value;
-                        const productNameElement = productCard.querySelector('.product_name');
-                        const productName = productNameElement.value;
-                        const productPriceElement = productCard.querySelector('.product_price');
-                        const productPrice = productPriceElement.value;
-                        const productQuantityElement = productCard.querySelector('.product_quantity');
-                        const productQuantity = productQuantityElement.value;
-                        const productTotalPriceElement = productCard.querySelector('.product_totalprice');
-                        const productTotalPrice = productTotalPriceElement.value;
-                        const payment = document.querySelector('#payment').value;
-
-
-                        // Prepare the data to be sent to the server
-                        const formData = new FormData();
-                        formData.append('product_code', productCode);
-                        formData.append('product_name', productName);
-                        formData.append('quantity', productQuantity);
-                        formData.append('price', productPrice);
-                        formData.append('total_price', productTotalPrice);
-                        formData.append('email', email);
-                        formData.append('image', productImage);
-                        formData.append('payment', payment);
-                        formData.append('addresss', addresss);
-                        formData.append('contact', contact);
-                        formData.append('fullname', full_name);
-
-                        // Send the data to the server for insertion into the order_product table
-                        const xhr = new XMLHttpRequest();
-                        xhr.onreadystatechange = function () {
-                            if (this.readyState === 4 && this.status === 200) {
-                                const data = JSON.parse(this.responseText);
-                                if (data.success) {
-                                    // If insertion is successful, delete the product from cart_product
-                                    fetchCart();
-                                    fetchData();
-                                    selectAllCheckbox.checked = false;
-                                    // Display the total price somewhere on the page
-                                    document.getElementById('totalPriceDisplay').textContent = "₱ 0.00";
-                                    document.getElementById('totalItemSelect').textContent = `Total (0 item)`;
-                                    Swal.fire({
-                                        title: "Successfull",
-                                        text: "",
-                                        icon: "success"
-                                    });
-                                } else {
-                                    console.error('Failed to insert product into order_product table.');
-                                }
-                            }
-                        };
-                        xhr.open('POST', '/shopping-cart-oche/Project/user_login/Add_to_Cart/insert_order.php', true);
-                        xhr.send(formData);
-                    });
+                    modalInstance.show()
                 }
             }
         });
@@ -671,6 +736,58 @@
                           searchResults.innerHTML = ''; // Clear previous results
                           if (data.length === 0) {
                               searchResults.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; background-color:white; padding: 170px; 0px 30px 0px; margin-top:20px;">No results found!</p>  </div>';
+                          }else if (data.length === 1) {
+                            const tableBody = document.querySelector('.cem');
+                  tableBody.innerHTML = ''; // Clear previous results
+                
+
+                  data.forEach(product => {
+                    const totalPrice = product.Price * product.Quantity; // Calculate total price
+                    const row = `<div class="col-12">
+                    <div class="card" style="width: 100%; padding:10px; height:120px;">
+                        <div class="row">
+                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                            </div>
+                            <div class="" style=" width:165px;">
+                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                <input type ="text" hidden class="product_Image" value="${product.Image}">
+                            </div>
+                            <div class="col">
+                                <label style="padding-top:15px;">${product.Product_name}</label>
+                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
+                                <input type ="text" class="user_email" hidden  value="${product.Email}">
+                            </div>
+                            <div class="col-1 position-relative" style="width:130px;">
+                                <div style="position: absolute; top: 36%; left:33%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">
+                                <div style="position: absolute; top: 30%; left:15%;">
+                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                                <div style="position: absolute; top: 36%; left:20%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;"  value="${totalPrice}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                tableBody.innerHTML += row;
+                  });
+                  document.querySelector('#Buttom_bot').style.marginTop = "150px";
                           } else {
                               const tableBody = document.querySelector('.cem');
                               tableBody.innerHTML = ''; // Clear previous results
@@ -755,12 +872,67 @@
               function populateTable(data) {
                   const tableBody = document.querySelector('.cem');
                   tableBody.innerHTML = ''; // Clear previous results
+                  
                   if (data.length === 0) {
                     tableBody.innerHTML = '<div class="col-md-12 text-center" id="no_result">  <p style="font-size:40px; color:red; background-color:white; padding: 170px; 0px 30px 0px; margin-top:20px;">No results found!</p>  </div>';
-                          }else {
+                          }else if (data.length === 1) {
+                            const tableBody = document.querySelector('.cem');
+                  tableBody.innerHTML = ''; // Clear previous results
+                
+
+                  data.forEach(product => {
+                    const totalPrice = product.Price * product.Quantity; // Calculate total price
+                    const row = `<div class="col-12">
+                    <div class="card" style="width: 100%; padding:10px; height:120px;">
+                        <div class="row">
+                            <div class="text-center" style="width:10px; padding-top:35px; padding-left:25px;">
+                                <input class="form-check-input productCheckbox product_code"  type="checkbox" value="" id="productCheckbox" data-product-code="${product.Product_code}">
+                            </div>
+                            <div class="" style=" width:165px;">
+                                <img src="/shopping-cart-oche/Project/admin/product/product_image_list/${product.Image}" width="150" height="100" alt="${product.Product_name}">  
+                                <input type ="text" hidden class="product_Image" value="${product.Image}">
+                            </div>
+                            <div class="col">
+                                <label style="padding-top:15px;">${product.Product_name}</label>
+                                <input type ="text" class="product_name" hidden value="${product.Product_name}">
+                                <input type ="text" class="user_email" hidden  value="${product.Email}">
+                            </div>
+                            <div class="col-1 position-relative" style="width:130px;">
+                                <div style="position: absolute; top: 36%; left:33%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_price" id="unitprice_${product.Product_code}" style="background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col position-relative" style="width:125px;">
+                                <div style="position: absolute; top: 30%; left:15%;">
+                                    <button class="btn btn-link border border-light-subtle" onclick="minus(${product.Product_code})"><i class="fa-solid fa-minus" style="color:black"></i></button>
+                                    <input class="text-center product_quantity border border-light-subtle" id="quantity_${product.Product_code}" style="width:70px;" value="${product.Quantity}" min="1" disabled>
+                                    <button class="btn btn-link border border-light-subtle" onclick="add(${product.Product_code})"><i class="fa-solid fa-plus" style="color:black"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-1 position-relative">
+                                <div style="position: absolute; top: 36%; left:20%;">
+                                    <label>₱ </label> 
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;"  value="${totalPrice}" min="1" disabled>
+                                </div>
+                            </div>
+                            <div class="col-2 position-relative" style="width:180px;">
+                                <a href="#" class="btn btn-sm delete-data" id="deleteProduct_${product.Product_code}" onclick="DeleteProduct(${product.Product_code})" value="${product.Product_code}" style="position: absolute; top: 35%; left:42%;">
+                                    <i class="fa-solid fa-trash" style="color: red; font-size:20px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                tableBody.innerHTML += row;
+                  });
+                  document.querySelector('#Buttom_bot').style.marginTop = "150px";
+                          }
+                          else {
                             const tableBody = document.querySelector('.cem');
                   tableBody.innerHTML = ''; // Clear previous results
                   data.forEach(product => {
+                    const totalPrice = product.Price * product.Quantity; // Calculate total price
                       const row = `<div class="col-12">
                     <div class="card" style="width: 100%; padding:10px; height:120px;">
                         <div class="row">
@@ -792,7 +964,7 @@
                             <div class="col-1 position-relative">
                                 <div style="position: absolute; top: 36%; left:20%;">
                                     <label>₱ </label> 
-                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${product.Price}" min="1" disabled>
+                                    <input class="text-center product_totalprice"  id="totalprice_${product.Product_code}" style="position: absolute; background-color:transparent; width:70px; border:none;" value="${totalPrice}" min="1" disabled>
                                 </div>
                             </div>
                             <div class="col-2 position-relative" style="width:180px;">
@@ -838,6 +1010,7 @@
                            if (this.readyState == 4 && this.status == 200){
                             fetchData();
                             fetchData();
+                            fetchCart()
                               calculateTotalPrice(); // Recalculate total price after deletion
                               alert('Products deleted successfully');
                                // Uncheck all checkboxes
@@ -889,6 +1062,7 @@
 
                   // Display the total price somewhere on the page
                   document.getElementById('totalPriceDisplay').textContent = "₱ " + totalPrice.toFixed(2);
+                  document.getElementById('totalPriceDisplayy').value =totalPrice.toFixed(2);
                   document.getElementById('totalItemSelect').textContent = `Total (${totalItems} item)`;
               }
 

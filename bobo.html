@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Integration Example</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=AWPZd1l7RhoRg-QQlFzCi0v9W2cK3d39R2PZkHwu5ZUjSIpgwLDmd4XTmTjth4D2z5FySI0_t9vHpXsp&currency=PHP"></script>
+
+</head>
+<body>
+    <div id="paypal-button-container"></div>
+    <input type="totalPriceDisplayy" id="totalPriceDisplayy"value="500.00">
+    <script>
+    // paypal
+    let totalPriceDisplayy = document.querySelector('#totalPriceDisplayy').value;
+
+
+paypal.Buttons({
+  createOrder: function(data, actions) {
+      return actions.order.create({
+          purchase_units: [{
+              amount: {
+                  value: totalPriceDisplayy // Change this to your desired amount
+              }
+          }]
+      });
+  },
+  onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+          alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          // Call your backend to save the transaction details
+          // window.location.href = "thank_you.php";
+      });
+  }
+}).render('#paypal-button-container');
+
+
+
+    </script>
+</body>
+</html>
