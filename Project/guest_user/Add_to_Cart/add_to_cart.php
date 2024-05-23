@@ -686,7 +686,16 @@ paypal.Buttons({
     let paypalmodal = document.querySelector ('#paypal')
     // Create a Bootstrap Modal instance
     let modalInstance = new bootstrap.Modal(paypalmodal);
-
+    let contact = document.querySelector('#contactt').value;
+                let block_lot = document.querySelector('#block_lot').value;
+                let barangaySelect = document.querySelector('#barangaySelect').value;
+                let citySelect = document.querySelector('#citySelect').value;
+                let provinceSelect = document.querySelector('#provinceSelect').value;
+                let full_name = document.querySelector('#full_name').value;
+                let email = document.querySelector('#email').value;
+                console.log("Email:", email); // Debug statement
+                const addresss = block_lot + " " + barangaySelect + " " + citySelect + " " + provinceSelect;
+                console.log("Address:", addresss); // Debug statement
     if (contact == '' || block_lot == '' || barangaySelect == '' || citySelect == '' || provinceSelect == '' ||
         full_name == '' || email == '') {
         Swal.fire({
@@ -1004,15 +1013,24 @@ paypal.Buttons({
 
                   // Check if any product is checked
                   if (checkedProducts.length > 0) {
-                     // Send a request to delete all checked products
+                    Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                           // Send a request to delete all checked products
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.onreadystatechange =function (){
                            if (this.readyState == 4 && this.status == 200){
                             fetchData();
                             fetchData();
                             fetchCart()
-                              calculateTotalPrice(); // Recalculate total price after deletion
-                              alert('Products deleted successfully');
+                              calculateTotalPrice(); // Recalculate total price after deletio
                                // Uncheck all checkboxes
                               productCheckboxes.forEach(checkbox => {
                                   checkbox.checked = false;
@@ -1023,9 +1041,19 @@ paypal.Buttons({
                         xmlHttp.open("GET","delete_all_data_cart.php",true);
                         xmlHttp.send();
                       // Send a request to delete all checked products
+                        Swal.fire({
+                        title: "Deleted!",
+                        text: "Your cart has been deleted.",
+                        icon: "success"
+                        });
+                    }
+                    });
                   } else {
-                      // If no product is checked, display a message
-                      alert('Please select at least one product to delete.');
+                    Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Please select at least one product to delete!",
+                    })
                   }
               });
 
